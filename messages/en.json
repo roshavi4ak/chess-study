@@ -1,0 +1,20 @@
+{
+    "HomePage": {
+        "title": "Chess Study Platform",
+        "subtitle": "Master the game with puzzles, openings, and play.",
+        "login": "Login with Lichess",
+        "dashboard": "Dashboard"
+    },
+    "Navigation": {
+        "home": "Home",
+        "puzzles": "Puzzles",
+        "openings": "Openings",
+        "play": "Play",
+        "login": "Login",
+        "logout": "Logout"
+    },
+    "Role": {
+        "coach": "Coach",
+        "student": "Student"
+    }
+}
