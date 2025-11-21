@@ -1,120 +1,178 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Chess } from "chess.js";
-import ChessBoard from "./ChessBoard";
-import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
+import { Chessboard } from "react-chessboard";
+import type { PieceDropHandlerArgs } from "react-chessboard";
 
 interface OpeningViewerProps {
     pgn: string;
 }
 
 export default function OpeningViewer({ pgn }: OpeningViewerProps) {
-    const [game, setGame] = useState(new Chess());
-    const [currentFen, setCurrentFen] = useState("start");
-    const [moveIndex, setMoveIndex] = useState(-1); // -1 means start position
-    const [history, setHistory] = useState<string[]>([]);
+    // Game state
+    const chessGameRef = useRef(new Chess());
 
+    // Opening line state
+    const [history, setHistory] = useState<string[]>([]);
+    const [moveIndex, setMoveIndex] = useState(-1); // -1 = start position
+    const [currentFen, setCurrentFen] = useState("start");
+    const [message, setMessage] = useState("Follow the opening line");
+
+    // Load PGN and parse moves
     useEffect(() => {
         const newGame = new Chess();
         try {
             newGame.loadPgn(pgn);
+            const moves = newGame.history({ verbose: true });
+            setHistory(moves.map(m => m.after)); // Store FEN after each move
+            console.log(`Loaded ${moves.length} moves from PGN`);
         } catch (e) {
             console.error("Error loading PGN:", e);
+            setMessage("Error loading opening");
         }
-        setGame(newGame);
-        setHistory(newGame.history({ verbose: true }).map(m => m.after));
-        // Reset to start
-        setCurrentFen("start");
-        setMoveIndex(-1);
     }, [pgn]);
 
-    const handleNext = () => {
+    // Navigation handlers
+    function handleNext() {
         if (moveIndex < history.length - 1) {
             const nextIndex = moveIndex + 1;
             setMoveIndex(nextIndex);
             setCurrentFen(history[nextIndex]);
+            setMessage(`Move ${Math.floor(nextIndex / 2) + 1}`);
         }
-    };
+    }
 
-    const handlePrev = () => {
+    function handlePrev() {
         if (moveIndex > -1) {
             const prevIndex = moveIndex - 1;
             setMoveIndex(prevIndex);
             setCurrentFen(prevIndex === -1 ? "start" : history[prevIndex]);
+            setMessage(prevIndex === -1 ? "Starting position" : `Move ${Math.floor(prevIndex / 2) + 1}`);
         }
-    };
+    }
 
-    const handleReset = () => {
+    function handleReset() {
         setMoveIndex(-1);
         setCurrentFen("start");
-    };
+        setMessage("Follow the opening line");
+    }
 
-    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
+    // Handle piece drop with move validation
+    function onPieceDrop({
+        sourceSquare,
+        targetSquare
+    }: PieceDropHandlerArgs) {
+        if (!targetSquare) return false;
+
+        // Create a temporary game from current position
         const tempGame = new Chess(currentFen === "start" ? undefined : currentFen);
+
         try {
-            const result = tempGame.move(move);
+            // Try to make the move
+            const result = tempGame.move({
+                from: sourceSquare,
+                to: targetSquare,
+                promotion: 'q'
+            });
+
             if (!result) return false;
 
             const newFen = tempGame.fen();
 
-            // Check if this move matches the next move in history
+            // Check if we're still within the opening line
             if (moveIndex + 1 < history.length) {
-                // We compare FENs. Note: chess.js FENs include move counts, so they should match exactly
-                // if the game history was generated from the same sequence.
+                // Check if this move matches the next move in the opening
                 if (history[moveIndex + 1] === newFen) {
-                    setMoveIndex(moveIndex + 1);
+                    // Correct move! Advance the position
+                    const nextIndex = moveIndex + 1;
+                    setMoveIndex(nextIndex);
                     setCurrentFen(newFen);
-                    return true;
-                }
-            }
 
-            // Allow exploration but don't update viewer state
-            return true;
+                    if (nextIndex === history.length - 1) {
+                        setMessage("✓ Opening complete!");
+                    } else {
+                        setMessage(`✓ Correct! Move ${Math.floor(nextIndex / 2) + 1}`);
+                    }
+                    return true;
+                } else {
+                    // Wrong move - reject it
+                    setMessage("❌ Incorrect move. Try again!");
+                    setTimeout(() => {
+                        if (moveIndex === -1) {
+                            setMessage("Follow the opening line");
+                        } else {
+                            setMessage(`Move ${Math.floor(moveIndex / 2) + 1}`);
+                        }
+                    }, 2000);
+                    return false;
+                }
+            } else {
+                // Past the opening line - allow free exploration
+                setCurrentFen(newFen);
+                chessGameRef.current = tempGame;
+                setMessage("Exploring beyond the opening");
+                return true;
+            }
         } catch (e) {
             return false;
         }
+    }
+
+    const chessboardOptions = {
+        position: currentFen,
+        onPieceDrop,
+        id: 'opening-viewer'
     };
 
     return (
         <div className="flex flex-col items-center space-y-6">
-            <div className="w-full max-w-md">
-                <ChessBoard
-                    fen={currentFen}
-                    onMove={handleMove}
-                    interactive={true} // Allow user to move pieces
-                    orientation="white"
-                />
+            {/* Chessboard */}
+            <div className="w-full max-w-[600px] aspect-square">
+                <Chessboard options={chessboardOptions} />
             </div>
 
-            <div className="flex space-x-4">
+            {/* Navigation buttons - using simple text instead of icons */}
+            <div className="flex gap-4">
                 <button
                     onClick={handleReset}
-                    className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
-                    title="Reset"
+                    className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors font-medium"
+                    title="Reset to start"
                 >
-                    <RotateCcw className="w-6 h-6" />
+                    Reset
                 </button>
                 <button
                     onClick={handlePrev}
                     disabled={moveIndex === -1}
-                    className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"
-                    title="Previous Move"
+                    className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                    title="Previous move"
                 >
-                    <ChevronLeft className="w-6 h-6" />
+                    ◀ Prev
                 </button>
                 <button
                     onClick={handleNext}
                     disabled={moveIndex === history.length - 1}
-                    className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"
-                    title="Next Move"
+                    className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                    title="Next move"
                 >
-                    <ChevronRight className="w-6 h-6" />
+                    Next ▶
                 </button>
             </div>
 
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-                Move {Math.floor((moveIndex + 1) / 2) + 1}
+            {/* Status message and move counter */}
+            <div className="text-center">
+                <div className="text-lg font-medium text-gray-900 dark:text-white mb-1">
+                    {message}
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                    Position: {moveIndex === -1 ? "Start" : `${moveIndex + 1} / ${history.length}`}
+                </div>
+            </div>
+
+            {/* Instructions */}
+            <div className="text-center text-sm text-gray-500 dark:text-gray-400 max-w-md">
+                <p>Navigate with buttons or drag pieces to practice the opening.</p>
+                <p className="mt-1">Correct moves will advance the position automatically.</p>
             </div>
         </div>
     );

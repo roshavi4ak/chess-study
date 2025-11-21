@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Chess } from "chess.js";
-import ChessBoard from "./ChessBoard";
+import { Chessboard } from "react-chessboard";
+import type { PieceDropHandlerArgs } from "react-chessboard";
 import { CheckCircle, XCircle } from "lucide-react";
 
 interface PuzzleSolverProps {
@@ -19,12 +20,17 @@ export default function PuzzleSolver({ fen, solution }: PuzzleSolverProps) {
 
     const solutionMoves = solution.split(" ").filter(m => m.trim() !== "");
 
-    const onMove = (move: { from: string; to: string; promotion?: string }) => {
+    function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
+        if (!targetSquare) return false;
         if (status !== "playing") return false;
 
         try {
             const tempGame = new Chess(game.fen());
-            const moveResult = tempGame.move(move);
+            const moveResult = tempGame.move({
+                from: sourceSquare,
+                to: targetSquare,
+                promotion: 'q'
+            });
 
             if (!moveResult) return false;
 
@@ -33,7 +39,7 @@ export default function PuzzleSolver({ fen, solution }: PuzzleSolverProps) {
 
             if (moveResult.san === expectedMoveSan) {
                 // Correct move
-                game.move(move);
+                game.move({ from: sourceSquare, to: targetSquare, promotion: 'q' });
                 setCurrentFen(game.fen());
                 setMoveIndex(prev => prev + 1);
                 setMessage("");
@@ -68,17 +74,19 @@ export default function PuzzleSolver({ fen, solution }: PuzzleSolverProps) {
         } catch (e) {
             return false;
         }
+    }
+
+    const chessboardOptions = {
+        position: currentFen,
+        onPieceDrop,
+        boardOrientation: game.turn() === 'w' ? 'white' as const : 'black' as const,
+        id: 'puzzle-solver'
     };
 
     return (
         <div className="flex flex-col items-center space-y-6">
-            <div className="w-full max-w-md">
-                <ChessBoard
-                    fen={currentFen}
-                    onMove={onMove}
-                    orientation={game.turn() === 'w' ? 'white' : 'black'}
-                    interactive={status === "playing"}
-                />
+            <div className="w-full max-w-[600px] aspect-square">
+                <Chessboard options={chessboardOptions} />
             </div>
 
             <div className="text-center h-16">
