@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import OpeningViewer from "@/components/OpeningViewer";
+import OpeningStepViewer from "@/components/OpeningStepViewer";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -12,7 +13,14 @@ export default async function OpeningPage({ params }: PageProps) {
     const { id } = await params;
     const opening = await prisma.opening.findUnique({
         where: { id },
-        include: { creator: true }
+        include: {
+            creator: true,
+            steps: {
+                orderBy: {
+                    order: 'asc'
+                }
+            }
+        }
     });
 
     if (!opening) {
@@ -35,7 +43,11 @@ export default async function OpeningPage({ params }: PageProps) {
                 </div>
 
                 <div className="flex justify-center">
-                    <OpeningViewer pgn={opening.pgn} />
+                    {opening.steps.length > 0 ? (
+                        <OpeningStepViewer steps={opening.steps} />
+                    ) : (
+                        <OpeningViewer pgn={opening.pgn} />
+                    )}
                 </div>
             </div>
         </main>

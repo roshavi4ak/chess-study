@@ -81,4 +81,15 @@ model Opening {
   createdBy   String
   creator     User     @relation(fields: [createdBy], references: [id])
   createdAt   DateTime @default(now())
+  steps       OpeningStep[]
+}
+
+model OpeningStep {
+  id          String   @id @default(cuid())
+  openingId   String
+  opening     Opening  @relation(fields: [openingId], references: [id], onDelete: Cascade)
+  fen         String
+  arrows      String?  // JSON string of arrows e.g. "[['e2', 'e4', 'green']]"
+  description String?
+  order       Int
 }
