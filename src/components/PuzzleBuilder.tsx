@@ -4,7 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { PieceDropHandlerArgs } from "react-chessboard";
-import { Trash2, Plus, X } from "lucide-react";
+import { Trash2, Plus, X, Tag, Repeat } from "lucide-react";
+import TagSelectorDialog from "./TagSelectorDialog";
+import { getAllTags } from "@/app/actions/tags";
 
 interface PuzzleBuilderProps {
     initialData?: {
@@ -36,6 +38,9 @@ export default function PuzzleBuilder({ initialData }: PuzzleBuilderProps) {
     const [hints, setHints] = useState<string[]>(initialData?.hints || []);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [boardOrientation, setBoardOrientation] = useState<"white" | "black">("white");
+    const [isTagDialogOpen, setIsTagDialogOpen] = useState(false);
+    const [availableTags, setAvailableTags] = useState<{ tag: string; count: number }[]>([]);
 
     useEffect(() => {
         if (!initialData && !name) {
@@ -54,6 +59,11 @@ export default function PuzzleBuilder({ initialData }: PuzzleBuilderProps) {
             }
         }
     }, [initialData, name, chessGame]);
+
+    useEffect(() => {
+        // Load available tags
+        getAllTags().then(setAvailableTags);
+    }, []);
 
     function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
         if (!targetSquare) return false;
@@ -187,10 +197,18 @@ export default function PuzzleBuilder({ initialData }: PuzzleBuilderProps) {
                             id: "puzzle-builder",
                             position: chessPosition,
                             onPieceDrop: onPieceDrop,
-                            boardOrientation: "white",
+                            boardOrientation: boardOrientation,
                         } as any}
                     />
                 </div>
+                <button
+                    type="button"
+                    onClick={() => setBoardOrientation(prev => prev === "white" ? "black" : "white")}
+                    className="mx-auto flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm font-medium"
+                >
+                    <Repeat className="w-4 h-4" />
+                    Flip Board
+                </button>
                 <div className="text-center text-sm text-gray-500">
                     Play moves on the board to define the solution sequence.
                 </div>
@@ -233,6 +251,14 @@ export default function PuzzleBuilder({ initialData }: PuzzleBuilderProps) {
                             />
                             <button type="button" onClick={addTag} className="px-3 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300">
                                 <Plus className="w-4 h-4" />
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setIsTagDialogOpen(true)}
+                                className="px-3 py-2 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 rounded hover:bg-blue-200 dark:hover:bg-blue-800 flex items-center gap-2"
+                            >
+                                <Tag className="w-4 h-4" />
+                                Select Tags
                             </button>
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -341,6 +367,14 @@ export default function PuzzleBuilder({ initialData }: PuzzleBuilderProps) {
                     </div>
                 </form>
             </div>
+
+            <TagSelectorDialog
+                isOpen={isTagDialogOpen}
+                onClose={() => setIsTagDialogOpen(false)}
+                selectedTags={tags}
+                onSelectTags={(newTags) => setTags(newTags)}
+                availableTags={availableTags}
+            />
         </div>
     );
 }
