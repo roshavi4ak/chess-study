@@ -38,22 +38,31 @@ export default async function PuzzlesPage() {
                         puzzles.map((puzzle) => (
                             <Link
                                 key={puzzle.id}
-                                href={`/puzzles/${puzzle.id}`}
+                                href={`/puzzles/${puzzle.name}`}
                                 className="block bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition"
                             >
                                 <div className="p-4">
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
-                                        {puzzle.description || "Untitled Puzzle"}
-                                    </h3>
-                                    <p className="text-sm text-gray-500 mt-1">
-                                        Created by {puzzle.creator.name}
-                                    </p>
-                                    <div className="mt-4">
-                                        {/* Mini board preview could go here */}
-                                        <div className="text-xs text-gray-400 font-mono truncate">
-                                            {puzzle.fen}
-                                        </div>
+                                    <div className="flex justify-between items-start">
+                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
+                                            {puzzle.name}
+                                        </h3>
+                                        <span className="px-1.5 py-0.5 bg-yellow-100 text-yellow-800 rounded text-xs font-bold">
+                                            {puzzle.rating}
+                                        </span>
                                     </div>
+                                    <p className="text-sm text-gray-500 mt-1 truncate">
+                                        {puzzle.description || "No description"}
+                                    </p>
+                                    <div className="flex flex-wrap gap-1 mt-2">
+                                        {puzzle.tags.map(tag => (
+                                            <span key={tag} className="px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded text-xs">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <p className="text-xs text-gray-400 mt-3">
+                                        By {puzzle.creator.name}
+                                    </p>
                                 </div>
                             </Link>
                         ))
