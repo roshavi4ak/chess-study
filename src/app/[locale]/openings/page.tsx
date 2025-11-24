@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import OpeningCard from "@/components/OpeningCard";
 
 export default async function OpeningsPage() {
     const session = await auth();
@@ -13,6 +14,7 @@ export default async function OpeningsPage() {
     });
 
     const isCoach = session?.user?.role === "COACH";
+    const userId = session?.user?.id;
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -36,23 +38,11 @@ export default async function OpeningsPage() {
                         <p className="text-gray-500">No openings found.</p>
                     ) : (
                         openings.map((opening) => (
-                            <Link
+                            <OpeningCard
                                 key={opening.id}
-                                href={`/openings/${opening.id}`}
-                                className="block bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition"
-                            >
-                                <div className="p-4">
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
-                                        {opening.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-500 mt-1">
-                                        {opening.description || "No description"}
-                                    </p>
-                                    <p className="text-xs text-gray-400 mt-2">
-                                        Created by {opening.creator.name}
-                                    </p>
-                                </div>
-                            </Link>
+                                opening={opening}
+                                isCreator={userId === opening.createdBy}
+                            />
                         ))
                     )}
                 </div>
@@ -60,3 +50,4 @@ export default async function OpeningsPage() {
         </main>
     );
 }
+

@@ -5,6 +5,7 @@ import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
 import { useRouter } from "next/navigation";
+import { updateOpening } from "@/app/actions/opening";
 
 // Arrow format per documentation: { startSquare: string; endSquare: string; color: string; }
 interface Arrow {
@@ -19,14 +20,45 @@ interface OpeningStep {
     description: string;
 }
 
-export default function OpeningBuilder() {
+interface OpeningEditorProps {
+    opening: {
+        id: string;
+        name: string;
+        description: string | null;
+        pgn: string;
+        steps: Array<{
+            fen: string;
+            arrows: string;
+            description: string | null;
+            order: number;
+        }>;
+    };
+}
+
+export default function OpeningEditor({ opening }: OpeningEditorProps) {
     const router = useRouter();
-    const [game, setGame] = useState(new Chess());
-    const [steps, setSteps] = useState<OpeningStep[]>([]);
+
+    // Parse existing steps
+    const initialSteps: OpeningStep[] = opening.steps.map(step => ({
+        fen: step.fen,
+        arrows: JSON.parse(step.arrows),
+        description: step.description || ""
+    }));
+
+    // Initialize game from PGN
+    const initialGame = new Chess();
+    try {
+        initialGame.loadPgn(opening.pgn);
+    } catch (e) {
+        console.error("Failed to load PGN:", e);
+    }
+
+    const [game, setGame] = useState(initialGame);
+    const [steps, setSteps] = useState<OpeningStep[]>(initialSteps);
     const [currentDescription, setCurrentDescription] = useState("");
     const [currentArrows, setCurrentArrows] = useState<Arrow[]>([]);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
+    const [name, setName] = useState(opening.name);
+    const [description, setDescription] = useState(opening.description || "");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
     const [editingStepIndex, setEditingStepIndex] = useState<number | null>(null);
@@ -36,9 +68,12 @@ export default function OpeningBuilder() {
 
     // Track changes
     useEffect(() => {
-        const hasChanges = steps.length > 0 || name.trim() !== "" || description.trim() !== "";
+        const hasChanges =
+            name !== opening.name ||
+            description !== (opening.description || "") ||
+            JSON.stringify(steps) !== JSON.stringify(initialSteps);
         setHasUnsavedChanges(hasChanges);
-    }, [steps, name, description]);
+    }, [name, description, steps, opening.name, opening.description, initialSteps]);
 
     // Warn before leaving with unsaved changes
     useEffect(() => {
@@ -219,16 +254,24 @@ export default function OpeningBuilder() {
         formData.append("steps", JSON.stringify(steps));
 
         try {
-            const { createOpening } = await import("@/app/actions/opening");
-            setHasUnsavedChanges(false); // Reset before redirect
-            await createOpening(formData);
+            await updateOpening(opening.id, formData);
+            setHasUnsavedChanges(false);
         } catch (error) {
             console.error(error);
-            alert("Failed to create opening");
-        } finally {
+            alert("Failed to update opening");
             setIsSubmitting(false);
         }
     }
+
+    const handleCancel = () => {
+        if (hasUnsavedChanges) {
+            if (confirm("You have unsaved changes. Are you sure you want to leave?")) {
+                router.push("/openings");
+            }
+        } else {
+            router.push("/openings");
+        }
+    };
 
     return (
         <div className="space-y-8">
@@ -237,15 +280,15 @@ export default function OpeningBuilder() {
                 <div className="space-y-4">
                     <div className="aspect-square w-full max-w-[500px] mx-auto border-4 border-gray-800 rounded-lg overflow-hidden shadow-xl">
                         <Chessboard
-                            key={`builder-${JSON.stringify(currentArrows)}-${game.fen()}`} // Force re-render on arrow or position change
+                            key={`editor-${JSON.stringify(currentArrows)}-${game.fen()}`}
                             options={{
-                                id: "builder-board",
+                                id: "editor-board",
                                 position: game.fen(),
                                 onPieceDrop: onPieceDrop,
                                 onSquareRightClick: handleSquareRightClick,
                                 arrows: currentArrows,
                                 boardOrientation: "white",
-                                allowDrawingArrows: false, // Disable native drag arrows to ensure we capture state via click-click
+                                allowDrawingArrows: false,
                                 squareStyles: rightClickStart ? {
                                     [rightClickStart]: { backgroundColor: "rgba(255, 255, 0, 0.5)" }
                                 } : undefined
@@ -414,13 +457,22 @@ export default function OpeningBuilder() {
                         </div>
                     </div>
 
-                    <button
-                        onClick={handleSubmit}
-                        disabled={isSubmitting || steps.length === 0 || !name}
-                        className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {isSubmitting ? "Saving..." : "Save Opening"}
-                    </button>
+                    <div className="flex gap-3">
+                        <button
+                            onClick={handleSubmit}
+                            disabled={isSubmitting || steps.length === 0 || !name}
+                            className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {isSubmitting ? "Saving..." : "Update Opening"}
+                        </button>
+                        <button
+                            onClick={handleCancel}
+                            disabled={isSubmitting}
+                            className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg font-bold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

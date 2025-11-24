@@ -2,9 +2,12 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Chessboard } from "react-chessboard";
-// import { Arrow } from "react-chessboard/dist/chessboard/types"; // Type import failing
 
-type Arrow = [string, string, string?]; // [start, end, color]
+interface Arrow {
+    startSquare: string;
+    endSquare: string;
+    color: string;
+}
 
 interface Step {
     id: string;
@@ -71,9 +74,11 @@ export default function OpeningStepViewer({ steps }: OpeningStepViewerProps) {
             {/* Chessboard */}
             <div className="w-full max-w-[600px] aspect-square shadow-2xl rounded-lg overflow-hidden border-4 border-[#8b5a2b]">
                 <Chessboard
+                    key={currentStepIndex}
                     options={{
+                        id: "viewer-board",
                         position: currentStep.fen,
-                        customArrows: arrows,
+                        arrows: arrows,
                         arePiecesDraggable: false,
                         boardOrientation: "white",
                     } as any}
@@ -90,6 +95,7 @@ export default function OpeningStepViewer({ steps }: OpeningStepViewerProps) {
                     <div className="relative z-10 text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
                         {currentStep.description || "No description for this step."}
                     </div>
+
                 </div>
 
                 {/* Controls */}
