@@ -45,3 +45,4 @@ next-env.d.ts
 # Import state and backups
 .import_state.json
 backups/
+lichess_db_puzzle.csv
