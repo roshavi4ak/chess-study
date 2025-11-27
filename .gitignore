@@ -41,4 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
-lichess_db_puzzle.csv
+
+# Import state and backups
+.import_state.json
+backups/

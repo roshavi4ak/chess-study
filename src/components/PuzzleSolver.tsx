@@ -6,6 +6,7 @@ import { Chessboard } from "react-chessboard";
 import type { PieceDropHandlerArgs } from "react-chessboard";
 import { CheckCircle, XCircle, RotateCcw, Lightbulb, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface PuzzleSolverProps {
     fen: string;
@@ -17,6 +18,7 @@ interface PuzzleSolverProps {
 }
 
 export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve, tag }: PuzzleSolverProps) {
+    const t = useTranslations("PuzzleSolver");
     const [game, setGame] = useState(new Chess(fen));
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
     const [status, setStatus] = useState<"playing" | "correct" | "wrong">("playing");
@@ -24,6 +26,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
     const [showHint, setShowHint] = useState(false);
     const [mistakeMade, setMistakeMade] = useState(false);
     const [hintUsed, setHintUsed] = useState(false);
+    const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
     const router = useRouter();
 
     // Parse solution moves (handle both UCI and SAN, but we expect UCI from Lichess DB)
@@ -67,6 +70,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                     if (moveResult) {
                         setGame(new Chess(newGame.fen()));
                         setCurrentMoveIndex(1); // Player needs to solve from index 1
+                        setLastMove({ from: moveResult.from, to: moveResult.to });
                     }
                 } catch (e) {
                     console.error("Failed to play initial move:", e);
@@ -107,7 +111,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
             if (!isCorrect) {
                 // Wrong move!
                 setStatus("wrong");
-                setMessage("Incorrect move. Try again.");
+                setMessage(t("incorrectMove"));
                 setMistakeMade(true);
                 setTimeout(() => {
                     setStatus("playing");
@@ -128,7 +132,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
             // Check if puzzle solved by this move
             if (newMoveIndex >= solutionMoves.length) {
                 setStatus("correct");
-                setMessage("Puzzle Solved!");
+                setMessage(t("puzzleSolved"));
                 if (onSolve) {
                     if (mistakeMade) onSolve("mistake");
                     else if (hintUsed) onSolve("hint");
@@ -156,11 +160,12 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                         if (oppMoveResult) {
                             setGame(new Chess(game.fen()));
                             setCurrentMoveIndex(prev => prev + 1);
+                            setLastMove({ from: oppMoveResult.from, to: oppMoveResult.to });
 
                             // Check if puzzle solved after opponent's move
                             if (newMoveIndex + 1 >= solutionMoves.length) {
                                 setStatus("correct");
-                                setMessage("Puzzle Solved!");
+                                setMessage(t("puzzleSolved"));
                                 if (onSolve) {
                                     if (mistakeMade) onSolve("mistake");
                                     else if (hintUsed) onSolve("hint");
@@ -203,7 +208,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
             if (data.name) {
                 router.push(`/puzzles/${data.name}${tag ? `?tag=${tag}` : ''}`);
             } else {
-                alert("No more puzzles available!");
+                alert(t("noMorePuzzles"));
             }
         } catch (error) {
             console.error("Failed to fetch next puzzle", error);
@@ -211,6 +216,13 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
     }
 
     const currentHint = hints[currentMoveIndex];
+
+    // Build square styles for highlighting opponent's last move
+    const squareStyles: Record<string, React.CSSProperties> = {};
+    if (lastMove) {
+        squareStyles[lastMove.from] = { backgroundColor: 'rgba(170, 162, 0, 0.6)' };
+        squareStyles[lastMove.to] = { backgroundColor: 'rgba(206, 210, 107, 0.4)' };
+    }
 
     return (
         <div className="flex flex-col items-center space-y-6">
@@ -224,7 +236,8 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                         // The FEN is for the opponent's move (first move). 
                         // If FEN says White to move, opponent is White, so we are Black.
                         boardOrientation: new Chess(fen).turn() === 'w' ? 'black' : 'white',
-                        animationDuration: 200,
+                        animationDurationInMs: 200,
+                        squareStyles: squareStyles,
                     } as any}
                 />
 
@@ -247,7 +260,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                             onClick={handleNextPuzzle}
                             className="mt-4 px-6 py-2 bg-green-600 text-white rounded-full text-lg font-bold hover:bg-green-700 transition-colors flex items-center gap-2"
                         >
-                            Next Puzzle <ArrowRight className="w-5 h-5" />
+                            {t("nextPuzzle")} <ArrowRight className="w-5 h-5" />
                         </button>
                     </div>
                 ) : (
@@ -260,14 +273,14 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                         )}
                         {status === "playing" && (
                             <div className="text-gray-500 text-lg">
-                                {currentMoveIndex === 0 ? "Your turn" : "Keep going..."}
+                                {currentMoveIndex === 0 ? t("yourTurn") : t("keepGoing")}
                             </div>
                         )}
 
                         {/* Hint Display */}
                         {showHint && currentHint && (
                             <div className="mt-2 p-3 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg text-sm animate-in fade-in slide-in-from-top-2">
-                                💡 <strong>Hint:</strong> {currentHint}
+                                💡 <strong>{t("hint")}:</strong> {currentHint}
                             </div>
                         )}
                     </>
@@ -282,7 +295,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                             className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
                         >
                             <RotateCcw className="w-4 h-4" />
-                            <span>Reset</span>
+                            <span>{t("reset")}</span>
                         </button>
 
                         {currentHint && !showHint && (
@@ -291,7 +304,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                                 className="flex items-center space-x-2 px-4 py-2 text-yellow-600 hover:text-yellow-900 hover:bg-yellow-50 rounded-md transition-colors"
                             >
                                 <Lightbulb className="w-4 h-4" />
-                                <span>Show Hint</span>
+                                <span>{t("showHint")}</span>
                             </button>
                         )}
                     </>

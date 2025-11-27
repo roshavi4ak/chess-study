@@ -6,15 +6,37 @@ import path from 'path';
 
 const prisma = new PrismaClient();
 const CSV_FILE = path.join(__dirname, '../lichess_db_puzzle.csv');
-const TARGET_COUNT = 1000;
+const STATE_FILE = path.join(__dirname, '../.import_state.json');
+const TARGET_COUNT = 10000;
 const MAX_RATING = 1700;
 const USER_ID = 'cmidi8gr50000v8vc36ubbgir'; // roshavi4ak
+
+interface ImportState {
+    lastImportedId: string | null;
+    totalImported: number;
+}
+
+function loadState(): ImportState {
+    if (fs.existsSync(STATE_FILE)) {
+        const data = fs.readFileSync(STATE_FILE, 'utf-8');
+        return JSON.parse(data);
+    }
+    return { lastImportedId: null, totalImported: 0 };
+}
+
+function saveState(state: ImportState) {
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+}
 
 async function main() {
     if (!fs.existsSync(CSV_FILE)) {
         console.error(`File not found: ${CSV_FILE}`);
         process.exit(1);
     }
+
+    const state = loadState();
+    console.log(`Resuming from: ${state.lastImportedId || 'beginning'}`);
+    console.log(`Total previously imported: ${state.totalImported}`);
 
     const fileStream = fs.createReadStream(CSV_FILE);
     const rl = readline.createInterface({
@@ -25,6 +47,8 @@ async function main() {
     const puzzlesToInsert: any[] = [];
     let count = 0;
     let processed = 0;
+    let foundResumePont = state.lastImportedId === null;
+    let lastProcessedId: string | null = null;
 
     console.log('Starting import...');
 
@@ -32,19 +56,25 @@ async function main() {
         processed++;
         if (processed === 1) continue; // Skip header
 
-        // Simple CSV split (assuming no commas in fields for this specific dataset)
         const cols = line.split(',');
-
-        // PuzzleId,FEN,Moves,Rating,RatingDeviation,Popularity,NbPlays,Themes,GameUrl,OpeningTags
-        // 0       1   2     3      4               5          6       7      8       9
-
         if (cols.length < 10) continue;
+
+        const puzzleId = cols[0];
+        lastProcessedId = puzzleId;
+
+        // Skip until we find our resume point
+        if (!foundResumePont) {
+            if (puzzleId === state.lastImportedId) {
+                foundResumePont = true;
+                console.log(`Found resume point at puzzle: ${puzzleId}`);
+            }
+            continue;
+        }
 
         const rating = parseInt(cols[3]);
         if (isNaN(rating)) continue;
 
         if (rating < MAX_RATING) {
-            const puzzleId = cols[0];
             const fen = cols[1];
             const moves = cols[2];
             const themes = cols[7];
@@ -52,7 +82,7 @@ async function main() {
             puzzlesToInsert.push({
                 name: puzzleId,
                 fen: fen,
-                solution: moves, // Storing moves as space-separated string
+                solution: moves,
                 rating: rating,
                 tags: themes ? themes.split(' ') : [],
                 createdBy: USER_ID,
@@ -72,7 +102,7 @@ async function main() {
 
     console.log(`\nFound ${puzzlesToInsert.length} puzzles. Inserting into database...`);
 
-    // Insert in batches to avoid too large query
+    // Insert in batches
     const BATCH_SIZE = 100;
     let inserted = 0;
 
@@ -88,6 +118,15 @@ async function main() {
         } catch (e) {
             console.error(`\nError inserting batch ${i}:`, e);
         }
+    }
+
+    // Update state
+    if (lastProcessedId) {
+        state.lastImportedId = lastProcessedId;
+        state.totalImported += inserted;
+        saveState(state);
+        console.log(`\nSaved state. Last imported: ${lastProcessedId}`);
+        console.log(`Total imported so far: ${state.totalImported}`);
     }
 
     console.log('\nImport complete!');
