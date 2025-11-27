@@ -1,4 +1,3 @@
-
 "use server";
 
 import { auth } from "@/auth";
@@ -18,4 +17,20 @@ export async function getLichessAccessToken() {
     });
 
     return account?.access_token || null;
+}
+
+export async function getCurrentUserLichessId() {
+    const session = await auth();
+    if (!session?.user?.id) return null;
+
+    const user = await prisma.user.findUnique({
+        where: {
+            id: session.user.id,
+        },
+        select: {
+            lichessId: true,
+        },
+    });
+
+    return user?.lichessId || null;
 }

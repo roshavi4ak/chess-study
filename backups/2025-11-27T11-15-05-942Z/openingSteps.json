@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cmidift780007v8vc9a4ve0a3",
+    "openingId": "cmidift770006v8vcdtqzbuix",
+    "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+    "arrows": "[{\"startSquare\":\"d4\",\"endSquare\":\"c5\",\"color\":\"#008000\"},{\"startSquare\":\"d4\",\"endSquare\":\"e5\",\"color\":\"#008000\"}]",
+    "description": "test 1",
+    "order": 0
+  },
+  {
+    "id": "cmidift780008v8vccyzxhq59",
+    "openingId": "cmidift770006v8vcdtqzbuix",
+    "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
+    "arrows": "[{\"startSquare\":\"d5\",\"endSquare\":\"e4\",\"color\":\"#008000\"},{\"startSquare\":\"d5\",\"endSquare\":\"c4\",\"color\":\"#008000\"}]",
+    "description": "test 2",
+    "order": 1
+  },
+  {
+    "id": "cmidift780009v8vcx5wz3uny",
+    "openingId": "cmidift770006v8vcdtqzbuix",
+    "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 1 2",
+    "arrows": "[{\"startSquare\":\"f3\",\"endSquare\":\"d4\",\"color\":\"#008000\"},{\"startSquare\":\"f3\",\"endSquare\":\"e5\",\"color\":\"#008000\"}]",
+    "description": "test 3",
+    "order": 2
+  }
+]

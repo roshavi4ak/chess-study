@@ -1,0 +1,88 @@
+[
+  {
+    "id": "cmidikrkk000bv8vc4lspno6e",
+    "name": "UQUGIY",
+    "fen": "6k1/1p4p1/p1pP3p/2P1Bqr1/5Q2/1P5P/1P4PK/8 w - - 3 34",
+    "solution": "Qxf5 Rxf5 d7 Rxe5 d8=Q+",
+    "description": "Best move for white",
+    "rating": 1656,
+    "tags": [
+      "advanced pawn",
+      "endgame",
+      "promotion"
+    ],
+    "hints": [
+      "Ход с Царицата",
+      "",
+      "D7 с цел да произведем",
+      "",
+      "Произвеждаме нова Царица"
+    ],
+    "createdBy": "cmidi8gr50000v8vc36ubbgir",
+    "createdAt": "2025-11-24T19:02:34.314Z"
+  },
+  {
+    "id": "cmidixidd0001v8fwy15lw0p4",
+    "name": "H51G60",
+    "fen": "3q1rk1/B2n1pbp/3P1np1/4p3/8/2N2B1P/PrP3P1/R2Q1RK1 b - - 0 17",
+    "solution": "Qa5 Be3 Qxc3",
+    "description": "Най-добрият ход на черните",
+    "rating": 1639,
+    "tags": [
+      "advantage",
+      "fork",
+      "middle game"
+    ],
+    "hints": [
+      "",
+      "",
+      ""
+    ],
+    "createdBy": "cmidi8gr50000v8vc36ubbgir",
+    "createdAt": "2025-11-24T19:12:28.690Z"
+  },
+  {
+    "id": "cmidm4wtn0001v8d8sbikunxj",
+    "name": "2JITT5",
+    "fen": "r1b1k1nr/1p3ppp/p3p3/2qpP3/1b1N4/8/PP1B1PPP/R2QKB1R w KQkq - 0 12",
+    "solution": "Qa4+ Bd7 Qxb4 Qxb4 Bxb4",
+    "description": "Най-добрият ход на белите",
+    "rating": 1737,
+    "tags": [
+      "advantage",
+      "opening"
+    ],
+    "hints": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "createdBy": "cmidi8gr50000v8vc36ubbgir",
+    "createdAt": "2025-11-24T20:42:12.855Z"
+  },
+  {
+    "id": "cmidm8nv10003v8d8lr3kxds0",
+    "name": "HIVGHI",
+    "fen": "1k1r4/pp1b4/4p1p1/q1p1P1Pp/3p1P2/PP1PnB1R/2PQ2P1/R3K3 b Q - 2 23",
+    "solution": "Nxc2+ Ke2 Qxd2+ Kxd2 Nxa1",
+    "description": "Най-добрият ход на черните",
+    "rating": 1504,
+    "tags": [
+      "advantage",
+      "middle game",
+      "pin",
+      "exposed king"
+    ],
+    "hints": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "createdBy": "cmidi8gr50000v8vc36ubbgir",
+    "createdAt": "2025-11-24T20:45:08.118Z"
+  }
+]

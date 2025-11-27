@@ -6,10 +6,13 @@ interface PageProps {
     params: Promise<{
         name: string;
     }>;
+    searchParams: Promise<{
+        tag?: string;
+    }>;
 }
 
-export default async function PuzzlePage({ params }: PageProps) {
-    const { name } = await params;
+export default async function PuzzlePage(props: PageProps) {
+    const { name } = await props.params;
     const puzzle = await prisma.puzzle.findUnique({
         where: { name },
         include: { creator: true }
@@ -22,6 +25,8 @@ export default async function PuzzlePage({ params }: PageProps) {
     const hints = (puzzle.hints as unknown as string[]) || [];
     const session = await import("@/auth").then(m => m.auth());
     const isCreator = session?.user?.id === puzzle.createdBy;
+
+    const { tag } = await props.searchParams;
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -44,9 +49,9 @@ export default async function PuzzlePage({ params }: PageProps) {
                         <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-bold">
                             {puzzle.rating}
                         </span>
-                        {puzzle.tags.map((tag: string) => (
-                            <span key={tag} className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">
-                                {tag}
+                        {puzzle.tags.map((t: string) => (
+                            <span key={t} className={`px-2 py-1 rounded text-xs ${t === tag ? 'bg-green-100 text-green-800 font-bold' : 'bg-blue-100 text-blue-800'}`}>
+                                {t}
                             </span>
                         ))}
                     </div>
@@ -64,6 +69,7 @@ export default async function PuzzlePage({ params }: PageProps) {
                         fen={puzzle.fen}
                         solution={puzzle.solution}
                         hints={hints}
+                        tag={tag}
                     />
                 </div>
             </div>

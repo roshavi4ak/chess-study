@@ -7,10 +7,14 @@ export default async function PuzzlesPage() {
     const session = await auth();
     const t = await getTranslations("Navigation");
 
-    const puzzles = await prisma.puzzle.findMany({
-        orderBy: { createdAt: "desc" },
-        include: { creator: true }
-    });
+    // Fetch unique tags and their counts
+    const tags = await prisma.$queryRaw<{ tag: string; count: bigint }[]>`
+        SELECT t.tag, COUNT(*)::int as count
+        FROM "Puzzle", unnest(tags) as t(tag)
+        GROUP BY t.tag
+        ORDER BY count DESC
+        LIMIT 50
+    `;
 
     const isCoach = session?.user?.role === "COACH";
 
@@ -31,42 +35,34 @@ export default async function PuzzlesPage() {
                     )}
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {puzzles.length === 0 ? (
-                        <p className="text-gray-500">No puzzles found.</p>
-                    ) : (
-                        puzzles.map((puzzle) => (
+                <div className="mb-8">
+                    <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Categories</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        {tags.map((item) => (
                             <Link
-                                key={puzzle.id}
-                                href={`/puzzles/${puzzle.name}`}
-                                className="block bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition"
+                                key={item.tag}
+                                href={`/puzzles/play?tag=${item.tag}`}
+                                className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center text-center gap-2"
                             >
-                                <div className="p-4">
-                                    <div className="flex justify-between items-start">
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
-                                            {puzzle.name}
-                                        </h3>
-                                        <span className="px-1.5 py-0.5 bg-yellow-100 text-yellow-800 rounded text-xs font-bold">
-                                            {puzzle.rating}
-                                        </span>
-                                    </div>
-                                    <p className="text-sm text-gray-500 mt-1 truncate">
-                                        {puzzle.description || "No description"}
-                                    </p>
-                                    <div className="flex flex-wrap gap-1 mt-2">
-                                        {puzzle.tags.map(tag => (
-                                            <span key={tag} className="px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded text-xs">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <p className="text-xs text-gray-400 mt-3">
-                                        By {puzzle.creator.name}
-                                    </p>
-                                </div>
+                                <span className="font-bold text-lg capitalize text-gray-900 dark:text-white">
+                                    {item.tag}
+                                </span>
+                                <span className="text-sm text-gray-500">
+                                    {Number(item.count)} puzzles
+                                </span>
                             </Link>
-                        ))
-                    )}
+                        ))}
+                    </div>
+                </div>
+
+                {/* Also show a "Play Random" button */}
+                <div className="flex justify-center mb-8">
+                    <Link
+                        href="/puzzles/play"
+                        className="bg-blue-600 text-white px-8 py-3 rounded-full text-xl font-bold hover:bg-blue-700 shadow-lg transition transform hover:scale-105"
+                    >
+                        Play Random Puzzle
+                    </Link>
                 </div>
             </div>
         </main>

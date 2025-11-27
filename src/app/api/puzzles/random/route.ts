@@ -4,11 +4,18 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const excludeName = searchParams.get("exclude");
+    const tag = searchParams.get("tag");
+
+    const whereClause: any = {
+        name: { not: excludeName || undefined }
+    };
+
+    if (tag) {
+        whereClause.tags = { has: tag };
+    }
 
     const count = await prisma.puzzle.count({
-        where: {
-            name: { not: excludeName || undefined }
-        }
+        where: whereClause
     });
 
     if (count === 0) {
@@ -17,9 +24,7 @@ export async function GET(request: Request) {
 
     const skip = Math.floor(Math.random() * count);
     const puzzle = await prisma.puzzle.findFirst({
-        where: {
-            name: { not: excludeName || undefined }
-        },
+        where: whereClause,
         skip,
         select: { name: true }
     });

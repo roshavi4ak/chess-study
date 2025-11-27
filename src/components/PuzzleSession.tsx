@@ -15,9 +15,10 @@ interface PuzzleSessionProps {
     fen: string;
     solution: string;
     hints: string[];
+    tag?: string;
 }
 
-export default function PuzzleSession({ currentPuzzleName, fen, solution, hints }: PuzzleSessionProps) {
+export default function PuzzleSession({ currentPuzzleName, fen, solution, hints, tag }: PuzzleSessionProps) {
     const [solvedPuzzles, setSolvedPuzzles] = useState<SolvedPuzzle[]>([]);
 
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function PuzzleSession({ currentPuzzleName, fen, solution, hints 
                 {solvedPuzzles.map((p, i) => (
                     <Link
                         key={i}
-                        href={`/puzzles/${p.name}`}
+                        href={`/puzzles/${p.name}${tag ? `?tag=${tag}` : ''}`}
                         className={cn(
                             "w-8 h-8 flex-shrink-0 rounded flex items-center justify-center text-xs font-bold text-white transition-transform hover:scale-110",
                             p.result === "success" && "bg-green-500",
@@ -75,6 +76,7 @@ export default function PuzzleSession({ currentPuzzleName, fen, solution, hints 
                 hints={hints}
                 name={currentPuzzleName}
                 onSolve={handleSolve}
+                tag={tag}
             />
         </div>
     );

@@ -13,9 +13,10 @@ interface PuzzleSolverProps {
     hints?: string[]; // Array of hints corresponding to moves
     name: string; // Current puzzle name
     onSolve?: (result: "success" | "mistake" | "hint") => void;
+    tag?: string;
 }
 
-export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve }: PuzzleSolverProps) {
+export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve, tag }: PuzzleSolverProps) {
     const [game, setGame] = useState(new Chess(fen));
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
     const [status, setStatus] = useState<"playing" | "correct" | "wrong">("playing");
@@ -25,37 +26,85 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve 
     const [hintUsed, setHintUsed] = useState(false);
     const router = useRouter();
 
-    // Parse solution moves
+    // Parse solution moves (handle both UCI and SAN, but we expect UCI from Lichess DB)
     const solutionMoves = solution.split(" ").filter(m => m.trim() !== "");
 
     useEffect(() => {
         // Reset state when puzzle changes
-        setGame(new Chess(fen));
+        const newGame = new Chess(fen);
+        setGame(newGame);
         setCurrentMoveIndex(0);
         setStatus("playing");
         setMessage("");
         setShowHint(false);
         setMistakeMade(false);
         setHintUsed(false);
-    }, [fen]);
+
+        // Lichess puzzles start with the opponent's move (the first move in the solution)
+        // We need to play this move immediately to set up the board for the player
+        if (solutionMoves.length > 0) {
+            // Small delay to let the board render the initial position first? 
+            // Or just play it immediately. Lichess usually shows the move being played.
+            setTimeout(() => {
+                try {
+                    const firstMove = solutionMoves[0];
+                    // Try to move using UCI (e.g. "e2e4") or SAN
+                    // chess.js move() handles SAN, or object {from, to}. 
+                    // For UCI "e2e4", we need to parse it.
+                    let moveResult;
+                    if (firstMove.length === 4 || firstMove.length === 5) {
+                        // Assume UCI
+                        moveResult = newGame.move({
+                            from: firstMove.substring(0, 2),
+                            to: firstMove.substring(2, 4),
+                            promotion: firstMove.length === 5 ? firstMove[4] : undefined,
+                        });
+                    } else {
+                        // Assume SAN
+                        moveResult = newGame.move(firstMove);
+                    }
+
+                    if (moveResult) {
+                        setGame(new Chess(newGame.fen()));
+                        setCurrentMoveIndex(1); // Player needs to solve from index 1
+                    }
+                } catch (e) {
+                    console.error("Failed to play initial move:", e);
+                }
+            }, 500);
+        }
+    }, [fen, solution]); // Re-run when puzzle changes
 
     function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
         if (!targetSquare || status !== "playing") return false;
 
         try {
-            // Create a temp game to validate the move and get SAN
+            // Create a temp game to validate the move
             const tempGame = new Chess(game.fen());
+
+            // Attempt the move
             const move = tempGame.move({
                 from: sourceSquare,
                 to: targetSquare,
-                promotion: 'q'
+                promotion: 'q' // Always promote to queen for simplicity in drag-drop, or handle promotion dialog
             });
 
             if (!move) return false; // Illegal move
 
-            const expectedMoveSan = solutionMoves[currentMoveIndex];
+            const expectedMove = solutionMoves[currentMoveIndex];
 
-            if (move.san !== expectedMoveSan) {
+            // Validate against expected move (UCI or SAN)
+            // We convert our move to UCI to compare with expected if expected is UCI
+            const moveUci = move.from + move.to + (move.promotion || "");
+
+            let isCorrect = false;
+            if (expectedMove === moveUci) {
+                isCorrect = true;
+            } else if (expectedMove === move.san) {
+                isCorrect = true;
+            }
+
+            if (!isCorrect) {
                 // Wrong move!
                 setStatus("wrong");
                 setMessage("Incorrect move. Try again.");
@@ -90,28 +139,45 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve 
 
             // Auto-play opponent's move
             setTimeout(() => {
-                const nextMoveSan = solutionMoves[newMoveIndex];
-                if (nextMoveSan) {
-                    game.move(nextMoveSan);
-                    setGame(new Chess(game.fen()));
-                    setCurrentMoveIndex(prev => prev + 1); // Increment by 1 for opponent's move
-
-                    // Check if puzzle solved after opponent's move
-                    if (newMoveIndex + 1 >= solutionMoves.length) {
-                        setStatus("correct");
-                        setMessage("Puzzle Solved!");
-                        if (onSolve) {
-                            if (mistakeMade) onSolve("mistake");
-                            else if (hintUsed) onSolve("hint");
-                            else onSolve("success");
+                const nextMove = solutionMoves[newMoveIndex];
+                if (nextMove) {
+                    try {
+                        let oppMoveResult;
+                        if (nextMove.length === 4 || nextMove.length === 5) {
+                            oppMoveResult = game.move({
+                                from: nextMove.substring(0, 2),
+                                to: nextMove.substring(2, 4),
+                                promotion: nextMove.length === 5 ? nextMove[4] : undefined,
+                            });
+                        } else {
+                            oppMoveResult = game.move(nextMove);
                         }
+
+                        if (oppMoveResult) {
+                            setGame(new Chess(game.fen()));
+                            setCurrentMoveIndex(prev => prev + 1);
+
+                            // Check if puzzle solved after opponent's move
+                            if (newMoveIndex + 1 >= solutionMoves.length) {
+                                setStatus("correct");
+                                setMessage("Puzzle Solved!");
+                                if (onSolve) {
+                                    if (mistakeMade) onSolve("mistake");
+                                    else if (hintUsed) onSolve("hint");
+                                    else onSolve("success");
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Error playing opponent move:", e);
                     }
                 }
             }, 200);
 
             return true;
 
-        } catch {
+        } catch (e) {
+            console.error(e);
             return false;
         }
     }
@@ -132,10 +198,10 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve 
 
     async function handleNextPuzzle() {
         try {
-            const res = await fetch(`/api/puzzles/random?exclude=${name}`);
+            const res = await fetch(`/api/puzzles/random?exclude=${name}${tag ? `&tag=${tag}` : ''}`);
             const data = await res.json();
             if (data.name) {
-                router.push(`/puzzles/${data.name}`);
+                router.push(`/puzzles/${data.name}${tag ? `?tag=${tag}` : ''}`);
             } else {
                 alert("No more puzzles available!");
             }
@@ -155,7 +221,9 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve 
                         id: "puzzle-solver",
                         position: game.fen(),
                         onPieceDrop: onPieceDrop,
-                        boardOrientation: new Chess(fen).turn() === 'w' ? 'white' : 'black',
+                        // The FEN is for the opponent's move (first move). 
+                        // If FEN says White to move, opponent is White, so we are Black.
+                        boardOrientation: new Chess(fen).turn() === 'w' ? 'black' : 'white',
                         animationDuration: 200,
                     } as any}
                 />
