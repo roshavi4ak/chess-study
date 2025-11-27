@@ -45,5 +45,5 @@ next-env.d.ts
 # Import state and backups
 .import_state.json
 backups/
-# lichess database dump
+# lichess database dump for testing only
 lichess_db_puzzle.csv
