@@ -1,0 +1,23 @@
+# Passenger configuration to limit worker processes
+PassengerEnabled on
+PassengerAppType node
+PassengerStartupFile server.js
+
+# CRITICAL: Limit the number of processes
+PassengerMinInstances 1
+PassengerMaxPoolSize 3
+PassengerMaxInstancesPerApp 3
+PassengerMaxRequests 1000
+
+# Memory and timeout settings
+PassengerMemoryLimit 512
+PassengerMaxPreloaderIdleTime 0
+PassengerPoolIdleTime 300
+
+# Spawn method (conservative to prevent process explosion)
+PassengerSpawnMethod conservative
+
+# Environment variables to limit resource usage
+SetEnv UV_THREADPOOL_SIZE 1
+SetEnv MALLOC_ARENA_MAX 2
+SetEnv NODE_OPTIONS "--max-old-space-size=512"

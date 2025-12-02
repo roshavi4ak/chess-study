@@ -1,9 +1,27 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
 import type { Adapter } from "next-auth/adapters"
+import { prisma } from "./lib/db"
 
-const prisma = new PrismaClient()
+// Validate critical environment variables
+const NEXTAUTH_URL = process.env.NEXTAUTH_URL;
+const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET;
+const LICHESS_CLIENT_ID = process.env.LICHESS_CLIENT_ID || "chess-study-app";
+
+if (!NEXTAUTH_SECRET) {
+    console.error('[Auth] ERROR: NEXTAUTH_SECRET or AUTH_SECRET environment variable is not set');
+}
+
+if (!NEXTAUTH_URL) {
+    console.error('[Auth] ERROR: NEXTAUTH_URL environment variable is not set');
+}
+
+console.log('[Auth] Configuration:', {
+    hasSecret: !!NEXTAUTH_SECRET,
+    nextAuthUrl: NEXTAUTH_URL,
+    lichessClientId: LICHESS_CLIENT_ID,
+    nodeEnv: process.env.NODE_ENV
+});
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -12,8 +30,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             id: "lichess",
             name: "Lichess",
             type: "oauth",
-            clientId: process.env.LICHESS_CLIENT_ID || "chess-study-app",
-            clientSecret: undefined, // PKCE doesn't use client secret
+            clientId: LICHESS_CLIENT_ID,
             authorization: {
                 url: "https://lichess.org/oauth",
                 params: {
@@ -21,7 +38,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 },
             },
             token: {
-                url: `${process.env.NEXTAUTH_URL}/api/lichess-token`,
+                url: `${NEXTAUTH_URL}/api/lichess-token`,
             },
             userinfo: "https://lichess.org/api/account",
             profile(profile: any) {
@@ -37,7 +54,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             checks: ["pkce"],
         }
     ],
-    secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
+    secret: NEXTAUTH_SECRET,
+    trustHost: true, // Critical for production with proxy/hosting environment
+    basePath: '/api/auth',
     debug: true,
     callbacks: {
         async session({ session, user }) {

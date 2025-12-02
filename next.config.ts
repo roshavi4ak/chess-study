@@ -5,11 +5,14 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    turbopack: {
-        root: path.resolve(__dirname),
-    },
+    output: 'standalone',
     transpilePackages: ['react-chessboard'],
     reactStrictMode: false,
+    images: {
+        unoptimized: true,
+    },
+    compress: false,
+    poweredByHeader: false,
 };
 
 export default withNextIntl(nextConfig as any);

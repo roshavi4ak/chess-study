@@ -1,9 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 
 export async function getLichessAccessToken() {
     const session = await auth();

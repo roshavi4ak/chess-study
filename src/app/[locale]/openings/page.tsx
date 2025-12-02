@@ -8,13 +8,44 @@ export default async function OpeningsPage() {
     const session = await auth();
     const t = await getTranslations("Navigation");
 
-    const openings = await prisma.opening.findMany({
-        orderBy: { createdAt: "desc" },
-        include: { creator: true }
-    });
+    let openings: any[] = [];
+    let error: Error | null = null;
+
+    try {
+        console.log('[Openings] Fetching openings...');
+        openings = await prisma.opening.findMany({
+            orderBy: { createdAt: "desc" },
+            include: { creator: true }
+        });
+        console.log(`[Openings] Successfully fetched ${openings.length} openings`);
+    } catch (err) {
+        console.error('[Openings] Error fetching openings:', err);
+        error = err as Error;
+        // Return a user-friendly error page instead of crashing
+    }
 
     const isCoach = session?.user?.role === "COACH";
     const userId = session?.user?.id;
+
+    // If there's an error, show it to the user
+    if (error) {
+        return (
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div className="px-4 py-6 sm:px-0">
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                        <h2 className="font-bold text-xl mb-2">Error Loading Openings</h2>
+                        <p className="mb-2">Unable to load openings. Please try again later.</p>
+                        <details className="mt-2">
+                            <summary className="cursor-pointer font-semibold">Technical Details</summary>
+                            <pre className="mt-2 text-xs overflow-auto bg-red-50 p-2 rounded">
+                                {error.message}
+                            </pre>
+                        </details>
+                    </div>
+                </div>
+            </main>
+        );
+    }
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
