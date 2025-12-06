@@ -13,7 +13,11 @@ const nextConfig = {
     },
     compress: false,
     poweredByHeader: false,
+    experimental: {
+        // Force single-threaded operation to reduce process count
+        workerThreads: false,
+        cpus: 1,
+    },
 };
 
 export default withNextIntl(nextConfig as any);
-

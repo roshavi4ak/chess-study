@@ -1,21 +1,13 @@
-# Passenger configuration to limit worker processes
-PassengerEnabled on
-PassengerAppType node
-PassengerStartupFile server.js
-
-# CRITICAL: Limit the number of processes
-PassengerMinInstances 1
-PassengerMaxPoolSize 3
-PassengerMaxInstancesPerApp 3
-PassengerMaxRequests 1000
-
-# Memory and timeout settings
-PassengerMemoryLimit 512
-PassengerMaxPreloaderIdleTime 0
-PassengerPoolIdleTime 300
-
-# Spawn method (conservative to prevent process explosion)
-PassengerSpawnMethod conservative
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv AUTH_TRUST_HOST true
+SetEnv DATABASE_URL postgresql://andrey12_chessadmin:domelike-herself-hangnail-itinerary6-epidermal@127.0.0.1:5432/andrey12_chessstudy?connection_limit=5&pool_timeout=10
+SetEnv NEXTAUTH_URL https://shah.belovezem.com
+SetEnv NEXTAUTH_SECRET 6Vawp0PJhigCxGeOBvK8mK6A0s9l4BBfOSt7cb3RhOA=1
+SetEnv AUTH_SECRET 6Vawp0PJhigCxGeOBvK8mK6A0s9l4BBfOSt7cb3RhOA=1
+SetEnv LICHESS_CLIENT_ID chess-study-app-production
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
 
 # Environment variables to limit resource usage
 SetEnv UV_THREADPOOL_SIZE 1

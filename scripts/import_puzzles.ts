@@ -5,27 +5,36 @@ import readline from 'readline';
 import path from 'path';
 
 const prisma = new PrismaClient();
-const CSV_FILE = path.join(__dirname, '../lichess_db_puzzle.csv');
-const STATE_FILE = path.join(__dirname, '../.import_state.json');
-const TARGET_COUNT = 10000;
-const MAX_RATING = 1700;
+const CSV_FILE = path.join(process.cwd(), 'lichess_db_puzzle.csv');
 const USER_ID = 'cmidi8gr50000v8vc36ubbgir'; // roshavi4ak
 
-interface ImportState {
-    lastImportedId: string | null;
-    totalImported: number;
-}
+// Configuration for the batches we want to import
+// "between 1700 and 2000" and "between 2000 and 2400"
+const BATCHES = [
+    { min: 1700, max: 2000, target: 20000, inserted: 0, buffer: [] as any[] },
+    { min: 2000, max: 2400, target: 10000, inserted: 0, buffer: [] as any[] }
+];
 
-function loadState(): ImportState {
-    if (fs.existsSync(STATE_FILE)) {
-        const data = fs.readFileSync(STATE_FILE, 'utf-8');
-        return JSON.parse(data);
+const FLUSH_THRESHOLD = 500; // Insert to DB when buffer reaches this size
+
+async function flushBuffer(batchIndex: number) {
+    const batch = BATCHES[batchIndex];
+    if (batch.buffer.length === 0) return;
+
+    try {
+        const result = await prisma.puzzle.createMany({
+            data: batch.buffer,
+            skipDuplicates: true,
+        });
+        batch.inserted += result.count;
+        // console.log(`Batch ${batchIndex} (${batch.min}-${batch.max}): +${result.count} inserted (Total: ${batch.inserted}/${batch.target})`);
+    } catch (e) {
+        console.error(`Error inserting batch ${batchIndex}:`, e);
+    } finally {
+        // Clear buffer regardless of success to avoid stuck loop, duplicate attempts will be skipped next time anyway or we move on.
+        // But for safety, we clear it.
+        batch.buffer = [];
     }
-    return { lastImportedId: null, totalImported: 0 };
-}
-
-function saveState(state: ImportState) {
-    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 }
 
 async function main() {
@@ -34,9 +43,8 @@ async function main() {
         process.exit(1);
     }
 
-    const state = loadState();
-    console.log(`Resuming from: ${state.lastImportedId || 'beginning'}`);
-    console.log(`Total previously imported: ${state.totalImported}`);
+    console.log('Starting multi-batch import...');
+    console.log('Batches:', BATCHES.map(b => `${b.min}-${b.max}: target ${b.target}`).join(', '));
 
     const fileStream = fs.createReadStream(CSV_FILE);
     const rl = readline.createInterface({
@@ -44,92 +52,79 @@ async function main() {
         crlfDelay: Infinity,
     });
 
-    const puzzlesToInsert: any[] = [];
-    let count = 0;
     let processed = 0;
-    let foundResumePont = state.lastImportedId === null;
-    let lastProcessedId: string | null = null;
 
-    console.log('Starting import...');
+    // We scan the file from the beginning to ensure we find puzzles in the desired ranges.
+    // We ignore previous state for this specific multi-range fill operation.
 
     for await (const line of rl) {
         processed++;
+        if (processed % 10000 === 0) {
+            process.stdout.write(`\rScanned ${processed} lines... Status: [${BATCHES.map(b => `${b.inserted}/${b.target}`).join(', ')}]`);
+        }
+
         if (processed === 1) continue; // Skip header
+
+        // Check if all batches are done
+        if (BATCHES.every(b => b.inserted >= b.target)) {
+            console.log('\nAll targets reached!');
+            break;
+        }
 
         const cols = line.split(',');
         if (cols.length < 10) continue;
 
         const puzzleId = cols[0];
-        lastProcessedId = puzzleId;
-
-        // Skip until we find our resume point
-        if (!foundResumePont) {
-            if (puzzleId === state.lastImportedId) {
-                foundResumePont = true;
-                console.log(`Found resume point at puzzle: ${puzzleId}`);
-            }
-            continue;
-        }
-
         const rating = parseInt(cols[3]);
+
         if (isNaN(rating)) continue;
 
-        if (rating < MAX_RATING) {
-            const fen = cols[1];
-            const moves = cols[2];
-            const themes = cols[7];
+        // Check which batch this puzzle belongs to
+        for (let i = 0; i < BATCHES.length; i++) {
+            const batch = BATCHES[i];
 
-            puzzlesToInsert.push({
-                name: puzzleId,
-                fen: fen,
-                solution: moves,
-                rating: rating,
-                tags: themes ? themes.split(' ') : [],
-                createdBy: USER_ID,
-                description: `Lichess Puzzle ${puzzleId}`,
-            });
+            // If batch is full, skip
+            if (batch.inserted >= batch.target) continue;
 
-            count++;
-            if (count % 100 === 0) {
-                process.stdout.write(`\rFound ${count} puzzles...`);
-            }
+            // Check rating range: min <= rating < max
+            if (rating >= batch.min && rating < batch.max) {
+                const fen = cols[1];
+                const moves = cols[2];
+                const themes = cols[7];
 
-            if (count >= TARGET_COUNT) {
+                batch.buffer.push({
+                    name: puzzleId,
+                    fen: fen,
+                    solution: moves,
+                    rating: rating,
+                    tags: themes ? themes.split(' ') : [],
+                    createdBy: USER_ID,
+                    description: `Lichess Puzzle ${puzzleId}`,
+                });
+
+                // Flush if buffer is full
+                if (batch.buffer.length >= FLUSH_THRESHOLD) {
+                    await flushBuffer(i);
+                }
+
+                // Once added to a batch, we break (puzzle belongs to only one range effectively)
                 break;
             }
         }
     }
 
-    console.log(`\nFound ${puzzlesToInsert.length} puzzles. Inserting into database...`);
-
-    // Insert in batches
-    const BATCH_SIZE = 100;
-    let inserted = 0;
-
-    for (let i = 0; i < puzzlesToInsert.length; i += BATCH_SIZE) {
-        const batch = puzzlesToInsert.slice(i, i + BATCH_SIZE);
-        try {
-            await prisma.puzzle.createMany({
-                data: batch,
-                skipDuplicates: true,
-            });
-            inserted += batch.length;
-            process.stdout.write(`\rInserted ${inserted}/${puzzlesToInsert.length}`);
-        } catch (e) {
-            console.error(`\nError inserting batch ${i}:`, e);
-        }
+    // Final flush for remaining items
+    console.log('\nFinalizing imports...');
+    for (let i = 0; i < BATCHES.length; i++) {
+        await flushBuffer(i);
     }
 
-    // Update state
-    if (lastProcessedId) {
-        state.lastImportedId = lastProcessedId;
-        state.totalImported += inserted;
-        saveState(state);
-        console.log(`\nSaved state. Last imported: ${lastProcessedId}`);
-        console.log(`Total imported so far: ${state.totalImported}`);
-    }
+    console.log('\nImport Summary:');
+    BATCHES.forEach(b => {
+        console.log(`Range ${b.min}-${b.max}: Requested ${b.target}, Inserted ${b.inserted}`);
+    });
 
-    console.log('\nImport complete!');
+    console.log('Done!');
 }
 
 main()

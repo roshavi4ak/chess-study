@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { PieceDropHandlerArgs } from "react-chessboard";
-import { createStockfishWorker, uciToMove, type StockfishDifficulty } from "@/lib/stockfishWorker";
+import { uciToMove } from "@/lib/stockfishWorker";
 import { getAvailableUsers, type AvailableUser } from "@/app/actions/users";
 import {
     createLichessAIChallenge,
@@ -20,7 +20,7 @@ import {
 } from "@/lib/lichessService";
 import { getLichessAccessToken, getCurrentUserLichessId } from "@/app/actions/lichess";
 
-type GameMode = 'random' | 'stockfish' | 'lichess' | 'friend';
+type GameMode = 'lichess' | 'friend';
 
 interface IncomingChallenge {
     id: string;
@@ -38,8 +38,7 @@ export default function PlayPage() {
     const [chessPosition, setChessPosition] = useState(chessGame.fen());
 
     // Mode and difficulty
-    const [gameMode, setGameMode] = useState<GameMode>('random');
-    const [stockfishDifficulty, setStockfishDifficulty] = useState<StockfishDifficulty>('medium');
+    const [gameMode, setGameMode] = useState<GameMode>('lichess');
     const [lichessLevel, setLichessLevel] = useState<LichessLevel>(3);
 
     // Status and errors
@@ -48,9 +47,6 @@ export default function PlayPage() {
 
     // Board orientation
     const [boardOrientation, setBoardOrientation] = useState<'white' | 'black'>('white');
-
-    // Stockfish worker ref
-    const stockfishWorkerRef = useRef<ReturnType<typeof createStockfishWorker> | null>(null);
 
     // Lichess game refs
     const lichessGameIdRef = useRef<string | null>(null);
@@ -71,20 +67,6 @@ export default function PlayPage() {
     const [isWaitingForChallenge, setIsWaitingForChallenge] = useState(false);
     const myLichessIdRef = useRef<string | null>(null);
 
-    // Initialize Stockfish worker when in Stockfish mode
-    useEffect(() => {
-        if (gameMode === 'stockfish' && !stockfishWorkerRef.current) {
-            stockfishWorkerRef.current = createStockfishWorker();
-            setStatus('Stockfish engine ready');
-        }
-
-        return () => {
-            if (stockfishWorkerRef.current && gameMode !== 'stockfish') {
-                stockfishWorkerRef.current.terminate();
-                stockfishWorkerRef.current = null;
-            }
-        };
-    }, [gameMode]);
 
 
     // Initialize Lichess event stream
@@ -148,9 +130,6 @@ export default function PlayPage() {
         initLichessStream();
 
         return () => {
-            if (stockfishWorkerRef.current) {
-                stockfishWorkerRef.current.terminate();
-            }
             if (lichessCleanupRef.current) {
                 lichessCleanupRef.current();
             }
@@ -160,61 +139,6 @@ export default function PlayPage() {
         };
     }, []);
 
-    // Make a random CPU move
-    function makeRandomMove() {
-        const possibleMoves = chessGame.moves();
-
-        if (chessGame.isGameOver()) {
-            setStatus(getGameOverMessage());
-            return;
-        }
-
-        const randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        chessGame.move(randomMove);
-        setChessPosition(chessGame.fen());
-
-        if (chessGame.isGameOver()) {
-            setStatus(getGameOverMessage());
-        } else {
-            setStatus('Your turn');
-        }
-    }
-
-    // Make a Stockfish AI move
-    async function makeStockfishMove() {
-        if (!stockfishWorkerRef.current) {
-            setError('Stockfish engine not initialized');
-            return;
-        }
-
-        setStatus(`Stockfish is thinking (${stockfishDifficulty})...`);
-
-        try {
-            const bestMove = await stockfishWorkerRef.current.messageHandler(
-                chessGame.fen(),
-                stockfishDifficulty
-            );
-
-            if (bestMove) {
-                const move = uciToMove(bestMove);
-                chessGame.move(move);
-                setChessPosition(chessGame.fen());
-
-                if (chessGame.isGameOver()) {
-                    setStatus(getGameOverMessage());
-                } else {
-                    setStatus('Your turn');
-                }
-            } else {
-                setError('Stockfish failed to find a move');
-                setStatus('Your turn');
-            }
-        } catch (err) {
-            setError('Error getting Stockfish move');
-            setStatus('Your turn');
-            console.error('Stockfish error:', err);
-        }
-    }
 
     // Connect to an existing Lichess game
     async function connectToLichessGame(gameId: string) {
@@ -457,12 +381,7 @@ export default function PlayPage() {
             }
 
             // Handle opponent move based on mode
-            if (gameMode === 'random') {
-                setStatus('CPU is thinking...');
-                setTimeout(makeRandomMove, 500);
-            } else if (gameMode === 'stockfish') {
-                setTimeout(makeStockfishMove, 200);
-            } else if (gameMode === 'lichess' || gameMode === 'friend') {
+            if (gameMode === 'lichess' || gameMode === 'friend') {
                 setStatus('Waiting for opponent...');
             }
 
@@ -543,24 +462,6 @@ export default function PlayPage() {
                     {/* Mode Selection */}
                     <div className="flex justify-center gap-2 mb-4 flex-wrap">
                         <button
-                            onClick={() => startNewGame('random')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${gameMode === 'random'
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
-                                }`}
-                        >
-                            Random
-                        </button>
-                        <button
-                            onClick={() => startNewGame('stockfish')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${gameMode === 'stockfish'
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
-                                }`}
-                        >
-                            Stockfish
-                        </button>
-                        <button
                             onClick={() => startNewGame('lichess')}
                             className={`px-4 py-2 rounded-lg font-medium transition-colors ${gameMode === 'lichess'
                                 ? 'bg-blue-600 text-white'
@@ -580,24 +481,6 @@ export default function PlayPage() {
                         </button>
                     </div>
 
-                    {/* Difficulty Selection for Stockfish */}
-                    {gameMode === 'stockfish' && (
-                        <div className="flex justify-center items-center gap-2 mb-4">
-                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Difficulty:
-                            </label>
-                            <select
-                                value={stockfishDifficulty}
-                                onChange={(e) => setStockfishDifficulty(e.target.value as StockfishDifficulty)}
-                                className="px-3 py-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                            >
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
-                                <option value="expert">Expert</option>
-                            </select>
-                        </div>
-                    )}
 
                     {/* Level Selection for Lichess */}
                     {gameMode === 'lichess' && (
@@ -771,8 +654,6 @@ export default function PlayPage() {
                 {/* Current Mode Indicator */}
                 <div className="mt-4 text-center text-sm text-gray-500">
                     <p>
-                        {gameMode === 'random' && 'Playing against random moves'}
-                        {gameMode === 'stockfish' && `Playing against Stockfish (${stockfishDifficulty})`}
                         {gameMode === 'lichess' && `Playing against Lichess AI (Level ${lichessLevel})`}
                         {gameMode === 'friend' && `Playing against Friend`}
                     </p>
