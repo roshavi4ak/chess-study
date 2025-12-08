@@ -13,6 +13,14 @@ export interface LichessGameState {
     status: 'created' | 'started' | 'finished';
     winner?: 'white' | 'black' | 'draw';
     playerColor?: 'white' | 'black'; // Which color the player is playing
+    // Player info
+    whiteName?: string;
+    whiteRating?: number;
+    blackName?: string;
+    blackRating?: number;
+    // Clock times in milliseconds
+    wtime?: number;
+    btime?: number;
 }
 
 interface LichessGameEvent {
@@ -435,6 +443,10 @@ export function streamLichessGame(
                                 }
                             }
 
+                            // Extract player names
+                            const whiteName = data.white?.name || (data.white?.aiLevel ? `Stockfish Level ${data.white.aiLevel}` : 'White');
+                            const blackName = data.black?.name || (data.black?.aiLevel ? `Stockfish Level ${data.black.aiLevel}` : 'Black');
+
                             onGameState({
                                 gameId,
                                 fen: '', // Will be calculated from moves
@@ -442,6 +454,12 @@ export function streamLichessGame(
                                 lastMove: moves.split(' ').pop(),
                                 status: 'started',
                                 playerColor: playerColor,
+                                whiteName: whiteName,
+                                whiteRating: (data.white as any)?.rating,
+                                blackName: blackName,
+                                blackRating: (data.black as any)?.rating,
+                                wtime: data.state?.wtime,
+                                btime: data.state?.btime,
                             });
                         } else if (data.type === 'gameState') {
                             // Game state update
@@ -459,6 +477,9 @@ export function streamLichessGame(
                                 winner: data.winner || data.state?.winner
                                     ? (data.winner || data.state?.winner) as 'white' | 'black' | 'draw'
                                     : undefined,
+                                // Clock times - available in gameState events
+                                wtime: (data as any).wtime ?? data.state?.wtime,
+                                btime: (data as any).btime ?? data.state?.btime,
                             });
                         }
                     } catch (error) {
@@ -530,6 +551,33 @@ export async function resignLichessGame(
         return response.ok;
     } catch (error) {
         console.error('Error resigning Lichess game:', error);
+        return false;
+    }
+}
+
+/**
+ * Offer or accept a draw in a Lichess game
+ * If the opponent has already offered a draw, this accepts it
+ */
+export async function offerLichessDraw(
+    accessToken: string,
+    gameId: string,
+    accept: boolean = true
+): Promise<boolean> {
+    try {
+        const response = await fetch(
+            `https://lichess.org/api/board/game/${gameId}/draw/${accept ? 'yes' : 'no'}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            }
+        );
+
+        return response.ok;
+    } catch (error) {
+        console.error('Error offering/accepting draw:', error);
         return false;
     }
 }

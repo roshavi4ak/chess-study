@@ -14,6 +14,8 @@ import {
     makeLichessMove,
     acceptLichessChallenge,
     declineLichessChallenge,
+    resignLichessGame,
+    offerLichessDraw,
     type LichessLevel,
     type LichessGameState,
     type ChallengeOptions
@@ -29,6 +31,15 @@ interface IncomingChallenge {
     rated: boolean;
     timeControl: string;
     variant: string;
+}
+
+// Helper to format clock time
+function formatTime(ms: number | undefined): string {
+    if (ms === undefined) return '--:--';
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
 export default function PlayPage() {
@@ -47,6 +58,18 @@ export default function PlayPage() {
 
     // Board orientation
     const [boardOrientation, setBoardOrientation] = useState<'white' | 'black'>('white');
+
+    // Player color for the current game (persisted throughout the game)
+    const playerColorRef = useRef<'white' | 'black'>('white');
+    const [playerColor, setPlayerColor] = useState<'white' | 'black'>('white');
+
+    // Player info state
+    const [whiteName, setWhiteName] = useState<string>('White');
+    const [blackName, setBlackName] = useState<string>('Black');
+    const [whiteRating, setWhiteRating] = useState<number | undefined>();
+    const [blackRating, setBlackRating] = useState<number | undefined>();
+    const [whiteTime, setWhiteTime] = useState<number | undefined>();
+    const [blackTime, setBlackTime] = useState<number | undefined>();
 
     // Lichess game refs
     const lichessGameIdRef = useRef<string | null>(null);
@@ -170,18 +193,42 @@ export default function PlayPage() {
     function handleLichessGameState(gameState: LichessGameState) {
         console.log('Lichess game state update:', gameState);
 
-        // Set board orientation based on player color (only once at game start)
+        // Set board orientation and player color (only once at game start when playerColor is provided)
         if (gameState.playerColor) {
             setBoardOrientation(gameState.playerColor);
+            setPlayerColor(gameState.playerColor);
+            playerColorRef.current = gameState.playerColor;
+        }
+
+        // Update player names and ratings (only from gameFull events which have this data)
+        if (gameState.whiteName) {
+            setWhiteName(gameState.whiteName);
+        }
+        if (gameState.blackName) {
+            setBlackName(gameState.blackName);
+        }
+        if (gameState.whiteRating !== undefined) {
+            setWhiteRating(gameState.whiteRating);
+        }
+        if (gameState.blackRating !== undefined) {
+            setBlackRating(gameState.blackRating);
+        }
+
+        // Update clock times
+        if (gameState.wtime !== undefined) {
+            setWhiteTime(gameState.wtime);
+        }
+        if (gameState.btime !== undefined) {
+            setBlackTime(gameState.btime);
         }
 
         // Apply all moves from the game state
-        if (gameState.moves) {
+        if (gameState.moves !== undefined) {
             try {
                 // Reset to starting position
                 const newGame = new Chess();
 
-                // Apply each move from Lichess
+                // Apply each move from Lichess if there are any
                 const movesArray = gameState.moves.trim().split(' ').filter(m => m);
                 for (const uciMove of movesArray) {
                     const move = uciToMove(uciMove);
@@ -192,15 +239,16 @@ export default function PlayPage() {
                 chessGameRef.current = newGame;
                 setChessPosition(newGame.fen());
 
-                // Update status  based on whose turn it is
+                // Update status based on whose turn it is
+                // Use the stored playerColorRef since gameState.playerColor is only in gameFull
                 if (gameState.status === 'finished') {
                     setStatus(`Game finished! Winner: ${gameState.winner || 'Draw'}`);
                 } else {
-                    // Check if it's player's turn
+                    // Check if it's player's turn using the persisted playerColorRef
                     const currentTurn = newGame.turn(); // 'w' or 'b'
-                    const playerTurn = gameState.playerColor === 'white' ? 'w' : 'b';
+                    const myTurn = playerColorRef.current === 'white' ? 'w' : 'b';
 
-                    if (currentTurn === playerTurn) {
+                    if (currentTurn === myTurn) {
                         setStatus('Your turn');
                     } else {
                         setStatus('Opponent is thinking...');
@@ -360,6 +408,17 @@ export default function PlayPage() {
             return false;
         }
 
+        // For Lichess games, verify it's the player's turn before allowing the move
+        if (lichessGameStarted && (gameMode === 'lichess' || gameMode === 'friend')) {
+            const currentTurn = chessGame.turn(); // 'w' or 'b'
+            const myTurn = playerColorRef.current === 'white' ? 'w' : 'b';
+
+            if (currentTurn !== myTurn) {
+                setError('It\'s not your turn!');
+                return false;
+            }
+        }
+
         try {
             chessGame.move({
                 from: sourceSquare,
@@ -368,6 +427,7 @@ export default function PlayPage() {
             });
 
             setChessPosition(chessGame.fen());
+            setError(''); // Clear any previous error
 
             // Send move to Lichess BEFORE checking if game is over
             // This ensures checkmate moves are transmitted
@@ -400,6 +460,16 @@ export default function PlayPage() {
         setStatus('Make your move');
         setBoardOrientation('white');
 
+        // Reset player info
+        setPlayerColor('white');
+        playerColorRef.current = 'white';
+        setWhiteName('White');
+        setBlackName('Black');
+        setWhiteRating(undefined);
+        setBlackRating(undefined);
+        setWhiteTime(undefined);
+        setBlackTime(undefined);
+
         // Clean up Lichess connection
         if (lichessCleanupRef.current) {
             lichessCleanupRef.current();
@@ -417,11 +487,47 @@ export default function PlayPage() {
         // Don't auto-start Lichess game - wait for Start button
     }
 
+    // Handle resign
+    async function handleResign() {
+        if (!lichessTokenRef.current || !lichessGameIdRef.current) return;
+
+        const confirmed = window.confirm('Are you sure you want to resign?');
+        if (!confirmed) return;
+
+        const success = await resignLichessGame(lichessTokenRef.current, lichessGameIdRef.current);
+        if (!success) {
+            setError('Failed to resign');
+        }
+    }
+
+    // Handle offer draw
+    async function handleOfferDraw() {
+        if (!lichessTokenRef.current || !lichessGameIdRef.current) return;
+
+        const success = await offerLichessDraw(lichessTokenRef.current, lichessGameIdRef.current);
+        if (success) {
+            setStatus('Draw offer sent');
+        } else {
+            setError('Failed to offer draw');
+        }
+    }
+
+    // Check if a piece is draggable (only allow dragging your own pieces)
+    function isDraggablePiece({ piece }: { piece: string }): boolean {
+        // If no Lichess game is active, allow all pieces to be dragged
+        if (!lichessGameStarted) return true;
+
+        // piece format is like 'wP', 'bK' etc - first char is color
+        const pieceColor = piece[0] === 'w' ? 'white' : 'black';
+        return pieceColor === playerColorRef.current;
+    }
+
     // Set the chessboard options (as per react-chessboard documentation)
     const chessboardOptions = {
         position: chessPosition,
         onPieceDrop,
         boardOrientation: boardOrientation,
+        isDraggablePiece,
         id: `play-vs-${gameMode}`
     };
 
@@ -634,10 +740,78 @@ export default function PlayPage() {
                     )}
                 </div>
 
-                {/* Chessboard */}
+                {/* Chessboard with player panels */}
                 <div className="flex justify-center">
-                    <div className="w-full max-w-[600px] aspect-square">
-                        <Chessboard options={chessboardOptions} />
+                    <div className="w-full max-w-[600px]">
+                        {/* Opponent Panel (top) - shows opposite of player color */}
+                        {lichessGameStarted && (
+                            <div className="flex justify-between items-center mb-2 p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <div className="flex items-center gap-2">
+                                    <div className={`w-4 h-4 rounded-full ${playerColor === 'white' ? 'bg-gray-900' : 'bg-white border border-gray-300'}`} />
+                                    <span className="font-semibold text-gray-900 dark:text-white">
+                                        {playerColor === 'white' ? blackName : whiteName}
+                                    </span>
+                                    {(playerColor === 'white' ? blackRating : whiteRating) && (
+                                        <span className="text-sm text-gray-500">
+                                            ({playerColor === 'white' ? blackRating : whiteRating})
+                                        </span>
+                                    )}
+                                </div>
+                                <div className={`px-3 py-1 rounded font-mono text-lg ${chessGameRef.current.turn() !== (playerColor === 'white' ? 'w' : 'b')
+                                    ? 'bg-green-600 text-white'
+                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                                    }`}>
+                                    {formatTime(playerColor === 'white' ? blackTime : whiteTime)}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Chessboard */}
+                        <div className="aspect-square">
+                            <Chessboard options={chessboardOptions} />
+                        </div>
+
+                        {/* Player Panel (bottom) - shows player's color */}
+                        {lichessGameStarted && (
+                            <div className="flex justify-between items-center mt-2 p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <div className="flex items-center gap-2">
+                                    <div className={`w-4 h-4 rounded-full ${playerColor === 'white' ? 'bg-white border border-gray-300' : 'bg-gray-900'}`} />
+                                    <span className="font-semibold text-gray-900 dark:text-white">
+                                        {playerColor === 'white' ? whiteName : blackName}
+                                    </span>
+                                    {(playerColor === 'white' ? whiteRating : blackRating) && (
+                                        <span className="text-sm text-gray-500">
+                                            ({playerColor === 'white' ? whiteRating : blackRating})
+                                        </span>
+                                    )}
+                                    <span className="text-xs text-blue-500 ml-2">(You)</span>
+                                </div>
+                                <div className={`px-3 py-1 rounded font-mono text-lg ${chessGameRef.current.turn() === (playerColor === 'white' ? 'w' : 'b')
+                                    ? 'bg-green-600 text-white'
+                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                                    }`}>
+                                    {formatTime(playerColor === 'white' ? whiteTime : blackTime)}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Game Actions (Resign/Draw) */}
+                        {lichessGameStarted && status !== 'Game finished!' && !status.startsWith('Game finished') && (
+                            <div className="flex justify-center gap-4 mt-4">
+                                <button
+                                    onClick={handleOfferDraw}
+                                    className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+                                >
+                                    ½ Offer Draw
+                                </button>
+                                <button
+                                    onClick={handleResign}
+                                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                                >
+                                    🏳️ Resign
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
 
