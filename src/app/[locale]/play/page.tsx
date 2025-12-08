@@ -71,6 +71,12 @@ export default function PlayPage() {
     const [whiteTime, setWhiteTime] = useState<number | undefined>();
     const [blackTime, setBlackTime] = useState<number | undefined>();
 
+    // Clock countdown refs - for client-side countdown between Lichess updates
+    const lastClockUpdateRef = useRef<number>(Date.now());
+    const clockIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const whiteTimeRef = useRef<number | undefined>(undefined);
+    const blackTimeRef = useRef<number | undefined>(undefined);
+
     // Lichess game refs
     const lichessGameIdRef = useRef<string | null>(null);
     const lichessCleanupRef = useRef<(() => void) | null>(null);
@@ -162,6 +168,42 @@ export default function PlayPage() {
         };
     }, []);
 
+    // Clock countdown effect - runs every 100ms to update the active player's clock
+    useEffect(() => {
+        // Only run countdown if game is started and we have clock times
+        if (!lichessGameStarted || (whiteTimeRef.current === undefined && blackTimeRef.current === undefined)) {
+            return;
+        }
+
+        // Start the countdown interval
+        clockIntervalRef.current = setInterval(() => {
+            const now = Date.now();
+            const elapsed = now - lastClockUpdateRef.current;
+            lastClockUpdateRef.current = now;
+
+            // Determine whose turn it is
+            const currentTurn = chessGameRef.current.turn(); // 'w' or 'b'
+
+            // Decrement the active player's time
+            if (currentTurn === 'w' && whiteTimeRef.current !== undefined) {
+                const newTime = Math.max(0, whiteTimeRef.current - elapsed);
+                whiteTimeRef.current = newTime;
+                setWhiteTime(newTime);
+            } else if (currentTurn === 'b' && blackTimeRef.current !== undefined) {
+                const newTime = Math.max(0, blackTimeRef.current - elapsed);
+                blackTimeRef.current = newTime;
+                setBlackTime(newTime);
+            }
+        }, 100); // Update every 100ms for smooth countdown
+
+        return () => {
+            if (clockIntervalRef.current) {
+                clearInterval(clockIntervalRef.current);
+                clockIntervalRef.current = null;
+            }
+        };
+    }, [lichessGameStarted, chessPosition]); // Re-run when game starts or position changes
+
 
     // Connect to an existing Lichess game
     async function connectToLichessGame(gameId: string) {
@@ -214,12 +256,16 @@ export default function PlayPage() {
             setBlackRating(gameState.blackRating);
         }
 
-        // Update clock times
+        // Update clock times and sync with refs for countdown
         if (gameState.wtime !== undefined) {
             setWhiteTime(gameState.wtime);
+            whiteTimeRef.current = gameState.wtime;
+            lastClockUpdateRef.current = Date.now(); // Reset timestamp for accurate countdown
         }
         if (gameState.btime !== undefined) {
             setBlackTime(gameState.btime);
+            blackTimeRef.current = gameState.btime;
+            lastClockUpdateRef.current = Date.now(); // Reset timestamp for accurate countdown
         }
 
         // Apply all moves from the game state
@@ -469,6 +515,17 @@ export default function PlayPage() {
         setBlackRating(undefined);
         setWhiteTime(undefined);
         setBlackTime(undefined);
+
+        // Reset clock refs
+        whiteTimeRef.current = undefined;
+        blackTimeRef.current = undefined;
+        lastClockUpdateRef.current = Date.now();
+
+        // Clear clock interval
+        if (clockIntervalRef.current) {
+            clearInterval(clockIntervalRef.current);
+            clockIntervalRef.current = null;
+        }
 
         // Clean up Lichess connection
         if (lichessCleanupRef.current) {
