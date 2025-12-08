@@ -22,6 +22,14 @@ model User {
   role          Role      @default(STUDENT)
   lichessId     String?   @unique
   
+  // Ratings
+  ratingPuzzle         Int?
+  ratingBullet         Int?
+  ratingBlitz          Int?
+  ratingRapid          Int?
+  ratingClassical      Int?
+  ratingCorrespondence Int?
+  
   accounts      Account[]
   sessions      Session[]
   

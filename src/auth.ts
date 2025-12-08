@@ -48,7 +48,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     email: profile.email,
                     image: `https://lichess1.org/assets/logo/lichess-pad3.svg`,
                     role: "STUDENT",
-                    lichessId: profile.id
+                    lichessId: profile.id,
+                    ratingPuzzle: profile.perfs?.puzzle?.rating,
+                    ratingBullet: profile.perfs?.bullet?.rating,
+                    ratingBlitz: profile.perfs?.blitz?.rating,
+                    ratingRapid: profile.perfs?.rapid?.rating,
+                    ratingClassical: profile.perfs?.classical?.rating,
+                    ratingCorrespondence: profile.perfs?.correspondence?.rating,
                 }
             },
             checks: ["pkce"],

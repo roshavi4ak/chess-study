@@ -12,5 +12,11 @@ declare module "next-auth" {
     interface User {
         role: Role
         lichessId: string | null
+        ratingPuzzle?: number | null
+        ratingBullet?: number | null
+        ratingBlitz?: number | null
+        ratingRapid?: number | null
+        ratingClassical?: number | null
+        ratingCorrespondence?: number | null
     }
 }
