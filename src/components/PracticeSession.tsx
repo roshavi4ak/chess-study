@@ -296,13 +296,31 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
             // WRONG MOVE - Show coach notes immediately for the correct move
             setHadWrongMoves(true);
 
-            // Find any child with notes to help the student
-            const childWithNotes = currentNode.children.find(c => c.notes);
+            // Try to find helpful notes in multiple places:
+            // 1. Notes on any of the correct children (the moves they should make)
+            const childWithNotes = currentNode.children.find(c => c.notes && c.notes.trim() !== "");
+            // 2. Notes on the current node (might describe what to do here)
+            const currentNodeNotes = currentNode.notes && currentNode.notes.trim() !== "" ? currentNode.notes : null;
+            // 3. Show the correct move itself as a hint
+            const firstChild = currentNode.children[0];
 
             if (childWithNotes?.notes) {
                 setFeedback({
                     type: "incorrect",
                     message: `❌ Wrong move! Hint: ${childWithNotes.notes}`
+                });
+            } else if (currentNodeNotes) {
+                setFeedback({
+                    type: "incorrect",
+                    message: `❌ Wrong move! Hint: ${currentNodeNotes}`
+                });
+            } else if (firstChild?.move) {
+                // Show the correct move as last resort hint
+                const from = firstChild.move.slice(0, 2);
+                const to = firstChild.move.slice(2, 4);
+                setFeedback({
+                    type: "incorrect",
+                    message: `❌ Wrong move! Try moving from ${from} to ${to}.`
                 });
             } else {
                 setFeedback({ type: "incorrect", message: "❌ That's not the right move. Try again!" });
@@ -393,8 +411,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                     {/* Feedback */}
                     {feedback.message && (
                         <div className={`p-4 rounded-lg text-center text-lg font-medium ${feedback.type === "incorrect" ? "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200" :
-                                feedback.type === "complete" ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200" :
-                                    "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+                            feedback.type === "complete" ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200" :
+                                "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                             }`}>
                             {feedback.message}
                         </div>
