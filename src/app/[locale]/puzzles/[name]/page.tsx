@@ -65,6 +65,7 @@ export default async function PuzzlePage(props: PageProps) {
 
                 <div className="flex justify-center">
                     <PuzzleSession
+                        id={puzzle.id}
                         currentPuzzleName={puzzle.name}
                         fen={puzzle.fen}
                         solution={puzzle.solution}

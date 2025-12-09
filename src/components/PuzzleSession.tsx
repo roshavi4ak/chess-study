@@ -11,6 +11,7 @@ interface SolvedPuzzle {
 }
 
 interface PuzzleSessionProps {
+    id: string;
     currentPuzzleName: string;
     fen: string;
     solution: string;
@@ -18,7 +19,7 @@ interface PuzzleSessionProps {
     tag?: string;
 }
 
-export default function PuzzleSession({ currentPuzzleName, fen, solution, hints, tag }: PuzzleSessionProps) {
+export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hints, tag }: PuzzleSessionProps) {
     const [solvedPuzzles, setSolvedPuzzles] = useState<SolvedPuzzle[]>([]);
 
     useEffect(() => {
@@ -71,6 +72,7 @@ export default function PuzzleSession({ currentPuzzleName, fen, solution, hints,
 
             {/* Puzzle Solver */}
             <PuzzleSolver
+                id={id}
                 fen={fen}
                 solution={solution}
                 hints={hints}

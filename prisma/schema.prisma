@@ -29,6 +29,8 @@ model User {
   ratingRapid          Int?
   ratingClassical      Int?
   ratingCorrespondence Int?
+  puzzleRd             Float     @default(350)
+  puzzleVolatility     Float     @default(0.06)
   
   accounts      Account[]
   sessions      Session[]
@@ -85,6 +87,8 @@ model Puzzle {
   solution    String
   description String?
   rating      Int      @default(1200)
+  ratingDeviation Float    @default(350)
+  volatility      Float    @default(0.06)
   tags        String[]
   hints       Json?    // Array of strings, one per move index
   createdBy   String

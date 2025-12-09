@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Chess } from "chess.js";
+import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { PieceDropHandlerArgs } from "react-chessboard";
 import { CheckCircle, XCircle, RotateCcw, Lightbulb, ArrowRight } from "lucide-react";
@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 interface PuzzleSolverProps {
+    id: string;
     fen: string;
     solution: string; // Space separated SAN moves
     hints?: string[]; // Array of hints corresponding to moves
@@ -17,7 +18,7 @@ interface PuzzleSolverProps {
     tag?: string;
 }
 
-export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve, tag }: PuzzleSolverProps) {
+export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSolve, tag }: PuzzleSolverProps) {
     const t = useTranslations("PuzzleSolver");
     const [game, setGame] = useState(new Chess(fen));
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
@@ -27,6 +28,8 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
     const [mistakeMade, setMistakeMade] = useState(false);
     const [hintUsed, setHintUsed] = useState(false);
     const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
+    const [ratingChange, setRatingChange] = useState<{ oldRating: number, newRating: number, change: number } | null>(null);
+    const [submitted, setSubmitted] = useState(false);
     const router = useRouter();
 
     // Parse solution moves (handle both UCI and SAN, but we expect UCI from Lichess DB)
@@ -42,28 +45,23 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
         setShowHint(false);
         setMistakeMade(false);
         setHintUsed(false);
+        setSubmitted(false);
+        setRatingChange(null);
 
         // Lichess puzzles start with the opponent's move (the first move in the solution)
         // We need to play this move immediately to set up the board for the player
         if (solutionMoves.length > 0) {
-            // Small delay to let the board render the initial position first? 
-            // Or just play it immediately. Lichess usually shows the move being played.
             setTimeout(() => {
                 try {
                     const firstMove = solutionMoves[0];
-                    // Try to move using UCI (e.g. "e2e4") or SAN
-                    // chess.js move() handles SAN, or object {from, to}. 
-                    // For UCI "e2e4", we need to parse it.
                     let moveResult;
                     if (firstMove.length === 4 || firstMove.length === 5) {
-                        // Assume UCI
                         moveResult = newGame.move({
                             from: firstMove.substring(0, 2),
                             to: firstMove.substring(2, 4),
                             promotion: firstMove.length === 5 ? firstMove[4] : undefined,
                         });
                     } else {
-                        // Assume SAN
                         moveResult = newGame.move(firstMove);
                     }
 
@@ -86,19 +84,23 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
             // Create a temp game to validate the move
             const tempGame = new Chess(game.fen());
 
+            // Check for promotion
+            const piece = game.get(sourceSquare as Square);
+            const isPromotion =
+                piece?.type === 'p' &&
+                ((piece.color === 'w' && targetSquare[1] === '8') ||
+                    (piece.color === 'b' && targetSquare[1] === '1'));
+
             // Attempt the move
             const move = tempGame.move({
                 from: sourceSquare,
                 to: targetSquare,
-                promotion: 'q' // Always promote to queen for simplicity in drag-drop, or handle promotion dialog
+                promotion: isPromotion ? 'q' : undefined
             });
 
             if (!move) return false; // Illegal move
 
             const expectedMove = solutionMoves[currentMoveIndex];
-
-            // Validate against expected move (UCI or SAN)
-            // We convert our move to UCI to compare with expected if expected is UCI
             const moveUci = move.from + move.to + (move.promotion || "");
 
             let isCorrect = false;
@@ -117,11 +119,16 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                     setStatus("playing");
                     setMessage("");
                 }, 1000);
+                submitResult(false);
                 return false; // Snap back
             }
 
             // Correct move!
-            game.move({ from: sourceSquare, to: targetSquare, promotion: 'q' });
+            game.move({
+                from: sourceSquare,
+                to: targetSquare,
+                promotion: isPromotion ? 'q' : undefined
+            });
             const newGame = new Chess(game.fen());
             setGame(newGame);
             const newMoveIndex = currentMoveIndex + 1;
@@ -137,6 +144,12 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                     if (mistakeMade) onSolve("mistake");
                     else if (hintUsed) onSolve("hint");
                     else onSolve("success");
+                }
+
+                if (!mistakeMade && !hintUsed) {
+                    submitResult(true);
+                } else {
+                    submitResult(false);
                 }
                 return true;
             }
@@ -171,6 +184,12 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                                     else if (hintUsed) onSolve("hint");
                                     else onSolve("success");
                                 }
+
+                                if (!mistakeMade && !hintUsed) {
+                                    submitResult(true);
+                                } else {
+                                    submitResult(false);
+                                }
                             }
                         }
                     } catch (e) {
@@ -193,7 +212,7 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
         setStatus("playing");
         setMessage("");
         setShowHint(false);
-        // We don't reset mistakeMade or hintUsed to discourage spamming reset to get perfect score
+        // We don't reset mistakeMade, hintUsed, or submitted to prevent cheating/retrying for points
     }
 
     function handleHint() {
@@ -201,9 +220,25 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
         setHintUsed(true);
     }
 
+    async function submitResult(success: boolean) {
+        if (submitted) return;
+        setSubmitted(true);
+        try {
+            // Pass generic puzzleId
+            const res = await fetch('/api/puzzles/submit', {
+                method: 'POST',
+                body: JSON.stringify({ puzzleId: id, success })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setRatingChange(data);
+            }
+        } catch (e) { console.error(e); }
+    }
+
     async function handleNextPuzzle() {
         try {
-            const res = await fetch(`/api/puzzles/random?exclude=${name}${tag ? `&tag=${tag}` : ''}`);
+            const res = await fetch(`/api/puzzles/next?exclude=${name}${tag ? `&tag=${tag}` : ''}`);
             const data = await res.json();
             if (data.name) {
                 router.push(`/puzzles/${data.name}${tag ? `?tag=${tag}` : ''}`);
@@ -233,8 +268,6 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                         id: "puzzle-solver",
                         position: game.fen(),
                         onPieceDrop: onPieceDrop,
-                        // The FEN is for the opponent's move (first move). 
-                        // If FEN says White to move, opponent is White, so we are Black.
                         boardOrientation: new Chess(fen).turn() === 'w' ? 'black' : 'white',
                         animationDurationInMs: 200,
                         squareStyles: squareStyles,
@@ -256,6 +289,16 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                             <CheckCircle className="w-8 h-8" />
                             <span className="text-2xl font-bold">{message}</span>
                         </div>
+                        {ratingChange && (
+                            <div className="flex flex-col items-center">
+                                <span className={`text-xl font-bold ${ratingChange.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    {ratingChange.change >= 0 ? '+' : ''}{ratingChange.change}
+                                </span>
+                                <span className="text-sm text-gray-500">
+                                    Rating: {ratingChange.newRating}
+                                </span>
+                            </div>
+                        )}
                         <button
                             onClick={handleNextPuzzle}
                             className="mt-4 px-6 py-2 bg-green-600 text-white rounded-full text-lg font-bold hover:bg-green-700 transition-colors flex items-center gap-2"
@@ -269,6 +312,16 @@ export default function PuzzleSolver({ fen, solution, hints = [], name, onSolve,
                             <div className="flex items-center justify-center text-red-600 space-x-2">
                                 <XCircle className="w-6 h-6" />
                                 <span className="text-xl font-bold">{message}</span>
+                            </div>
+                        )}
+                        {status === "wrong" && ratingChange && (
+                            <div className="flex flex-col items-center mt-2">
+                                <span className={`text-lg font-bold ${ratingChange.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    {ratingChange.change >= 0 ? '+' : ''}{ratingChange.change}
+                                </span>
+                                <span className="text-xs text-gray-500">
+                                    Rating: {ratingChange.newRating}
+                                </span>
                             </div>
                         )}
                         {status === "playing" && (

@@ -69,6 +69,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             if (session.user && user) {
                 session.user.role = (user as any).role || "STUDENT";
                 session.user.lichessId = (user as any).lichessId || null;
+                session.user.ratingPuzzle = (user as any).ratingPuzzle || null;
             }
             return session;
         }
