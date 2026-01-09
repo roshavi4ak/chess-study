@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
+import { saveLineProgress } from "@/app/actions/progress";
 
 interface PracticeNode {
     id: string;
@@ -70,16 +71,14 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     const [currentLineFirstTime, setCurrentLineFirstTime] = useState(true);
 
     // All available lines
-    const allLinesRef = useRef<string[][]>([]);
+    const allLines = useMemo(() => getAllLines(practice.tree), [practice.tree]);
 
     // Initialize progress map from DB
     useEffect(() => {
-        allLinesRef.current = getAllLines(practice.tree);
-
         const map = new Map<string, LineProgress>();
         initialProgress.forEach(p => map.set(p.lineSignature, p));
         setProgressMap(map);
-    }, [practice.tree, initialProgress]);
+    }, [initialProgress]);
 
     // Initialize game position
     useEffect(() => {
@@ -110,8 +109,6 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
 
     // Get priority lines to practice
     function getPriorityLines(): string[][] {
-        const allLines = allLinesRef.current;
-
         // Priority 1: Never seen lines
         const neverSeen = allLines.filter(line => !progressMap.has(getLineSignature(line)));
         if (neverSeen.length > 0) return neverSeen;
@@ -270,7 +267,6 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
 
         // Save progress to database
         try {
-            const { saveLineProgress } = await import("@/app/actions/progress");
             await saveLineProgress({
                 practiceId: practice.id,
                 lineSignature,
@@ -382,11 +378,11 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     }
 
     // Calculate progress stats
-    const totalLines = allLinesRef.current.length;
-    const neverSeenCount = allLinesRef.current.filter(line => !progressMap.has(getLineSignature(line))).length;
-    const partialCount = allLinesRef.current.filter(line => progressMap.get(getLineSignature(line))?.status === "PARTIAL").length;
-    const completedCount = allLinesRef.current.filter(line => progressMap.get(getLineSignature(line))?.status === "COMPLETED").length;
-    const perfectCount = allLinesRef.current.filter(line => progressMap.get(getLineSignature(line))?.status === "PERFECT").length;
+    const totalLines = allLines.length;
+    const neverSeenCount = allLines.filter(line => !progressMap.has(getLineSignature(line))).length;
+    const partialCount = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "PARTIAL").length;
+    const completedCount = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "COMPLETED").length;
+    const perfectCount = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "PERFECT").length;
     const totalSeen = totalLines - neverSeenCount;
 
     return (

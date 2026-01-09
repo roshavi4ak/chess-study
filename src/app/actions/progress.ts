@@ -3,6 +3,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { LineStatus } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 interface SaveLineProgressParams {
     practiceId: string;
@@ -66,6 +67,9 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
             },
         });
     }
+
+    console.log(`[Progress] Saved progress for practice ${practiceId}, user ${session.user.id}, status: ${status}`);
+    revalidatePath(`/practices/${practiceId}`);
 }
 
 // Get all progress for a practice (for determining which lines to avoid)
@@ -195,4 +199,7 @@ export async function trackOpeningView(openingId: string, completed: boolean = f
             },
         });
     }
+
+    console.log(`[Progress] Tracked opening view for ${openingId}, user ${session.user.id}`);
+    revalidatePath(`/openings/${openingId}`);
 }
