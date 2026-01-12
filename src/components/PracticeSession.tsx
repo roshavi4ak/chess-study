@@ -53,7 +53,11 @@ function getLineSignature(path: string[]): string {
     return path.join(",");
 }
 
+import { useTranslations } from "next-intl";
+
 export default function PracticeSession({ practice, initialProgress }: PracticeSessionProps) {
+    const t = useTranslations("Practice");
+    const commonT = useTranslations("Common");
     const [game, setGame] = useState(new Chess());
     const [currentNode, setCurrentNode] = useState<PracticeNode>(practice.tree);
     const [moveHistory, setMoveHistory] = useState<string[]>([]);
@@ -261,8 +265,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         setFeedback({
             type: "complete",
             message: hadWrongMoves
-                ? "🎉 Line completed! (with some mistakes)"
-                : "🎉 Perfect! Line completed flawlessly!"
+                ? t("lineCompletedMistakes")
+                : t("lineCompletedFlawlessly")
         });
 
         // Save progress to database
@@ -303,12 +307,12 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
             if (childWithNotes?.notes) {
                 setFeedback({
                     type: "incorrect",
-                    message: `❌ Wrong move! Hint: ${childWithNotes.notes}`
+                    message: t("wrongMoveHint", { hint: childWithNotes.notes })
                 });
             } else if (currentNodeNotes) {
                 setFeedback({
                     type: "incorrect",
-                    message: `❌ Wrong move! Hint: ${currentNodeNotes}`
+                    message: t("wrongMoveHint", { hint: currentNodeNotes })
                 });
             } else if (firstChild?.move) {
                 // Show the correct move as last resort hint
@@ -316,10 +320,10 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                 const to = firstChild.move.slice(2, 4);
                 setFeedback({
                     type: "incorrect",
-                    message: `❌ Wrong move! Try moving from ${from} to ${to}.`
+                    message: t("wrongMoveTryMoving", { from, to })
                 });
             } else {
-                setFeedback({ type: "incorrect", message: "❌ That's not the right move. Try again!" });
+                setFeedback({ type: "incorrect", message: t("wrongMoveTryAgain") });
             }
             return false;
         }
@@ -425,32 +429,32 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                             </p>
                         )}
                         <div className="text-sm text-gray-500">
-                            Playing as: <span className="font-medium">{practice.playerColor}</span>
+                            {t("playingAs")}: <span className="font-medium">{practice.playerColor === "WHITE" ? commonT("white") : commonT("black")}</span>
                         </div>
                     </div>
 
                     {/* Overall Progress */}
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                        <h3 className="font-medium mb-3">Overall Progress</h3>
+                        <h3 className="font-medium mb-3">{t("overallProgress")}</h3>
                         <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
-                                <span>Total lines:</span>
+                                <span>{t("totalLines")}:</span>
                                 <span className="font-medium">{totalLines}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>Lines seen:</span>
+                                <span>{t("linesSeen")}:</span>
                                 <span className="font-medium text-blue-600">{totalSeen} / {totalLines}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>Perfect:</span>
+                                <span>{t("perfect")}:</span>
                                 <span className="font-medium text-green-600">{perfectCount}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>Completed (mistakes):</span>
+                                <span>{t("completedMistakes")}:</span>
                                 <span className="font-medium text-yellow-600">{completedCount}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>Never seen:</span>
+                                <span>{t("neverSeen")}:</span>
                                 <span className="font-medium text-gray-500">{neverSeenCount}</span>
                             </div>
                         </div>
@@ -466,14 +470,14 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
 
                     {/* Session Stats */}
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                        <h3 className="font-medium mb-3">This Session</h3>
+                        <h3 className="font-medium mb-3">{t("thisSession")}</h3>
                         <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
-                                <span>Lines completed:</span>
+                                <span>{t("linesCompleted")}:</span>
                                 <span className="font-medium text-green-600">{sessionLinesCompleted}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>Perfect (no mistakes):</span>
+                                <span>{t("perfectNoMistakes")}:</span>
                                 <span className="font-medium text-blue-600">{sessionLinesPerfect}</span>
                             </div>
                         </div>
@@ -481,10 +485,10 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
 
                     {/* Move History */}
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                        <h3 className="font-medium mb-2">Move History</h3>
+                        <h3 className="font-medium mb-2">{t("moveHistory")}</h3>
                         <div className="text-sm max-h-[120px] overflow-y-auto">
                             {moveHistory.length === 0 ? (
-                                <p className="text-gray-500">No moves yet</p>
+                                <p className="text-gray-500">{t("noMovesYet")}</p>
                             ) : (
                                 <div className="flex flex-wrap gap-1">
                                     {moveHistory.map((move, index) => (
@@ -502,8 +506,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                         className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700"
                     >
                         {feedback.type === "complete"
-                            ? (neverSeenCount > 0 ? `Next Line (${neverSeenCount} new)` : "Practice Again")
-                            : "Restart Practice"
+                            ? (neverSeenCount > 0 ? t("nextLineCount", { count: neverSeenCount }) : t("practiceAgain"))
+                            : t("restartPractice")
                         }
                     </button>
                 </div>

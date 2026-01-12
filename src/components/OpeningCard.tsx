@@ -5,6 +5,8 @@ import { useState } from "react";
 import { deleteOpening } from "@/app/actions/opening";
 import { useRouter } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
 interface OpeningCardProps {
     opening: {
         id: string;
@@ -18,6 +20,7 @@ interface OpeningCardProps {
 }
 
 export default function OpeningCard({ opening, isCreator }: OpeningCardProps) {
+    const t = useTranslations("Common");
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
 
@@ -25,7 +28,7 @@ export default function OpeningCard({ opening, isCreator }: OpeningCardProps) {
         e.preventDefault();
         e.stopPropagation();
 
-        if (!confirm(`Are you sure you want to delete "${opening.name}"?`)) {
+        if (!confirm(t("confirmDelete", { name: opening.name }))) {
             return;
         }
 
@@ -53,10 +56,10 @@ export default function OpeningCard({ opening, isCreator }: OpeningCardProps) {
                     {opening.name}
                 </h3>
                 <p className="text-sm text-gray-500 mt-1">
-                    {opening.description || "No description"}
+                    {opening.description || t("noDescription")}
                 </p>
                 <p className="text-xs text-gray-400 mt-2">
-                    Created by {opening.creator.name}
+                    {t("createdBy", { name: opening.creator.name || t("unknown") })}
                 </p>
             </Link>
 
@@ -66,14 +69,14 @@ export default function OpeningCard({ opening, isCreator }: OpeningCardProps) {
                         onClick={handleEdit}
                         className="flex-1 bg-blue-600 text-white px-3 py-2 rounded text-sm hover:bg-blue-700 transition"
                     >
-                        Edit
+                        {t("edit")}
                     </button>
                     <button
                         onClick={handleDelete}
                         disabled={isDeleting}
                         className="flex-1 bg-red-600 text-white px-3 py-2 rounded text-sm hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {isDeleting ? "Deleting..." : "Delete"}
+                        {isDeleting ? t("deleting") : t("delete")}
                     </button>
                 </div>
             )}

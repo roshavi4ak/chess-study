@@ -5,10 +5,13 @@ import { getTranslations } from "next-intl/server";
 export default async function Dashboard() {
     const session = await auth();
     const t = await getTranslations("Dashboard");
+    const tRole = await getTranslations("Role");
 
-    if (!session) {
+    if (!session || !session.user) {
         redirect("/");
     }
+
+    const roleKey = session.user.role?.toLowerCase() as "coach" | "student" || "student";
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -21,7 +24,7 @@ export default async function Dashboard() {
                         {t("welcomeBack")}, {session.user?.name}!
                     </p>
                     <p className="text-md text-gray-500 dark:text-gray-400 mt-2">
-                        {t("role")}: <span className="font-semibold">{session.user?.role}</span>
+                        {t("role")}: <span className="font-semibold">{tRole(roleKey)}</span>
                     </p>
                 </div>
 

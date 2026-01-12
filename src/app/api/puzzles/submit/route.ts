@@ -86,6 +86,13 @@ export async function POST(request: Request) {
                     ratingDeviation: newPuzzleRating.rd,
                     volatility: newPuzzleRating.volatility
                 }
+            }),
+            prisma.puzzleAttempt.create({
+                data: {
+                    userId: session.user.id,
+                    puzzleId: puzzleId,
+                    success: success
+                }
             })
         ]);
 

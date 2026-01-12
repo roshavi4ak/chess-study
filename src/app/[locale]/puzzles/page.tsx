@@ -38,16 +38,18 @@ export default async function PuzzlesPage() {
 
     const isCoach = session?.user?.role === "COACH";
 
+    const commonT = await getTranslations("Common");
+
     // If there's an error, show it to the user
     if (error) {
         return (
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <div className="px-4 py-6 sm:px-0">
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                        <h2 className="font-bold text-xl mb-2">Error Loading Puzzles</h2>
-                        <p className="mb-2">Unable to load puzzle categories. Please try again later.</p>
+                        <h2 className="font-bold text-xl mb-2">{commonT("errorLoading", { name: t("title") })}</h2>
+                        <p className="mb-2">{commonT("tryAgainLater", { name: t("categories") })}</p>
                         <details className="mt-2">
-                            <summary className="cursor-pointer font-semibold">Technical Details</summary>
+                            <summary className="cursor-pointer font-semibold">{commonT("technicalDetails")}</summary>
                             <pre className="mt-2 text-xs overflow-auto bg-red-50 p-2 rounded">
                                 {error.message}
                             </pre>

@@ -4,12 +4,15 @@ import { getPracticeProgress } from "@/app/actions/progress";
 import PracticeSession from "@/components/PracticeSession";
 import Link from "next/link";
 
+import { getTranslations } from "next-intl/server";
+
 interface PracticePageProps {
     params: Promise<{ id: string }>;
 }
 
 export default async function PracticePage({ params }: PracticePageProps) {
     const { id } = await params;
+    const t = await getTranslations("Practice");
     const [practice, progressData] = await Promise.all([
         getPractice(id),
         getPracticeProgress(id),
@@ -27,7 +30,7 @@ export default async function PracticePage({ params }: PracticePageProps) {
                         href="/practices"
                         className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                     >
-                        ← Back to Practices
+                        ← {t("backToPractices")}
                     </Link>
                 </div>
                 <PracticeSession practice={practice} initialProgress={progressData} />

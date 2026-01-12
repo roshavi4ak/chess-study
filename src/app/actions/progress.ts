@@ -42,33 +42,40 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
         },
     });
 
-    if (existing) {
-        // Update existing
-        await prisma.practiceLineProgress.update({
-            where: { id: existing.id },
-            data: {
-                status: status === "PERFECT" ? status : (existing.status === "PERFECT" ? "PERFECT" : status),
-                attempts: existing.attempts + 1,
-                perfectCount: status === "PERFECT" ? existing.perfectCount + 1 : existing.perfectCount,
-                lastAttemptAt: new Date(),
-            },
-        });
-    } else {
-        // Create new
-        await prisma.practiceLineProgress.create({
+    // Use a transaction to update progress and record attempt
+    await prisma.$transaction([
+        existing
+            ? prisma.practiceLineProgress.update({
+                where: { id: existing.id },
+                data: {
+                    status: status === "PERFECT" ? status : (existing.status === "PERFECT" ? "PERFECT" : status),
+                    attempts: existing.attempts + 1,
+                    perfectCount: status === "PERFECT" ? existing.perfectCount + 1 : existing.perfectCount,
+                    lastAttemptAt: new Date(),
+                },
+            })
+            : prisma.practiceLineProgress.create({
+                data: {
+                    userId: session.user.id,
+                    practiceId,
+                    lineSignature,
+                    status,
+                    attempts: 1,
+                    perfectCount: status === "PERFECT" ? 1 : 0,
+                    lastAttemptAt: new Date(),
+                },
+            }),
+        prisma.practiceAttempt.create({
             data: {
                 userId: session.user.id,
                 practiceId,
                 lineSignature,
                 status,
-                attempts: 1,
-                perfectCount: status === "PERFECT" ? 1 : 0,
-                lastAttemptAt: new Date(),
-            },
-        });
-    }
+            }
+        })
+    ]);
 
-    console.log(`[Progress] Saved progress for practice ${practiceId}, user ${session.user.id}, status: ${status}`);
+    console.log(`[Progress] Saved progress and recorded attempt for practice ${practiceId}, user ${session.user.id}, status: ${status}`);
     revalidatePath(`/practices/${practiceId}`);
 }
 

@@ -43,6 +43,8 @@ model User {
   practiceProgress  PracticeLineProgress[]
   openingProgress   OpeningProgress[]
   gameRecords       GameRecord[]
+  puzzleAttempts    PuzzleAttempt[]
+  practiceAttempts  PracticeAttempt[]
 }
 
 model Account {
@@ -94,6 +96,20 @@ model Puzzle {
   createdBy   String
   creator     User     @relation(fields: [createdBy], references: [id])
   createdAt   DateTime @default(now())
+  attempts    PuzzleAttempt[]
+}
+
+model PuzzleAttempt {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  puzzleId  String
+  puzzle    Puzzle   @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
+  success   Boolean
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([puzzleId])
 }
 
 model Opening {
@@ -133,6 +149,7 @@ model Practice {
   createdAt   DateTime    @default(now())
   nodes       PracticeNode[]
   progress    PracticeLineProgress[]
+  attempts    PracticeAttempt[]
 }
 
 model PracticeNode {
@@ -175,6 +192,20 @@ model PracticeLineProgress {
   updatedAt     DateTime   @updatedAt
 
   @@unique([userId, practiceId, lineSignature])
+}
+
+model PracticeAttempt {
+  id            String     @id @default(cuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  practiceId    String
+  practice      Practice   @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+  lineSignature String
+  status        LineStatus
+  createdAt     DateTime   @default(now())
+
+  @@index([userId])
+  @@index([practiceId])
 }
 
 // Tracks which openings a student has studied (viewed)

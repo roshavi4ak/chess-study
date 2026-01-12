@@ -295,7 +295,7 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
                                     {ratingChange.change >= 0 ? '+' : ''}{ratingChange.change}
                                 </span>
                                 <span className="text-sm text-gray-500">
-                                    Rating: {ratingChange.newRating}
+                                    {t("rating")}: {ratingChange.newRating}
                                 </span>
                             </div>
                         )}
@@ -320,7 +320,7 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
                                     {ratingChange.change >= 0 ? '+' : ''}{ratingChange.change}
                                 </span>
                                 <span className="text-xs text-gray-500">
-                                    Rating: {ratingChange.newRating}
+                                    {t("rating")}: {ratingChange.newRating}
                                 </span>
                             </div>
                         )}
