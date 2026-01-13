@@ -20,6 +20,7 @@ import {
     type LichessGameState,
     type ChallengeOptions
 } from "@/lib/lichessService";
+import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { getLichessAccessToken, getCurrentUserLichessId } from "@/app/actions/lichess";
 import { useTranslations } from "next-intl";
 
@@ -389,8 +390,12 @@ export default function PlayPage() {
         return t("gameOver");
     }
 
-    function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
-        if (!targetSquare) return false;
+    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
+        const { from, to, promotion = 'q' } = move;
+        setOptionSquares({});
+        if (!to) return false;
+        if (from === to) return false;
+
         if (lichessGameStarted && (gameMode === 'lichess' || gameMode === 'friend')) {
             const currentTurn = chessGame.turn();
             const myTurn = playerColorRef.current === 'white' ? 'w' : 'b';
@@ -400,10 +405,10 @@ export default function PlayPage() {
             }
         }
         try {
-            chessGame.move({ from: sourceSquare, to: targetSquare, promotion: 'q' });
+            chessGame.move({ from, to, promotion });
             setChessPosition(chessGame.fen());
             setError('');
-            if (gameMode === 'lichess' || gameMode === 'friend') sendLichessMove(sourceSquare, targetSquare);
+            if (gameMode === 'lichess' || gameMode === 'friend') sendLichessMove(from, to, promotion);
             if (chessGame.isGameOver()) {
                 setStatus(getGameOverMessage());
                 return true;
@@ -411,7 +416,16 @@ export default function PlayPage() {
             if (gameMode === 'lichess' || gameMode === 'friend') setStatus(t("waitingForOpponent"));
             return true;
         } catch { return false; }
-    }
+    };
+
+    const { onSquareClick, onPieceClick, optionSquares, setOptionSquares, onPieceDrop } = useLegalMoves({
+        game: chessGameRef.current,
+        onMove: handleMove
+    });
+
+    const handlePieceDrop = ({ sourceSquare, targetSquare }: PieceDropHandlerArgs) => {
+        return onPieceDrop({ sourceSquare, targetSquare });
+    };
 
     function startNewGame(mode?: GameMode) {
         chessGameRef.current = new Chess();
@@ -455,10 +469,13 @@ export default function PlayPage() {
 
     const chessboardOptions = {
         position: chessPosition,
-        onPieceDrop,
+        onPieceDrop: handlePieceDrop as any,
         boardOrientation: boardOrientation,
         isDraggablePiece,
-        id: `play-vs-${gameMode}`
+        id: `play-vs-${gameMode}`,
+        onSquareClick,
+        onPieceClick,
+        squareStyles: optionSquares
     };
 
     return (

@@ -5,6 +5,7 @@ import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
 import { useRouter } from "next/navigation";
+import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { updateOpening } from "@/app/actions/opening";
 
 // Arrow format per documentation: { startSquare: string; endSquare: string; color: string; }
@@ -63,6 +64,30 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
     const [editingStepIndex, setEditingStepIndex] = useState<number | null>(null);
 
+    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
+        const { from, to, promotion = 'q' } = move;
+        setOptionSquares({});
+        if (from === to) return false;
+        try {
+            const m = game.move({
+                from,
+                to,
+                promotion,
+            });
+
+            if (m === null) return false;
+            setGame(new Chess(game.fen()));
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    const { onSquareClick, onPieceClick, optionSquares, setOptionSquares, onPieceDrop } = useLegalMoves({
+        game,
+        onMove: handleMove
+    });
+
     // Arrow drawing state
     const [rightClickStart, setRightClickStart] = useState<Square | null>(null);
 
@@ -88,21 +113,7 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
         return () => window.removeEventListener('beforeunload', handleBeforeUnload);
     }, [hasUnsavedChanges]);
 
-    function onPieceDrop({ sourceSquare, targetSquare }: { sourceSquare: Square, targetSquare: Square }) {
-        try {
-            const move = game.move({
-                from: sourceSquare,
-                to: targetSquare,
-                promotion: "q",
-            });
 
-            if (move === null) return false;
-            setGame(new Chess(game.fen()));
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
 
     function handleSquareRightClick({ square }: { square: Square }) {
         if (rightClickStart) {
@@ -284,14 +295,17 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
                             options={{
                                 id: "editor-board",
                                 position: game.fen(),
-                                onPieceDrop: onPieceDrop,
+                                onPieceDrop: onPieceDrop as any,
                                 onSquareRightClick: handleSquareRightClick,
                                 arrows: currentArrows,
                                 boardOrientation: "white",
                                 allowDrawingArrows: false,
-                                squareStyles: rightClickStart ? {
-                                    [rightClickStart]: { backgroundColor: "rgba(255, 255, 0, 0.5)" }
-                                } : undefined
+                                onSquareClick: onSquareClick,
+                                onPieceClick: onPieceClick,
+                                squareStyles: {
+                                    ...(rightClickStart ? { [rightClickStart]: { backgroundColor: "rgba(255, 255, 0, 0.5)" } } : {}),
+                                    ...optionSquares
+                                }
                             } as any}
                         />
                     </div>

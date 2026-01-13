@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { PieceDropHandlerArgs } from "react-chessboard";
+import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { CheckCircle, XCircle, RotateCcw, Lightbulb, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -31,6 +32,14 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
     const [ratingChange, setRatingChange] = useState<{ oldRating: number, newRating: number, change: number } | null>(null);
     const [submitted, setSubmitted] = useState(false);
     const router = useRouter();
+
+    const { onSquareClick, onPieceClick, onPieceDrop, optionSquares, setOptionSquares } = useLegalMoves({
+        game,
+        onMove: ({ from, to, promotion }) => {
+            const result = handleMove(from, to, promotion);
+            return result;
+        }
+    });
 
     // Parse solution moves (handle both UCI and SAN, but we expect UCI from Lichess DB)
     const solutionMoves = solution.split(" ").filter(m => m.trim() !== "");
@@ -77,25 +86,29 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
         }
     }, [fen, solution]); // Re-run when puzzle changes
 
-    function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
+    function handleMove(sourceSquare: string, targetSquare: string, promotion?: string): boolean {
         if (!targetSquare || status !== "playing") return false;
+        if (sourceSquare === targetSquare) return false;
 
         try {
             // Create a temp game to validate the move
             const tempGame = new Chess(game.fen());
 
-            // Check for promotion
-            const piece = game.get(sourceSquare as Square);
-            const isPromotion =
-                piece?.type === 'p' &&
-                ((piece.color === 'w' && targetSquare[1] === '8') ||
-                    (piece.color === 'b' && targetSquare[1] === '1'));
+            // Check for promotion if not supplied
+            if (!promotion) {
+                const piece = game.get(sourceSquare as Square);
+                const isPromotion =
+                    piece?.type === 'p' &&
+                    ((piece.color === 'w' && targetSquare[1] === '8') ||
+                        (piece.color === 'b' && targetSquare[1] === '1'));
+                if (isPromotion) promotion = 'q';
+            }
 
             // Attempt the move
             const move = tempGame.move({
                 from: sourceSquare,
                 to: targetSquare,
-                promotion: isPromotion ? 'q' : undefined
+                promotion: promotion || undefined
             });
 
             if (!move) return false; // Illegal move
@@ -127,7 +140,7 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
             game.move({
                 from: sourceSquare,
                 to: targetSquare,
-                promotion: isPromotion ? 'q' : undefined
+                promotion: promotion || undefined
             });
             const newGame = new Chess(game.fen());
             setGame(newGame);
@@ -267,10 +280,12 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
                     options={{
                         id: "puzzle-solver",
                         position: game.fen(),
-                        onPieceDrop: onPieceDrop,
+                        onPieceDrop: onPieceDrop as any,
+                        onSquareClick: onSquareClick,
+                        onPieceClick: onPieceClick,
                         boardOrientation: new Chess(fen).turn() === 'w' ? 'black' : 'white',
                         animationDurationInMs: 200,
-                        squareStyles: squareStyles,
+                        squareStyles: { ...squareStyles, ...optionSquares },
                     } as any}
                 />
 
