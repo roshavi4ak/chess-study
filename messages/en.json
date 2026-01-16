@@ -148,7 +148,10 @@
         "wrongMoveTryAgain": "That's not the right move. Try again!",
         "nextLineCount": "Next Line ({count} new)",
         "practiceAgain": "Practice Again",
-        "restartPractice": "Restart Practice"
+        "restartPractice": "Restart Practice",
+        "nextLine": "Next Line",
+        "showCoachHints": "Show Coach Hints",
+        "coachHints": "Coach Hints"
     },
     "Play": {
         "title": "Play Chess",

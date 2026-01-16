@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
-import { saveLineProgress } from "@/app/actions/progress";
+import { saveLineProgress, getPracticeProgress } from "@/app/actions/progress";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { useTranslations } from "next-intl";
 
@@ -57,6 +57,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     const [nodePath, setNodePath] = useState<string[]>([practice.tree.id]);
     const [feedback, setFeedback] = useState<{ type: "incorrect" | "complete" | "note" | null; message: string }>({ type: null, message: "" });
     const [highlightSquares, setHighlightSquares] = useState<Record<string, React.CSSProperties>>({});
+    const [showCoachHints, setShowCoachHints] = useState(false);
+    const [hintsMessage, setHintsMessage] = useState("");
 
     const handleMove = (move: { from: string; to: string; promotion?: string }) => {
         const { from, to, promotion = 'q' } = move;
@@ -138,8 +140,23 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     }, [initialProgress]);
 
     useEffect(() => {
+        setHintsMessage(showCoachHints ? (currentNode.notes || "") : "");
+    }, [showCoachHints, currentNode.notes]);
+
+    useEffect(() => {
         startNewLine();
-    }, [practice]);
+    }, []);
+
+    const refetchProgress = async () => {
+        try {
+            const updatedProgress = await getPracticeProgress(practice.id);
+            const map = new Map<string, LineProgress>();
+            updatedProgress.forEach(p => map.set(p.nodeId, p));
+            setProgressMap(map);
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     function getCurrentTurn(fen: string): "WHITE" | "BLACK" {
         return new Chess(fen).turn() === "w" ? "WHITE" : "BLACK";
@@ -179,6 +196,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         setFeedback({ type: null, message: "" });
         setHighlightSquares({});
         setHadWrongMoves(false);
+        setShowCoachHints(false);
+        setHintsMessage("");
 
         const priorityLines = getPriorityLines();
         if (priorityLines.length > 0) {
@@ -275,6 +294,7 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                 hadWrongMoves,
                 completed: true,
             });
+            await refetchProgress();
         } catch (e) { console.error(e); }
     }
 
@@ -314,6 +334,12 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                                 "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                             }`}>
                             {feedback.message}
+                        </div>
+                    )}
+                    {hintsMessage && (
+                        <div className="p-4 rounded-lg bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
+                            <h4 className="font-medium">{t("coachHints")}</h4>
+                            <p className="text-sm whitespace-pre-line">{hintsMessage}</p>
                         </div>
                     )}
                 </div>
@@ -362,9 +388,32 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                         </div>
                     </div>
 
-                    <button onClick={handleRestart} className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">
-                        {feedback.type === "complete" ? (neverSeenCount > 0 ? t("nextLineCount", { count: neverSeenCount }) : t("practiceAgain")) : t("restartPractice")}
-                    </button>
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                        <label className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                checked={showCoachHints}
+                                onChange={(e) => setShowCoachHints(e.target.checked)}
+                                className="form-checkbox"
+                            />
+                            <span className="text-sm font-medium">{t("showCoachHints")}</span>
+                        </label>
+                    </div>
+
+                    {feedback.type === "complete" ? (
+                        <button
+                            onClick={() => {
+                                startNewLine();
+                            }}
+                            className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700"
+                        >
+                            {t("nextLine")}
+                        </button>
+                    ) : (
+                        <button onClick={handleRestart} className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">
+                            {t("restartPractice")}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

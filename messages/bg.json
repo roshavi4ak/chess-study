@@ -148,7 +148,10 @@
         "wrongMoveTryAgain": "Това не е правилният ход. Опитайте отново!",
         "nextLineCount": "Следваща линия ({count} нови)",
         "practiceAgain": "Упражнявай се отново",
-        "restartPractice": "Рестартирай упражнението"
+        "restartPractice": "Рестартирай упражнението",
+        "nextLine": "Следваща Линия",
+        "showCoachHints": "Покажи Насоки на Треньора",
+        "coachHints": "Насоки на Треньора"
     },
     "Play": {
         "title": "Играй Шах",
