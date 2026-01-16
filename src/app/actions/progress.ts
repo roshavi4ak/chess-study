@@ -43,12 +43,13 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
     });
 
     // Use a transaction to update progress and record attempt
+    // Status is always based on the LAST attempt result (not preserved from previous attempts)
     await prisma.$transaction([
         existing
             ? prisma.practiceLineProgress.update({
                 where: { id: existing.id },
                 data: {
-                    status: status === "PERFECT" ? status : (existing.status === "PERFECT" ? "PERFECT" : status),
+                    status, // Always use the result of this attempt
                     attempts: existing.attempts + 1,
                     perfectCount: status === "PERFECT" ? existing.perfectCount + 1 : existing.perfectCount,
                     lastAttemptAt: new Date(),
