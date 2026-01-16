@@ -163,6 +163,8 @@ model PracticeNode {
   move        String?  // UCI move string (e.g. "e2e4"), null for root node
   notes       String?  // Coach notes for this move/position
   order       Int      @default(0)  // For ordering siblings
+  progress    PracticeLineProgress[]
+  attempts    PracticeAttempt[]
 }
 
 // ============================================
@@ -176,33 +178,35 @@ enum LineStatus {
   NEVER_SEEN   // Never attempted this line
 }
 
-// Tracks student progress on each practice line (leaf node path)
+// Tracks student progress on each practice line (leaf node)
 model PracticeLineProgress {
-  id            String     @id @default(cuid())
-  userId        String
-  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  practiceId    String
-  practice      Practice   @relation(fields: [practiceId], references: [id], onDelete: Cascade)
-  lineSignature String     // Unique identifier for this line (e.g., comma-separated node IDs from root to leaf)
-  status        LineStatus @default(NEVER_SEEN)
-  attempts      Int        @default(0)
+  id         String     @id @default(cuid())
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  practiceId String
+  practice   Practice   @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+  nodeId     String     // ID of the leaf node
+  node       PracticeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  status     LineStatus @default(NEVER_SEEN)
+  attempts   Int        @default(0)
   perfectCount  Int        @default(0)  // Number of times completed perfectly
   lastAttemptAt DateTime?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
-  @@unique([userId, practiceId, lineSignature])
+  @@unique([userId, practiceId, nodeId])
 }
 
 model PracticeAttempt {
-  id            String     @id @default(cuid())
-  userId        String
-  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  practiceId    String
-  practice      Practice   @relation(fields: [practiceId], references: [id], onDelete: Cascade)
-  lineSignature String
-  status        LineStatus
-  createdAt     DateTime   @default(now())
+  id         String     @id @default(cuid())
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  practiceId String
+  practice   Practice   @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+  nodeId     String
+  node       PracticeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  status     LineStatus
+  createdAt  DateTime   @default(now())
 
   @@index([userId])
   @@index([practiceId])

@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 
 interface SaveLineProgressParams {
     practiceId: string;
-    lineSignature: string;  // Comma-separated node IDs from root to leaf
+    nodeId: string;  // ID of the leaf node
     hadWrongMoves: boolean;
     completed: boolean;
 }
@@ -19,7 +19,7 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
         throw new Error("Unauthorized");
     }
 
-    const { practiceId, lineSignature, hadWrongMoves, completed } = params;
+    const { practiceId, nodeId, hadWrongMoves, completed } = params;
 
     // Determine status
     let status: LineStatus;
@@ -34,10 +34,10 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
     // Upsert the progress record
     const existing = await prisma.practiceLineProgress.findUnique({
         where: {
-            userId_practiceId_lineSignature: {
+            userId_practiceId_nodeId: {
                 userId: session.user.id,
                 practiceId,
-                lineSignature,
+                nodeId,
             },
         },
     });
@@ -58,7 +58,7 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
                 data: {
                     userId: session.user.id,
                     practiceId,
-                    lineSignature,
+                    nodeId,
                     status,
                     attempts: 1,
                     perfectCount: status === "PERFECT" ? 1 : 0,
@@ -69,13 +69,12 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
             data: {
                 userId: session.user.id,
                 practiceId,
-                lineSignature,
+                nodeId,
                 status,
             }
         })
     ]);
 
-    console.log(`[Progress] Saved progress and recorded attempt for practice ${practiceId}, user ${session.user.id}, status: ${status}`);
     revalidatePath(`/practices/${practiceId}`);
 }
 

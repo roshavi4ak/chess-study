@@ -369,7 +369,7 @@ export default function PlayPage() {
 
     async function sendLichessMove(from: string, to: string, promotion?: string) {
         if (!lichessTokenRef.current || !lichessGameIdRef.current) return false;
-        const move = from + to + (promotion || '');
+        const move = from + to + (promotion ? promotion : '');
         const success = await makeLichessMove(lichessTokenRef.current, lichessGameIdRef.current, move);
         if (!success) setError(t("failedSendMove"));
         return success;
@@ -391,7 +391,7 @@ export default function PlayPage() {
     }
 
     const handleMove = (move: { from: string; to: string; promotion?: string }) => {
-        const { from, to, promotion = 'q' } = move;
+        const { from, to, promotion } = move;
         setOptionSquares({});
         if (!to) return false;
         if (from === to) return false;

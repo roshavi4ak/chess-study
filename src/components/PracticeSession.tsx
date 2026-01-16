@@ -17,7 +17,7 @@ interface PracticeNode {
 }
 
 interface LineProgress {
-    lineSignature: string;
+    nodeId: string;
     status: "PERFECT" | "COMPLETED" | "PARTIAL" | "NEVER_SEEN";
     attempts: number;
     perfectCount: number;
@@ -35,18 +35,17 @@ interface PracticeSessionProps {
     initialProgress: LineProgress[];
 }
 
-function getAllLines(node: PracticeNode, currentPath: string[] = []): string[][] {
-    const path = [...currentPath, node.id];
-    if (node.children.length === 0) return [path];
-    const lines: string[][] = [];
+function getAllLeafNodes(node: PracticeNode): PracticeNode[] {
+    if (node.children.length === 0) return [node];
+    const leaves: PracticeNode[] = [];
     for (const child of node.children) {
-        lines.push(...getAllLines(child, path));
+        leaves.push(...getAllLeafNodes(child));
     }
-    return lines;
+    return leaves;
 }
 
-function getLineSignature(path: string[]): string {
-    return path.join(",");
+function getLeafDescendants(node: PracticeNode): PracticeNode[] {
+    return getAllLeafNodes(node);
 }
 
 export default function PracticeSession({ practice, initialProgress }: PracticeSessionProps) {
@@ -130,11 +129,11 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     const [sessionLinesPerfect, setSessionLinesPerfect] = useState(0);
     const [progressMap, setProgressMap] = useState<Map<string, LineProgress>>(new Map());
     const [currentLineFirstTime, setCurrentLineFirstTime] = useState(true);
-    const allLines = useMemo(() => getAllLines(practice.tree), [practice.tree]);
+    const allLeafNodes = useMemo(() => getAllLeafNodes(practice.tree), [practice.tree]);
 
     useEffect(() => {
         const map = new Map<string, LineProgress>();
-        initialProgress.forEach(p => map.set(p.lineSignature, p));
+        initialProgress.forEach(p => map.set(p.nodeId, p));
         setProgressMap(map);
     }, [initialProgress]);
 
@@ -161,14 +160,14 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         });
     }
 
-    function getPriorityLines(): string[][] {
-        const neverSeen = allLines.filter(line => !progressMap.has(getLineSignature(line)));
+    function getPriorityLines(): PracticeNode[] {
+        const neverSeen = allLeafNodes.filter(node => !progressMap.has(node.id));
         if (neverSeen.length > 0) return neverSeen;
-        const partial = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "PARTIAL");
+        const partial = allLeafNodes.filter(node => progressMap.get(node.id)?.status === "PARTIAL");
         if (partial.length > 0) return partial;
-        const completed = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "COMPLETED");
+        const completed = allLeafNodes.filter(node => progressMap.get(node.id)?.status === "COMPLETED");
         if (completed.length > 0) return completed;
-        return allLines;
+        return allLeafNodes;
     }
 
     function startNewLine(previousLineSignature?: string) {
@@ -184,7 +183,7 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         const priorityLines = getPriorityLines();
         if (priorityLines.length > 0) {
             const candidateLine = priorityLines[Math.floor(Math.random() * priorityLines.length)];
-            const sig = getLineSignature(candidateLine);
+            const sig = candidateLine.id;
             setCurrentLineFirstTime(!progressMap.has(sig));
         }
 
@@ -192,8 +191,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
             const children = practice.tree.children;
             if (children.length > 0) {
                 const childScores = children.map(child => {
-                    const linesThrough = priorityLines.filter(line => line[1] === child.id);
-                    return { child, score: linesThrough.length };
+                    const leavesThrough = getLeafDescendants(child).filter(leaf => priorityLines.includes(leaf));
+                    return { child, score: leavesThrough.length };
                 });
                 childScores.sort((a, b) => b.score - a.score);
                 const maxScore = childScores[0].score;
@@ -241,11 +240,8 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         if (node.children.length > 1) {
             const priorityLines = getPriorityLines();
             const childScores = node.children.map(child => {
-                const linesThrough = priorityLines.filter(line => {
-                    const idx = line.indexOf(node.id);
-                    return idx !== -1 && line[idx + 1] === child.id;
-                });
-                return { child, score: linesThrough.length };
+                const leavesThrough = getLeafDescendants(child).filter(leaf => priorityLines.includes(leaf));
+                return { child, score: leavesThrough.length };
             });
             childScores.sort((a, b) => b.score - a.score);
             const topChildren = childScores.filter(c => c.score === childScores[0].score);
@@ -257,17 +253,17 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     }
 
     async function handleLineComplete(finalPath: string[]) {
-        const lineSignature = getLineSignature(finalPath);
+        const nodeId = currentNode.id;
         setSessionLinesCompleted(prev => prev + 1);
         if (!hadWrongMoves) setSessionLinesPerfect(prev => prev + 1);
-        const existingProgress = progressMap.get(lineSignature);
+        const existingProgress = progressMap.get(nodeId);
         const newProgress: LineProgress = {
-            lineSignature,
+            nodeId,
             status: hadWrongMoves ? "COMPLETED" : "PERFECT",
             attempts: (existingProgress?.attempts || 0) + 1,
             perfectCount: (existingProgress?.perfectCount || 0) + (hadWrongMoves ? 0 : 1),
         };
-        setProgressMap(prev => new Map(prev).set(lineSignature, newProgress));
+        setProgressMap(prev => new Map(prev).set(nodeId, newProgress));
         setFeedback({
             type: "complete",
             message: hadWrongMoves ? t("lineCompletedMistakes") : t("lineCompletedFlawlessly")
@@ -275,7 +271,7 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         try {
             await saveLineProgress({
                 practiceId: practice.id,
-                lineSignature,
+                nodeId,
                 hadWrongMoves,
                 completed: true,
             });
@@ -283,14 +279,15 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
     }
 
     function handleRestart() {
-        startNewLine(getLineSignature(nodePath));
+        startNewLine(currentNode.id);
     }
 
-    const neverSeenCount = allLines.filter(line => !progressMap.has(getLineSignature(line))).length;
-    const completedCount = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "COMPLETED").length;
-    const perfectCount = allLines.filter(line => progressMap.get(getLineSignature(line))?.status === "PERFECT").length;
-    const totalLines = allLines.length;
+    const neverSeenCount = allLeafNodes.filter(node => !progressMap.has(node.id)).length;
+    const completedCount = allLeafNodes.filter(node => progressMap.get(node.id)?.status === "COMPLETED").length;
+    const perfectCount = allLeafNodes.filter(node => progressMap.get(node.id)?.status === "PERFECT").length;
+    const totalLines = allLeafNodes.length;
     const totalSeen = totalLines - neverSeenCount;
+
 
     return (
         <div className="space-y-6">
