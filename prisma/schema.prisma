@@ -163,6 +163,7 @@ model PracticeNode {
   move        String?  // UCI move string (e.g. "e2e4"), null for root node
   notes       String?  // Coach notes for this move/position
   order       Int      @default(0)  // For ordering siblings
+  lineNumber  Int?     // For ordering lines in practice (only set on leaf nodes)
   progress    PracticeLineProgress[]
   attempts    PracticeAttempt[]
 }

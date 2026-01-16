@@ -12,6 +12,7 @@ interface PracticeNodeInput {
     fen: string;
     move: string | null;
     notes: string;
+    lineNumber: number | null;  // For ordering lines in practice (only set on leaf nodes)
     children: PracticeNodeInput[];
 }
 
@@ -58,6 +59,7 @@ export async function createPractice(formData: FormData) {
                 move: node.move,
                 notes: node.notes || null,
                 order,
+                lineNumber: node.lineNumber,
             },
         });
 
@@ -135,6 +137,7 @@ export async function updatePractice(practiceId: string, formData: FormData) {
                 move: node.move,
                 notes: node.notes || null,
                 order,
+                lineNumber: node.lineNumber,
             },
         });
 
@@ -192,6 +195,7 @@ export async function getPractice(id: string) {
             fen: node.fen,
             move: node.move,
             notes: node.notes,
+            lineNumber: node.lineNumber,
             children: [],
         });
     }

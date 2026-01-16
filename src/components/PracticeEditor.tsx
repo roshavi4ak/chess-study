@@ -13,6 +13,7 @@ interface PracticeNode {
     move: string | null;
     san: string | null;
     notes: string;
+    lineNumber: number | null;
     children: PracticeNode[];
 }
 
@@ -97,6 +98,7 @@ function convertToClientTree(dbNode: any, game: Chess): PracticeNode {
         move: dbNode.move,
         san: null,
         notes: dbNode.notes || "",
+        lineNumber: dbNode.lineNumber ?? null,
         children: [],
     };
 
@@ -147,6 +149,7 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
     const [description, setDescription] = useState(initialData.description || "");
     const [playerColor, setPlayerColor] = useState<"WHITE" | "BLACK">(initialData.playerColor);
     const [currentNotes, setCurrentNotes] = useState("");
+    const [currentLineNumber, setCurrentLineNumber] = useState<string>("");
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -173,6 +176,7 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
         const newGame = new Chess(currentNode.fen);
         setGame(newGame);
         setCurrentNotes(currentNode.notes);
+        setCurrentLineNumber(currentNode.lineNumber?.toString() || "");
     }, [currentNode]);
 
     // All the same functions from PracticeBuilder
@@ -205,6 +209,7 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
                 move: uciMove,
                 san: move.san,
                 notes: "",
+                lineNumber: null,
                 children: [],
             };
 
@@ -294,6 +299,19 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
         updateNodeInTree(currentNode.id, updatedNode);
     }
 
+    function saveLineNumber() {
+        const lineNum = currentLineNumber.trim() === "" ? null : parseInt(currentLineNumber, 10);
+        const updatedNode = {
+            ...currentNode,
+            lineNumber: isNaN(lineNum as number) ? null : lineNum,
+        };
+        updateNodeInTree(currentNode.id, updatedNode);
+    }
+
+    function isLeafNode(node: PracticeNode): boolean {
+        return node.children.length === 0;
+    }
+
     function countNodes(node: PracticeNode): number {
         return 1 + node.children.reduce((sum, child) => sum + countNodes(child), 0);
     }
@@ -361,8 +379,8 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
                     </div>
 
                     <div className={`p-4 rounded-lg ${isStudentTurn()
-                            ? "bg-green-100 dark:bg-green-900/50 border-2 border-green-500"
-                            : "bg-blue-100 dark:bg-blue-900/50 border-2 border-blue-500"
+                        ? "bg-green-100 dark:bg-green-900/50 border-2 border-green-500"
+                        : "bg-blue-100 dark:bg-blue-900/50 border-2 border-blue-500"
                         }`}>
                         <div className="font-bold text-lg mb-1">
                             {isStudentTurn() ? "👨‍🎓 Student's Turn" : "🤖 Opponent's Turn"}
@@ -403,8 +421,8 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
                                     <button
                                         onClick={() => navigateToNode(node)}
                                         className={`px-2 py-1 rounded ${node.id === currentNode.id
-                                                ? "bg-yellow-400 text-yellow-900 font-bold"
-                                                : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                            ? "bg-yellow-400 text-yellow-900 font-bold"
+                                            : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
                                             }`}
                                     >
                                         {node.san || "Start"}
@@ -427,6 +445,27 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
                             placeholder="Notes for this position..."
                         />
                     </div>
+
+                    {/* Line Number - only show for leaf nodes */}
+                    {isLeafNode(currentNode) && (
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                            <label className="block text-sm font-medium mb-2">
+                                🔢 Line Number (for practice order)
+                            </label>
+                            <input
+                                type="number"
+                                min="1"
+                                value={currentLineNumber}
+                                onChange={(e) => setCurrentLineNumber(e.target.value)}
+                                onBlur={saveLineNumber}
+                                className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+                                placeholder="Leave empty for random order"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">
+                                Unseen lines are practiced in order of their line number (1 first, then 2, etc.)
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Middle Column: Tree */}

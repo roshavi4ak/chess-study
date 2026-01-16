@@ -13,6 +13,7 @@ interface PracticeNode {
     move: string | null; // UCI format e.g. "e2e4"
     san: string | null;  // SAN format for display e.g. "e4"
     notes: string;
+    lineNumber: number | null;
     children: PracticeNode[];
 }
 
@@ -30,6 +31,7 @@ function createRootNode(): PracticeNode {
         move: null,
         san: null,
         notes: "",
+        lineNumber: null,
         children: [],
     };
 }
@@ -112,6 +114,7 @@ export default function PracticeBuilder() {
     const [description, setDescription] = useState("");
     const [playerColor, setPlayerColor] = useState<"WHITE" | "BLACK">("WHITE");
     const [currentNotes, setCurrentNotes] = useState("");
+    const [currentLineNumber, setCurrentLineNumber] = useState<string>("");
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -139,6 +142,7 @@ export default function PracticeBuilder() {
         const newGame = new Chess(currentNode.fen);
         setGame(newGame);
         setCurrentNotes(currentNode.notes);
+        setCurrentLineNumber(currentNode.lineNumber?.toString() || "");
     }, [currentNode]);
 
     // Handle piece drop - create new node
@@ -174,6 +178,7 @@ export default function PracticeBuilder() {
                 move: uciMove,
                 san: move.san,
                 notes: "",
+                lineNumber: null,
                 children: [],
             };
 
@@ -273,6 +278,21 @@ export default function PracticeBuilder() {
             notes: currentNotes,
         };
         updateNodeInTree(currentNode.id, updatedNode);
+    }
+
+    // Save line number for current node
+    function saveLineNumber() {
+        const lineNum = currentLineNumber.trim() === "" ? null : parseInt(currentLineNumber, 10);
+        const updatedNode = {
+            ...currentNode,
+            lineNumber: isNaN(lineNum as number) ? null : lineNum,
+        };
+        updateNodeInTree(currentNode.id, updatedNode);
+    }
+
+    // Check if node is a leaf (end of line)
+    function isLeafNode(node: PracticeNode): boolean {
+        return node.children.length === 0;
     }
 
     // Count total nodes in tree
@@ -418,6 +438,27 @@ export default function PracticeBuilder() {
                             placeholder="Explain why this move is important..."
                         />
                     </div>
+
+                    {/* Line Number - only show for leaf nodes */}
+                    {isLeafNode(currentNode) && (
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                            <label className="block text-sm font-medium mb-2">
+                                🔢 Line Number (for practice order)
+                            </label>
+                            <input
+                                type="number"
+                                min="1"
+                                value={currentLineNumber}
+                                onChange={(e) => setCurrentLineNumber(e.target.value)}
+                                onBlur={saveLineNumber}
+                                className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+                                placeholder="Leave empty for random order"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">
+                                Unseen lines are practiced in order of their line number (1 first, then 2, etc.)
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Middle Column: Tree Visualization */}
