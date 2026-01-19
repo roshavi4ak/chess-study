@@ -106,6 +106,7 @@ model PuzzleAttempt {
   puzzleId  String
   puzzle    Puzzle   @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
   success   Boolean
+  points    Int      @default(0)
   createdAt DateTime @default(now())
 
   @@index([userId])

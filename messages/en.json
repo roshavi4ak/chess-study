@@ -10,6 +10,7 @@
         "puzzles": "Puzzles",
         "openings": "Openings",
         "play": "Play",
+        "leaderboard": "Leaderboard",
         "login": "Login",
         "logout": "Logout",
         "coachDashboard": "Coach Dashboard"
@@ -38,6 +39,20 @@
         "categories": "Categories",
         "puzzlesCount": "puzzles",
         "playRandom": "Play Random Puzzle"
+    },
+    "Leaderboard": {
+        "title": "Leaderboard",
+        "puzzles": "Puzzles",
+        "openings": "Openings",
+        "weekly": "Weekly",
+        "allTime": "All Time",
+        "rank": "Rank",
+        "student": "Student",
+        "puzzlesSolved": "Puzzles Solved",
+        "points": "Points",
+        "openingsCompleted": "Openings Completed",
+        "loading": "Loading...",
+        "noData": "No data available"
     },
     "PuzzleCategories": {
         "opening": "Opening",

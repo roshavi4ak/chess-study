@@ -91,7 +91,8 @@ export async function POST(request: Request) {
                 data: {
                     userId: session.user.id,
                     puzzleId: puzzleId,
-                    success: success
+                    success: success,
+                    points: success ? Math.max(1, Math.round(puzzle.rating / 100)) : 0
                 }
             })
         ]);
