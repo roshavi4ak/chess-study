@@ -37,6 +37,9 @@ export default function Navbar() {
                             <Link href="/play" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
                                 {t("play")}
                             </Link>
+                            <Link href="/leaderboard" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                {t("leaderboard")}
+                            </Link>
                             {session?.user?.role === "COACH" && (
                                 <Link href="/coach/dashboard" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
                                     {t("coachDashboard")}
@@ -93,6 +96,9 @@ export default function Navbar() {
                         </Link>
                         <Link href="/play" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
                             {t("play")}
+                        </Link>
+                        <Link href="/leaderboard" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                            {t("leaderboard")}
                         </Link>
                         {session?.user?.role === "COACH" && (
                             <Link href="/coach/dashboard" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">

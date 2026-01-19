@@ -1,6 +1,5 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -106,6 +105,7 @@ model PuzzleAttempt {
   puzzleId  String
   puzzle    Puzzle   @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
   success   Boolean
+  points    Int      @default(0)
   createdAt DateTime @default(now())
 
   @@index([userId])

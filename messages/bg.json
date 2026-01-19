@@ -10,6 +10,7 @@
         "puzzles": "Пъзели",
         "openings": "Дебюти",
         "play": "Игра",
+        "leaderboard": "Класация",
         "login": "Вход",
         "logout": "Изход",
         "coachDashboard": "Треньорско Табло"
@@ -251,5 +252,18 @@
         "noPracticeAttempts": "Все още няма намерени опити за упражнения.",
         "rating": "Рейтинг",
         "ratingChange": "Промяна"
+    },
+    "Leaderboard": {
+        "title": "Класация",
+        "puzzles": "Пъзели",
+        "openings": "Дебюти",
+        "weekly": "Седмично",
+        "allTime": "За всички времена",
+        "rank": "Място",
+        "name": "Име",
+        "puzzlesSolved": "Решени Пъзели",
+        "points": "Точки",
+        "openingsCompleted": "Завършени Дебюти",
+        "loading": "Зареждане..."
     }
 }

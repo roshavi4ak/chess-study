@@ -10,6 +10,7 @@
         "puzzles": "Puzzles",
         "openings": "Openings",
         "play": "Play",
+        "leaderboard": "Leaderboard",
         "login": "Login",
         "logout": "Logout",
         "coachDashboard": "Coach Dashboard"
@@ -251,5 +252,18 @@
         "noPracticeAttempts": "No practice attempts found yet.",
         "rating": "Rating",
         "ratingChange": "Change"
+    },
+    "Leaderboard": {
+        "title": "Leaderboard",
+        "puzzles": "Puzzles",
+        "openings": "Openings",
+        "weekly": "Weekly",
+        "allTime": "All Time",
+        "rank": "Rank",
+        "name": "Name",
+        "puzzlesSolved": "Puzzles Solved",
+        "points": "Points",
+        "openingsCompleted": "Openings Completed",
+        "loading": "Loading..."
     }
 }
