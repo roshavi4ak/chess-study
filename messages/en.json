@@ -10,6 +10,7 @@
         "puzzles": "Puzzles",
         "openings": "Openings",
         "play": "Play",
+        "leaderboard": "Leaderboard",
         "login": "Login",
         "logout": "Logout",
         "coachDashboard": "Coach Dashboard"
@@ -244,8 +245,21 @@
         "solved": "Solved",
         "failed": "Failed",
         "statusPERFECT": "Perfect",
-        "statusCOMPLETED": "Completed",
-        "statusPARTIAL": "Partial",
+        "statusCOMPLETED": "Completed"
+    },
+    "Leaderboard": {
+        "title": "Leaderboard",
+        "puzzles": "Puzzles",
+        "openings": "Openings",
+        "weekly": "Weekly",
+        "allTime": "All time",
+        "number": "Number",
+        "pointsGained": "Points gained",
+        "linesCompleted": "Lines completed",
+        "linesPerfected": "Lines perfected",
+        "noData": "No data available"
+    },
+    "statusPARTIAL": "Partial",
         "viewPuzzle": "View",
         "noAttempts": "No puzzle attempts found yet.",
         "noPracticeAttempts": "No practice attempts found yet.",

@@ -10,6 +10,7 @@
         "puzzles": "Пъзели",
         "openings": "Дебюти",
         "play": "Игра",
+        "leaderboard": "Класация",
         "login": "Вход",
         "logout": "Изход",
         "coachDashboard": "Треньорско Табло"
@@ -244,8 +245,21 @@
         "solved": "Решен",
         "failed": "Неуспешен",
         "statusPERFECT": "Перфектно",
-        "statusCOMPLETED": "Завършено",
-        "statusPARTIAL": "Частично",
+        "statusCOMPLETED": "Завършено"
+    },
+    "Leaderboard": {
+        "title": "Класация",
+        "puzzles": "Пъзели",
+        "openings": "Дебюти",
+        "weekly": "Седмично",
+        "allTime": "Общо",
+        "number": "Брой",
+        "pointsGained": "Спечелени точки",
+        "linesCompleted": "Завършени линии",
+        "linesPerfected": "Перфектни линии",
+        "noData": "Няма налични данни"
+    },
+    "statusPARTIAL": "Частично",
         "viewPuzzle": "Преглед",
         "noAttempts": "Все още няма намерени опити за решаване на пъзели.",
         "noPracticeAttempts": "Все още няма намерени опити за упражнения.",
