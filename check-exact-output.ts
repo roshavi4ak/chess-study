@@ -1,4 +1,4 @@
-import { prisma } from "./src/lib/db.ts";
+import { prisma } from "./src/lib/db";
 
 async function run() {
     const now = new Date();
