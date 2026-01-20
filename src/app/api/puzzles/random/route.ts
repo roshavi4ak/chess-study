@@ -1,33 +1,22 @@
-import { prisma } from "@/lib/db";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
+import { getNextPuzzleName } from "@/lib/puzzles";
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const excludeName = searchParams.get("exclude");
-    const tag = searchParams.get("tag");
+    const excludeName = searchParams.get("exclude") || undefined;
+    const tag = searchParams.get("tag") || undefined;
 
-    const whereClause: any = {
-        name: { not: excludeName || undefined }
-    };
+    const session = await auth();
+    const rating = session?.user?.ratingPuzzle ?? 1500;
 
-    if (tag) {
-        whereClause.tags = { has: tag };
-    }
 
-    const count = await prisma.puzzle.count({
-        where: whereClause
+    const puzzleName = await getNextPuzzleName({
+        userId: session?.user?.id,
+        rating,
+        tag,
+        excludeName
     });
 
-    if (count === 0) {
-        return NextResponse.json({ name: null });
-    }
-
-    const skip = Math.floor(Math.random() * count);
-    const puzzle = await prisma.puzzle.findFirst({
-        where: whereClause,
-        skip,
-        select: { name: true }
-    });
-
-    return NextResponse.json({ name: puzzle?.name || null });
+    return NextResponse.json({ name: puzzleName });
 }

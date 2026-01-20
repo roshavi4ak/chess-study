@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import DashboardNameManager from "@/components/DashboardNameManager";
 
 export default async function Dashboard() {
     const session = await auth();
@@ -12,9 +13,11 @@ export default async function Dashboard() {
     }
 
     const roleKey = session.user.role?.toLowerCase() as "coach" | "student" || "student";
+    const isNameSet = session.user.isNameSet;
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <DashboardNameManager isNameSet={!!isNameSet} />
             <div className="px-4 py-6 sm:px-0">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                     {t("title")}

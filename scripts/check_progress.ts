@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const userId = 'cmidi8gr50000v8vc36ubbgir'; // From logs
+  const userId = 'cmifmn6al0000v84osqjrozrv'; // From logs
 
   const progress = await prisma.practiceLineProgress.findMany({
     where: { userId },

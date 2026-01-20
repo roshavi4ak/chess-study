@@ -19,7 +19,7 @@ async function main() {
 
         // Find the user
         const user = await prisma.user.findFirst({
-            where: { name: 'roshavi4ak' }
+            where: { name: 'mi666ka' }
         });
         if (!user) {
             console.log('User not found');

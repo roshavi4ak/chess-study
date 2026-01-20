@@ -53,6 +53,32 @@ export async function POST(request: Request) {
 
         const score = success ? 1 : 0;
 
+        // Check if user already attempted this puzzle to satisfy requirement #2
+        const existingAttempt = await prisma.puzzleAttempt.findFirst({
+            where: {
+                userId: session.user.id,
+                puzzleId: puzzleId
+            }
+        });
+
+        if (existingAttempt) {
+            // Already tried this puzzle, don't change rating
+            await prisma.puzzleAttempt.create({
+                data: {
+                    userId: session.user.id,
+                    puzzleId: puzzleId,
+                    success: success,
+                    points: 0 // No points for retries
+                }
+            });
+
+            return NextResponse.json({
+                oldRating: Math.round(userRating.rating),
+                newRating: Math.round(userRating.rating),
+                change: 0
+            });
+        }
+
         // User vs Puzzle
         const userResult: MatchResult = {
             opponentRating: puzzleRating.rating,
@@ -69,12 +95,22 @@ export async function POST(request: Request) {
         };
         const newPuzzleRating = Glicko2.calculateNewRating(puzzleRating, [puzzleResult]);
 
+        // Dial down rating changes: 70% for user, 10% for puzzle
+        const userDiff = newUserRating.rating - userRating.rating;
+        const puzzleDiff = newPuzzleRating.rating - puzzleRating.rating;
+
+        const points = Math.round(userDiff * 0.7);
+        const puzzleChange = Math.round(puzzleDiff * 0.1);
+
+        const finalUserRating = Math.round(userRating.rating) + points;
+        const finalPuzzleRating = Math.round(puzzleRating.rating) + puzzleChange;
+
         // Update DB
         await prisma.$transaction([
             prisma.user.update({
                 where: { id: session.user.id },
                 data: {
-                    ratingPuzzle: Math.round(newUserRating.rating),
+                    ratingPuzzle: finalUserRating,
                     puzzleRd: newUserRating.rd,
                     puzzleVolatility: newUserRating.volatility
                 }
@@ -82,7 +118,7 @@ export async function POST(request: Request) {
             prisma.puzzle.update({
                 where: { id: puzzleId },
                 data: {
-                    rating: Math.round(newPuzzleRating.rating),
+                    rating: finalPuzzleRating,
                     ratingDeviation: newPuzzleRating.rd,
                     volatility: newPuzzleRating.volatility
                 }
@@ -91,15 +127,16 @@ export async function POST(request: Request) {
                 data: {
                     userId: session.user.id,
                     puzzleId: puzzleId,
-                    success: success
+                    success: success,
+                    points: points
                 }
             })
         ]);
 
         return NextResponse.json({
             oldRating: Math.round(userRating.rating),
-            newRating: Math.round(newUserRating.rating),
-            change: Math.round(newUserRating.rating) - Math.round(userRating.rating)
+            newRating: finalUserRating,
+            change: points
         });
     } catch (error) {
         console.error("Error submitting puzzle result:", error);

@@ -19,6 +19,7 @@ export async function getAvailableUsers(): Promise<AvailableUser[]> {
             where: {
                 lichessId: {
                     not: null,
+                    notIn: ["mi666ka", "petar1976"],
                 },
                 id: {
                     not: session.user.id,
@@ -36,5 +37,30 @@ export async function getAvailableUsers(): Promise<AvailableUser[]> {
     } catch (error) {
         console.error("Error fetching available users:", error);
         return [];
+    }
+}
+
+export async function updateUserName(name: string) {
+    const session = await auth();
+    if (!session?.user?.id) {
+        throw new Error("Unauthorized");
+    }
+
+    if (!name || name.trim().length === 0) {
+        throw new Error("Name is required");
+    }
+
+    try {
+        await prisma.user.update({
+            where: { id: session.user.id },
+            data: {
+                name: name.trim(),
+                isNameSet: true,
+            },
+        });
+        return { success: true };
+    } catch (error) {
+        console.error("Error updating user name:", error);
+        throw new Error("Failed to update name");
     }
 }

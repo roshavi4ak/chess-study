@@ -49,6 +49,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     image: `https://lichess1.org/assets/logo/lichess-pad3.svg`,
                     role: "STUDENT",
                     lichessId: profile.id,
+                    isNameSet: false,
                     ratingPuzzle: profile.perfs?.puzzle?.rating,
                     ratingBullet: profile.perfs?.bullet?.rating,
                     ratingBlitz: profile.perfs?.blitz?.rating,
@@ -70,6 +71,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 session.user.role = (user as any).role || "STUDENT";
                 session.user.lichessId = (user as any).lichessId || null;
                 session.user.ratingPuzzle = (user as any).ratingPuzzle || null;
+                session.user.isNameSet = (user as any).isNameSet || false;
             }
             return session;
         }

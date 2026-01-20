@@ -1,6 +1,6 @@
-
-import { prisma } from "@/lib/db";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { getNextPuzzleName } from "@/lib/puzzles";
 
 export default async function PuzzlePlayPage({
     searchParams,
@@ -8,33 +8,27 @@ export default async function PuzzlePlayPage({
     searchParams: Promise<{ tag?: string }>;
 }) {
     const { tag } = await searchParams;
+    const session = await auth();
 
-    const whereClause: any = {};
-    if (tag) {
-        whereClause.tags = { has: tag };
+    let rating = 1500;
+    if (session?.user?.id) {
+        rating = session?.user?.ratingPuzzle || 1500;
     }
 
-    const count = await prisma.puzzle.count({ where: whereClause });
+    const puzzleName = await getNextPuzzleName({
+        userId: session?.user?.id,
+        rating,
+        tag: tag || undefined
+    });
 
-    if (count === 0) {
+    if (puzzleName) {
+        redirect(`/puzzles/${puzzleName}${tag ? `?tag=${tag}` : ''}`);
+    } else {
         return (
             <div className="p-8 text-center">
                 <h1 className="text-2xl font-bold text-red-600">No puzzles found</h1>
                 <p className="mt-2 text-gray-600">Try selecting a different category.</p>
             </div>
         );
-    }
-
-    const skip = Math.floor(Math.random() * count);
-    const puzzle = await prisma.puzzle.findFirst({
-        where: whereClause,
-        skip,
-        select: { name: true }
-    });
-
-    if (puzzle) {
-        redirect(`/puzzles/${puzzle.name}${tag ? `?tag=${tag}` : ''}`);
-    } else {
-        return <div>Error finding puzzle</div>;
     }
 }

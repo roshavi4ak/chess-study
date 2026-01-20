@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function listAllProgress() {
-    const username = "roshavi4ak";
+    const username = "mi666ka";
     const user = await prisma.user.findFirst({ where: { name: username } });
 
     if (!user) {

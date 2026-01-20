@@ -6,12 +6,15 @@ declare module "next-auth" {
         user: {
             role: Role
             lichessId: string | null
+            ratingPuzzle: number | null
+            isNameSet: boolean
         } & DefaultSession["user"]
     }
 
     interface User {
         role: Role
         lichessId: string | null
+        isNameSet: boolean
         ratingPuzzle?: number | null
         ratingBullet?: number | null
         ratingBlitz?: number | null
