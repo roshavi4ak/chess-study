@@ -108,96 +108,98 @@ export default function Leaderboard({ data }: LeaderboardProps) {
 
             {/* Table */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
-                <table className="w-full text-left">
-                    <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-700">
-                        <tr>
-                            <th className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">#</th>
-                            <th className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">{t("student")}</th>
-                            {section === "puzzles" ? (
-                                <>
-                                    <th
-                                        className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
-                                        onClick={() => handleSort("count")}
-                                    >
-                                        <div className="flex items-center">{t("number")} <SortIcon field="count" /></div>
-                                    </th>
-                                    <th
-                                        className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
-                                        onClick={() => handleSort("points")}
-                                    >
-                                        <div className="flex items-center">{t("points")} <SortIcon field="points" /></div>
-                                    </th>
-                                </>
-                            ) : (
-                                <>
-                                    <th
-                                        className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-green-600 transition-colors"
-                                        onClick={() => handleSort("completed")}
-                                    >
-                                        <div className="flex items-center">{t("linesCompleted")} <SortIcon field="completed" /></div>
-                                    </th>
-                                    <th
-                                        className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-green-600 transition-colors"
-                                        onClick={() => handleSort("perfected")}
-                                    >
-                                        <div className="flex items-center">{t("linesPerfected")} <SortIcon field="perfected" /></div>
-                                    </th>
-                                </>
-                            )}
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-50 dark:divide-gray-700">
-                        {sortedData.map((student, index) => (
-                            <tr key={student.id} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group">
-                                <td className="px-6 py-5 whitespace-nowrap text-sm font-black text-gray-400">
-                                    {index + 1}
-                                </td>
-                                <td className="px-6 py-5 whitespace-nowrap">
-                                    <div className="flex items-center">
-                                        {student.image ? (
-                                            <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                <img src={student.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
-                                            </div>
-                                        ) : (
-                                            <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 ring-2 ring-gray-100 dark:ring-gray-700 font-bold text-blue-600 dark:text-blue-400">
-                                                {student.name && student.name.length > 0 ? student.name[0] : '?'}
-                                            </div>
-                                        )}
-                                        <span className="text-base font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
-                                            {student.name || t("anonymous")}
-                                        </span>
-                                    </div>
-                                </td>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full text-left">
+                        <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-700">
+                            <tr>
+                                <th className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">#</th>
+                                <th className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">{t("student")}</th>
                                 {section === "puzzles" ? (
                                     <>
-                                        <td className="px-6 py-5 whitespace-nowrap text-lg font-black text-gray-700 dark:text-gray-300">
-                                            {student.puzzleStats[timeframe].count}
-                                        </td>
-                                        <td className="px-6 py-5 whitespace-nowrap">
-                                            <span className={`text-lg font-black ${student.puzzleStats[timeframe].points >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                                                {student.puzzleStats[timeframe].points > 0 ? '+' : ''}{student.puzzleStats[timeframe].points}
-                                            </span>
-                                        </td>
+                                        <th
+                                            className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
+                                            onClick={() => handleSort("count")}
+                                        >
+                                            <div className="flex items-center">{t("number")} <SortIcon field="count" /></div>
+                                        </th>
+                                        <th
+                                            className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
+                                            onClick={() => handleSort("points")}
+                                        >
+                                            <div className="flex items-center">{t("points")} <SortIcon field="points" /></div>
+                                        </th>
                                     </>
                                 ) : (
                                     <>
-                                        <td className="px-6 py-5 whitespace-nowrap text-lg font-black text-gray-700 dark:text-gray-300">
-                                            {student.openingStats[timeframe].completed}
-                                        </td>
-                                        <td className="px-6 py-5 whitespace-nowrap text-lg font-black text-green-600 dark:text-green-400">
-                                            {student.openingStats[timeframe].perfected}
-                                        </td>
+                                        <th
+                                            className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-green-600 transition-colors"
+                                            onClick={() => handleSort("completed")}
+                                        >
+                                            <div className="flex items-center">{t("linesCompleted")} <SortIcon field="completed" /></div>
+                                        </th>
+                                        <th
+                                            className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-green-600 transition-colors"
+                                            onClick={() => handleSort("perfected")}
+                                        >
+                                            <div className="flex items-center">{t("linesPerfected")} <SortIcon field="perfected" /></div>
+                                        </th>
                                     </>
                                 )}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-                {sortedData.length === 0 && (
-                    <div className="py-12 text-center text-gray-500 dark:text-gray-400 font-medium">
-                        {t("noData")}
-                    </div>
-                )}
+                        </thead>
+                        <tbody className="divide-y divide-gray-50 dark:divide-gray-700">
+                            {sortedData.map((student, index) => (
+                                <tr key={student.id} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group">
+                                    <td className="px-6 py-5 whitespace-nowrap text-sm font-black text-gray-400">
+                                        {index + 1}
+                                    </td>
+                                    <td className="px-6 py-5 whitespace-nowrap">
+                                        <div className="flex items-center">
+                                            {student.image ? (
+                                                <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
+                                                    <img src={student.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                </div>
+                                            ) : (
+                                                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 ring-2 ring-gray-100 dark:ring-gray-700 font-bold text-blue-600 dark:text-blue-400">
+                                                    {student.name && student.name.length > 0 ? student.name[0] : '?'}
+                                                </div>
+                                            )}
+                                            <span className="text-base font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                                                {student.name || t("anonymous")}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    {section === "puzzles" ? (
+                                        <>
+                                            <td className="px-6 py-5 whitespace-nowrap text-lg font-black text-gray-700 dark:text-gray-300">
+                                                {student.puzzleStats[timeframe].count}
+                                            </td>
+                                            <td className="px-6 py-5 whitespace-nowrap">
+                                                <span className={`text-lg font-black ${student.puzzleStats[timeframe].points >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                                                    {student.puzzleStats[timeframe].points > 0 ? '+' : ''}{student.puzzleStats[timeframe].points}
+                                                </span>
+                                            </td>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <td className="px-6 py-5 whitespace-nowrap text-lg font-black text-gray-700 dark:text-gray-300">
+                                                {student.openingStats[timeframe].completed}
+                                            </td>
+                                            <td className="px-6 py-5 whitespace-nowrap text-lg font-black text-green-600 dark:text-green-400">
+                                                {student.openingStats[timeframe].perfected}
+                                            </td>
+                                        </>
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {sortedData.length === 0 && (
+                        <div className="py-12 text-center text-gray-500 dark:text-gray-400 font-medium">
+                            {t("noData")}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

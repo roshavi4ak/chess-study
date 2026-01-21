@@ -90,4 +90,5 @@ echo    - Set 'Application startup file' to: server.js
 echo    - Run 'npm run db:generate' if needed (usually handled by postinstall).
 echo 7. Start the App.
 echo.
+if "%1"=="auto" exit /b 0
 pause

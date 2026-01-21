@@ -15,37 +15,37 @@ export async function getLeaderboardData() {
 
     const excludedLichessIds = ["mi666ka", "belozem", "petar1976"];
 
-    // Limit to top 100 students by all-time puzzle points to reduce load
-    // First, aggregate to get top 100 user IDs by sum of points from successful attempts
-    const topUserAggregates = await prisma.puzzleAttempt.groupBy({
+    // Get all students
+    const allStudents = await prisma.user.findMany({
+        where: {
+            role: "STUDENT",
+            lichessId: {
+                notIn: excludedLichessIds,
+            }
+        },
+        select: { id: true }
+    });
+
+    const allUserIds = allStudents.map(s => s.id);
+
+    // Aggregate points for all students
+    const userAggregates = await prisma.puzzleAttempt.groupBy({
         by: ['userId'],
         where: {
             success: true,
-            user: {
-                role: "STUDENT",
-                lichessId: {
-                    notIn: excludedLichessIds,
-                }
-            }
+            userId: { in: allUserIds }
         },
         _sum: {
             points: true
-        },
-        orderBy: {
-            _sum: {
-                points: "desc"
-            }
-        },
-        take: 100
+        }
     });
 
-    const topUserIds = topUserAggregates.map(a => a.userId);
-    const pointsMap = new Map(topUserAggregates.map(a => [a.userId, a._sum.points || 0]));
+    const pointsMap = new Map(userAggregates.map(a => [a.userId, a._sum.points || 0]));
 
-    // Now fetch the user details for these top users
+    // Fetch the user details for all students
     const topStudents = await prisma.user.findMany({
         where: {
-            id: { in: topUserIds }
+            id: { in: allUserIds }
         },
         select: {
             id: true,
@@ -127,6 +127,6 @@ export async function getLeaderboardData() {
         };
     });
 
-    // Sort by all-time points descending to ensure top performers are shown
-    return allLeaderboardData.sort((a, b) => b.puzzleStats.allTime.points - a.puzzleStats.allTime.points);
+    // Sort by all-time points descending and limit to 20
+    return allLeaderboardData.sort((a, b) => b.puzzleStats.allTime.points - a.puzzleStats.allTime.points).slice(0, 20);
 }

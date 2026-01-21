@@ -48,3 +48,4 @@ backups/
 deploy/
 # lichess database dump for testing only
 lichess_db_puzzle.csv
+smart-deploy.bat
