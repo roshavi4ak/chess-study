@@ -2,8 +2,7 @@ import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import type { Adapter } from "next-auth/adapters"
 import { prisma } from "./lib/db"
-
-// Validate critical environment variables
+import { AVATARS } from "./lib/avatars";
 const NEXTAUTH_URL = process.env.NEXTAUTH_URL;
 const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET;
 const LICHESS_CLIENT_ID = process.env.LICHESS_CLIENT_ID || "chess-study-app";
@@ -41,12 +40,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 url: `${NEXTAUTH_URL}/api/lichess-token`,
             },
             userinfo: "https://lichess.org/api/account",
+
             profile(profile: any) {
+                const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
                 return {
                     id: profile.id,
                     name: profile.username,
                     email: profile.email,
-                    image: `https://lichess1.org/assets/logo/lichess-pad3.svg`,
+                    image: `/img/avatars/${randomAvatar}`,
                     role: "STUDENT",
                     lichessId: profile.id,
                     isNameSet: false,

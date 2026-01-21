@@ -18,5 +18,5 @@ export async function GET(request: Request) {
         excludeName: exclude
     });
 
-    return NextResponse.json({ name: puzzleName });
+    return NextResponse.json({ puzzleName });
 }

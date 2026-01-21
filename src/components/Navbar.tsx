@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Menu, X, User, LogOut } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -12,8 +12,13 @@ export default function Navbar() {
     const t = useTranslations("Navigation");
     const { data: session } = useSession();
     const [isOpen, setIsOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const params = useParams();
     const locale = params?.locale as string || "bg";
+
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -23,28 +28,36 @@ export default function Navbar() {
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href="/" className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                            <Link href="/" locale={locale} className="text-xl font-bold text-blue-600 dark:text-blue-400">
                                 ChessStudy
                             </Link>
                         </div>
                         <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <Link href="/dashboard" className="text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                            <Link href="/dashboard" locale={locale} className="text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
                                 {t("home")}
                             </Link>
-                            <Link href="/puzzles" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
-                                {t("puzzles")}
-                            </Link>
-                            <Link href="/openings" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
-                                {t("openings")}
-                            </Link>
-                            <Link href="/play" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
-                                {t("play")}
-                            </Link>
-                            <Link href="/leaderboard" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
-                                {t("leaderboard")}
-                            </Link>
+                            {session && (
+                                <Link href="/puzzles" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                    {t("puzzles")}
+                                </Link>
+                            )}
+                            {session && (
+                                <Link href="/openings" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                    {t("openings")}
+                                </Link>
+                            )}
+                            {session && (
+                                <Link href="/play" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                    {t("play")}
+                                </Link>
+                            )}
+                            {session && (
+                                <Link href="/leaderboard" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                    {t("leaderboard")}
+                                </Link>
+                            )}
                             {session?.user?.role === "COACH" && (
-                                <Link href="/coach/dashboard" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                <Link href="/coach/dashboard" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
                                     {t("coachDashboard")}
                                 </Link>
                             )}
@@ -88,23 +101,31 @@ export default function Navbar() {
             {isOpen && (
                 <div className="sm:hidden">
                     <div className="pt-2 pb-3 space-y-1">
-                        <Link href="/dashboard" className="block pl-3 pr-4 py-2 border-l-4 border-blue-500 text-base font-medium text-blue-700 bg-blue-50">
+                        <Link href="/dashboard" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-blue-500 text-base font-medium text-blue-700 bg-blue-50">
                             {t("home")}
                         </Link>
-                        <Link href="/puzzles" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-                            {t("puzzles")}
-                        </Link>
-                        <Link href="/openings" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-                            {t("openings")}
-                        </Link>
-                        <Link href="/play" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-                            {t("play")}
-                        </Link>
-                        <Link href="/leaderboard" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-                            {t("leaderboard")}
-                        </Link>
+                        {session && (
+                            <Link href="/puzzles" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                                {t("puzzles")}
+                            </Link>
+                        )}
+                        {session && (
+                            <Link href="/openings" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                                {t("openings")}
+                            </Link>
+                        )}
+                        {session && (
+                            <Link href="/play" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                                {t("play")}
+                            </Link>
+                        )}
+                        {session && (
+                            <Link href="/leaderboard" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                                {t("leaderboard")}
+                            </Link>
+                        )}
                         {session?.user?.role === "COACH" && (
-                            <Link href="/coach/dashboard" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                            <Link href="/coach/dashboard" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
                                 {t("coachDashboard")}
                             </Link>
                         )}

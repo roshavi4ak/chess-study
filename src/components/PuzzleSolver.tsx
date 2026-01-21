@@ -64,13 +64,13 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
                 try {
                     const firstMove = solutionMoves[0];
                     let moveResult;
-                    if (firstMove.length === 4 || firstMove.length === 5) {
-                        moveResult = newGame.move({
-                            from: firstMove.substring(0, 2),
-                            to: firstMove.substring(2, 4),
-                            promotion: firstMove.length === 5 ? firstMove[4] : undefined,
-                        });
-                    } else {
+                        if (firstMove.length === 4 || firstMove.length === 5) {
+                            moveResult = newGame.move({
+                                from: firstMove.substring(0, 2),
+                                to: firstMove.substring(2, 4),
+                                promotion: firstMove.length === 5 ? firstMove[4] : undefined,
+                            });
+                        } else {
                         moveResult = newGame.move(firstMove);
                     }
 
@@ -253,8 +253,8 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
         try {
             const res = await fetch(`/api/puzzles/next?exclude=${name}${tag ? `&tag=${tag}` : ''}`);
             const data = await res.json();
-            if (data.name) {
-                router.push(`/puzzles/${data.name}${tag ? `?tag=${tag}` : ''}`);
+            if (data.puzzleName) {
+                router.push(`/puzzles/${data.puzzleName}${tag ? `?tag=${tag}` : ''}`);
             } else {
                 alert(t("noMorePuzzles"));
             }

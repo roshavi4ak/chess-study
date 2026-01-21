@@ -3,21 +3,36 @@ import path from 'path';
 
 const withNextIntl = createNextIntlPlugin();
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',').map(s => s.trim()).filter(Boolean) || [];
+
+if (allowedOrigins.includes('*')) {
+    throw new Error('serverActions.allowedOrigins must contain only explicit hostnames, no wildcards');
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'standalone',
     transpilePackages: ['react-chessboard'],
-    reactStrictMode: false,
+    reactStrictMode: true,
     images: {
         unoptimized: true,
     },
     compress: false,
     poweredByHeader: false,
     experimental: {
-        // Force single-threaded operation to reduce process count
-        workerThreads: false,
-        cpus: 1,
+        optimizePackageImports: ['react-chessboard'],
+        serverActions: {
+            bodySizeLimit: '2mb',
+            allowedOrigins: allowedOrigins,
+        },
     },
+    async redirects() {
+        return [];
+    },
+    async rewrites() {
+        return [];
+    },
+
 };
 
 export default withNextIntl(nextConfig as any);

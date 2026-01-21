@@ -1,39 +1,75 @@
-import { auth } from "@/auth";
-import { prisma } from "@/lib/db";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 import OpeningCard from "@/components/OpeningCard";
 import PracticeCard from "@/components/PracticeCard";
 
-export default async function OpeningsPage() {
-    const session = await auth();
-    const navigationT = await getTranslations("Navigation");
-    const openingsT = await getTranslations("Openings");
-    const commonT = await getTranslations("Common");
-
-    let openings: any[] = [];
-    let practices: any[] = [];
-    let error: Error | null = null;
-
-    try {
-        console.log('[Openings] Fetching openings...');
-        openings = await prisma.opening.findMany({
-            orderBy: { createdAt: "desc" },
-            include: { creator: true }
-        });
-        console.log(`[Openings] Successfully fetched ${openings.length} openings`);
-
-        // Also fetch practices
-        practices = await prisma.practice.findMany({
-            orderBy: { createdAt: "desc" },
-            include: { creator: true }
-        });
-        console.log(`[Openings] Successfully fetched ${practices.length} practices`);
-    } catch (err) {
-        console.error('[Openings] Error fetching openings:', err);
-        error = err as Error;
-        // Return a user-friendly error page instead of crashing
+// API function to fetch openings
+async function fetchOpenings(): Promise<any[]> {
+    const response = await fetch("/api/openings", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error(`Failed to fetch openings: ${response.status}`);
     }
+    
+    return response.json();
+}
+
+// API function to fetch practices
+async function fetchPractices(): Promise<any[]> {
+    const response = await fetch("/api/practices", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error(`Failed to fetch practices: ${response.status}`);
+    }
+    
+    return response.json();
+}
+
+export default function OpeningsPage() {
+    const { data: session, status } = useSession();
+    const navigationT = useTranslations("Navigation");
+    const openingsT = useTranslations("Openings");
+    const commonT = useTranslations("Common");
+    
+    const [openings, setOpenings] = useState<any[]>([]);
+    const [practices, setPractices] = useState<any[]>([]);
+    const [error, setError] = useState<Error | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                setLoading(true);
+                const [fetchedOpenings, fetchedPractices] = await Promise.all([
+                    fetchOpenings(),
+                    fetchPractices()
+                ]);
+                setOpenings(fetchedOpenings);
+                setPractices(fetchedPractices);
+            } catch (err) {
+                console.error('[Openings] Error fetching data:', err);
+                setError(err as Error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadData();
+    }, []);
 
     const isCoach = session?.user?.role === "COACH";
     const userId = session?.user?.id;
@@ -52,6 +88,19 @@ export default async function OpeningsPage() {
                                 {error.message}
                             </pre>
                         </details>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
+    // Loading state
+    if (loading) {
+        return (
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div className="px-4 py-6 sm:px-0">
+                    <div className="flex min-h-screen items-center justify-center">
+                        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
                     </div>
                 </div>
             </main>

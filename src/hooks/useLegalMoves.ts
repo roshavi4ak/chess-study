@@ -144,6 +144,15 @@ export function useLegalMoves({ game, onMove, boardOrientation = "white" }: UseL
         setOptionSquares({});
         if (onMove && source && target) {
             if (source === target) return false; // Same-square guard
+
+            // Check if the move is legal
+            const moves = game.moves({
+                square: source,
+                verbose: true
+            });
+            const foundMove = moves.find((m) => m.to === target);
+            if (!foundMove) return false; // Illegal move, snap back
+
             // Check for promotion
             const piece = game.get(source);
             const isPromotion =

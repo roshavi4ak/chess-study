@@ -1,18 +1,10 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
-import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import Providers from "@/components/Providers";
+import NavbarWrapper from "@/components/NavbarWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Chess Study Platform",
-  description: "Learn and play chess",
-};
-
-import { SessionProvider } from "next-auth/react";
-import Navbar from "@/components/Navbar";
 
 export default async function RootLayout({
   children,
@@ -25,14 +17,12 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale}>
       <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>
-          <SessionProvider>
-            <Navbar />
-            {children}
-          </SessionProvider>
-        </NextIntlClientProvider>
+        <Providers messages={messages} locale={locale}>
+          <NavbarWrapper />
+          {children}
+        </Providers>
       </body>
     </html>
   );

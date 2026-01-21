@@ -268,6 +268,11 @@
         "noData": "No data available for this selection.",
         "anonymous": "Anonymous"
     },
+    "AvatarPicker": {
+        "pickAvatar": "Pick Avatar",
+        "chooseYourAvatar": "Choose Your Avatar",
+        "cancel": "Cancel"
+    },
     "NameDialog": {
         "title": "Welcome! Please enter your name",
         "description": "To help your coach track your progress, please provide your real name.",

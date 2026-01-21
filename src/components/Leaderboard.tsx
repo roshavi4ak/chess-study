@@ -155,7 +155,9 @@ export default function Leaderboard({ data }: LeaderboardProps) {
                                 <td className="px-6 py-5 whitespace-nowrap">
                                     <div className="flex items-center">
                                         {student.image ? (
-                                            <img src={student.image} className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700" alt="" />
+                                            <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
+                                                <img src={student.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                            </div>
                                         ) : (
                                             <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 ring-2 ring-gray-100 dark:ring-gray-700 font-bold text-blue-600 dark:text-blue-400">
                                                 {student.name && student.name.length > 0 ? student.name[0] : '?'}

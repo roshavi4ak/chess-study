@@ -25,50 +25,69 @@ if errorlevel 1 (
 
 echo ✅ Build successful!
 
+REM Fix nested standalone structure if exists (due to absolute path preservation)
+if exist ".next\standalone\StudioProjects\chess-study" (
+    echo 🔧 Fixing nested standalone structure...
+    xcopy /e /y /q ".next\standalone\StudioProjects\chess-study\*" ".next\standalone\"
+    rmdir /s /q ".next\standalone\StudioProjects"
+)
+
 REM Create package
 echo 📦 Creating deployment package...
+if exist deploy rmdir /s /q deploy
 mkdir deploy
 mkdir deploy\chess-study
 
-REM Copy FILES ONLY (No node_modules)
-echo 📂 Copying source files...
+REM --- STANDALONE FLATTENING STRATEGY ---
+echo 📂 assembling standalone structure...
 
-REM .next folder (App Logic)
-xcopy /e /i /y .next deploy\chess-study\.next
+REM 1. Copy the standalone Build (Server logic)
+xcopy /e /i /y .next\standalone deploy\chess-study
 
-REM Public assets
+REM 2. Copy Static Assets (REQUIRED for standalone to serve CSS/JS)
+REM    Must go to .next/static inside the deployment
+mkdir deploy\chess-study\.next\static
+xcopy /e /i /y .next\static deploy\chess-study\.next\static
+
+REM 3. Copy Public Assets
 xcopy /e /i /y public deploy\chess-study\public
 
-REM Config & Scripts
-copy package.json deploy\chess-study\
-copy package-lock.json deploy\chess-study\
-copy server.js deploy\chess-study\
-copy .htaccess deploy\chess-study\
+REM 4. Copy Internationalization Messages (Fixes ENVIRONMENT_FALLBACK)
 xcopy /e /i /y messages deploy\chess-study\messages
+
+REM 5. Copy Prisma (For potential schema usage/updates)
 xcopy /e /i /y prisma deploy\chess-study\prisma
-mkdir deploy\chess-study\src\i18n
-copy src\i18n\request.ts deploy\chess-study\src\i18n\
 
-REM Cleanup Env
-if exist deploy\chess-study\.env del /f deploy\chess-study\.env
-if exist deploy\chess-study\.env.local del /f deploy\chess-study\.env.local
-if exist deploy\chess-study\.env.production del /f deploy\chess-study\.env.production
+REM 6. Copy Scripts & Configs
+xcopy /e /i /y scripts deploy\chess-study\scripts
 
-REM Zip
+REM 7. Copy Original Package.json (Better for 'npm install' on host)
+copy /y package.json deploy\chess-study\package.json
+copy /y package-lock.json deploy\chess-study\package-lock.json
+
+REM 8. Cleanup Windows-specific node_modules from the bundle
+REM    (We want the server to run 'npm install' to get Linux binaries)
+if exist deploy\chess-study\node_modules rmdir /s /q deploy\chess-study\node_modules
+
 echo 🤐 Creating zip file...
 cd deploy
 powershell -command "Compress-Archive -Path chess-study\* -DestinationPath chess-study-source.zip"
 cd ..
 
 echo ✅ Package Created: deploy\chess-study-source.zip
-echo 📊 Size: ~20MB (Source code only)
+echo 📊 Size: Optimized (Source + Static + Server)
 echo.
 echo 📋 FINAL REPAIR INSTRUCTIONS:
 echo 1. In cPanel, STOP the Node.js App.
 echo 2. Using File Manager, delete EVERYTHING in 'public_html'.
-echo 3. Also delete the folder: '/home/andrey12/nodevenv/shah.belovezem.com' (This fixes the npm error!)
+echo 3. Also delete the folder: '/home/andrey12/nodevenv/shah.belovezem.com'
 echo 4. Upload 'deploy\chess-study-source.zip' to 'public_html' and Extract.
+echo    (You should see 'server.js' directly in public_html now).
 echo 5. Open Terminal, cd to public_html, and run: npm install
-echo 6. Start the App.
+echo    (This installs Linux binaries for Prisma/Next).
+echo 6. In cPanel 'Setup Node.js App':
+echo    - Set 'Application startup file' to: server.js
+echo    - Run 'npm run db:generate' if needed (usually handled by postinstall).
+echo 7. Start the App.
 echo.
 pause

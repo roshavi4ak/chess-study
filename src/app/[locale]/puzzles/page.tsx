@@ -1,44 +1,60 @@
-import { auth } from "@/auth";
-import { prisma } from "@/lib/db";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 
 // Helper function to convert tag to camelCase for translation key
-// Database tags are already in camelCase (e.g., "kingsideAttack", "mateIn1")
-// We just need to ensure the first letter is lowercase
 function tagToCamelCase(tag: string): string {
     if (!tag) return tag;
     return tag.charAt(0).toLowerCase() + tag.slice(1);
 }
 
-export default async function PuzzlesPage() {
-    const session = await auth();
-    const t = await getTranslations("Puzzles");
-    const tCategories = await getTranslations("PuzzleCategories");
-
-    let tags: { tag: string; count: bigint }[] = [];
-    let error: Error | null = null;
-
-    try {
-        console.log('[Puzzles] Fetching puzzle tags...');
-        // Fetch unique tags and their counts
-        tags = await prisma.$queryRaw<{ tag: string; count: bigint }[]>`
-            SELECT t.tag, COUNT(*)::int as count
-            FROM "Puzzle", unnest(tags) as t(tag)
-            GROUP BY t.tag
-            ORDER BY count DESC
-            LIMIT 50
-        `;
-        console.log(`[Puzzles] Successfully fetched ${tags.length} tags`);
-    } catch (err) {
-        console.error('[Puzzles] Error fetching tags:', err);
-        error = err as Error;
-        // Return a user-friendly error page instead of crashing
+// API function to fetch puzzle tags
+async function fetchPuzzleTags(): Promise<{ tag: string; count: number }[]> {
+    const response = await fetch("/api/puzzles/tags", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error(`Failed to fetch tags: ${response.status}`);
     }
+    
+    return response.json();
+}
+
+export default function PuzzlesPage() {
+    const { data: session, status } = useSession();
+    const t = useTranslations("Puzzles");
+    const tCategories = useTranslations("PuzzleCategories");
+    const commonT = useTranslations("Common");
+    
+    const [tags, setTags] = useState<{ tag: string; count: number }[]>([]);
+    const [error, setError] = useState<Error | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadTags = async () => {
+            try {
+                setLoading(true);
+                const fetchedTags = await fetchPuzzleTags();
+                setTags(fetchedTags);
+            } catch (err) {
+                console.error('[Puzzles] Error fetching tags:', err);
+                setError(err as Error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadTags();
+    }, []);
 
     const isCoach = session?.user?.role === "COACH";
-
-    const commonT = await getTranslations("Common");
 
     // If there's an error, show it to the user
     if (error) {
@@ -54,6 +70,19 @@ export default async function PuzzlesPage() {
                                 {error.message}
                             </pre>
                         </details>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
+    // Loading state
+    if (loading) {
+        return (
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div className="px-4 py-6 sm:px-0">
+                    <div className="flex min-h-screen items-center justify-center">
+                        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
                     </div>
                 </div>
             </main>
@@ -96,7 +125,7 @@ export default async function PuzzlesPage() {
                                         {translatedTag}
                                     </span>
                                     <span className="text-sm text-gray-500">
-                                        {Number(item.count)} {t("puzzlesCount")}
+                                        {item.count} {t("puzzlesCount")}
                                     </span>
                                 </Link>
                             );

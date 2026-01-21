@@ -1,23 +1,52 @@
-import { auth } from "@/auth";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getPractices } from "@/app/actions/practice";
+import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 import PracticeCard from "@/components/PracticeCard";
-import { getTranslations } from "next-intl/server";
 
-export default async function PracticesPage() {
-    const session = await auth();
-    const openingsT = await getTranslations("Openings");
-    const commonT = await getTranslations("Common");
-
-    let practices: any[] = [];
-    let error: Error | null = null;
-
-    try {
-        practices = await getPractices();
-    } catch (err) {
-        console.error('[Practices] Error fetching practices:', err);
-        error = err as Error;
+// API function to fetch practices
+async function fetchPractices(): Promise<any[]> {
+    const response = await fetch("/api/practices", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error(`Failed to fetch practices: ${response.status}`);
     }
+    
+    return response.json();
+}
+
+export default function PracticesPage() {
+    const { data: session, status } = useSession();
+    const openingsT = useTranslations("Openings");
+    const commonT = useTranslations("Common");
+    
+    const [practices, setPractices] = useState<any[]>([]);
+    const [error, setError] = useState<Error | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                setLoading(true);
+                const fetchedPractices = await fetchPractices();
+                setPractices(fetchedPractices);
+            } catch (err) {
+                console.error('[Practices] Error fetching practices:', err);
+                setError(err as Error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadData();
+    }, []);
 
     const isCoach = session?.user?.role === "COACH";
     const userId = session?.user?.id;
@@ -35,6 +64,19 @@ export default async function PracticesPage() {
                                 {error.message}
                             </pre>
                         </details>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
+    // Loading state
+    if (loading) {
+        return (
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div className="px-4 py-6 sm:px-0">
+                    <div className="flex min-h-screen items-center justify-center">
+                        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
                     </div>
                 </div>
             </main>
