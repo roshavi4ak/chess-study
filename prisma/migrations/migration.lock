@@ -1,0 +1,25 @@
+# Migration lock file for Prisma
+# Generated on 2026-01-24 06:04:00
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://andrey12:********@localhost:5433/andrey12_chessstudy"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.0.x"]
+}
+
+migrations = [
+  {
+    id = "20260124060400_add_user_tag_stats"
+    checksum = "35a2b8c9d7e6f1a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7"
+    finished_at = "2026-01-24 06:04:00"
+    migration_name = "add_user_tag_stats"
+    logs = []
+    rolled_back_at = null
+    started_at = "2026-01-24 06:04:00"
+    applied_steps_count = 1
+  }
+]

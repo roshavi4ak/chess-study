@@ -46,6 +46,7 @@ model User {
   gameRecords       GameRecord[]
   puzzleAttempts    PuzzleAttempt[]
   practiceAttempts  PracticeAttempt[]
+  tagStats          UserTagStats[]
 }
 
 model Account {
@@ -112,6 +113,18 @@ model PuzzleAttempt {
 
   @@index([userId])
   @@index([puzzleId])
+}
+
+model UserTagStats {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tag           String
+  totalCount    Int      @default(0)
+  unsolvedCount Int      @default(0)
+
+  @@unique([userId, tag])
+  @@index([userId])
 }
 
 model Opening {

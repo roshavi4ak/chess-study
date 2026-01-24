@@ -210,3 +210,16 @@ export async function trackOpeningView(openingId: string, completed: boolean = f
     console.log(`[Progress] Tracked opening view for ${openingId}, user ${session.user.id}`);
     revalidatePath(`/openings/${openingId}`);
 }
+
+export async function getUserTagStats() {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        return [];
+    }
+
+    return await prisma.userTagStats.findMany({
+        where: { userId: session.user.id },
+        orderBy: { tag: 'asc' },
+    });
+}
