@@ -10,6 +10,7 @@ interface SaveLineProgressParams {
     nodeId: string;  // ID of the leaf node
     hadWrongMoves: boolean;
     completed: boolean;
+    coachNotesVisible: boolean;
 }
 
 export async function saveLineProgress(params: SaveLineProgressParams) {
@@ -19,13 +20,13 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
         throw new Error("Unauthorized");
     }
 
-    const { practiceId, nodeId, hadWrongMoves, completed } = params;
+    const { practiceId, nodeId, hadWrongMoves, completed, coachNotesVisible } = params;
 
     // Determine status
     let status: LineStatus;
-    if (completed && !hadWrongMoves) {
+    if (completed && !hadWrongMoves && !coachNotesVisible) {
         status = "PERFECT";
-    } else if (completed && hadWrongMoves) {
+    } else if (completed) {
         status = "COMPLETED";
     } else {
         status = "PARTIAL";

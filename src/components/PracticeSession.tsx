@@ -326,22 +326,25 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         const nodeId = finalPath[finalPath.length - 1]; // Use the actual leaf node ID
         const leafNode = allLeafNodes.find(n => n.id === nodeId);
 
+        // Determine if coach notes were visible at any point during this line
+        const coachNotesVisible = showCoachHints || currentLineFirstTime;
+
         setSessionLinesCompleted(prev => prev + 1);
-        if (!hadWrongMoves) setSessionLinesPerfect(prev => prev + 1);
+        if (!hadWrongMoves && !coachNotesVisible) setSessionLinesPerfect(prev => prev + 1);
 
         const existingProgress = progressMap.get(nodeId);
         const newProgress: LineProgress = {
             nodeId,
-            status: hadWrongMoves ? "COMPLETED" : "PERFECT",
+            status: hadWrongMoves ? "COMPLETED" : (coachNotesVisible ? "COMPLETED" : "PERFECT"),
             attempts: (existingProgress?.attempts || 0) + 1,
-            perfectCount: (existingProgress?.perfectCount || 0) + (hadWrongMoves ? 0 : 1),
+            perfectCount: (existingProgress?.perfectCount || 0) + (!hadWrongMoves && !coachNotesVisible ? 1 : 0),
         };
         setProgressMap(prev => new Map(prev).set(nodeId, newProgress));
-        if (!hadWrongMoves) {
+        if (!hadWrongMoves && !coachNotesVisible) {
             setSessionCompletedIds(prev => new Set(prev).add(nodeId));
         }
 
-        const baseMessage = hadWrongMoves ? t("lineCompletedMistakes") : t("lineCompletedFlawlessly");
+        const baseMessage = hadWrongMoves ? t("lineCompletedMistakes") : (coachNotesVisible ? t("lineCompletedWithHints") : t("lineCompletedFlawlessly"));
         const finalMessage = leafNode?.notes ? `${baseMessage}\n\n💡 ${leafNode.notes}` : baseMessage;
 
         setFeedback({
@@ -354,6 +357,7 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                 nodeId,
                 hadWrongMoves,
                 completed: true,
+                coachNotesVisible,
             });
         } catch (e) {
             console.error("Failed to save progress:", e);
