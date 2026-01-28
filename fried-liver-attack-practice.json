@@ -1,110 +1,110 @@
 {
-  "id": "node_1769378800719_0",
+  "id": "node_1769620434287_0",
   "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
   "move": null,
   "notes": "Let's learn the Fried Liver Attack, one of the most dangerous openings in chess. An opening where you can potentially checkmate your opponent in 8 moves. It starts with pawn to e4.",
   "lineNumber": null,
   "children": [
     {
-      "id": "node_1769378800729_1",
+      "id": "node_1769620434300_1",
       "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
       "move": "e2e4",
       "notes": "",
       "lineNumber": null,
       "children": [
         {
-          "id": "node_1769378800730_2",
+          "id": "node_1769620434301_2",
           "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
           "move": "e7e5",
           "notes": "Let's continue with knight f3.",
           "lineNumber": null,
           "children": [
             {
-              "id": "node_1769378800730_3",
+              "id": "node_1769620434301_3",
               "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2",
               "move": "g1f3",
               "notes": "",
               "lineNumber": null,
               "children": [
                 {
-                  "id": "node_1769378800731_4",
+                  "id": "node_1769620434302_4",
                   "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
                   "move": "b8c6",
                   "notes": "Now develop our bishop to c4.",
                   "lineNumber": null,
                   "children": [
                     {
-                      "id": "node_1769378800731_5",
+                      "id": "node_1769620434303_5",
                       "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
                       "move": "f1c4",
                       "notes": "",
                       "lineNumber": null,
                       "children": [
                         {
-                          "id": "node_1769378800732_6",
+                          "id": "node_1769620434304_6",
                           "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
                           "move": "g8f6",
                           "notes": "Black played knight f6, which means we can play the Fried Liver Attack. To start the attack, let's play knight g5, threatening the pawn on f7 with the bishop and knight.",
                           "lineNumber": null,
                           "children": [
                             {
-                              "id": "node_1769378800733_7",
+                              "id": "node_1769620434305_7",
                               "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p1N1/2B1P3/8/PPPP1PPP/RNBQK2R b KQkq - 5 4",
                               "move": "f3g5",
                               "notes": "",
                               "lineNumber": null,
                               "children": [
                                 {
-                                  "id": "node_1769378800743_8",
+                                  "id": "node_1769620434318_8",
                                   "fen": "r1bqkb1r/ppp2ppp/2n2n2/3pp1N1/2B1P3/8/PPPP1PPP/RNBQK2R w KQkq - 0 5",
                                   "move": "d7d5",
                                   "notes": "This was Black's only way to stop capture on f7. Now let's capture on d5 with our e-pawn.",
                                   "lineNumber": null,
                                   "children": [
                                     {
-                                      "id": "node_1769378800744_9",
+                                      "id": "node_1769620434319_9",
                                       "fen": "r1bqkb1r/ppp2ppp/2n2n2/3Pp1N1/2B5/8/PPPP1PPP/RNBQK2R b KQkq - 0 5",
                                       "move": "e4d5",
                                       "notes": "",
                                       "lineNumber": null,
                                       "children": [
                                         {
-                                          "id": "node_1769378800745_10",
+                                          "id": "node_1769620434320_10",
                                           "fen": "r1bqkb1r/ppp2ppp/2n5/3np1N1/2B5/8/PPPP1PPP/RNBQK2R w KQkq - 0 6",
                                           "move": "f6d5",
                                           "notes": "Black played the very natural recapture with the knight, but now they are in trouble. Here we detonate an explosive. Knight to f7. Kaboom.",
                                           "lineNumber": null,
                                           "children": [
                                             {
-                                              "id": "node_1769378800745_11",
+                                              "id": "node_1769620434322_11",
                                               "fen": "r1bqkb1r/ppp2Npp/2n5/3np3/2B5/8/PPPP1PPP/RNBQK2R b KQkq - 0 6",
                                               "move": "g5f7",
                                               "notes": "",
                                               "lineNumber": null,
                                               "children": [
                                                 {
-                                                  "id": "node_1769378800746_12",
+                                                  "id": "node_1769620434324_12",
                                                   "fen": "r1bq1b1r/ppp2kpp/2n5/3np3/2B5/8/PPPP1PPP/RNBQK2R w KQ - 0 7",
                                                   "move": "e8f7",
                                                   "notes": "Let's bring out the queen with check on f3. We are checking the king and have a double attack on the knight on d5.",
                                                   "lineNumber": null,
                                                   "children": [
                                                     {
-                                                      "id": "node_1769378800746_13",
+                                                      "id": "node_1769620434326_13",
                                                       "fen": "r1bq1b1r/ppp2kpp/2n5/3np3/2B5/5Q2/PPPP1PPP/RNB1K2R b KQ - 1 7",
                                                       "move": "d1f3",
                                                       "notes": "",
                                                       "lineNumber": null,
                                                       "children": [
                                                         {
-                                                          "id": "node_1769378800747_14",
+                                                          "id": "node_1769620434327_14",
                                                           "fen": "r1bqkb1r/ppp3pp/2n5/3np3/2B5/5Q2/PPPP1PPP/RNB1K2R w KQ - 2 8",
                                                           "move": "f7e8",
                                                           "notes": "Black moved their king, so now we can take their knight with bishop d5.",
                                                           "lineNumber": null,
                                                           "children": [
                                                             {
-                                                              "id": "node_1769378800747_15",
+                                                              "id": "node_1769620434329_15",
                                                               "fen": "r1bqkb1r/ppp3pp/2n5/3Bp3/8/5Q2/PPPP1PPP/RNB1K2R b KQ - 0 8",
                                                               "move": "c4d5",
                                                               "notes": "Well done! We have a dominant position against Black's exposed king. The computer puts our position at a +2 point advantage.",
@@ -114,42 +114,42 @@
                                                           ]
                                                         },
                                                         {
-                                                          "id": "node_1769378800758_16",
+                                                          "id": "node_1769620434342_16",
                                                           "fen": "r1bq1bkr/ppp3pp/2n5/3np3/2B5/5Q2/PPPP1PPP/RNB1K2R w KQ - 2 8",
                                                           "move": "f7g8",
                                                           "notes": "Black ran their king to g8, and now we have mate on the board. Bishop takes knight on d5.",
                                                           "lineNumber": null,
                                                           "children": [
                                                             {
-                                                              "id": "node_1769378800759_17",
+                                                              "id": "node_1769620434343_17",
                                                               "fen": "r1bq1bkr/ppp3pp/2n5/3Bp3/8/5Q2/PPPP1PPP/RNB1K2R b KQ - 0 8",
                                                               "move": "c4d5",
                                                               "notes": "",
                                                               "lineNumber": null,
                                                               "children": [
                                                                 {
-                                                                  "id": "node_1769378800760_18",
+                                                                  "id": "node_1769620434344_18",
                                                                   "fen": "r1b2bkr/ppp3pp/2n5/3qp3/8/5Q2/PPPP1PPP/RNB1K2R w KQ - 0 9",
                                                                   "move": "d8d5",
                                                                   "notes": "Black is giving up their queen to delay the inevitable. Queen takes queen on d5.",
                                                                   "lineNumber": null,
                                                                   "children": [
                                                                     {
-                                                                      "id": "node_1769378800761_19",
+                                                                      "id": "node_1769620434345_19",
                                                                       "fen": "r1b2bkr/ppp3pp/2n5/3Qp3/8/8/PPPP1PPP/RNB1K2R b KQ - 0 9",
                                                                       "move": "f3d5",
                                                                       "notes": "",
                                                                       "lineNumber": null,
                                                                       "children": [
                                                                         {
-                                                                          "id": "node_1769378800761_20",
+                                                                          "id": "node_1769620434345_20",
                                                                           "fen": "r4bkr/ppp3pp/2n1b3/3Qp3/8/8/PPPP1PPP/RNB1K2R w KQ - 1 10",
                                                                           "move": "c8e6",
                                                                           "notes": "Final capture, queen takes bishop on e6 checkmate.",
                                                                           "lineNumber": null,
                                                                           "children": [
                                                                             {
-                                                                              "id": "node_1769378800761_21",
+                                                                              "id": "node_1769620434345_21",
                                                                               "fen": "r4bkr/ppp3pp/2n1Q3/4p3/8/8/PPPP1PPP/RNB1K2R b KQ - 0 10",
                                                                               "move": "d5e6",
                                                                               "notes": "That was best case for the Fried Liver Attack. But let's be real, most of our opponents won't play those awful moves LOL - so how do we win if black has other ideas?",
@@ -167,70 +167,70 @@
                                                           ]
                                                         },
                                                         {
-                                                          "id": "node_1769378800769_22",
+                                                          "id": "node_1769620434353_22",
                                                           "fen": "r1bq1b1r/ppp3pp/2n1k3/3np3/2B5/5Q2/PPPP1PPP/RNB1K2R w KQ - 2 8",
                                                           "move": "f7e6",
                                                           "notes": "Black has brought the king to defend the knight on d5. Let's put even more pressure on the d5 knight by developing our knight to c3.",
                                                           "lineNumber": null,
                                                           "children": [
                                                             {
-                                                              "id": "node_1769378800769_23",
+                                                              "id": "node_1769620434353_23",
                                                               "fen": "r1bq1b1r/ppp3pp/2n1k3/3np3/2B5/2N2Q2/PPPP1PPP/R1B1K2R b KQ - 3 8",
                                                               "move": "b1c3",
                                                               "notes": "",
                                                               "lineNumber": null,
                                                               "children": [
                                                                 {
-                                                                  "id": "node_1769378800770_24",
+                                                                  "id": "node_1769620434354_24",
                                                                   "fen": "r1bq1b1r/ppp3pp/4k3/3np3/1nB5/2N2Q2/PPPP1PPP/R1B1K2R w KQ - 4 9",
                                                                   "move": "c6b4",
                                                                   "notes": "Black added yet another defender to their knight, and is also threatening a fork on c2. Weirdly enough, we shouldn't get so worried about defending the pawn, and we should just castle.",
                                                                   "lineNumber": null,
                                                                   "children": [
                                                                     {
-                                                                      "id": "node_1769378800770_25",
+                                                                      "id": "node_1769620434354_25",
                                                                       "fen": "r1bq1b1r/ppp3pp/4k3/3np3/1nB5/2N2Q2/PPPP1PPP/R1B2RK1 b - - 5 9",
                                                                       "move": "e1g1",
                                                                       "notes": "",
                                                                       "lineNumber": null,
                                                                       "children": [
                                                                         {
-                                                                          "id": "node_1769378800770_26",
+                                                                          "id": "node_1769620434354_26",
                                                                           "fen": "r1bq1b1r/pp4pp/2p1k3/3np3/1nB5/2N2Q2/PPPP1PPP/R1B2RK1 w - - 0 10",
                                                                           "move": "c7c6",
                                                                           "notes": "This was literally Black's only move, adding another defender to the knight. Now pawn to d4, shattering the defenses in the center.",
                                                                           "lineNumber": null,
                                                                           "children": [
                                                                             {
-                                                                              "id": "node_1769378800771_27",
+                                                                              "id": "node_1769620434355_27",
                                                                               "fen": "r1bq1b1r/pp4pp/2p1k3/3np3/1nBP4/2N2Q2/PPP2PPP/R1B2RK1 b - - 0 10",
                                                                               "move": "d2d4",
                                                                               "notes": "",
                                                                               "lineNumber": null,
                                                                               "children": [
                                                                                 {
-                                                                                  "id": "node_1769378800771_28",
+                                                                                  "id": "node_1769620434355_28",
                                                                                   "fen": "r1bq1b1r/pp4pp/2p1k3/3np3/2BP4/2N2Q2/PPn2PPP/R1B2RK1 w - - 0 11",
                                                                                   "move": "b4c2",
                                                                                   "notes": "Black is attacking our rook in the corner, forgetting that all the action is happening in the center of the board. D-pawn takes e5.",
                                                                                   "lineNumber": null,
                                                                                   "children": [
                                                                                     {
-                                                                                      "id": "node_1769378800771_29",
+                                                                                      "id": "node_1769620434356_29",
                                                                                       "fen": "r1bq1b1r/pp4pp/2p1k3/3nP3/2B5/2N2Q2/PPn2PPP/R1B2RK1 b - - 0 11",
                                                                                       "move": "d4e5",
                                                                                       "notes": "",
                                                                                       "lineNumber": null,
                                                                                       "children": [
                                                                                         {
-                                                                                          "id": "node_1769378800772_30",
+                                                                                          "id": "node_1769620434357_30",
                                                                                           "fen": "r1bq1b1r/pp4pp/2p1k3/3nP3/2B5/2N2Q2/PP3PPP/n1B2RK1 w - - 0 12",
                                                                                           "move": "c2a1",
                                                                                           "notes": "Forget about our rook, let's add even more pressure to the center with other rook to d1, pinning the queen.",
                                                                                           "lineNumber": null,
                                                                                           "children": [
                                                                                             {
-                                                                                              "id": "node_1769378800772_31",
+                                                                                              "id": "node_1769620434358_31",
                                                                                               "fen": "r1bq1b1r/pp4pp/2p1k3/3nP3/2B5/2N2Q2/PP3PPP/n1BR2K1 b - - 1 12",
                                                                                               "move": "f1d1",
                                                                                               "notes": "This is a crazy position. We are down 7 points of material, but our position is so crushing that the computer puts us at +9 point advantage.",
@@ -244,28 +244,28 @@
                                                                                   ]
                                                                                 },
                                                                                 {
-                                                                                  "id": "node_1769378800798_52",
+                                                                                  "id": "node_1769620434387_52",
                                                                                   "fen": "r1bq1b1r/pp4pp/2p1k3/3n4/1nBp4/2N2Q2/PPP2PPP/R1B2RK1 w - - 0 11",
                                                                                   "move": "e5d4",
                                                                                   "notes": "With blacks middle pawn out of the way, we can add our rook to the mix. Rook to e1.",
                                                                                   "lineNumber": null,
                                                                                   "children": [
                                                                                     {
-                                                                                      "id": "node_1769378800799_53",
+                                                                                      "id": "node_1769620434388_53",
                                                                                       "fen": "r1bq1b1r/pp4pp/2p1k3/3n4/1nBp4/2N2Q2/PPP2PPP/R1B1R1K1 b - - 1 11",
                                                                                       "move": "f1e1",
                                                                                       "notes": "",
                                                                                       "lineNumber": null,
                                                                                       "children": [
                                                                                         {
-                                                                                          "id": "node_1769378800799_54",
+                                                                                          "id": "node_1769620434388_54",
                                                                                           "fen": "r1bq1b1r/pp4pp/2pk4/3n4/1nBp4/2N2Q2/PPP2PPP/R1B1R1K1 w - - 2 12",
                                                                                           "move": "e6d6",
                                                                                           "notes": "Now we add our bishop to the mix. Bishop to f4. Our pieces are swarming.",
                                                                                           "lineNumber": null,
                                                                                           "children": [
                                                                                             {
-                                                                                              "id": "node_1769378800799_55",
+                                                                                              "id": "node_1769620434388_55",
                                                                                               "fen": "r1bq1b1r/pp4pp/2pk4/3n4/1nBp1B2/2N2Q2/PPP2PPP/R3R1K1 b - - 3 12",
                                                                                               "move": "c1f4",
                                                                                               "notes": "Well done! Even though we are a knight down, all pieces are aiming right for Blacks king in the middle of the board and the computer puts us at a +4 point advantage.",
@@ -283,14 +283,14 @@
                                                                           ]
                                                                         },
                                                                         {
-                                                                          "id": "node_1769378800795_50",
+                                                                          "id": "node_1769620434384_50",
                                                                           "fen": "r1bq1b1r/ppp3pp/4k3/3np3/2B5/2N2Q2/PPnP1PPP/R1B2RK1 w - - 0 10",
                                                                           "move": "b4c2",
                                                                           "notes": "Black forgot their knight was a defender of their other knight. Now we can play bishop takes d5 with check.",
                                                                           "lineNumber": null,
                                                                           "children": [
                                                                             {
-                                                                              "id": "node_1769378800795_51",
+                                                                              "id": "node_1769620434384_51",
                                                                               "fen": "r1bq1b1r/ppp3pp/4k3/3Bp3/8/2N2Q2/PPnP1PPP/R1B2RK1 b - - 0 10",
                                                                               "move": "c4d5",
                                                                               "notes": "Well done! Black is in an awful position down material, with their king checked in the middle of the board, and our pieces about to swarm.",
@@ -304,28 +304,28 @@
                                                                   ]
                                                                 },
                                                                 {
-                                                                  "id": "node_1769378800790_46",
+                                                                  "id": "node_1769620434379_46",
                                                                   "fen": "r1bq1b1r/ppp3pp/4k3/3np3/2Bn4/2N2Q2/PPPP1PPP/R1B1K2R w KQ - 4 9",
                                                                   "move": "c6d4",
                                                                   "notes": "Black is threatening our queen, but we can gain tempo by playing bishop captures knight on d5 with our bishop with check.",
                                                                   "lineNumber": null,
                                                                   "children": [
                                                                     {
-                                                                      "id": "node_1769378800791_47",
+                                                                      "id": "node_1769620434380_47",
                                                                       "fen": "r1bq1b1r/ppp3pp/4k3/3Bp3/3n4/2N2Q2/PPPP1PPP/R1B1K2R b KQ - 0 9",
                                                                       "move": "c4d5",
                                                                       "notes": "",
                                                                       "lineNumber": null,
                                                                       "children": [
                                                                         {
-                                                                          "id": "node_1769378800791_48",
+                                                                          "id": "node_1769620434380_48",
                                                                           "fen": "r1bq1b1r/ppp3pp/3k4/3Bp3/3n4/2N2Q2/PPPP1PPP/R1B1K2R w KQ - 1 10",
                                                                           "move": "e6d6",
                                                                           "notes": "Black is attacking our queen and threatening a fork on c2. Let's move our queen to d3 to cover that square.",
                                                                           "lineNumber": null,
                                                                           "children": [
                                                                             {
-                                                                              "id": "node_1769378800791_49",
+                                                                              "id": "node_1769620434380_49",
                                                                               "fen": "r1bq1b1r/ppp3pp/3k4/3Bp3/3n4/2NQ4/PPPP1PPP/R1B1K2R b KQ - 2 10",
                                                                               "move": "f3d3",
                                                                               "notes": "Well done! Black's king is in the middle of the board and we are up in material. This is a completely winning position for us.",
@@ -339,112 +339,112 @@
                                                                   ]
                                                                 },
                                                                 {
-                                                                  "id": "node_1769378800806_56",
+                                                                  "id": "node_1769620434395_56",
                                                                   "fen": "r1bq1b1r/ppp1n1pp/4k3/3np3/2B5/2N2Q2/PPPP1PPP/R1B1K2R w KQ - 4 9",
                                                                   "move": "c6e7",
                                                                   "notes": "Black retreated their knight to e6, but this is too passive. Now, pawn to d4 immediately is extremely strong.",
                                                                   "lineNumber": null,
                                                                   "children": [
                                                                     {
-                                                                      "id": "node_1769378800806_57",
+                                                                      "id": "node_1769620434396_57",
                                                                       "fen": "r1bq1b1r/ppp1n1pp/4k3/3np3/2BP4/2N2Q2/PPP2PPP/R1B1K2R b KQ - 0 9",
                                                                       "move": "d2d4",
                                                                       "notes": "",
                                                                       "lineNumber": null,
                                                                       "children": [
                                                                         {
-                                                                          "id": "node_1769378800806_58",
+                                                                          "id": "node_1769620434396_58",
                                                                           "fen": "r1bq1b1r/pp2n1pp/2p1k3/3np3/2BP4/2N2Q2/PPP2PPP/R1B1K2R w KQ - 0 10",
                                                                           "move": "c7c6",
                                                                           "notes": "If Black won't open up the center, we'll do it for them. D-pawn takes e5.",
                                                                           "lineNumber": null,
                                                                           "children": [
                                                                             {
-                                                                              "id": "node_1769378800807_59",
+                                                                              "id": "node_1769620434397_59",
                                                                               "fen": "r1bq1b1r/pp2n1pp/2p1k3/3nP3/2B5/2N2Q2/PPP2PPP/R1B1K2R b KQ - 0 10",
                                                                               "move": "d4e5",
                                                                               "notes": "",
                                                                               "lineNumber": null,
                                                                               "children": [
                                                                                 {
-                                                                                  "id": "node_1769378800807_60",
+                                                                                  "id": "node_1769620434397_60",
                                                                                   "fen": "r1bq1b1r/pp1kn1pp/2p5/3nP3/2B5/2N2Q2/PPP2PPP/R1B1K2R w KQ - 1 11",
                                                                                   "move": "e6d7",
                                                                                   "notes": "Let's bring our bishop in. Bishop to g5.",
                                                                                   "lineNumber": null,
                                                                                   "children": [
                                                                                     {
-                                                                                      "id": "node_1769378800808_61",
+                                                                                      "id": "node_1769620434398_61",
                                                                                       "fen": "r1bq1b1r/pp1kn1pp/2p5/3nP1B1/2B5/2N2Q2/PPP2PPP/R3K2R b KQ - 2 11",
                                                                                       "move": "c1g5",
                                                                                       "notes": "",
                                                                                       "lineNumber": null,
                                                                                       "children": [
                                                                                         {
-                                                                                          "id": "node_1769378800808_62",
+                                                                                          "id": "node_1769620434398_62",
                                                                                           "fen": "r1bq1b1r/ppk1n1pp/2p5/3nP1B1/2B5/2N2Q2/PPP2PPP/R3K2R w KQ - 3 12",
                                                                                           "move": "d7c7",
                                                                                           "notes": "Black is continuing to run their king. Let's cut down the pieces in the middle to expose him. Bishop takes d5. It's important to do this with the bishop to save the knight for a future check.",
                                                                                           "lineNumber": null,
                                                                                           "children": [
                                                                                             {
-                                                                                              "id": "node_1769378800808_63",
+                                                                                              "id": "node_1769620434398_63",
                                                                                               "fen": "r1bq1b1r/ppk1n1pp/2p5/3BP1B1/8/2N2Q2/PPP2PPP/R3K2R b KQ - 0 12",
                                                                                               "move": "c4d5",
                                                                                               "notes": "",
                                                                                               "lineNumber": null,
                                                                                               "children": [
                                                                                                 {
-                                                                                                  "id": "node_1769378800809_64",
+                                                                                                  "id": "node_1769620434398_64",
                                                                                                   "fen": "r1bq1b1r/ppk1n1pp/8/3pP1B1/8/2N2Q2/PPP2PPP/R3K2R w KQ - 0 13",
                                                                                                   "move": "c6d5",
                                                                                                   "notes": "Now leap in with our knight. Knight to b5 check.",
                                                                                                   "lineNumber": null,
                                                                                                   "children": [
                                                                                                     {
-                                                                                                      "id": "node_1769378800809_65",
+                                                                                                      "id": "node_1769620434399_65",
                                                                                                       "fen": "r1bq1b1r/ppk1n1pp/8/1N1pP1B1/8/5Q2/PPP2PPP/R3K2R b KQ - 1 13",
                                                                                                       "move": "c3b5",
                                                                                                       "notes": "",
                                                                                                       "lineNumber": null,
                                                                                                       "children": [
                                                                                                         {
-                                                                                                          "id": "node_1769378800809_66",
+                                                                                                          "id": "node_1769620434399_66",
                                                                                                           "fen": "rkbq1b1r/pp2n1pp/8/1N1pP1B1/8/5Q2/PPP2PPP/R3K2R w KQ - 2 14",
                                                                                                           "move": "c7b8",
                                                                                                           "notes": "Let's open up a line of possible line of sight to the king. Pawn to e6. We are now threatening checkmate.",
                                                                                                           "lineNumber": null,
                                                                                                           "children": [
                                                                                                             {
-                                                                                                              "id": "node_1769378800810_67",
+                                                                                                              "id": "node_1769620434399_67",
                                                                                                               "fen": "rkbq1b1r/pp2n1pp/4P3/1N1p2B1/8/5Q2/PPP2PPP/R3K2R b KQ - 0 14",
                                                                                                               "move": "e5e6",
                                                                                                               "notes": "",
                                                                                                               "lineNumber": null,
                                                                                                               "children": [
                                                                                                                 {
-                                                                                                                  "id": "node_1769378800810_68",
+                                                                                                                  "id": "node_1769620434400_68",
                                                                                                                   "fen": "rkb2b1r/pp2n1pp/4P3/qN1p2B1/8/5Q2/PPP2PPP/R3K2R w KQ - 1 15",
                                                                                                                   "move": "d8a5",
                                                                                                                   "notes": "Black is delaying the inevitable. The second we get a free move, we will win the game. Let's block the check with bishop to d2.",
                                                                                                                   "lineNumber": null,
                                                                                                                   "children": [
                                                                                                                     {
-                                                                                                                      "id": "node_1769378800810_69",
+                                                                                                                      "id": "node_1769620434400_69",
                                                                                                                       "fen": "rkb2b1r/pp2n1pp/4P3/qN1p4/8/5Q2/PPPB1PPP/R3K2R b KQ - 2 15",
                                                                                                                       "move": "g5d2",
                                                                                                                       "notes": "",
                                                                                                                       "lineNumber": null,
                                                                                                                       "children": [
                                                                                                                         {
-                                                                                                                          "id": "node_1769378800811_70",
+                                                                                                                          "id": "node_1769620434400_70",
                                                                                                                           "fen": "rkb2b1r/pp2n1pp/4P3/1q1p4/8/5Q2/PPPB1PPP/R3K2R w KQ - 0 16",
                                                                                                                           "move": "a5b5",
                                                                                                                           "notes": "Checkmate in 1. Can you find it? Hint: It's bishop to f4.",
                                                                                                                           "lineNumber": null,
                                                                                                                           "children": [
                                                                                                                             {
-                                                                                                                              "id": "node_1769378800811_71",
+                                                                                                                              "id": "node_1769620434401_71",
                                                                                                                               "fen": "rkb2b1r/pp2n1pp/4P3/1q1p4/5B2/5Q2/PPP2PPP/R3K2R b KQ - 1 16",
                                                                                                                               "move": "d2f4",
                                                                                                                               "notes": "You stuck with it! You are mastering how to convert your positional advantage into a win.",
@@ -458,42 +458,42 @@
                                                                                                                   ]
                                                                                                                 },
                                                                                                                 {
-                                                                                                                  "id": "node_1769378800820_72",
+                                                                                                                  "id": "node_1769620434411_72",
                                                                                                                   "fen": "rkbq1b1r/p3n1pp/1p2P3/1N1p2B1/8/5Q2/PPP2PPP/R3K2R w KQ - 0 15",
                                                                                                                   "move": "b7b6",
                                                                                                                   "notes": "Black is gasping for air, giving their king a space to breath. Let's slide our queen to g3 check.",
                                                                                                                   "lineNumber": null,
                                                                                                                   "children": [
                                                                                                                     {
-                                                                                                                      "id": "node_1769378800821_73",
+                                                                                                                      "id": "node_1769620434411_73",
                                                                                                                       "fen": "rkbq1b1r/p3n1pp/1p2P3/1N1p2B1/8/6Q1/PPP2PPP/R3K2R b KQ - 1 15",
                                                                                                                       "move": "f3g3",
                                                                                                                       "notes": "",
                                                                                                                       "lineNumber": null,
                                                                                                                       "children": [
                                                                                                                         {
-                                                                                                                          "id": "node_1769378800821_74",
+                                                                                                                          "id": "node_1769620434412_74",
                                                                                                                           "fen": "r1bq1b1r/pk2n1pp/1p2P3/1N1p2B1/8/6Q1/PPP2PPP/R3K2R w KQ - 2 16",
                                                                                                                           "move": "b8b7",
                                                                                                                           "notes": "And now another check, forcing the king out of his hiding hole. Knight to d6.",
                                                                                                                           "lineNumber": null,
                                                                                                                           "children": [
                                                                                                                             {
-                                                                                                                              "id": "node_1769378800822_75",
+                                                                                                                              "id": "node_1769620434412_75",
                                                                                                                               "fen": "r1bq1b1r/pk2n1pp/1p1NP3/3p2B1/8/6Q1/PPP2PPP/R3K2R b KQ - 3 16",
                                                                                                                               "move": "b5d6",
                                                                                                                               "notes": "",
                                                                                                                               "lineNumber": null,
                                                                                                                               "children": [
                                                                                                                                 {
-                                                                                                                                  "id": "node_1769378800822_76",
+                                                                                                                                  "id": "node_1769620434413_76",
                                                                                                                                   "fen": "r1bq1b1r/p3n1pp/1pkNP3/3p2B1/8/6Q1/PPP2PPP/R3K2R w KQ - 4 17",
                                                                                                                                   "move": "b7c6",
                                                                                                                                   "notes": "Finally, let's fork the queen and rook. Knight to f7.",
                                                                                                                                   "lineNumber": null,
                                                                                                                                   "children": [
                                                                                                                                     {
-                                                                                                                                      "id": "node_1769378800823_77",
+                                                                                                                                      "id": "node_1769620434413_77",
                                                                                                                                       "fen": "r1bq1b1r/p3nNpp/1pk1P3/3p2B1/8/6Q1/PPP2PPP/R3K2R b KQ - 5 17",
                                                                                                                                       "move": "d6f7",
                                                                                                                                       "notes": "Well done! We are completely winning from here.",
@@ -511,56 +511,56 @@
                                                                                                                   ]
                                                                                                                 },
                                                                                                                 {
-                                                                                                                  "id": "node_1769378800843_92",
+                                                                                                                  "id": "node_1769620434435_92",
                                                                                                                   "fen": "rk1q1b1r/pp2n1pp/4b3/1N1p2B1/8/5Q2/PPP2PPP/R3K2R w KQ - 0 15",
                                                                                                                   "move": "c8e6",
                                                                                                                   "notes": "By moving the bishop, the king has gained another escape square. Let's cut him off with our queen. Queen to c3.",
                                                                                                                   "lineNumber": null,
                                                                                                                   "children": [
                                                                                                                     {
-                                                                                                                      "id": "node_1769378800843_93",
+                                                                                                                      "id": "node_1769620434436_93",
                                                                                                                       "fen": "rk1q1b1r/pp2n1pp/4b3/1N1p2B1/8/2Q5/PPP2PPP/R3K2R b KQ - 1 15",
                                                                                                                       "move": "f3c3",
                                                                                                                       "notes": "",
                                                                                                                       "lineNumber": null,
                                                                                                                       "children": [
                                                                                                                         {
-                                                                                                                          "id": "node_1769378800844_94",
+                                                                                                                          "id": "node_1769620434436_94",
                                                                                                                           "fen": "rk1q1b1r/p3n1pp/1p2b3/1N1p2B1/8/2Q5/PPP2PPP/R3K2R w KQ - 0 16",
                                                                                                                           "move": "b7b6",
                                                                                                                           "notes": "Black is delaying the inevitable. Let's play bishop to f4 check.",
                                                                                                                           "lineNumber": null,
                                                                                                                           "children": [
                                                                                                                             {
-                                                                                                                              "id": "node_1769378800844_95",
+                                                                                                                              "id": "node_1769620434436_95",
                                                                                                                               "fen": "rk1q1b1r/p3n1pp/1p2b3/1N1p4/5B2/2Q5/PPP2PPP/R3K2R b KQ - 1 16",
                                                                                                                               "move": "g5f4",
                                                                                                                               "notes": "",
                                                                                                                               "lineNumber": null,
                                                                                                                               "children": [
                                                                                                                                 {
-                                                                                                                                  "id": "node_1769378800844_96",
+                                                                                                                                  "id": "node_1769620434436_96",
                                                                                                                                   "fen": "r2q1b1r/pk2n1pp/1p2b3/1N1p4/5B2/2Q5/PPP2PPP/R3K2R w KQ - 2 17",
                                                                                                                                   "move": "b8b7",
                                                                                                                                   "notes": "Now throw in another check. Knight to d6. ",
                                                                                                                                   "lineNumber": null,
                                                                                                                                   "children": [
                                                                                                                                     {
-                                                                                                                                      "id": "node_1769378800844_97",
+                                                                                                                                      "id": "node_1769620434436_97",
                                                                                                                                       "fen": "r2q1b1r/pk2n1pp/1p1Nb3/3p4/5B2/2Q5/PPP2PPP/R3K2R b KQ - 3 17",
                                                                                                                                       "move": "b5d6",
                                                                                                                                       "notes": "",
                                                                                                                                       "lineNumber": null,
                                                                                                                                       "children": [
                                                                                                                                         {
-                                                                                                                                          "id": "node_1769378800845_98",
+                                                                                                                                          "id": "node_1769620434437_98",
                                                                                                                                           "fen": "r2q1b1r/p3n1pp/kp1Nb3/3p4/5B2/2Q5/PPP2PPP/R3K2R w KQ - 4 18",
                                                                                                                                           "move": "b7a6",
                                                                                                                                           "notes": "Checkmate in 1. Can you find it? Hint: It's Queen to a3.",
                                                                                                                                           "lineNumber": null,
                                                                                                                                           "children": [
                                                                                                                                             {
-                                                                                                                                              "id": "node_1769378800845_99",
+                                                                                                                                              "id": "node_1769620434437_99",
                                                                                                                                               "fen": "r2q1b1r/p3n1pp/kp1Nb3/3p4/5B2/Q7/PPP2PPP/R3K2R b KQ - 5 18",
                                                                                                                                               "move": "c3a3",
                                                                                                                                               "notes": "Way to stick with it! Enjoy the win.",
@@ -602,98 +602,98 @@
                                                                           ]
                                                                         },
                                                                         {
-                                                                          "id": "node_1769378800833_78",
+                                                                          "id": "node_1769620434424_78",
                                                                           "fen": "r1bq1b1r/ppp1n1pp/4k3/3n4/2Bp4/2N2Q2/PPP2PPP/R1B1K2R w KQ - 0 10",
                                                                           "move": "e5d4",
                                                                           "notes": "Black is too focused on gaining material. Let's add even more pressure in the center with bishop to f4, preparing us to castle queenside next move.",
                                                                           "lineNumber": null,
                                                                           "children": [
                                                                             {
-                                                                              "id": "node_1769378800833_79",
+                                                                              "id": "node_1769620434424_79",
                                                                               "fen": "r1bq1b1r/ppp1n1pp/4k3/3n4/2Bp1B2/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10",
                                                                               "move": "c1f4",
                                                                               "notes": "",
                                                                               "lineNumber": null,
                                                                               "children": [
                                                                                 {
-                                                                                  "id": "node_1769378800833_80",
+                                                                                  "id": "node_1769620434424_80",
                                                                                   "fen": "r1bq1b1r/ppp1n1pp/4k3/3n4/2B2B2/2p2Q2/PPP2PPP/R3K2R w KQ - 0 11",
                                                                                   "move": "d4c3",
                                                                                   "notes": "With the center cleared up, we can add even more pressure to the middle with castle queenside.",
                                                                                   "lineNumber": null,
                                                                                   "children": [
                                                                                     {
-                                                                                      "id": "node_1769378800834_81",
+                                                                                      "id": "node_1769620434425_81",
                                                                                       "fen": "r1bq1b1r/ppp1n1pp/4k3/3n4/2B2B2/2p2Q2/PPP2PPP/2KR3R b - - 1 11",
                                                                                       "move": "e1c1",
                                                                                       "notes": "",
                                                                                       "lineNumber": null,
                                                                                       "children": [
                                                                                         {
-                                                                                          "id": "node_1769378800834_82",
+                                                                                          "id": "node_1769620434425_82",
                                                                                           "fen": "r1bq1b1r/ppp1n1pp/4k3/3n4/2B2B2/5Q2/PpP2PPP/2KR3R w - - 0 12",
                                                                                           "move": "c3b2",
                                                                                           "notes": "Instead of taking back our pawn, it's better to slide our king to b1 and use the black pawn as cover.",
                                                                                           "lineNumber": null,
                                                                                           "children": [
                                                                                             {
-                                                                                              "id": "node_1769378800834_83",
+                                                                                              "id": "node_1769620434425_83",
                                                                                               "fen": "r1bq1b1r/ppp1n1pp/4k3/3n4/2B2B2/5Q2/PpP2PPP/1K1R3R b - - 1 12",
                                                                                               "move": "c1b1",
                                                                                               "notes": "",
                                                                                               "lineNumber": null,
                                                                                               "children": [
                                                                                                 {
-                                                                                                  "id": "node_1769378800835_84",
+                                                                                                  "id": "node_1769620434425_84",
                                                                                                   "fen": "r1bq1b1r/pp2n1pp/2p1k3/3n4/2B2B2/5Q2/PpP2PPP/1K1R3R w - - 0 13",
                                                                                                   "move": "c7c6",
                                                                                                   "notes": "Black added yet another defender to their knight. Let's remove the king as a defender with by moving our h-rook to e1 with check.",
                                                                                                   "lineNumber": null,
                                                                                                   "children": [
                                                                                                     {
-                                                                                                      "id": "node_1769378800835_85",
+                                                                                                      "id": "node_1769620434426_85",
                                                                                                       "fen": "r1bq1b1r/pp2n1pp/2p1k3/3n4/2B2B2/5Q2/PpP2PPP/1K1RR3 b - - 1 13",
                                                                                                       "move": "h1e1",
                                                                                                       "notes": "",
                                                                                                       "lineNumber": null,
                                                                                                       "children": [
                                                                                                         {
-                                                                                                          "id": "node_1769378800835_86",
+                                                                                                          "id": "node_1769620434426_86",
                                                                                                           "fen": "r1bq1b1r/pp2nkpp/2p5/3n4/2B2B2/5Q2/PpP2PPP/1K1RR3 w - - 2 14",
                                                                                                           "move": "e6f7",
                                                                                                           "notes": "Now we unleash our trick. Bishop to c7 attacking the queen and discovering a check on the king. We win the queen this way.",
                                                                                                           "lineNumber": null,
                                                                                                           "children": [
                                                                                                             {
-                                                                                                              "id": "node_1769378800835_87",
+                                                                                                              "id": "node_1769620434426_87",
                                                                                                               "fen": "r1bq1b1r/ppB1nkpp/2p5/3n4/2B5/5Q2/PpP2PPP/1K1RR3 b - - 3 14",
                                                                                                               "move": "f4c7",
                                                                                                               "notes": "",
                                                                                                               "lineNumber": null,
                                                                                                               "children": [
                                                                                                                 {
-                                                                                                                  "id": "node_1769378800836_88",
+                                                                                                                  "id": "node_1769620434426_88",
                                                                                                                   "fen": "r1bqkb1r/ppB1n1pp/2p5/3n4/2B5/5Q2/PpP2PPP/1K1RR3 w - - 4 15",
                                                                                                                   "move": "f7e8",
                                                                                                                   "notes": "Cute - the king made a trip around the board and has returned to his home square beside his queen. Now we take her. Bishop takes d8.",
                                                                                                                   "lineNumber": null,
                                                                                                                   "children": [
                                                                                                                     {
-                                                                                                                      "id": "node_1769378800836_89",
+                                                                                                                      "id": "node_1769620434426_89",
                                                                                                                       "fen": "r1bBkb1r/pp2n1pp/2p5/3n4/2B5/5Q2/PpP2PPP/1K1RR3 b - - 0 15",
                                                                                                                       "move": "c7d8",
                                                                                                                       "notes": "",
                                                                                                                       "lineNumber": null,
                                                                                                                       "children": [
                                                                                                                         {
-                                                                                                                          "id": "node_1769378800836_90",
+                                                                                                                          "id": "node_1769620434427_90",
                                                                                                                           "fen": "r1bk1b1r/pp2n1pp/2p5/3n4/2B5/5Q2/PpP2PPP/1K1RR3 w - - 0 16",
                                                                                                                           "move": "e8d8",
                                                                                                                           "notes": "Our material is equal again! Let's remove all cover from the king. Bishop takes d5.",
                                                                                                                           "lineNumber": null,
                                                                                                                           "children": [
                                                                                                                             {
-                                                                                                                              "id": "node_1769378800837_91",
+                                                                                                                              "id": "node_1769620434427_91",
                                                                                                                               "fen": "r1bk1b1r/pp2n1pp/2p5/3B4/8/5Q2/PpP2PPP/1K1RR3 b - - 0 16",
                                                                                                                               "move": "c4d5",
                                                                                                                               "notes": "Well done! This game is over for Black. His queen is gone and all our pieces are pointed at him. It's only a matter of time.",
@@ -743,42 +743,42 @@
                                           ]
                                         },
                                         {
-                                          "id": "node_1769378800853_104",
+                                          "id": "node_1769620434448_104",
                                           "fen": "r1bqkb1r/ppp2ppp/5n2/n2Pp1N1/2B5/8/PPPP1PPP/RNBQK2R w KQkq - 1 6",
                                           "move": "c6a5",
                                           "notes": "Black has played the main line. Here let's give a check with bishop to b5.",
                                           "lineNumber": null,
                                           "children": [
                                             {
-                                              "id": "node_1769378800853_105",
+                                              "id": "node_1769620434448_105",
                                               "fen": "r1bqkb1r/ppp2ppp/5n2/nB1Pp1N1/8/8/PPPP1PPP/RNBQK2R b KQkq - 2 6",
                                               "move": "c4b5",
                                               "notes": "",
                                               "lineNumber": null,
                                               "children": [
                                                 {
-                                                  "id": "node_1769378800853_106",
+                                                  "id": "node_1769620434449_106",
                                                   "fen": "r1bqkb1r/pp3ppp/2p2n2/nB1Pp1N1/8/8/PPPP1PPP/RNBQK2R w KQkq - 0 7",
                                                   "move": "c7c6",
                                                   "notes": "Let's play pawn takes c6.",
                                                   "lineNumber": null,
                                                   "children": [
                                                     {
-                                                      "id": "node_1769378800854_107",
+                                                      "id": "node_1769620434449_107",
                                                       "fen": "r1bqkb1r/pp3ppp/2P2n2/nB2p1N1/8/8/PPPP1PPP/RNBQK2R b KQkq - 0 7",
                                                       "move": "d5c6",
                                                       "notes": "",
                                                       "lineNumber": null,
                                                       "children": [
                                                         {
-                                                          "id": "node_1769378800854_108",
+                                                          "id": "node_1769620434449_108",
                                                           "fen": "r1bqkb1r/p4ppp/2p2n2/nB2p1N1/8/8/PPPP1PPP/RNBQK2R w KQkq - 0 8",
                                                           "move": "b7c6",
                                                           "notes": "Black has thwarted our Fried Liver Attack. Let's retreat our bishop back to d3.",
                                                           "lineNumber": null,
                                                           "children": [
                                                             {
-                                                              "id": "node_1769378800854_109",
+                                                              "id": "node_1769620434450_109",
                                                               "fen": "r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/3B4/PPPP1PPP/RNBQK2R b KQkq - 1 8",
                                                               "move": "b5d3",
                                                               "notes": "OK! The position is equal and we are ready to continue the game.",
@@ -800,42 +800,42 @@
                                   ]
                                 },
                                 {
-                                  "id": "node_1769378800777_32",
+                                  "id": "node_1769620434363_32",
                                   "fen": "r1bqkb1r/pppp1ppp/2n5/4p1N1/2B1n3/8/PPPP1PPP/RNBQK2R w KQkq - 0 5",
                                   "move": "f6e4",
                                   "notes": "Black is trying to bait us into playing knight takes f7. If we do, we're actually losing. Let's avoid this by taking f7 with our bishop.",
                                   "lineNumber": null,
                                   "children": [
                                     {
-                                      "id": "node_1769378800777_33",
+                                      "id": "node_1769620434364_33",
                                       "fen": "r1bqkb1r/pppp1Bpp/2n5/4p1N1/4n3/8/PPPP1PPP/RNBQK2R b KQkq - 0 5",
                                       "move": "c4f7",
                                       "notes": "",
                                       "lineNumber": null,
                                       "children": [
                                         {
-                                          "id": "node_1769378800778_34",
+                                          "id": "node_1769620434364_34",
                                           "fen": "r1bq1b1r/ppppkBpp/2n5/4p1N1/4n3/8/PPPP1PPP/RNBQK2R w KQ - 1 6",
                                           "move": "e8e7",
                                           "notes": "Now we play pawn to d4, taking the center and baiting Black to take our knight. If they do, they lose their queen.",
                                           "lineNumber": null,
                                           "children": [
                                             {
-                                              "id": "node_1769378800778_35",
+                                              "id": "node_1769620434364_35",
                                               "fen": "r1bq1b1r/ppppkBpp/2n5/4p1N1/3Pn3/8/PPP2PPP/RNBQK2R b KQ - 0 6",
                                               "move": "d2d4",
                                               "notes": "",
                                               "lineNumber": null,
                                               "children": [
                                                 {
-                                                  "id": "node_1769378800778_36",
+                                                  "id": "node_1769620434364_36",
                                                   "fen": "r1bq1b1r/ppppkBpp/8/4p1N1/3nn3/8/PPP2PPP/RNBQK2R w KQ - 0 7",
                                                   "move": "c6d4",
                                                   "notes": "Black thinks they won a free pawn, in reality they are giving us time to escape our pieces. Let's play pawn to c3 attacking their knight.",
                                                   "lineNumber": null,
                                                   "children": [
                                                     {
-                                                      "id": "node_1769378800778_37",
+                                                      "id": "node_1769620434365_37",
                                                       "fen": "r1bq1b1r/ppppkBpp/8/4p1N1/3nn3/2P5/PP3PPP/RNBQK2R b KQ - 0 7",
                                                       "move": "c2c3",
                                                       "notes": "Well done! Wherever black moves their knight, we will be able to escape or trade our pieces out of danger, leaving us with a +3 point positional advantage. White wins this position over 80% of the time.",
@@ -845,28 +845,28 @@
                                                   ]
                                                 },
                                                 {
-                                                  "id": "node_1769378800782_38",
+                                                  "id": "node_1769620434370_38",
                                                   "fen": "r1bq1b1r/ppppkBpp/2n5/4p1n1/3P4/8/PPP2PPP/RNBQK2R w KQ - 0 7",
                                                   "move": "e4g5",
                                                   "notes": "Black took the bait, now we capture the knight back with bishop to g5, skewering the king against his own queen.",
                                                   "lineNumber": null,
                                                   "children": [
                                                     {
-                                                      "id": "node_1769378800782_39",
+                                                      "id": "node_1769620434370_39",
                                                       "fen": "r1bq1b1r/ppppkBpp/2n5/4p1B1/3P4/8/PPP2PPP/RN1QK2R b KQ - 0 7",
                                                       "move": "c1g5",
                                                       "notes": "",
                                                       "lineNumber": null,
                                                       "children": [
                                                         {
-                                                          "id": "node_1769378800782_40",
+                                                          "id": "node_1769620434371_40",
                                                           "fen": "r1bq1b1r/pppp1kpp/2n5/4p1B1/3P4/8/PPP2PPP/RN1QK2R w KQ - 0 8",
                                                           "move": "e7f7",
                                                           "notes": "Now bishop to d8, winning the queen.",
                                                           "lineNumber": null,
                                                           "children": [
                                                             {
-                                                              "id": "node_1769378800782_41",
+                                                              "id": "node_1769620434371_41",
                                                               "fen": "r1bB1b1r/pppp1kpp/2n5/4p3/3P4/8/PPP2PPP/RN1QK2R b KQ - 0 8",
                                                               "move": "g5d8",
                                                               "notes": "Well done! We are up a queen and have an easy win ahead of us.",
@@ -880,28 +880,28 @@
                                                   ]
                                                 },
                                                 {
-                                                  "id": "node_1769378800785_42",
+                                                  "id": "node_1769620434375_42",
                                                   "fen": "r1bq1b1r/ppppkBp1/2n4p/4p1N1/3Pn3/8/PPP2PPP/RNBQK2R w KQ - 0 7",
                                                   "move": "h7h6",
                                                   "notes": "Let's recapture with knight to e4. ",
                                                   "lineNumber": null,
                                                   "children": [
                                                     {
-                                                      "id": "node_1769378800786_43",
+                                                      "id": "node_1769620434375_43",
                                                       "fen": "r1bq1b1r/ppppkBp1/2n4p/4p3/3PN3/8/PPP2PPP/RNBQK2R b KQ - 0 7",
                                                       "move": "g5e4",
                                                       "notes": "",
                                                       "lineNumber": null,
                                                       "children": [
                                                         {
-                                                          "id": "node_1769378800786_44",
+                                                          "id": "node_1769620434375_44",
                                                           "fen": "r1bq1b1r/pppp1kp1/2n4p/4p3/3PN3/8/PPP2PPP/RNBQK2R w KQ - 0 8",
                                                           "move": "e7f7",
                                                           "notes": "The best move here is to move our pawn to d5, destabilizing their knight.",
                                                           "lineNumber": null,
                                                           "children": [
                                                             {
-                                                              "id": "node_1769378800786_45",
+                                                              "id": "node_1769620434375_45",
                                                               "fen": "r1bq1b1r/pppp1kp1/2n4p/3Pp3/4N3/8/PPP2PPP/RNBQK2R b KQ - 0 8",
                                                               "move": "d4d5",
                                                               "notes": "Well done! Despite being equal in material, the computer puts us at a +2 point advantage.",
@@ -923,28 +923,28 @@
                                   ]
                                 },
                                 {
-                                  "id": "node_1769378800847_100",
+                                  "id": "node_1769620434439_100",
                                   "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p1N1/2B1P3/8/PPPP1PPP/RNBQK2R w KQkq - 6 5",
                                   "move": "f8c5",
                                   "notes": "Black is trying to play a nasty trick on us called The Traxler. Although it's tempting to take Knight takes f7, The Traxler is a tricky line that we can't guess our way through. In this course, I recommend simply taking the pawn on f7 with our Bishop.",
                                   "lineNumber": null,
                                   "children": [
                                     {
-                                      "id": "node_1769378800848_101",
+                                      "id": "node_1769620434440_101",
                                       "fen": "r1bqk2r/pppp1Bpp/2n2n2/2b1p1N1/4P3/8/PPPP1PPP/RNBQK2R b KQkq - 0 5",
                                       "move": "c4f7",
                                       "notes": "",
                                       "lineNumber": null,
                                       "children": [
                                         {
-                                          "id": "node_1769378800848_102",
+                                          "id": "node_1769620434440_102",
                                           "fen": "r1bq3r/ppppkBpp/2n2n2/2b1p1N1/4P3/8/PPPP1PPP/RNBQK2R w KQ - 1 6",
                                           "move": "e8e7",
                                           "notes": "Now let's retreat our bishop back to b3.",
                                           "lineNumber": null,
                                           "children": [
                                             {
-                                              "id": "node_1769378800848_103",
+                                              "id": "node_1769620434441_103",
                                               "fen": "r1bq3r/ppppk1pp/2n2n2/2b1p1N1/4P3/1B6/PPPP1PPP/RNBQK2R b KQ - 2 6",
                                               "move": "f7b3",
                                               "notes": "Well done! We are a pawn up, the Black king is exposed, and we are ready to castle.",
