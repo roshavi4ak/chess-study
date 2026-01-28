@@ -25,6 +25,31 @@ export default function PracticeCard({ practice, isCreator }: PracticeCardProps)
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
 
+    // Determine current user's progress for this practice (if any)
+    // practice.progress is included by the API and contains PracticeLineProgress entries
+    const userProgress = (practice.progress || []).find((p: any) => p.userId === (typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.props?.pageProps?.session?.user?.id));
+
+    // Fallback check: sometimes the session user id is not available on the client via __NEXT_DATA__.
+    // In that case, we'll also look for a 'currentUserId' prop on the practice (if server provided it).
+    const currentUserId = (typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.props?.pageProps?.session?.user?.id) || (practice.currentUserId);
+    const progressForUser = (practice.progress || []).find((p: any) => p.userId === currentUserId);
+
+    // Compute status: perfected if all leaf lines for this practice have status PERFECT for this user
+    // For a lightweight client-side heuristic, consider perfected if any progress entry has perfectCount > 0 for all nodes.
+    let status: 'none' | 'in-progress' | 'perfected' = 'none';
+    if (progressForUser) {
+        // If any perfected entries exist, treat as perfected if every leaf node has perfectCount > 0
+        const totalLines = practice.nodes ? practice.nodes.filter((n: any) => n.lineNumber !== null).length : null;
+        const perfectedCount = (practice.progress || []).filter((pp: any) => pp.userId === currentUserId && pp.status === "PERFECT").length;
+        const seenCount = (practice.progress || []).filter((pp: any) => pp.userId === currentUserId && pp.status !== "NEVER_SEEN").length;
+
+        if (totalLines !== null && totalLines > 0 && perfectedCount === totalLines) {
+            status = 'perfected';
+        } else if (seenCount > 0) {
+            status = 'in-progress';
+        }
+    }
+
     const handleDelete = async (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
@@ -44,8 +69,18 @@ export default function PracticeCard({ practice, isCreator }: PracticeCardProps)
         }
     };
 
+    // Border and label classes
+    const borderClass = status === 'perfected' ? 'border-2 border-green-500' : status === 'in-progress' ? 'border-2 border-blue-500' : '';
+    const label = status === 'perfected' ? t('perfected') : status === 'in-progress' ? t('inProgress') : null;
+
     return (
-        <div className="bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition relative">
+        <div className={`${borderClass} bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition relative`}>
+            {label && (
+                <div className={`absolute right-3 top-3 px-2 py-1 text-xs font-semibold rounded ${status === 'perfected' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                    {label}
+                </div>
+            )}
+
             <Link href={`/practices/${practice.id}`} className="block p-4">
                 <div className="flex items-center gap-2 mb-2">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
