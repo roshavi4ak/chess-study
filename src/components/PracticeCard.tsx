@@ -4,8 +4,36 @@ import Link from "next/link";
 import { useState } from "react";
 import { deletePractice } from "@/app/actions/practice";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { useTranslations } from "next-intl";
+
+// Type definitions for practice data
+type LineStatus = 'PERFECT' | 'COMPLETED' | 'PARTIAL' | 'NEVER_SEEN';
+
+interface PracticeLineProgress {
+    id: string;
+    userId: string;
+    practiceId: string;
+    nodeId: string;
+    status: LineStatus;
+    attempts: number;
+    perfectCount: number;
+    lastAttemptAt?: Date;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+interface PracticeNode {
+    id: string;
+    practiceId: string;
+    parentId: string | null;
+    fen: string;
+    move: string | null;
+    notes: string | null;
+    order: number;
+    lineNumber: number | null;
+}
 
 interface PracticeCardProps {
     practice: {
@@ -16,6 +44,8 @@ interface PracticeCardProps {
         creator: {
             name: string | null;
         } | null;
+        progress?: PracticeLineProgress[];
+        nodes?: PracticeNode[];
     };
     isCreator: boolean;
 }
@@ -24,6 +54,49 @@ export default function PracticeCard({ practice, isCreator }: PracticeCardProps)
     const t = useTranslations("Common");
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
+    const { data: session } = useSession();
+
+    // Get current user ID from session
+    const currentUserId = session?.user?.id;
+
+    // Compute status: perfected if all leaf lines for this practice have status PERFECT for this user
+    let status: 'none' | 'in-progress' | 'perfected' = 'none';
+    if (currentUserId) {
+        const totalLines = practice.nodes
+            ? practice.nodes.filter((n) => n.lineNumber !== null).length
+            : 0;
+        let perfectedCount = 0;
+        let seenCount = 0;
+        (practice.progress || []).forEach((pp) => {
+            if (pp.userId === currentUserId) {
+                if (pp.status === "PERFECT") {
+                    perfectedCount++;
+                }
+                if (pp.status !== "NEVER_SEEN") {
+                    seenCount++;
+                }
+            }
+        });
+
+        // Debug logging - development only
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`[PracticeCard] ${practice.name}:`, {
+                currentUserId,
+                totalLines,
+                perfectedCount,
+                seenCount,
+                progressEntries: practice.progress?.length || 0,
+                nodeCount: practice.nodes?.length || 0,
+                progress: practice.progress
+            });
+        }
+
+        if (totalLines > 0 && perfectedCount === totalLines) {
+            status = 'perfected';
+        } else if (seenCount > 0) {
+            status = 'in-progress';
+        }
+    }
 
     const handleDelete = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -44,8 +117,18 @@ export default function PracticeCard({ practice, isCreator }: PracticeCardProps)
         }
     };
 
+    // Border and label classes
+    const borderClass = status === 'perfected' ? 'border-2 border-green-500' : status === 'in-progress' ? 'border-2 border-blue-500' : '';
+    const label = status === 'perfected' ? t('perfected') : status === 'in-progress' ? t('inProgress') : null;
+
     return (
-        <div className="bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition relative">
+        <div className={`${borderClass} bg-white dark:bg-gray-800 shadow rounded-lg hover:shadow-md transition relative`}>
+            {label && (
+                <div className={`absolute right-3 top-3 px-2 py-1 text-xs font-semibold rounded ${status === 'perfected' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                    {label}
+                </div>
+            )}
+
             <Link href={`/practices/${practice.id}`} className="block p-4">
                 <div className="flex items-center gap-2 mb-2">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
