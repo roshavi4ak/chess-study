@@ -1,4 +1,5 @@
 import { getLeaderboardData } from "@/app/actions/leaderboard";
+import { getWeeklyStatistics, getAllTimeWinners } from "@/app/actions/statistics";
 import Leaderboard from "@/components/Leaderboard";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
@@ -11,11 +12,24 @@ export default async function LeaderboardPage() {
     }
 
     try {
-        const data = await getLeaderboardData();
+        const [data, weeklyStats, allTimeStats] = await Promise.all([
+            getLeaderboardData(),
+            getWeeklyStatistics(),
+            getAllTimeWinners()
+        ]);
+
+        // Transform data to ensure compatibility
+        const stats = {
+            weekly: {
+                puzzleWinners: weeklyStats.puzzleWinners || [],
+                practiceWinners: weeklyStats.practiceWinners || []
+            },
+            allTime: allTimeStats || []
+        };
 
         return (
             <main className="py-12 bg-gray-50 dark:bg-gray-950 min-h-screen">
-                <Leaderboard data={data} />
+                <Leaderboard data={data} weeklyStats={stats} />
             </main>
         );
     } catch (error) {

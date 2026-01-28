@@ -10,9 +10,18 @@ export async function POST(request: Request) {
     }
 
     try {
-        const { puzzleId, success } = await request.json();
+        console.log("Received puzzle submission request:", {
+            userId: session.user.id,
+            method: request.method
+        });
+        
+        const body = await request.json();
+        console.log("Request body:", body);
+        
+        const { puzzleId, success } = body;
 
         if (!puzzleId) {
+            console.error("Missing puzzleId");
             return new NextResponse("Missing puzzleId", { status: 400 });
         }
 
@@ -34,6 +43,12 @@ export async function POST(request: Request) {
                 volatility: true,
                 tags: true
             }
+        });
+
+        console.log("Found user and puzzle:", {
+            userFound: !!user,
+            puzzleFound: !!puzzle,
+            puzzleId
         });
 
         if (!user || !puzzle) {
@@ -64,39 +79,33 @@ export async function POST(request: Request) {
 
         if (existingAttempt) {
             // Already tried this puzzle, don't change rating
-            const operations = [
-                prisma.puzzleAttempt.create({
-                    data: {
-                        userId: session.user.id,
-                        puzzleId: puzzleId,
-                        success: success,
-                        points: 0 // No points for retries
-                    }
-                })
-            ];
+            await prisma.puzzleAttempt.create({
+                data: {
+                    userId: session.user.id,
+                    puzzleId: puzzleId,
+                    success: success,
+                    points: 0 // No points for retries
+                }
+            });
 
             // Update tag stats for retries as well
             if (puzzle?.tags) {
                 for (const tag of puzzle.tags) {
-                    operations.push(
-                        prisma.userTagStats.upsert({
-                            where: { userId_tag: { userId: session.user.id, tag } },
-                            update: {
-                                totalCount: { increment: 1 },
-                                unsolvedCount: { increment: success ? 0 : 1 }
-                            },
-                            create: {
-                                userId: session.user.id,
-                                tag,
-                                totalCount: 1,
-                                unsolvedCount: success ? 0 : 1
-                            }
-                        }) as any
-                    );
+                    await prisma.userTagStats.upsert({
+                        where: { userId_tag: { userId: session.user.id, tag } },
+                        update: {
+                            totalCount: { increment: 1 },
+                            unsolvedCount: { increment: success ? 0 : 1 }
+                        },
+                        create: {
+                            userId: session.user.id,
+                            tag,
+                            totalCount: 1,
+                            unsolvedCount: success ? 0 : 1
+                        }
+                    });
                 }
             }
-
-            await prisma.$transaction(operations as any[]);
 
             return NextResponse.json({
                 oldRating: Math.round(userRating.rating),
@@ -131,56 +140,52 @@ export async function POST(request: Request) {
         const finalUserRating = Math.round(userRating.rating) + points;
         const finalPuzzleRating = Math.round(puzzleRating.rating) + puzzleChange;
 
-        // Prepare tag stats updates
-        const tagStatsOperations = [];
+        // Update DB
+        await prisma.user.update({
+            where: { id: session.user.id },
+            data: {
+                ratingPuzzle: finalUserRating,
+                puzzleRd: newUserRating.rd,
+                puzzleVolatility: newUserRating.volatility
+            }
+        });
+
+        await prisma.puzzle.update({
+            where: { id: puzzleId },
+            data: {
+                rating: finalPuzzleRating,
+                ratingDeviation: newPuzzleRating.rd,
+                volatility: newPuzzleRating.volatility
+            }
+        });
+
+        await prisma.puzzleAttempt.create({
+            data: {
+                userId: session.user.id,
+                puzzleId: puzzleId,
+                success: success,
+                points: points
+            }
+        });
+
+        // Update tag stats
         if (puzzle?.tags) {
             for (const tag of puzzle.tags) {
-                tagStatsOperations.push(
-                    prisma.userTagStats.upsert({
-                        where: { userId_tag: { userId: session.user.id, tag } },
-                        update: {
-                            totalCount: { increment: 1 },
-                            unsolvedCount: { increment: success ? 0 : 1 }
-                        },
-                        create: {
-                            userId: session.user.id,
-                            tag,
-                            totalCount: 1,
-                            unsolvedCount: success ? 0 : 1
-                        }
-                    })
-                );
+                await prisma.userTagStats.upsert({
+                    where: { userId_tag: { userId: session.user.id, tag } },
+                    update: {
+                        totalCount: { increment: 1 },
+                        unsolvedCount: { increment: success ? 0 : 1 }
+                    },
+                    create: {
+                        userId: session.user.id,
+                        tag,
+                        totalCount: 1,
+                        unsolvedCount: success ? 0 : 1
+                    }
+                });
             }
         }
-
-        // Update DB
-        await prisma.$transaction([
-            prisma.user.update({
-                where: { id: session.user.id },
-                data: {
-                    ratingPuzzle: finalUserRating,
-                    puzzleRd: newUserRating.rd,
-                    puzzleVolatility: newUserRating.volatility
-                }
-            }),
-            prisma.puzzle.update({
-                where: { id: puzzleId },
-                data: {
-                    rating: finalPuzzleRating,
-                    ratingDeviation: newPuzzleRating.rd,
-                    volatility: newPuzzleRating.volatility
-                }
-            }),
-            prisma.puzzleAttempt.create({
-                data: {
-                    userId: session.user.id,
-                    puzzleId: puzzleId,
-                    success: success,
-                    points: points
-                }
-            }),
-            ...tagStatsOperations
-        ] as any[]);
 
         return NextResponse.json({
             oldRating: Math.round(userRating.rating),

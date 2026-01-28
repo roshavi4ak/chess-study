@@ -70,7 +70,8 @@ export async function getLeaderboardData() {
                 },
                 select: {
                     status: true,
-                    nodeId: true
+                    nodeId: true,
+                    createdAt: true
                 }
             },
             // Only pulling relevant progress rows (completed or perfected)
@@ -88,13 +89,26 @@ export async function getLeaderboardData() {
         const weeklySuccessful = student.puzzleAttempts.filter(a => a.success);
         const weeklyPuzzlePoints = weeklySuccessful.reduce((sum, a) => sum + (a.points ?? 0), 0);
 
-        // Weekly Openings (Calculate unique completed/perfected nodes this week)
-        const weeklyCompletedNodes = new Set(student.practiceAttempts.map(a => a.nodeId));
-        const weeklyPerfectedNodes = new Set(
-            student.practiceAttempts
-                .filter(a => a.status === "PERFECT")
-                .map(a => a.nodeId)
-        );
+        // Weekly Openings (Calculate unique completed/perfected nodes this week, considering only the last attempt)
+        const nodeLastAttemptMap = new Map();
+        student.practiceAttempts.forEach(attempt => {
+            const existing = nodeLastAttemptMap.get(attempt.nodeId);
+            if (!existing || attempt.createdAt > existing.createdAt) {
+                nodeLastAttemptMap.set(attempt.nodeId, attempt);
+            }
+        });
+
+        const weeklyCompletedNodes = new Set();
+        const weeklyPerfectedNodes = new Set();
+        
+        nodeLastAttemptMap.forEach(attempt => {
+            if (attempt.status === "COMPLETED" || attempt.status === "PERFECT") {
+                weeklyCompletedNodes.add(attempt.nodeId);
+            }
+            if (attempt.status === "PERFECT") {
+                weeklyPerfectedNodes.add(attempt.nodeId);
+            }
+        });
 
         // All Time Openings (Aggregated from filtered progress rows)
         const allTimeCompleted = student.practiceProgress.length;

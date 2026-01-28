@@ -237,16 +237,29 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
         if (submitted) return;
         setSubmitted(true);
         try {
-            // Pass generic puzzleId
+            console.log("Submitting puzzle result:", { puzzleId: id, success });
+            
             const res = await fetch('/api/puzzles/submit', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({ puzzleId: id, success })
             });
+            
+            console.log("Response status:", res.status);
+            
             if (res.ok) {
                 const data = await res.json();
+                console.log("Response data:", data);
                 setRatingChange(data);
+            } else {
+                const errorText = await res.text();
+                console.error("Error response:", errorText);
             }
-        } catch (e) { console.error(e); }
+        } catch (e) { 
+            console.error("Error submitting result:", e); 
+        }
     }
 
     async function handleNextPuzzle() {

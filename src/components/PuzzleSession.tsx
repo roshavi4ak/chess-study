@@ -64,27 +64,29 @@ export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hi
     return (
         <div className="space-y-8">
             {/* Timeline */}
-            <div className="flex items-center gap-2 overflow-x-auto p-2 pb-4">
-                {solvedPuzzles.map((p, i) => (
-                    <Link
-                        key={p.id || p.name}
-                        href={`/puzzles/${p.name}${tag ? `?tag=${tag}` : ''}`}
-                        className={cn(
-                            "w-8 h-8 flex-shrink-0 rounded flex items-center justify-center text-xs font-bold text-white transition-transform hover:scale-110",
-                            p.result === "success" && "bg-green-500",
-                            p.result === "mistake" && "bg-red-500",
-                            p.result === "hint" && "bg-yellow-500"
-                        )}
-                        title={p.name}
-                    >
-                        {i + 1}
-                    </Link>
-                ))}
-                <div className={cn(
-                    "w-8 h-8 flex-shrink-0 rounded border-2 border-dashed border-gray-300 flex items-center justify-center text-xs font-bold text-gray-400",
-                    "bg-gray-50"
-                )}>
-                    {solvedPuzzles.length + 1}
+            <div className="w-full max-w-[250px] md:max-w-2xl mx-auto">
+                <div className="flex items-center gap-2 overflow-x-auto p-2 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                    {solvedPuzzles.map((p, i) => (
+                        <Link
+                            key={p.id || p.name}
+                            href={`/puzzles/${p.name}${tag ? `?tag=${tag}` : ''}`}
+                            className={cn(
+                                "w-8 h-8 flex-shrink-0 rounded flex items-center justify-center text-xs font-bold text-white transition-transform hover:scale-110",
+                                p.result === "success" && "bg-green-500",
+                                p.result === "mistake" && "bg-red-500",
+                                p.result === "hint" && "bg-yellow-500"
+                            )}
+                            title={p.name}
+                        >
+                            {i + 1}
+                        </Link>
+                    ))}
+                    <div className={cn(
+                        "w-8 h-8 flex-shrink-0 rounded border-2 border-dashed border-gray-300 flex items-center justify-center text-xs font-bold text-gray-400",
+                        "bg-gray-50"
+                    )}>
+                        {solvedPuzzles.length + 1}
+                    </div>
                 </div>
             </div>
 

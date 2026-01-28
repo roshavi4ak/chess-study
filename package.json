@@ -36,5 +36,18 @@
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "fried-liver-attack.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roshavi4ak/chess-study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roshavi4ak/chess-study/issues"
+  },
+  "homepage": "https://github.com/roshavi4ak/chess-study#readme"
 }
