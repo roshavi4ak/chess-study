@@ -4,8 +4,36 @@ import Link from "next/link";
 import { useState } from "react";
 import { deletePractice } from "@/app/actions/practice";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { useTranslations } from "next-intl";
+
+// Type definitions for practice data
+type LineStatus = 'PERFECT' | 'COMPLETED' | 'PARTIAL' | 'NEVER_SEEN';
+
+interface PracticeLineProgress {
+    id: string;
+    userId: string;
+    practiceId: string;
+    nodeId: string;
+    status: LineStatus;
+    attempts: number;
+    perfectCount: number;
+    lastAttemptAt?: Date;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+interface PracticeNode {
+    id: string;
+    practiceId: string;
+    parentId: string | null;
+    fen: string;
+    move: string | null;
+    notes: string | null;
+    order: number;
+    lineNumber: number | null;
+}
 
 interface PracticeCardProps {
     practice: {
@@ -16,6 +44,8 @@ interface PracticeCardProps {
         creator: {
             name: string | null;
         } | null;
+        progress?: PracticeLineProgress[];
+        nodes?: PracticeNode[];
     };
     isCreator: boolean;
 }
@@ -24,26 +54,41 @@ export default function PracticeCard({ practice, isCreator }: PracticeCardProps)
     const t = useTranslations("Common");
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
+    const { data: session } = useSession();
 
-    // Determine current user's progress for this practice (if any)
-    // practice.progress is included by the API and contains PracticeLineProgress entries
-    const userProgress = (practice.progress || []).find((p: any) => p.userId === (typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.props?.pageProps?.session?.user?.id));
+    // Get current user ID from session
+    const currentUserId = session?.user?.id;
 
-    // Fallback check: sometimes the session user id is not available on the client via __NEXT_DATA__.
-    // In that case, we'll also look for a 'currentUserId' prop on the practice (if server provided it).
-    const currentUserId = (typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.props?.pageProps?.session?.user?.id) || (practice.currentUserId);
-    const progressForUser = (practice.progress || []).find((p: any) => p.userId === currentUserId);
+    // Find progress for the current user
+    const progressForUser = currentUserId
+        ? (practice.progress || []).find((p) => p.userId === currentUserId)
+        : undefined;
 
     // Compute status: perfected if all leaf lines for this practice have status PERFECT for this user
-    // For a lightweight client-side heuristic, consider perfected if any progress entry has perfectCount > 0 for all nodes.
     let status: 'none' | 'in-progress' | 'perfected' = 'none';
-    if (progressForUser) {
-        // If any perfected entries exist, treat as perfected if every leaf node has perfectCount > 0
-        const totalLines = practice.nodes ? practice.nodes.filter((n: any) => n.lineNumber !== null).length : null;
-        const perfectedCount = (practice.progress || []).filter((pp: any) => pp.userId === currentUserId && pp.status === "PERFECT").length;
-        const seenCount = (practice.progress || []).filter((pp: any) => pp.userId === currentUserId && pp.status !== "NEVER_SEEN").length;
+    if (currentUserId) {
+        const totalLines = practice.nodes
+            ? practice.nodes.filter((n) => n.lineNumber !== null).length
+            : 0;
+        const perfectedCount = (practice.progress || []).filter(
+            (pp) => pp.userId === currentUserId && pp.status === "PERFECT"
+        ).length;
+        const seenCount = (practice.progress || []).filter(
+            (pp) => pp.userId === currentUserId && pp.status !== "NEVER_SEEN"
+        ).length;
 
-        if (totalLines !== null && totalLines > 0 && perfectedCount === totalLines) {
+        // Debug logging
+        console.log(`[PracticeCard] ${practice.name}:`, {
+            currentUserId,
+            totalLines,
+            perfectedCount,
+            seenCount,
+            progressEntries: practice.progress?.length || 0,
+            nodeCount: practice.nodes?.length || 0,
+            progress: practice.progress
+        });
+
+        if (totalLines > 0 && perfectedCount === totalLines) {
             status = 'perfected';
         } else if (seenCount > 0) {
             status = 'in-progress';
