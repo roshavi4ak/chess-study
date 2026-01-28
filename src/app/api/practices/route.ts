@@ -21,7 +21,13 @@ export async function GET() {
         const practices = await prisma.practice.findMany({
             orderBy: { createdAt: "desc" },
             include: {
-                creator: true,
+                creator: {
+                    select: {
+                        id: true,
+                        name: true,
+                        image: true
+                    }
+                },
                 progress: {
                     where: { userId }
                 },

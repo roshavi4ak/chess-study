@@ -59,34 +59,37 @@ export default function PracticeCard({ practice, isCreator }: PracticeCardProps)
     // Get current user ID from session
     const currentUserId = session?.user?.id;
 
-    // Find progress for the current user
-    const progressForUser = currentUserId
-        ? (practice.progress || []).find((p) => p.userId === currentUserId)
-        : undefined;
-
     // Compute status: perfected if all leaf lines for this practice have status PERFECT for this user
     let status: 'none' | 'in-progress' | 'perfected' = 'none';
     if (currentUserId) {
         const totalLines = practice.nodes
             ? practice.nodes.filter((n) => n.lineNumber !== null).length
             : 0;
-        const perfectedCount = (practice.progress || []).filter(
-            (pp) => pp.userId === currentUserId && pp.status === "PERFECT"
-        ).length;
-        const seenCount = (practice.progress || []).filter(
-            (pp) => pp.userId === currentUserId && pp.status !== "NEVER_SEEN"
-        ).length;
-
-        // Debug logging
-        console.log(`[PracticeCard] ${practice.name}:`, {
-            currentUserId,
-            totalLines,
-            perfectedCount,
-            seenCount,
-            progressEntries: practice.progress?.length || 0,
-            nodeCount: practice.nodes?.length || 0,
-            progress: practice.progress
+        let perfectedCount = 0;
+        let seenCount = 0;
+        (practice.progress || []).forEach((pp) => {
+            if (pp.userId === currentUserId) {
+                if (pp.status === "PERFECT") {
+                    perfectedCount++;
+                }
+                if (pp.status !== "NEVER_SEEN") {
+                    seenCount++;
+                }
+            }
         });
+
+        // Debug logging - development only
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`[PracticeCard] ${practice.name}:`, {
+                currentUserId,
+                totalLines,
+                perfectedCount,
+                seenCount,
+                progressEntries: practice.progress?.length || 0,
+                nodeCount: practice.nodes?.length || 0,
+                progress: practice.progress
+            });
+        }
 
         if (totalLines > 0 && perfectedCount === totalLines) {
             status = 'perfected';
