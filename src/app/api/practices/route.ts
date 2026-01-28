@@ -5,9 +5,10 @@ export async function GET() {
     try {
         console.log('[API] Fetching practices...');
         
+        // Include progress entries so the client can determine per-user status
         const practices = await prisma.practice.findMany({
             orderBy: { createdAt: "desc" },
-            include: { creator: true }
+            include: { creator: true, progress: true }
         });
         
         console.log(`[API] Successfully fetched ${practices.length} practices`);
