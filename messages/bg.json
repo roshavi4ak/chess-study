@@ -118,7 +118,9 @@
         "unknown": "Неизвестен",
         "noDescription": "Няма описание",
         "white": "Бял",
-        "black": "Черен"
+        "black": "Черен",
+        "perfected": "Перфектно",
+        "inProgress": "В процес"
     },
     "Openings": {
         "title": "Дебюти",

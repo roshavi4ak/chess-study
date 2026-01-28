@@ -118,7 +118,9 @@
         "unknown": "Unknown",
         "noDescription": "No description",
         "white": "White",
-        "black": "Black"
+        "black": "Black",
+        "perfected": "Perfected",
+        "inProgress": "In progress"
     },
     "Openings": {
         "title": "Openings",
