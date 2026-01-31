@@ -112,10 +112,75 @@ export async function updatePractice(practiceId: string, formData: FormData) {
         throw new Error("Invalid tree data");
     }
 
-    // Delete all existing nodes and create new ones
-    await prisma.practiceNode.deleteMany({
+    // Fetch all existing nodes to compare with the new tree
+    const existingNodes = await prisma.practiceNode.findMany({
         where: { practiceId },
     });
+
+    // Create a map of existing nodes by FEN+move for matching
+    // This allows us to identify nodes that represent the same position
+    const existingNodeMap = new Map<string, typeof existingNodes[0]>();
+    for (const node of existingNodes) {
+        // Use combination of FEN and move as unique identifier
+        const key = `${node.fen}|${node.move || 'root'}`;
+        existingNodeMap.set(key, node);
+    }
+
+    // Track which existing nodes are still in use
+    const usedExistingNodeIds = new Set<string>();
+    // Track new nodes that need to be created
+    const nodesToCreate: Array<{
+        node: PracticeNodeInput;
+        parentId: string | null;
+        order: number;
+        matchedExistingId?: string;
+    }> = [];
+
+    // First pass: match new tree nodes with existing nodes
+    function matchNodes(node: PracticeNodeInput, parentId: string | null, order: number) {
+        const key = `${node.fen}|${node.move || 'root'}`;
+        const existingNode = existingNodeMap.get(key);
+
+        if (existingNode && !usedExistingNodeIds.has(existingNode.id)) {
+            // Found a matching existing node - preserve its ID
+            usedExistingNodeIds.add(existingNode.id);
+            nodesToCreate.push({
+                node,
+                parentId,
+                order,
+                matchedExistingId: existingNode.id,
+            });
+        } else {
+            // No match found - this is a new node
+            nodesToCreate.push({
+                node,
+                parentId,
+                order,
+            });
+        }
+
+        // Process children
+        for (let i = 0; i < node.children.length; i++) {
+            matchNodes(node.children[i], node.id, i);
+        }
+    }
+
+    matchNodes(tree, null, 0);
+
+    // Identify nodes to delete (existing nodes not in the new tree)
+    const nodesToDelete = existingNodes.filter(n => !usedExistingNodeIds.has(n.id));
+
+    // Delete nodes that are no longer in the tree
+    // Delete in reverse depth order (children first) to avoid FK constraint issues
+    if (nodesToDelete.length > 0) {
+        // Sort by id length to delete children before parents (child IDs are often longer)
+        // Or use a safer approach: delete all in one operation since we have onDelete: Cascade
+        await prisma.practiceNode.deleteMany({
+            where: {
+                id: { in: nodesToDelete.map(n => n.id) },
+            },
+        });
+    }
 
     // Update practice metadata
     await prisma.practice.update({
@@ -127,27 +192,76 @@ export async function updatePractice(practiceId: string, formData: FormData) {
         },
     });
 
-    // Recursively create nodes
-    async function createNodes(node: PracticeNodeInput, parentId: string | null, order: number) {
-        const createdNode = await prisma.practiceNode.create({
-            data: {
-                practiceId,
-                parentId,
-                fen: node.fen,
-                move: node.move,
-                notes: node.notes || null,
-                order,
-                lineNumber: node.lineNumber,
-            },
-        });
+    // Build a map of old parent IDs to new parent IDs for proper tree reconstruction
+    const idMapping = new Map<string, string>(); // old temp id -> final db id
 
-        // Create children
-        for (let i = 0; i < node.children.length; i++) {
-            await createNodes(node.children[i], createdNode.id, i);
+    // Process nodes in order (parents before children)
+    // We need to process them level by level to ensure parent IDs are resolved
+    const nodesByLevel: typeof nodesToCreate[] = [];
+    
+    function collectByLevel(node: PracticeNodeInput, level: number) {
+        if (!nodesByLevel[level]) nodesByLevel[level] = [];
+        const found = nodesToCreate.find(n => n.node === node);
+        if (found) {
+            nodesByLevel[level].push(found);
+        }
+        for (const child of node.children) {
+            collectByLevel(child, level + 1);
         }
     }
+    
+    collectByLevel(tree, 0);
 
-    await createNodes(tree, null, 0);
+    // Process level by level
+    for (const level of nodesByLevel) {
+        if (!level) continue;
+        
+        for (const { node, order, matchedExistingId } of level) {
+            // Resolve parent ID - it might be a mapped ID
+            let resolvedParentId: string | null = null;
+            
+            // Find the parent in nodesToCreate
+            const parentEntry = nodesToCreate.find(n => 
+                n.node.children.includes(node)
+            );
+            
+            if (parentEntry) {
+                // Parent was processed in a previous level
+                // Get the parent's assigned ID from the mapping
+                const parentTempId = parentEntry.node.id;
+                resolvedParentId = idMapping.get(parentTempId) || null;
+            }
+
+            if (matchedExistingId) {
+                // Update existing node - preserve ID but update other fields
+                await prisma.practiceNode.update({
+                    where: { id: matchedExistingId },
+                    data: {
+                        parentId: resolvedParentId,
+                        order,
+                        notes: node.notes || null,
+                        lineNumber: node.lineNumber,
+                        // FEN and move should already match
+                    },
+                });
+                idMapping.set(node.id, matchedExistingId);
+            } else {
+                // Create new node
+                const createdNode = await prisma.practiceNode.create({
+                    data: {
+                        practiceId,
+                        parentId: resolvedParentId,
+                        fen: node.fen,
+                        move: node.move,
+                        notes: node.notes || null,
+                        order,
+                        lineNumber: node.lineNumber,
+                    },
+                });
+                idMapping.set(node.id, createdNode.id);
+            }
+        }
+    }
 
     revalidatePath("/practices");
     revalidatePath(`/practices/${practiceId}`);

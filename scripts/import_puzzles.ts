@@ -9,10 +9,14 @@ const CSV_FILE = path.join(process.cwd(), 'lichess_db_puzzle.csv');
 const USER_ID = 'cmidi8gr50000v8vc36ubbgir'; // roshavi4ak
 
 // Configuration for the batches we want to import
-// "between 1700 and 2000" and "between 2000 and 2400"
+// Three non-overlapping ranges as requested:
+// - 1700-2000: 50,000 puzzles
+// - 2000-2200: 50,000 puzzles  
+// - 2200-2300: 50,000 puzzles
 const BATCHES = [
-    { min: 1700, max: 2000, target: 20000, inserted: 0, buffer: [] as any[] },
-    { min: 2000, max: 2400, target: 10000, inserted: 0, buffer: [] as any[] }
+    { min: 1700, max: 2000, target: 50000, inserted: 0, buffer: [] as any[] },
+    { min: 2000, max: 2200, target: 50000, inserted: 0, buffer: [] as any[] },
+    { min: 2200, max: 2300, target: 50000, inserted: 0, buffer: [] as any[] }
 ];
 
 const FLUSH_THRESHOLD = 500; // Insert to DB when buffer reaches this size

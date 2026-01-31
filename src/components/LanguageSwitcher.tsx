@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/i18n/navigation";
 import { ChangeEvent, useTransition } from "react";
 
 export default function LanguageSwitcher() {
@@ -11,12 +11,14 @@ export default function LanguageSwitcher() {
     const [isPending, startTransition] = useTransition();
 
     const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        const nextLocale = e.target.value;
+        const nextLocale = e.target.value as 'en' | 'bg';
         startTransition(() => {
-            // Replace the locale in the pathname
-            // This is a simplified approach; for production, use next-intl's navigation APIs
-            const newPath = pathname.replace(`/${locale}`, `/${nextLocale}`);
-            router.replace(newPath);
+            // Set a cookie to remember the user's locale preference
+            // This cookie will be used by the middleware on subsequent requests
+            document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`;
+
+            // Use next-intl's router to handle the locale change properly
+            router.replace(pathname, {locale: nextLocale});
         });
     };
 
