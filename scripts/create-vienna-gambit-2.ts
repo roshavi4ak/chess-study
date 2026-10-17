@@ -42,7 +42,7 @@ function buildLineFromMoves(moves: string[], lineName: string): TreeNode[] {
 }
 
 // Helper to merge a line into the tree
-function mergeLineIntoTree(root: TreeNode, lineNodes: TreeNode[], lineName: string): void {
+function mergeLineIntoTree(root: TreeNode, lineNodes: TreeNode[]): void {
     let currentNode = root;
 
     for (let i = 0; i < lineNodes.length; i++) {
@@ -163,7 +163,7 @@ async function createViennaGambit2() {
         console.log(`Processing: ${line.name}`);
         try {
             const lineNodes = buildLineFromMoves(line.moves, line.name);
-            mergeLineIntoTree(root, lineNodes, line.name);
+            mergeLineIntoTree(root, lineNodes);
         } catch (error) {
             console.error(`Failed to process line: ${line.name}`);
             throw error;

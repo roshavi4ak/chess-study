@@ -1,4 +1,4 @@
-function parseOpeningData(input: string): any {
+function parseOpeningData(input: string): unknown {
   // Extract the data from the SvelteKit resolve function
   const dataMatch = input.match(/__sveltekit_\w+\.resolve\(\d+, \(\) => \[(.*)\]\)/);
   
@@ -10,7 +10,7 @@ function parseOpeningData(input: string): any {
     // Evaluate the extracted data to get the object
     const data = eval(`(${dataMatch[1]})`);
     return data;
-  } catch (error) {
+  } catch {
     throw new Error('Failed to parse the opening data');
   }
 }

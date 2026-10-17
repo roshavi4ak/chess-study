@@ -35,7 +35,7 @@ async function main() {
 
             // Calculate stats
             const puzzlesWithMultipleAttempts = Object.entries(puzzleAttempts).filter(
-                ([_, attempts]) => attempts.length > 1
+                ([, attempts]) => attempts.length > 1
             );
 
             // First attempt solves (with points > 0 means first attempt was successful)

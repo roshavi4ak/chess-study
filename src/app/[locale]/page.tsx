@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 export default function Home() {
   const t = useTranslations('HomePage');
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;

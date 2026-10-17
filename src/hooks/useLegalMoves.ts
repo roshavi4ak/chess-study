@@ -7,7 +7,7 @@ interface UseLegalMovesProps {
     boardOrientation?: "white" | "black";
 }
 
-export function useLegalMoves({ game, onMove, boardOrientation = "white" }: UseLegalMovesProps) {
+export function useLegalMoves({ game, onMove }: UseLegalMovesProps) {
     const [moveFrom, setMoveFrom] = useState<Square | null>(null);
     const [optionSquares, setOptionSquares] = useState<Record<string, React.CSSProperties>>({});
 
@@ -43,7 +43,7 @@ export function useLegalMoves({ game, onMove, boardOrientation = "white" }: UseL
         return true;
     }
 
-    async function onSquareClick(args: any) {
+    async function onSquareClick(args: string | { square: string | null }) {
         const square = typeof args === 'string' ? args : args?.square;
         console.log("onSquareClick triggered for:", square);
         if (!square) return;
@@ -66,7 +66,7 @@ export function useLegalMoves({ game, onMove, boardOrientation = "white" }: UseL
                     (source[1] === "2" && target[1] === "1"));
 
             if (onMove) {
-                const result = await onMove({
+                await onMove({
                     from: source,
                     to: target,
                     promotion: isPromotion ? "q" : undefined,
@@ -126,18 +126,18 @@ export function useLegalMoves({ game, onMove, boardOrientation = "white" }: UseL
         }
     }
 
-    async function onPieceDrop(args: any) {
+    async function onPieceDrop(args: string | { sourceSquare: string; targetSquare: string | null }, targetSquare?: string) {
         // Handle both (source, target) and ({ sourceSquare, targetSquare })
         let source: Square;
-        let target: Square;
+        let target: Square | null;
 
         if (typeof args === 'object' && 'sourceSquare' in args) {
-            source = args.sourceSquare;
-            target = args.targetSquare;
+            source = args.sourceSquare as Square;
+            target = args.targetSquare as Square | null;
         } else {
             // Fallback for direct calls if any
-            source = arguments[0];
-            target = arguments[1];
+            source = args as Square;
+            target = targetSquare as Square | undefined ?? null;
         }
 
         setMoveFrom(null);
@@ -175,7 +175,7 @@ export function useLegalMoves({ game, onMove, boardOrientation = "white" }: UseL
         return true;
     }
 
-    function onPieceClick(args: any) {
+    function onPieceClick(args: { square: string | null }) {
         // react-chessboard passes an object { piece, square }
         onSquareClick(args);
     }

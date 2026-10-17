@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-08",
+  "status": "DEPLOYED_AND_VERIFIED",
+  "host": "shah.belovezem.com",
+  "practices": 29,
+  "terminalNotesUpdated": 694,
+  "nodesVerified": 5738,
+  "nonterminalHintsTested": 5044,
+  "studentProgressRows": 449,
+  "practiceAttempts": 1070,
+  "studentProgressPreserved": true,
+  "otherPracticeFieldsChanged": 0,
+  "discardedGenericTemplatesRemaining": 0,
+  "frontend": "current-position hints with explicit legal SAN continuations",
+  "publicSmokeChecks": {
+    "bg": 200,
+    "en": 200,
+    "practices": 200,
+    "unauthenticatedPracticesApi": 401,
+    "newHintBundle": 200
+  },
+  "sourceAudit": "Full legal replay of every course path; factual closing explanations from the final learner moves, with individually reviewed Traxler endings. No unverified engine scores or win percentages.",
+  "vpsBackup": "/srv/sites/shah.belovezem.com/hint-repair-20261008"
+}

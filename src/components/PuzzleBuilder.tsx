@@ -198,7 +198,7 @@ export default function PuzzleBuilder({ initialData }: PuzzleBuilderProps) {
                             position: chessPosition,
                             onPieceDrop: onPieceDrop,
                             boardOrientation: boardOrientation,
-                        } as any}
+                        }}
                     />
                 </div>
                 <button

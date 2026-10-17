@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
-import { useRouter } from "next/navigation";
+import type { PieceDropHandlerArgs, SquareHandlerArgs } from "react-chessboard";
 
 // Arrow format per documentation: { startSquare: string; endSquare: string; color: string; }
 interface Arrow {
@@ -20,7 +20,6 @@ interface OpeningStep {
 }
 
 export default function OpeningBuilder() {
-    const router = useRouter();
     const [game, setGame] = useState(new Chess());
     const [steps, setSteps] = useState<OpeningStep[]>([]);
     const [currentDescription, setCurrentDescription] = useState("");
@@ -53,7 +52,8 @@ export default function OpeningBuilder() {
         return () => window.removeEventListener('beforeunload', handleBeforeUnload);
     }, [hasUnsavedChanges]);
 
-    function onPieceDrop({ sourceSquare, targetSquare }: { sourceSquare: Square, targetSquare: Square }) {
+    function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
+        if (!targetSquare) return false;
         try {
             const move = game.move({
                 from: sourceSquare,
@@ -64,12 +64,13 @@ export default function OpeningBuilder() {
             if (move === null) return false;
             setGame(new Chess(game.fen()));
             return true;
-        } catch (e) {
+        } catch {
             return false;
         }
     }
 
-    function handleSquareRightClick({ square }: { square: Square }) {
+    function handleSquareRightClick({ square: clickedSquare }: SquareHandlerArgs) {
+        const square = clickedSquare as Square;
         if (rightClickStart) {
             // Complete arrow
             if (rightClickStart === square) {
@@ -249,7 +250,7 @@ export default function OpeningBuilder() {
                                 squareStyles: rightClickStart ? {
                                     [rightClickStart]: { backgroundColor: "rgba(255, 255, 0, 0.5)" }
                                 } : undefined
-                            } as any}
+                            }}
                         />
                     </div>
                     <div className="text-sm text-gray-500 text-center">

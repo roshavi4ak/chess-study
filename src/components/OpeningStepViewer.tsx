@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Chessboard } from "react-chessboard";
+import LichessAnalysisLink from "@/components/LichessAnalysisLink";
 
 interface Arrow {
     startSquare: string;
@@ -79,9 +80,9 @@ export default function OpeningStepViewer({ steps }: OpeningStepViewerProps) {
                         id: "viewer-board",
                         position: currentStep.fen,
                         arrows: arrows,
-                        arePiecesDraggable: false,
+                        allowDragging: false,
                         boardOrientation: "white",
-                    } as any}
+                    }}
                 />
             </div>
 
@@ -120,6 +121,7 @@ export default function OpeningStepViewer({ steps }: OpeningStepViewerProps) {
                 </div>
 
                 {/* Progress */}
+                <LichessAnalysisLink fen={currentStep.fen} />
                 <div className="text-center text-gray-500">
                     Step {currentStepIndex + 1} of {sortedSteps.length}
                 </div>

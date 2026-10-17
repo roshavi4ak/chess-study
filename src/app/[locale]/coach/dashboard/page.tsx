@@ -2,9 +2,47 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { CheckCircle, XCircle, ExternalLink } from "lucide-react";
+import CoachStudentHelp from "@/components/CoachStudentHelp";
+import Image from "next/image";
+
+function loadDashboardData() {
+    return Promise.all([
+        prisma.puzzleAttempt.findMany({
+            orderBy: { createdAt: 'desc' },
+            include: {
+                user: { select: { name: true, image: true, ratingPuzzle: true } },
+                puzzle: { select: { name: true, rating: true } }
+            },
+            take: 100
+        }),
+        prisma.practiceAttempt.findMany({
+            orderBy: { createdAt: 'desc' },
+            include: {
+                user: { select: { name: true, image: true } },
+                practice: { select: { name: true } }
+            },
+            take: 100
+        }),
+        prisma.user.findMany({
+            where: { role: 'STUDENT' },
+            include: {
+                _count: {
+                    select: {
+                        puzzleAttempts: true,
+                        practiceAttempts: true,
+                        openingProgress: true
+                    }
+                }
+            },
+            orderBy: { name: 'asc' }
+        })
+    ]);
+}
+
+type DashboardData = Awaited<ReturnType<typeof loadDashboardData>>;
 
 export default async function CoachDashboard() {
     console.log("[CoachDashboard] Page loading...");
@@ -53,44 +91,14 @@ export default async function CoachDashboard() {
         redirect("/dashboard");
     }
 
-    let attempts: any[] = [];
-    let practiceAttempts: any[] = [];
-    let students: any[] = [];
+    let attempts: DashboardData[0] = [];
+    let practiceAttempts: DashboardData[1] = [];
+    let students: DashboardData[2] = [];
 
     try {
         console.log("[CoachDashboard] Starting data fetch...");
 
-        const results = await Promise.all([
-            prisma.puzzleAttempt.findMany({
-                orderBy: { createdAt: 'desc' },
-                include: {
-                    user: { select: { name: true, image: true, ratingPuzzle: true } },
-                    puzzle: { select: { name: true, rating: true } }
-                },
-                take: 100
-            }),
-            prisma.practiceAttempt.findMany({
-                orderBy: { createdAt: 'desc' },
-                include: {
-                    user: { select: { name: true, image: true } },
-                    practice: { select: { name: true } }
-                },
-                take: 100
-            }),
-            prisma.user.findMany({
-                where: { role: 'STUDENT' },
-                include: {
-                    _count: {
-                        select: {
-                            puzzleAttempts: true,
-                            practiceAttempts: true,
-                            openingProgress: true
-                        }
-                    }
-                },
-                orderBy: { name: 'asc' }
-            })
-        ]);
+        const results = await loadDashboardData();
 
         attempts = results[0];
         practiceAttempts = results[1];
@@ -121,6 +129,8 @@ export default async function CoachDashboard() {
                     </h1>
                 </div>
 
+                <CoachStudentHelp />
+
                 {/* Student Overview Section */}
                 <div className="bg-white dark:bg-gray-800 shadow-xl overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-700">
                     <div className="px-6 py-5 bg-gradient-to-r from-blue-600 to-indigo-700">
@@ -140,7 +150,7 @@ export default async function CoachDashboard() {
                                         {t("puzzlesSolved")}
                                     </th>
                                     <th scope="col" className="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                        {t("linesMastered")}
+                                        {t("linesPlayed")}
                                     </th>
                                     <th scope="col" className="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                         {t("openingsStudied")}
@@ -151,23 +161,23 @@ export default async function CoachDashboard() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                                {students.map((student: any) => (
+                                {students.map((student) => (
                                     <tr key={student.id} className="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors">
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="flex items-center">
+                                            <Link href={`/coach/students/${student.id}`} prefetch={false} className="flex items-center group">
                                                 {student.image ? (
-                                                    <img className="h-9 w-9 rounded-full ring-2 ring-blue-500/20" src={student.image} alt="" />
+                                                    <Image className="h-9 w-9 rounded-full ring-2 ring-blue-500/20" src={student.image} alt="" width={36} height={36} />
                                                 ) : (
                                                     <div className="h-9 w-9 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-700 dark:text-indigo-300 font-bold">
                                                         {student.name?.[0] || '?'}
                                                     </div>
                                                 )}
                                                 <div className="ml-3">
-                                                    <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                                                    <div className="text-sm font-semibold text-gray-900 dark:text-white group-hover:underline group-hover:text-blue-600 dark:group-hover:text-blue-400">
                                                         {student.name || "Unknown"}
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-gray-700 dark:text-gray-300">
                                             {student._count?.puzzleAttempts || 0}
@@ -220,13 +230,13 @@ export default async function CoachDashboard() {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                        {attempts.map((attempt: any) => (
+                                        {attempts.map((attempt) => (
                                             <tr key={attempt.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                                 <td className="px-6 py-4 whitespace-nowrap">
-                                                    <div className="flex items-center">
+                                                    <Link href={`/coach/students/${attempt.userId}`} prefetch={false} className="flex items-center hover:underline">
                                                         {attempt.user?.image && (
                                                             <div className="flex-shrink-0 h-10 w-10 mr-3">
-                                                                <img className="h-10 w-10 rounded-full" src={attempt.user.image} alt="" />
+                                                                <Image className="h-10 w-10 rounded-full" src={attempt.user.image} alt="" width={40} height={40} />
                                                             </div>
                                                         )}
                                                         <div>
@@ -237,13 +247,14 @@ export default async function CoachDashboard() {
                                                                 {t("rating")}: {attempt.user?.ratingPuzzle || 1200}
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     {attempt.puzzle ? (
                                                         <div className="flex flex-col">
                                                             <Link
                                                                 href={`/puzzles/${attempt.puzzle.name}`}
+                                                                prefetch={false}
                                                                 className="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                                                             >
                                                                 {attempt.puzzle.name}
@@ -314,19 +325,19 @@ export default async function CoachDashboard() {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                        {practiceAttempts.map((attempt: any) => (
+                                        {practiceAttempts.map((attempt) => (
                                             <tr key={attempt.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                                 <td className="px-6 py-4 whitespace-nowrap">
-                                                    <div className="flex items-center">
+                                                    <Link href={`/coach/students/${attempt.userId}`} prefetch={false} className="flex items-center hover:underline">
                                                         {attempt.user?.image && (
                                                             <div className="flex-shrink-0 h-10 w-10 mr-3">
-                                                                <img className="h-10 w-10 rounded-full" src={attempt.user.image} alt="" />
+                                                                <Image className="h-10 w-10 rounded-full" src={attempt.user.image} alt="" width={40} height={40} />
                                                             </div>
                                                         )}
                                                         <div className="text-sm font-medium text-gray-900 dark:text-white">
                                                             {attempt.user?.name || "Unknown"}
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="text-sm text-gray-900 dark:text-white font-medium">

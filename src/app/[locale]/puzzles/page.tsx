@@ -1,15 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-
-// Helper function to convert tag to camelCase for translation key
-function tagToCamelCase(tag: string): string {
-    if (!tag) return tag;
-    return tag.charAt(0).toLowerCase() + tag.slice(1);
-}
+import { themeLabel } from "@/lib/puzzleThemes";
 
 // API function to fetch puzzle tags
 async function fetchPuzzleTags(): Promise<{ tag: string; count: number }[]> {
@@ -28,7 +23,7 @@ async function fetchPuzzleTags(): Promise<{ tag: string; count: number }[]> {
 }
 
 export default function PuzzlesPage() {
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
     const t = useTranslations("Puzzles");
     const tCategories = useTranslations("PuzzleCategories");
     const commonT = useTranslations("Common");
@@ -110,15 +105,13 @@ export default function PuzzlesPage() {
                     <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{t("categories")}</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                         {tags.map((item) => {
-                            const translationKey = tagToCamelCase(item.tag);
-                            const translatedTag = tCategories.has(translationKey)
-                                ? tCategories(translationKey)
-                                : item.tag;
+                            const translatedTag = themeLabel(item.tag, tCategories);
 
                             return (
                                 <Link
                                     key={item.tag}
-                                    href={`/puzzles/play?tag=${item.tag}`}
+                                    href={{ pathname: "/puzzles/play", query: { tag: item.tag } }}
+                                    prefetch={false}
                                     className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center text-center gap-2"
                                 >
                                     <span className="font-bold text-lg capitalize text-gray-900 dark:text-white">

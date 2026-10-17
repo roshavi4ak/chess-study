@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
-import { useRouter } from "next/navigation";
+import type { PieceDropHandlerArgs } from "react-chessboard";
+import type { PracticeTreeNode } from "@/types/practice";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 // Tree node structure
 interface PracticeNode {
@@ -91,7 +93,7 @@ function TreeView({
 }
 
 // Convert DB tree to client tree (add san property)
-function convertToClientTree(dbNode: any, game: Chess): PracticeNode {
+function convertToClientTree(dbNode: PracticeTreeNode, game: Chess): PracticeNode {
     const node: PracticeNode = {
         id: dbNode.id || generateNodeId(),
         fen: dbNode.fen,
@@ -120,7 +122,7 @@ function convertToClientTree(dbNode: any, game: Chess): PracticeNode {
 
     // Process children
     const childGame = new Chess(dbNode.fen);
-    node.children = (dbNode.children || []).map((child: any) => convertToClientTree(child, childGame));
+    node.children = (dbNode.children || []).map((child) => convertToClientTree(child, childGame));
 
     return node;
 }
@@ -131,12 +133,11 @@ interface PracticeEditorProps {
         name: string;
         description: string | null;
         playerColor: "WHITE" | "BLACK";
-        tree: any;
+        tree: PracticeTreeNode;
     };
 }
 
 export default function PracticeEditor({ practiceId, initialData }: PracticeEditorProps) {
-    const router = useRouter();
     const [tree, setTree] = useState<PracticeNode>(() => {
         const startGame = new Chess();
         return convertToClientTree(initialData.tree, startGame);
@@ -180,7 +181,8 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
     }, [currentNode]);
 
     // All the same functions from PracticeBuilder
-    function onPieceDrop({ sourceSquare, targetSquare }: { sourceSquare: Square, targetSquare: Square }) {
+    function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
+        if (!targetSquare) return false;
         const gameCopy = new Chess(game.fen());
 
         try {
@@ -224,7 +226,7 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
             setGame(gameCopy);
 
             return true;
-        } catch (e) {
+        } catch {
             return false;
         }
     }
@@ -333,10 +335,13 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
         e.preventDefault();
         setIsSubmitting(true);
 
-        function stripSan(node: PracticeNode): any {
-            const { san, ...rest } = node;
+        function stripSan(node: PracticeNode): PracticeTreeNode {
             return {
-                ...rest,
+                id: node.id,
+                fen: node.fen,
+                move: node.move,
+                notes: node.notes,
+                lineNumber: node.lineNumber,
                 children: node.children.map(stripSan),
             };
         }
@@ -351,8 +356,8 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
             const { updatePractice } = await import("@/app/actions/practice");
             setHasUnsavedChanges(false);
             await updatePractice(practiceId, formData);
-        } catch (error: any) {
-            if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+        } catch (error) {
+            if (isRedirectError(error)) {
                 return;
             }
             console.error(error);
@@ -374,7 +379,7 @@ export default function PracticeEditor({ practiceId, initialData }: PracticeEdit
                                 position: game.fen(),
                                 onPieceDrop: onPieceDrop,
                                 boardOrientation: playerColor.toLowerCase() as "white" | "black",
-                            } as any}
+                            }}
                         />
                     </div>
 

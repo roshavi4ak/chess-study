@@ -24,7 +24,7 @@ export async function getNextPuzzleName({
 
     // Use a single query with ORDER BY ABS distance to find the closest puzzles by rating
     // This replaces the previous incremental +100 range widening logic
-    let puzzles = await prisma.$queryRaw<any[]>(Prisma.sql`
+    let puzzles = await prisma.$queryRaw<{ name: string }[]>(Prisma.sql`
         SELECT name FROM "Puzzle"
         WHERE 1=1
         ${seenFilter}
@@ -37,7 +37,7 @@ export async function getNextPuzzleName({
     // Fallback: If no unseen puzzles match the criteria (e.g. user has seen all puzzles in a category),
     // allow seen puzzles while still respecting other filters like tag and excludeName.
     if (puzzles.length === 0) {
-        puzzles = await prisma.$queryRaw<any[]>(Prisma.sql`
+        puzzles = await prisma.$queryRaw<{ name: string }[]>(Prisma.sql`
             SELECT name FROM "Puzzle"
             WHERE 1=1
             ${tagFilter}

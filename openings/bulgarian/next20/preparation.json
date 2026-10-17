@@ -1,0 +1,224 @@
+{
+  "formatVersion": 1,
+  "language": "bg",
+  "status": "PREPARED_LOCALLY",
+  "practices": [
+    {
+      "slug": "french-defense",
+      "name": "Френска защита (French Defense)",
+      "source": "french defense.js",
+      "playerColor": "BLACK",
+      "sourceLines": 26,
+      "lines": 26,
+      "sourceNotes": 118,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "ruy-lopez",
+      "name": "Испанска партия (Ruy Lopez)",
+      "source": "ruy lopez.js",
+      "playerColor": "WHITE",
+      "sourceLines": 55,
+      "lines": 55,
+      "sourceNotes": 300,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "queens-gambit-declined",
+      "name": "Отказан дамски гамбит (Queen's Gambit Declined)",
+      "source": "queens gambit declined.js",
+      "playerColor": "WHITE",
+      "sourceLines": 20,
+      "lines": 20,
+      "sourceNotes": 109,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "queens-gambit-accepted",
+      "name": "Приет дамски гамбит (Queen's Gambit Accepted)",
+      "source": "queens gambit accepted.js",
+      "playerColor": "WHITE",
+      "sourceLines": 16,
+      "lines": 16,
+      "sourceNotes": 73,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "kings-indian-defense",
+      "name": "Староиндийска защита (King's Indian Defense)",
+      "source": "kings indian defense.js",
+      "playerColor": "BLACK",
+      "sourceLines": 35,
+      "lines": 35,
+      "sourceNotes": 189,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "scandinavian-defense",
+      "name": "Скандинавска защита (Scandinavian Defense)",
+      "source": "scandinavian defense.js",
+      "playerColor": "BLACK",
+      "sourceLines": 25,
+      "lines": 24,
+      "sourceNotes": 92,
+      "removedPrefixes": [
+        {
+          "sourceLine": 3,
+          "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bf5 6. Bd2 e6 7. Ne4 Qb6 8. Nxf6+ gxf6 9. c3 Qxb2",
+          "reason": "Prefix of a retained longer line; its positions and notes remain in the tree."
+        }
+      ]
+    },
+    {
+      "slug": "petrov-defense",
+      "name": "Защита Петров (Petrov Defense)",
+      "source": "petrov defense.js",
+      "playerColor": "BLACK",
+      "sourceLines": 24,
+      "lines": 24,
+      "sourceNotes": 123,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "english",
+      "name": "Английско начало (English Opening)",
+      "source": "english.js",
+      "playerColor": "WHITE",
+      "sourceLines": 17,
+      "lines": 17,
+      "sourceNotes": 95,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "alapin-sicilian",
+      "name": "Сицилианска защита: вариант Алапин (Alapin Sicilian)",
+      "source": "alapin sicilian.js",
+      "playerColor": "WHITE",
+      "sourceLines": 21,
+      "lines": 21,
+      "sourceNotes": 122,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "bishop-opening",
+      "name": "Дебют на офицера (Bishop's Opening)",
+      "source": "bishop opening.js",
+      "playerColor": "WHITE",
+      "sourceLines": 19,
+      "lines": 19,
+      "sourceNotes": 119,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "vienna-game",
+      "name": "Виенска партия (Vienna Game)",
+      "source": "vienna game.js",
+      "playerColor": "WHITE",
+      "sourceLines": 19,
+      "lines": 19,
+      "sourceNotes": 96,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "vienna-gambit-mastery",
+      "name": "Виенски гамбит – разширен курс (Vienna Gambit Mastery)",
+      "source": "vienna gambit mastery.js",
+      "playerColor": "WHITE",
+      "sourceLines": 57,
+      "lines": 57,
+      "sourceNotes": 238,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "vienna-gambit-counter",
+      "name": "Защита срещу Виенския гамбит (Vienna Gambit Counter)",
+      "source": "vienna gambit counter.js",
+      "playerColor": "BLACK",
+      "sourceLines": 14,
+      "lines": 14,
+      "sourceNotes": 83,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "ponziani",
+      "name": "Дебют Понциани (Ponziani)",
+      "source": "ponziani.js",
+      "playerColor": "WHITE",
+      "sourceLines": 19,
+      "lines": 17,
+      "sourceNotes": 84,
+      "removedPrefixes": [
+        {
+          "sourceLine": 11,
+          "pgn": "1. e4 e5 2. Nf3 Nc6 3. c3 Bc5 4. d4 exd4 5. cxd4 Bb4+ 6. Nc3 Nf6 7. d5 Ne7 8. Bd3",
+          "reason": "Prefix of a retained longer line; its positions and notes remain in the tree."
+        },
+        {
+          "sourceLine": 15,
+          "pgn": "1. e4 e5 2. Nf3 Nc6 3. c3 d6 4. d4 exd4 5. cxd4",
+          "reason": "Prefix of a retained longer line; its positions and notes remain in the tree."
+        }
+      ]
+    },
+    {
+      "slug": "kings-gambit",
+      "name": "Царски гамбит (King's Gambit)",
+      "source": "kings gambit.js",
+      "playerColor": "WHITE",
+      "sourceLines": 22,
+      "lines": 22,
+      "sourceNotes": 98,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "danish-gambit",
+      "name": "Датски гамбит (Danish Gambit)",
+      "source": "danish gambit.js",
+      "playerColor": "WHITE",
+      "sourceLines": 15,
+      "lines": 15,
+      "sourceNotes": 70,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "albin-countergambit",
+      "name": "Контрагамбит Албин (Albin Countergambit)",
+      "source": "albin countergambit.js",
+      "playerColor": "BLACK",
+      "sourceLines": 17,
+      "lines": 17,
+      "sourceNotes": 95,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "traxler",
+      "name": "Контраатака Тракслер (Traxler Counterattack)",
+      "source": "traxler.js",
+      "playerColor": "BLACK",
+      "sourceLines": 26,
+      "lines": 26,
+      "sourceNotes": 131,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "rousseau-gambit",
+      "name": "Гамбит Русо (Rousseau Gambit)",
+      "source": "rousseau gambit.js",
+      "playerColor": "BLACK",
+      "sourceLines": 24,
+      "lines": 24,
+      "sourceNotes": 129,
+      "removedPrefixes": []
+    },
+    {
+      "slug": "englund-gambit",
+      "name": "Гамбит Енглунд (Englund Gambit)",
+      "source": "englund gambit.js",
+      "playerColor": "BLACK",
+      "sourceLines": 15,
+      "lines": 15,
+      "sourceNotes": 57,
+      "removedPrefixes": []
+    }
+  ]
+}

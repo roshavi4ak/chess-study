@@ -3,26 +3,15 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import type { Square } from "chess.js";
-import { saveLineProgress, getPracticeProgress } from "@/app/actions/progress";
+import { saveLineProgress } from "@/app/actions/progress";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { useTranslations } from "next-intl";
-
-interface PracticeNode {
-    id: string;
-    fen: string;
-    move: string | null;
-    notes: string | null;
-    lineNumber: number | null;
-    children: PracticeNode[];
-}
-
-interface LineProgress {
-    nodeId: string;
-    status: "PERFECT" | "COMPLETED" | "PARTIAL" | "NEVER_SEEN";
-    attempts: number;
-    perfectCount: number;
-}
+import { formatPracticeHint } from "@/lib/practiceHints";
+import { getAllLeafNodes, hasSeenLine, getLineCandidates, getAvailableChildren, chooseOpponentChild, type PracticeNode, type LineProgress } from "@/lib/practiceLines";
+import LichessAnalysisLink from "@/components/LichessAnalysisLink";
+import { Link } from "@/i18n/navigation";
+import WhyQuestionCard from "@/components/WhyQuestionCard";
+import type { WhyQuestion } from "@/app/actions/practiceQuestions";
 
 interface PracticeSessionProps {
     practice: {
@@ -34,139 +23,122 @@ interface PracticeSessionProps {
         tree: PracticeNode;
     };
     initialProgress: LineProgress[];
+    // Lines due for review today; they are served first, before normal practice continues.
+    dueLineIds?: string[];
+    // "Why?" questions by the last node of a line, and whether this viewer (a coach) may edit them.
+    questions?: Record<string, WhyQuestion>;
+    canEditQuestions?: boolean;
 }
 
-function getAllLeafNodes(node: PracticeNode): PracticeNode[] {
-    if (node.children.length === 0) return [node];
-    const leaves: PracticeNode[] = [];
-    for (const child of node.children) {
-        leaves.push(...getAllLeafNodes(child));
-    }
-    return leaves;
-}
-
-function getLeafDescendants(node: PracticeNode): PracticeNode[] {
-    return getAllLeafNodes(node);
-}
-
-export default function PracticeSession({ practice, initialProgress }: PracticeSessionProps) {
+export default function PracticeSession({ practice, initialProgress, dueLineIds, questions = {}, canEditQuestions = false }: PracticeSessionProps) {
     const t = useTranslations("Practice");
     const commonT = useTranslations("Common");
-    const [game, setGame] = useState(new Chess());
+    const [game, setGame] = useState(() => new Chess(practice.tree.fen));
     const [currentNode, setCurrentNode] = useState<PracticeNode>(practice.tree);
     const [targetLine, setTargetLine] = useState<PracticeNode | null>(null);
     const [moveHistory, setMoveHistory] = useState<string[]>([]);
     const [nodePath, setNodePath] = useState<string[]>([practice.tree.id]);
+    const [reviewIndex, setReviewIndex] = useState<number | null>(null);
+    const [seenOnly, setSeenOnly] = useState(false);
     const [sessionCompletedIds, setSessionCompletedIds] = useState<Set<string>>(new Set());
     const [feedback, setFeedback] = useState<{ type: "incorrect" | "complete" | "note" | null; message: string }>({ type: null, message: "" });
     const [highlightSquares, setHighlightSquares] = useState<Record<string, React.CSSProperties>>({});
     const [showCoachHints, setShowCoachHints] = useState(false);
-    const [hintsMessage, setHintsMessage] = useState("");
-
-    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
-        const { from, to, promotion = 'q' } = move;
-        setOptionSquares({});
-        if (!isStudentTurn() || feedback.type === 'complete') return false;
-        if (from === to) return false;
-
-        const uciMove = `${from}${to}`;
-        const matchingChild = currentNode.children.find(child => child.move?.startsWith(uciMove));
-
-        if (!matchingChild) {
-            setHadWrongMoves(true);
-            const childWithNotes = currentNode.children.find(c => c.notes && c.notes.trim() !== "");
-            const currentNodeNotes = currentNode.notes && currentNode.notes.trim() !== "" ? currentNode.notes : null;
-            const firstChild = currentNode.children[0];
-
-            if (childWithNotes?.notes) {
-                setFeedback({ type: "incorrect", message: t("wrongMoveHint", { hint: childWithNotes.notes }) });
-            } else if (currentNodeNotes) {
-                setFeedback({ type: "incorrect", message: t("wrongMoveHint", { hint: currentNodeNotes }) });
-            } else if (firstChild?.move) {
-                const f = firstChild.move.slice(0, 2);
-                const tStr = firstChild.move.slice(2, 4);
-                setFeedback({ type: "incorrect", message: t("wrongMoveTryMoving", { from: f, to: tStr }) });
-            } else {
-                setFeedback({ type: "incorrect", message: t("wrongMoveTryAgain") });
-            }
-            return false;
-        }
-
-        const gameResult = new Chess(game.fen());
-        try {
-            const finalPromotion = matchingChild.move && matchingChild.move[4] as "q" | "r" | "b" | "n" | undefined;
-            const moveResult = gameResult.move({ from, to, promotion: finalPromotion || promotion });
-
-            if (moveResult) {
-                const newHistory = [...moveHistory, moveResult.san];
-                const newPath = [...nodePath, matchingChild.id];
-                setGame(new Chess(gameResult.fen()));
-                setMoveHistory(newHistory);
-                setCurrentNode(matchingChild);
-                setNodePath(newPath);
-                highlightMove(from, to);
-
-                if (matchingChild.children.length === 0) {
-                    handleLineComplete(newPath);
-                    return true;
-                }
-
-                if (matchingChild.notes && currentLineFirstTime && !hadWrongMoves) {
-                    setFeedback({ type: "note", message: `💡 ${matchingChild.notes}` });
-                } else {
-                    setFeedback({ type: null, message: "" });
-                }
-
-                makeOpponentMove(matchingChild, newHistory, newPath);
-                return true;
-            }
-        } catch (e) { console.error(e); }
-        return false;
-    };
-
-    const { onSquareClick, onPieceClick, optionSquares, setOptionSquares, onPieceDrop } = useLegalMoves({
-        game,
-        onMove: handleMove
-    });
-
-    const [hadWrongMoves, setHadWrongMoves] = useState(false);
+    // Wrong tries in the current position; from the second one an arrow shows the expected move.
+    const [wrongAt, setWrongAt] = useState<{ nodeId: string; count: number } | null>(null);
     const [sessionLinesCompleted, setSessionLinesCompleted] = useState(0);
     const [sessionLinesPerfect, setSessionLinesPerfect] = useState(0);
-    const [progressMap, setProgressMap] = useState<Map<string, LineProgress>>(() => {
-        const map = new Map<string, LineProgress>();
-        const leafNodes = getAllLeafNodes(practice.tree);
-        const validNodeIds = new Set(leafNodes.map(node => node.id));
-        initialProgress.forEach(p => {
-            if (validNodeIds.has(p.nodeId)) {
-                map.set(p.nodeId, p);
-            }
-        });
-        return map;
-    });
-
     const [currentLineFirstTime, setCurrentLineFirstTime] = useState(true);
+    const [dueRemaining, setDueRemaining] = useState<Set<string>>(() => new Set(dueLineIds));
+    const [questionMap, setQuestionMap] = useState<Record<string, WhyQuestion>>(questions);
+    // Wrong moves in the current attempt of a line.
+    const wrongMoves = useRef(0);
+    const usedCoachHints = useRef(false);
+    // Browsing or replaying an attempt must never save its completion twice.
+    const attemptCompleted = useRef(false);
     const allLeafNodes = useMemo(() => getAllLeafNodes(practice.tree), [practice.tree]);
+    const nodesById = useMemo(() => {
+        const nodes = new Map<string, PracticeNode>();
+        function visit(node: PracticeNode) {
+            nodes.set(node.id, node);
+            node.children.forEach(visit);
+        }
+        visit(practice.tree);
+        return nodes;
+    }, [practice.tree]);
+    const [progressMap, setProgressMap] = useState<Map<string, LineProgress>>(() => {
+        const validIds = new Set(getAllLeafNodes(practice.tree).map(node => node.id));
+        return new Map(initialProgress.filter(p => validIds.has(p.nodeId) && hasSeenLine(p)).map(p => [p.nodeId, p]));
+    });
+    const seenIds = new Set([...progressMap.values()].filter(hasSeenLine).map(p => p.nodeId));
+    const displayedIndex = reviewIndex ?? nodePath.length - 1;
+    const displayedNode = nodesById.get(nodePath[displayedIndex]) ?? currentNode;
+    const displayedGame = useMemo(() => new Chess(displayedNode.fen), [displayedNode.fen]);
+    const reviewing = reviewIndex !== null;
+    const hintNode = { ...displayedNode, children: getAvailableChildren(displayedNode, seenOnly ? seenIds : null) };
+    const hintsMessage = showCoachHints && (reviewing || feedback.type !== "complete")
+        ? formatPracticeHint(hintNode, moves => t("expectedMoveHint", { moves })) : "";
+    const displayedFeedback = reviewing
+        ? { type: "note", message: (currentLineFirstTime || showCoachHints) && displayedNode.notes ? `💡 ${displayedNode.notes}` : "" }
+        : feedback;
+    const displayedHighlights = reviewing && displayedNode.move ? {
+        [displayedNode.move.slice(0, 2)]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+        [displayedNode.move.slice(2, 4)]: { backgroundColor: "rgba(255, 255, 0, 0.6)" },
+    } : reviewing ? {} : highlightSquares;
+    const hintArrows = !reviewing && feedback.type !== "complete" && wrongAt?.nodeId === currentNode.id && wrongAt.count >= 2
+        ? getAvailableChildren(currentNode, seenOnly ? seenIds : null)
+            .filter(child => child.move)
+            .map(child => ({ startSquare: child.move!.slice(0, 2), endSquare: child.move!.slice(2, 4), color: "rgba(34, 197, 94, 0.85)" }))
+        : [];
 
-    useEffect(() => {
-        setHintsMessage(showCoachHints ? (currentNode.notes || "") : "");
-    }, [showCoachHints, currentNode.notes]);
+    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
+        const { from, to, promotion = "q" } = move;
+        setOptionSquares({});
+        if (reviewing || isOpponentTurn(game.fen()) || feedback.type === "complete" || from === to) return false;
+        const matchingChild = getAvailableChildren(currentNode, seenOnly ? seenIds : null)
+            .find(child => child.move?.startsWith(`${from}${to}`));
+        if (!matchingChild) {
+            wrongMoves.current += 1;
+            setWrongAt(previous => ({ nodeId: currentNode.id, count: previous?.nodeId === currentNode.id ? previous.count + 1 : 1 }));
+            const hint = formatPracticeHint({ ...currentNode, children: getAvailableChildren(currentNode, seenOnly ? seenIds : null) }, moves => t("expectedMoveHint", { moves }));
+            setFeedback({ type: "incorrect", message: hint ? t("wrongMoveHint", { hint }) : t("wrongMoveTryAgain") });
+            return false;
+        }
+        const gameResult = new Chess(game.fen());
+        try {
+            const moveResult = gameResult.move({ from, to, promotion: matchingChild.move?.[4] || promotion });
+            if (!moveResult) return false;
+            const newHistory = [...moveHistory, moveResult.san];
+            const newPath = [...nodePath, matchingChild.id];
+            setGame(gameResult);
+            setMoveHistory(newHistory);
+            setCurrentNode(matchingChild);
+            setNodePath(newPath);
+            highlightMove(from, to);
+            if (!matchingChild.children.length) {
+                void handleLineComplete(newPath);
+            } else {
+                setFeedback({ type: matchingChild.notes && currentLineFirstTime ? "note" : null, message: matchingChild.notes && currentLineFirstTime ? `💡 ${matchingChild.notes}` : "" });
+                const selected = selectOpponentReply(matchingChild, targetLine?.id ?? null, seenOnly);
+                if (selected) executeOpponentMove(matchingChild, selected, newHistory, newPath, currentLineFirstTime);
+            }
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
+
+    const { onSquareClick, onPieceClick, optionSquares, setOptionSquares, onPieceDrop } = useLegalMoves({ game: displayedGame, onMove: handleMove });
 
     useEffect(() => {
         startNewLine();
+        // Initialize once; subsequent lines start only through the practice controls.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
-
-    function getCurrentTurn(fen: string): "WHITE" | "BLACK" {
-        return new Chess(fen).turn() === "w" ? "WHITE" : "BLACK";
-    }
-
     function isOpponentTurn(fen: string): boolean {
-        return getCurrentTurn(fen) !== practice.playerColor;
-    }
-
-    function isStudentTurn(): boolean {
-        return !isOpponentTurn(game.fen());
+        return (new Chess(fen).turn() === "w" ? "WHITE" : "BLACK") !== practice.playerColor;
     }
 
     function highlightMove(from: string, to: string) {
@@ -176,196 +148,119 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
         });
     }
 
-    function getPriorityLines(): { lines: PracticeNode[]; priority: 'unseen' | 'not_perfect' | 'all' } {
-        // Priority 1: Unseen lines
-        const unseenLines = allLeafNodes.filter(node => !progressMap.has(node.id));
-        const unseenNotDoneThisSession = unseenLines.filter(node => !sessionCompletedIds.has(node.id));
-
-        if (unseenNotDoneThisSession.length > 0) {
-            unseenNotDoneThisSession.sort((a, b) => {
-                if (a.lineNumber === null && b.lineNumber === null) return 0;
-                if (a.lineNumber === null) return 1;
-                if (b.lineNumber === null) return -1;
-                return a.lineNumber - b.lineNumber;
-            });
-            return { lines: unseenNotDoneThisSession, priority: 'unseen' };
-        }
-
-        // Priority 2: Seen but not perfect lines
-        const notPerfectLines = allLeafNodes.filter(node => {
-            const progress = progressMap.get(node.id);
-            return progress && progress.status !== "PERFECT";
-        });
-        const notPerfectNotDoneThisSession = notPerfectLines.filter(node => !sessionCompletedIds.has(node.id));
-
-        if (notPerfectNotDoneThisSession.length > 0) {
-            notPerfectNotDoneThisSession.sort((a, b) => {
-                const progressA = progressMap.get(a.id);
-                const progressB = progressMap.get(b.id);
-                return (progressA?.perfectCount || 0) - (progressB?.perfectCount || 0);
-            });
-            return { lines: notPerfectNotDoneThisSession, priority: 'not_perfect' };
-        }
-
-        // Priority 3: All lines (cycling through perfect lines)
-        const perfectNotDoneThisSession = allLeafNodes.filter(node => !sessionCompletedIds.has(node.id));
-
-        if (perfectNotDoneThisSession.length > 0) {
-            return { lines: perfectNotDoneThisSession, priority: 'all' };
-        }
-
-        // If we reach here, it means EVERY line in the practice has been done THIS SESSION.
-        // Reset the session cycle and start over.
-        setSessionCompletedIds(new Set());
-
-        // Return unseen again if they exist, or fallback to all
-        if (unseenLines.length > 0) return { lines: unseenLines, priority: 'unseen' };
-        if (notPerfectLines.length > 0) return { lines: notPerfectLines, priority: 'not_perfect' };
-        return { lines: allLeafNodes, priority: 'all' };
+    function selectOpponentReply(node: PracticeNode, targetId: string | null, onlySeen: boolean) {
+        const candidates = getLineCandidates(getAllLeafNodes(node), progressMap, sessionCompletedIds, onlySeen);
+        const allowedIds = new Set(candidates.lines.map(line => line.id));
+        if (targetId && (!onlySeen || seenIds.has(targetId))) allowedIds.add(targetId);
+        return chooseOpponentChild(node, targetId, allowedIds);
     }
 
-    function startNewLine(previousLineSignature?: string) {
-        const newGame = new Chess(practice.tree.fen);
-        setGame(newGame);
+    function startNewLine(onlySeen = seenOnly, repeatLine?: PracticeNode) {
+        const completedIds = onlySeen === seenOnly ? sessionCompletedIds : new Set<string>();
+        const dueLeaves = allLeafNodes.filter(node => dueRemaining.has(node.id));
+        const candidates = dueLeaves.length
+            ? getLineCandidates(dueLeaves, progressMap, new Set(), false)
+            : getLineCandidates(allLeafNodes, progressMap, completedIds, onlySeen);
+        const candidate = repeatLine ?? (candidates.random
+            ? candidates.lines[Math.floor(Math.random() * candidates.lines.length)] : candidates.lines[0]);
+        if (!candidate) return;
+        if (candidates.resetCycle && !repeatLine) setSessionCompletedIds(new Set());
+        const firstTime = !hasSeenLine(progressMap.get(candidate.id));
+        setGame(new Chess(practice.tree.fen));
         setCurrentNode(practice.tree);
         setMoveHistory([]);
         setNodePath([practice.tree.id]);
+        setReviewIndex(null);
+        setOptionSquares({});
         setFeedback({ type: null, message: "" });
         setHighlightSquares({});
-        setHadWrongMoves(false);
+        setWrongAt(null);
+        wrongMoves.current = 0;
+        usedCoachHints.current = firstTime;
+        attemptCompleted.current = false;
         setShowCoachHints(false);
-        setHintsMessage("");
-
-        const { lines: priorityLines, priority } = getPriorityLines();
-        if (priorityLines.length > 0) {
-            // For unseen and not_perfect: pick the first one from the sorted list
-            // For 'all' (random mode): pick randomly
-            const candidateLine = priority === 'all'
-                ? priorityLines[Math.floor(Math.random() * priorityLines.length)]
-                : priorityLines[0];
-
-            console.log(`[DEBUG] Selected line for practice (${priority}):`, candidateLine.id, "lineNumber:", candidateLine.lineNumber, "perfectCount:", progressMap.get(candidateLine.id)?.perfectCount || 0);
-
-            setTargetLine(candidateLine);
-            const sig = candidateLine.id;
-            setCurrentLineFirstTime(!progressMap.has(sig));
-        }
-
-        if (isOpponentTurn(practice.tree.fen)) {
-            const children = practice.tree.children;
-            if (children.length > 0) {
-                const childScores = children.map(child => {
-                    const leavesThrough = getLeafDescendants(child).filter(leaf => priorityLines.includes(leaf));
-                    return { child, score: leavesThrough.length };
-                });
-                childScores.sort((a, b) => b.score - a.score);
-
-                // If we have a target line, see if any child leads to it
-                const targetFirst = childScores.find(s => targetLine && getLeafDescendants(s.child).some(leaf => leaf.id === targetLine.id));
-                const selected = targetFirst ? targetFirst.child : childScores[0].child;
-
-                executeOpponentMove(practice.tree, selected, [], [practice.tree.id]);
-            }
+        setTargetLine(candidate);
+        setCurrentLineFirstTime(firstTime);
+        if (!practice.tree.children.length) {
+            void handleLineComplete([practice.tree.id]);
+        } else if (isOpponentTurn(practice.tree.fen)) {
+            const child = selectOpponentReply(practice.tree, candidate.id, onlySeen);
+            if (child) executeOpponentMove(practice.tree, child, [], [practice.tree.id], firstTime);
         }
     }
 
-    function executeOpponentMove(parentNode: PracticeNode, childNode: PracticeNode, history: string[], path: string[]) {
-        const gameCopy = new Chess(parentNode.fen);
-        if (childNode.move) {
-            const from = childNode.move.slice(0, 2) as Square;
-            const to = childNode.move.slice(2, 4) as Square;
-            const promotion = childNode.move[4] as "q" | "r" | "b" | "n" | undefined;
-
-            try {
-                const move = gameCopy.move({ from, to, promotion });
-                if (move) {
-                    const newHistory = [...history, move.san];
-                    const newPath = [...path, childNode.id];
-                    setGame(new Chess(gameCopy.fen()));
-                    setMoveHistory(newHistory);
-                    setCurrentNode(childNode);
-                    setNodePath(newPath);
-                    highlightMove(from, to);
-                    if (childNode.notes && currentLineFirstTime) {
-                        setFeedback({ type: "note", message: `💡 ${childNode.notes}` });
-                    } else {
-                        setFeedback({ type: null, message: "" });
-                    }
-                    if (childNode.children.length === 0) handleLineComplete(newPath);
-                }
-            } catch (e) { console.error(e); }
-        }
-    }
-
-    function makeOpponentMove(node: PracticeNode, history: string[], path: string[]) {
-        if (node.children.length === 0) {
-            handleLineComplete(path);
-            return;
-        }
-        let selectedChild: PracticeNode;
-        if (node.children.length > 1) {
-            const { lines: priorityLines } = getPriorityLines();
-            const childScores = node.children.map(child => {
-                const leavesThrough = getLeafDescendants(child).filter(leaf => priorityLines.includes(leaf));
-                return { child, score: leavesThrough.length };
-            });
-            childScores.sort((a, b) => b.score - a.score);
-
-            // Prioritize the target line if it's reachable through one of these children
-            const targetFirst = childScores.find(s => targetLine && getLeafDescendants(s.child).some(leaf => leaf.id === targetLine.id));
-            selectedChild = targetFirst ? targetFirst.child : childScores[0].child;
-
-            console.log("[DEBUG] Selected opponent move child:", selectedChild.id, "fen:", selectedChild.fen);
-        } else {
-            selectedChild = node.children[0];
-        }
-        executeOpponentMove(node, selectedChild, history, path);
+    function executeOpponentMove(parent: PracticeNode, child: PracticeNode, history: string[], path: string[], firstTime: boolean) {
+        if (!child.move) return;
+        const gameCopy = new Chess(parent.fen);
+        try {
+            const move = gameCopy.move({ from: child.move.slice(0, 2), to: child.move.slice(2, 4), promotion: child.move[4] });
+            if (!move) return;
+            const newPath = [...path, child.id];
+            setGame(gameCopy);
+            setMoveHistory([...history, move.san]);
+            setCurrentNode(child);
+            setNodePath(newPath);
+            highlightMove(move.from, move.to);
+            setFeedback({ type: child.notes && firstTime ? "note" : null, message: child.notes && firstTime ? `💡 ${child.notes}` : "" });
+            if (!child.children.length) void handleLineComplete(newPath);
+        } catch (error) { console.error(error); }
     }
 
     async function handleLineComplete(finalPath: string[]) {
-        const nodeId = finalPath[finalPath.length - 1]; // Use the actual leaf node ID
-        const leafNode = allLeafNodes.find(n => n.id === nodeId);
-
-        // Determine if coach notes were visible at any point during this line
-        const coachNotesVisible = showCoachHints || currentLineFirstTime;
-
+        const nodeId = finalPath[finalPath.length - 1];
+        const leafNode = nodesById.get(nodeId);
+        const coachNotesVisible = usedCoachHints.current;
+        const mistakes = wrongMoves.current;
+        const wrong = mistakes > 0;
+        const perfect = !wrong && !coachNotesVisible;
+        const baseMessage = wrong ? t("lineCompletedMistakes") : coachNotesVisible ? t("lineCompletedWithHints") : t("lineCompletedFlawlessly");
+        setFeedback({ type: "complete", message: leafNode?.notes ? `${baseMessage}\n\n💡 ${leafNode.notes}` : baseMessage });
+        if (attemptCompleted.current) return;
+        attemptCompleted.current = true;
         setSessionLinesCompleted(prev => prev + 1);
-        if (!hadWrongMoves && !coachNotesVisible) setSessionLinesPerfect(prev => prev + 1);
-
-        const existingProgress = progressMap.get(nodeId);
-        const newProgress: LineProgress = {
-            nodeId,
-            status: hadWrongMoves ? "COMPLETED" : (coachNotesVisible ? "COMPLETED" : "PERFECT"),
-            attempts: (existingProgress?.attempts || 0) + 1,
-            perfectCount: (existingProgress?.perfectCount || 0) + (!hadWrongMoves && !coachNotesVisible ? 1 : 0),
-        };
-        setProgressMap(prev => new Map(prev).set(nodeId, newProgress));
-        if (!hadWrongMoves && !coachNotesVisible) {
-            setSessionCompletedIds(prev => new Set(prev).add(nodeId));
-        }
-
-        const baseMessage = hadWrongMoves ? t("lineCompletedMistakes") : (coachNotesVisible ? t("lineCompletedWithHints") : t("lineCompletedFlawlessly"));
-        const finalMessage = leafNode?.notes ? `${baseMessage}\n\n💡 ${leafNode.notes}` : baseMessage;
-
-        setFeedback({
-            type: "complete",
-            message: finalMessage
+        if (perfect) setSessionLinesPerfect(prev => prev + 1);
+        setProgressMap(prev => {
+            const existing = prev.get(nodeId);
+            return new Map(prev).set(nodeId, {
+                nodeId,
+                status: perfect ? "PERFECT" : "COMPLETED",
+                attempts: (existing?.attempts ?? 0) + 1,
+                perfectCount: (existing?.perfectCount ?? 0) + (perfect ? 1 : 0),
+            });
+        });
+        setSessionCompletedIds(prev => new Set(prev).add(nodeId));
+        setDueRemaining(prev => {
+            if (!prev.has(nodeId)) return prev;
+            const next = new Set(prev);
+            next.delete(nodeId);
+            return next;
         });
         try {
-            await saveLineProgress({
-                practiceId: practice.id,
-                nodeId,
-                hadWrongMoves,
-                completed: true,
-                coachNotesVisible,
-            });
-        } catch (e) {
-            console.error("Failed to save progress:", e);
-        }
+            await saveLineProgress({ practiceId: practice.id, nodeId, hadWrongMoves: wrong, mistakes, completed: true, coachNotesVisible });
+        } catch (error) { console.error("Failed to save progress:", error); }
+    }
+
+    function navigateTo(index: number) {
+        setReviewIndex(index === nodePath.length - 1 ? null : index);
+        setOptionSquares({});
+    }
+
+    function replayFromHere() {
+        if (!reviewing || isOpponentTurn(displayedNode.fen)) return;
+        setGame(new Chess(displayedNode.fen));
+        setCurrentNode(displayedNode);
+        setNodePath(nodePath.slice(0, displayedIndex + 1));
+        setMoveHistory(moveHistory.slice(0, displayedIndex));
+        setReviewIndex(null);
+        setOptionSquares({});
+        setHighlightSquares(displayedHighlights);
+        setFeedback({ type: null, message: "" });
     }
 
     function handleRestart() {
-        startNewLine(currentNode.id);
+        // Repeat the actual line just played, even if it diverged from the initial target.
+        const leaf = currentNode.children.length === 0 ? currentNode : targetLine;
+        if (leaf) startNewLine(seenOnly, leaf);
     }
 
     const totalLines = allLeafNodes.length;
@@ -381,26 +276,60 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                 <div className="lg:col-span-2 space-y-4">
                     <div className="aspect-square w-full max-w-[600px] mx-auto border-4 border-gray-800 rounded-lg overflow-hidden shadow-xl">
                         <Chessboard
-                            key={`session-${game.fen()}`}
+                            key={`session-${displayedNode.fen}`}
                             options={{
                                 id: "practice-session-board",
-                                position: game.fen(),
-                                onPieceDrop: onPieceDrop as any,
+                                position: displayedNode.fen,
+                                onPieceDrop: (args) => { void onPieceDrop(args); return false; },
                                 boardOrientation: practice.playerColor.toLowerCase() as "white" | "black",
-                                squareStyles: { ...highlightSquares, ...optionSquares },
-                                onSquareClick,
-                                onPieceClick,
-                                arePiecesDraggable: isStudentTurn() && feedback.type !== "complete",
-                            } as any}
+                                squareStyles: { ...displayedHighlights, ...optionSquares },
+                                arrows: hintArrows,
+                                onSquareClick: reviewing || feedback.type === "complete" ? undefined : onSquareClick,
+                                onPieceClick: reviewing || feedback.type === "complete" ? undefined : onPieceClick,
+                                allowDragging: !reviewing && !isOpponentTurn(game.fen()) && feedback.type !== "complete",
+                            }}
                         />
                     </div>
-                    {feedback.message && (
-                        <div className={`p-4 rounded-lg text-center text-lg font-medium ${feedback.type === "incorrect" ? "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200" :
-                            feedback.type === "complete" ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200" :
+                    <div className="flex flex-wrap justify-center gap-2">
+                        <button onClick={() => navigateTo(displayedIndex - 1)} disabled={displayedIndex === 0} className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            {t("previousMove")}
+                        </button>
+                        <button onClick={() => navigateTo(displayedIndex + 1)} disabled={displayedIndex === nodePath.length - 1} className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            {t("forwardMove")}
+                        </button>
+                        <LichessAnalysisLink fen={displayedNode.fen} orientation={practice.playerColor.toLowerCase() as "white" | "black"} onOpen={() => { usedCoachHints.current = true; }} />
+                    </div>
+                    {reviewing && (
+                        <div className="p-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-center space-y-2">
+                            <p className="text-sm">{t("reviewingMoves")}</p>
+                            <div className="flex flex-wrap justify-center gap-2">
+                                <button onClick={() => navigateTo(nodePath.length - 1)} className="px-3 py-2 rounded-lg bg-blue-600 text-white">{t("returnToCurrent")}</button>
+                                <button onClick={replayFromHere} disabled={isOpponentTurn(displayedNode.fen)} className="px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">{t("replayFromHere")}</button>
+                            </div>
+                            {isOpponentTurn(displayedNode.fen) && <p className="text-sm text-gray-500">{t("replayStudentTurn")}</p>}
+                        </div>
+                    )}
+                    {displayedFeedback.message && (
+                        <div className={`p-4 rounded-lg text-center text-lg font-medium whitespace-pre-line ${displayedFeedback.type === "incorrect" ? "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200" :
+                            displayedFeedback.type === "complete" ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200" :
                                 "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                             }`}>
-                            {feedback.message}
+                            {displayedFeedback.message}
                         </div>
+                    )}
+                    {!reviewing && feedback.type === "complete" && currentNode.children.length === 0 && (questionMap[currentNode.id] || canEditQuestions) && (
+                        <WhyQuestionCard
+                            key={`${currentNode.id}-${sessionLinesCompleted}`}
+                            nodeId={currentNode.id}
+                            question={questionMap[currentNode.id]}
+                            canEdit={canEditQuestions}
+                            onSaved={saved => setQuestionMap(previous => {
+                                const next = { ...previous };
+                                if (saved) next[currentNode.id] = saved;
+                                else delete next[currentNode.id];
+                                return next;
+                            })}
+                        />
                     )}
                     {hintsMessage && (
                         <div className="p-4 rounded-lg bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
@@ -411,6 +340,15 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                 </div>
 
                 <div className="space-y-4">
+                    {!!dueLineIds?.length && (
+                        <div className={`p-4 rounded-lg shadow ${dueRemaining.size ? "bg-amber-50 dark:bg-amber-900/40 text-amber-900 dark:text-amber-100" : "bg-green-50 dark:bg-green-900/40 text-green-900 dark:text-green-100"}`}>
+                            <h3 className="font-bold">{dueRemaining.size ? t("dueReviewTitle") : t("dueReviewDone")}</h3>
+                            <p className="text-sm mt-1">{dueRemaining.size ? t("dueLinesLeft", { count: dueRemaining.size }) : t("dueReviewDoneDescription")}</p>
+                            {!dueRemaining.size && (
+                                <Link href="/dashboard" className="inline-block mt-2 text-sm font-medium underline">{t("backToMission")}</Link>
+                            )}
+                        </div>
+                    )}
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
                         <h2 className="text-xl font-bold mb-2">{practice.name}</h2>
                         {practice.description && <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{practice.description}</p>}
@@ -448,7 +386,10 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                         <div className="text-sm max-h-[120px] overflow-y-auto">
                             {moveHistory.length === 0 ? <p className="text-gray-500">{t("noMovesYet")}</p> : (
                                 <div className="flex flex-wrap gap-1">
-                                    {moveHistory.map((move, index) => <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">{index % 2 === 0 ? `${Math.floor(index / 2) + 1}.` : ""} {move}</span>)}
+                                    {moveHistory.map((move, index) => {
+                                        const before = new Chess(nodesById.get(nodePath[index])!.fen);
+                                        return <button key={index} onClick={() => navigateTo(index + 1)} aria-current={displayedIndex === index + 1 ? "step" : undefined} className={`px-2 py-1 rounded text-xs ${displayedIndex === index + 1 ? "bg-blue-600 text-white" : "bg-gray-100 dark:bg-gray-700"}`}>{before.moveNumber()}{before.turn() === "w" ? "." : "..."} {move}</button>;
+                                    })}
                                 </div>
                             )}
                         </div>
@@ -459,22 +400,35 @@ export default function PracticeSession({ practice, initialProgress }: PracticeS
                             <input
                                 type="checkbox"
                                 checked={showCoachHints}
-                                onChange={(e) => setShowCoachHints(e.target.checked)}
+                                onChange={(e) => {
+                                    setShowCoachHints(e.target.checked);
+                                    if (e.target.checked) usedCoachHints.current = true;
+                                }}
                                 className="form-checkbox"
                             />
                             <span className="text-sm font-medium">{t("showCoachHints")}</span>
                         </label>
                     </div>
 
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow space-y-2">
+                        <label className="flex items-center gap-2">
+                            <input type="checkbox" checked={seenOnly} disabled={totalSeen === 0} onChange={(e) => {
+                                setSeenOnly(e.target.checked);
+                                setSessionCompletedIds(new Set());
+                                startNewLine(e.target.checked);
+                            }} />
+                            <span className="text-sm font-medium">{t("practiceSeenLines")}</span>
+                        </label>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{totalSeen === 0 ? t("noSeenLines") : seenOnly ? t("seenLinesModeDescription") : t("practiceSeenLinesDescription")}</p>
+                    </div>
+
                     {feedback.type === "complete" ? (
-                        <button
-                            onClick={() => {
-                                startNewLine();
-                            }}
-                            className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700"
-                        >
-                            {t("nextLine")}
-                        </button>
+                        <div className="space-y-2">
+                            <button onClick={() => startNewLine()} className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700">
+                                {dueRemaining.size ? t("nextDueLine") : seenOnly ? t("nextSeenLine") : t("nextLine")}
+                            </button>
+                            <button onClick={handleRestart} className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">{t("repeatLine")}</button>
+                        </div>
                     ) : (
                         <button onClick={handleRestart} className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">
                             {t("restartPractice")}

@@ -1,0 +1,1367 @@
+{
+  "id": "node_1790900933218_3725",
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "move": null,
+  "notes": "Играете с белите. Виенската партия започва с 1. e4 e5 2. Nc3. Развивате дамския кон преди царския и запазвате възможността за активна игра с f4.",
+  "lineNumber": null,
+  "children": [
+    {
+      "id": "node_1790900933219_3726",
+      "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+      "move": "e2e4",
+      "notes": "",
+      "lineNumber": null,
+      "children": [
+        {
+          "id": "node_1790900933220_3727",
+          "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+          "move": "e7e5",
+          "notes": "Развийте коня с Nc3 и защитете e4. Запазвате възможността за f4, а изборът между спокоен и остър план зависи от развитието на черните.",
+          "lineNumber": null,
+          "children": [
+            {
+              "id": "node_1790900933220_3728",
+              "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq - 1 2",
+              "move": "b1c3",
+              "notes": "",
+              "lineNumber": null,
+              "children": [
+                {
+                  "id": "node_1790900933220_3729",
+                  "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w KQkq - 2 3",
+                  "move": "b8c6",
+                  "notes": "Развийте офицера с Bc4 и създайте натиск срещу f7. Завършете развитието, преди да предприемете жертва срещу царя.",
+                  "lineNumber": null,
+                  "children": [
+                    {
+                      "id": "node_1790900933221_3730",
+                      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR b KQkq - 3 3",
+                      "move": "f1c4",
+                      "notes": "",
+                      "lineNumber": null,
+                      "children": [
+                        {
+                          "id": "node_1790900933225_3731",
+                          "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w KQkq - 4 4",
+                          "move": "f8c5",
+                          "notes": "Играйте Qg4, като преместите дамата от d1 на g4. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                          "lineNumber": null,
+                          "children": [
+                            {
+                              "id": "node_1790900933225_3732",
+                              "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P1Q1/2N5/PPPP1PPP/R1B1K1NR b KQkq - 5 4",
+                              "move": "d1g4",
+                              "notes": "",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790900933225_3733",
+                                  "fen": "r1b1k1nr/pppp1ppp/2n2q2/2b1p3/2B1P1Q1/2N5/PPPP1PPP/R1B1K1NR w KQkq - 6 5",
+                                  "move": "d8f6",
+                                  "notes": "Играйте Nd5, като преместите коня от c3 на d5. Нападате дамата на f6 и създавате заплаха, на която противникът трябва да отговори.",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790900933226_3734",
+                                      "fen": "r1b1k1nr/pppp1ppp/2n2q2/2bNp3/2B1P1Q1/8/PPPP1PPP/R1B1K1NR b KQkq - 7 5",
+                                      "move": "c3d5",
+                                      "notes": "",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790900933226_3735",
+                                          "fen": "r1b1k1nr/pppp1ppp/2n5/2bNp3/2B1P1Q1/8/PPPP1qPP/R1B1K1NR w KQkq - 0 6",
+                                          "move": "f6f2",
+                                          "notes": "Отговорете на шаха с Kd1. Променяте позицията на царя. Проверете противниковите шахове и свободните полета около него.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933227_3736",
+                                              "fen": "r1b1k1nr/pppp1ppp/2n5/2bNp3/2B1P1Q1/8/PPPP1qPP/R1BK2NR b kq - 1 6",
+                                              "move": "e1d1",
+                                              "notes": "",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790900933227_3737",
+                                                  "fen": "r1b1k1nr/pppp1ppp/2n5/2bNp3/2B1P1Q1/8/PPPP2PP/R1BK1qNR w kq - 2 7",
+                                                  "move": "f2f1",
+                                                  "notes": "Отговорете на шаха с Bxf1. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933227_3738",
+                                                      "fen": "r1b1k1nr/pppp1ppp/2n5/2bNp3/4P1Q1/8/PPPP2PP/R1BK1BNR b kq - 0 7",
+                                                      "move": "c4f1",
+                                                      "notes": "Черните рядко ще подарят дамата си, но включих този вариант, защото с белите е важно да помните, че другите варианти от тази позиция работят само благодарение на офицера, който защитава това поле. Все пак повече от 10 000 партии са достигнали тази позиция, така че...",
+                                                      "lineNumber": 1,
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": "node_1790900933231_3739",
+                                                  "fen": "r1b1k1nr/ppp2ppp/2np4/2bNp3/2B1P1Q1/8/PPPP1qPP/R1BK2NR w kq - 0 7",
+                                                  "move": "d7d6",
+                                                  "notes": "Вземете пешката на g7 с Qxg7. Нападате топа на h8 и създавате заплаха, на която противникът трябва да отговори.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933232_3740",
+                                                      "fen": "r1b1k1nr/ppp2pQp/2np4/2bNp3/2B1P3/8/PPPP1qPP/R1BK2NR b kq - 0 7",
+                                                      "move": "g4g7",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933232_3741",
+                                                          "fen": "r3k1nr/ppp2pQp/2npb3/2bNp3/2B1P3/8/PPPP1qPP/R1BK2NR w kq - 1 8",
+                                                          "move": "c8e6",
+                                                          "notes": "Дайте шах с Nxc7+. Едновременно нападате топа на a8, царя на e8 и офицера на e6.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933232_3742",
+                                                              "fen": "r3k1nr/ppN2pQp/2npb3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR b kq - 0 8",
+                                                              "move": "d5c7",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933232_3743",
+                                                                  "fen": "r5nr/ppNk1pQp/2npb3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR w - - 1 9",
+                                                                  "move": "e8d7",
+                                                                  "notes": "Вземете офицера на e6 с Nxe6. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933232_3744",
+                                                                      "fen": "r5nr/pp1k1pQp/2npN3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR b - - 0 9",
+                                                                      "move": "c7e6",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933233_3745",
+                                                                          "fen": "r6r/pp1knpQp/2npN3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR w - - 1 10",
+                                                                          "move": "g8e7",
+                                                                          "notes": "Играйте Nh3, като преместите коня от g1 на h3. Нападате дамата на f2 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933233_3746",
+                                                                              "fen": "r6r/pp1knpQp/2npN3/2b1p3/2B1P3/7N/PPPP1qPP/R1BK3R b - - 2 10",
+                                                                              "move": "g1h3",
+                                                                              "notes": "За черните всичко е напълно приключило. Браво!",
+                                                                              "lineNumber": 2,
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "id": "node_1790900933269_3801",
+                                                                  "fen": "r2k2nr/ppN2pQp/2npb3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR w - - 1 9",
+                                                                  "move": "e8d8",
+                                                                  "notes": "Дайте шах с Nxe6+. Едновременно нападате царя на d8 и офицера на c5.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933270_3802",
+                                                                      "fen": "r2k2nr/pp3pQp/2npN3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR b - - 0 9",
+                                                                      "move": "c7e6",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933270_3803",
+                                                                          "fen": "r2k2nr/pp4Qp/2npp3/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR w - - 0 10",
+                                                                          "move": "f7e6",
+                                                                          "notes": "Играйте Nf3, като преместите коня от g1 на f3. Развивате коня и увеличавате контрола над централните полета.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933270_3804",
+                                                                              "fen": "r2k2nr/pp4Qp/2npp3/2b1p3/2B1P3/5N2/PPPP1qPP/R1BK3R b - - 1 10",
+                                                                              "move": "g1f3",
+                                                                              "notes": "Браво! На следващия ход вземаме топа. Компютърът ни дава предимство от пет или шест точки в тази позиция.",
+                                                                              "lineNumber": 8,
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "id": "node_1790900933246_3759",
+                                                          "fen": "r1b1k1nr/ppp2pQp/3p4/2bNp3/2BnP3/8/PPPP1qPP/R1BK2NR w kq - 1 8",
+                                                          "move": "c6d4",
+                                                          "notes": "Играйте Ne2, като преместите коня от g1 на e2. Развивате коня и увеличавате контрола над централните полета.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933246_3760",
+                                                              "fen": "r1b1k1nr/ppp2pQp/3p4/2bNp3/2BnP3/8/PPPPNqPP/R1BK3R b kq - 2 8",
+                                                              "move": "g1e2",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933246_3761",
+                                                                  "fen": "r1b1k1nr/ppp2pQp/3p4/2bNp3/2B1P3/8/PPPPnqPP/R1BK3R w kq - 0 9",
+                                                                  "move": "d4e2",
+                                                                  "notes": "Вземете коня на e2 с Bxe2. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933246_3762",
+                                                                      "fen": "r1b1k1nr/ppp2pQp/3p4/2bNp3/4P3/8/PPPPBqPP/R1BK3R b kq - 0 9",
+                                                                      "move": "c4e2",
+                                                                      "notes": "Браво! Вече сме в пълна безопасност и на следващия ход можем да вземем топа. Партията на практика е приключила.",
+                                                                      "lineNumber": 4,
+                                                                      "children": []
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": "node_1790900933260_3783",
+                                                  "fen": "r1b2knr/pppp1ppp/2n5/2bNp3/2B1P1Q1/8/PPPP1qPP/R1BK2NR w - - 2 7",
+                                                  "move": "e8f8",
+                                                  "notes": "Играйте Nh3, като преместите коня от g1 на h3. Нападате дамата на f2 и създавате заплаха, на която противникът трябва да отговори.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933260_3784",
+                                                      "fen": "r1b2knr/pppp1ppp/2n5/2bNp3/2B1P1Q1/7N/PPPP1qPP/R1BK3R b - - 3 7",
+                                                      "move": "g1h3",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933261_3785",
+                                                          "fen": "r1b2knr/pppp1ppp/2n5/2bNp3/2BqP1Q1/7N/PPPP2PP/R1BK3R w - - 4 8",
+                                                          "move": "f2d4",
+                                                          "notes": "Играйте d3 и преместете пешката от d2 на d3. Променяте централната пешечна структура. Проверете кои диагонали и линии се отварят за фигурите.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933261_3786",
+                                                              "fen": "r1b2knr/pppp1ppp/2n5/2bNp3/2BqP1Q1/3P3N/PPP3PP/R1BK3R b - - 0 8",
+                                                              "move": "d2d3",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933261_3787",
+                                                                  "fen": "r1b2knr/ppp2ppp/2np4/2bNp3/2BqP1Q1/3P3N/PPP3PP/R1BK3R w - - 0 9",
+                                                                  "move": "d7d6",
+                                                                  "notes": "Играйте Qg3, като преместите дамата от g4 на g3. Извеждате фигурата от непосредственото нападение и я запазвате за следващия план.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933261_3788",
+                                                                      "fen": "r1b2knr/ppp2ppp/2np4/2bNp3/2BqP3/3P2QN/PPP3PP/R1BK3R b - - 1 9",
+                                                                      "move": "g4g3",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933261_3789",
+                                                                          "fen": "r4knr/ppp2ppp/2np4/2bNp3/2BqP3/3P2Qb/PPP3PP/R1BK3R w - - 0 10",
+                                                                          "move": "c8h3",
+                                                                          "notes": "Играйте Rf1, като преместите топа от h1 на f1. Свързвате пешката на f7 към царя на f8.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933262_3790",
+                                                                              "fen": "r4knr/ppp2ppp/2np4/2bNp3/2BqP3/3P2Qb/PPP3PP/R1BK1R2 b - - 1 10",
+                                                                              "move": "h1f1",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933262_3791",
+                                                                                  "fen": "r4knr/ppp2ppp/2npb3/2bNp3/2BqP3/3P2Q1/PPP3PP/R1BK1R2 w - - 2 11",
+                                                                                  "move": "h3e6",
+                                                                                  "notes": "Играйте c3 и преместете пешката от c2 на c3. Нападате дамата на d4 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933262_3792",
+                                                                                      "fen": "r4knr/ppp2ppp/2npb3/2bNp3/2BqP3/2PP2Q1/PP4PP/R1BK1R2 b - - 0 11",
+                                                                                      "move": "c2c3",
+                                                                                      "notes": "Браво! Това е един от най-интересните шахматни варианти, които съм виждал.",
+                                                                                      "lineNumber": 6,
+                                                                                      "children": []
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "node_1790900933238_3747",
+                                  "fen": "r1bqk1nr/pppp1p1p/2n3p1/2b1p3/2B1P1Q1/2N5/PPPP1PPP/R1B1K1NR w KQkq - 0 5",
+                                  "move": "g7g6",
+                                  "notes": "Играйте Qf3, като преместите дамата от g4 на f3. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790900933238_3748",
+                                      "fen": "r1bqk1nr/pppp1p1p/2n3p1/2b1p3/2B1P3/2N2Q2/PPPP1PPP/R1B1K1NR b KQkq - 1 5",
+                                      "move": "g4f3",
+                                      "notes": "",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790900933238_3749",
+                                          "fen": "r1b1k1nr/pppp1p1p/2n2qp1/2b1p3/2B1P3/2N2Q2/PPPP1PPP/R1B1K1NR w KQkq - 2 6",
+                                          "move": "d8f6",
+                                          "notes": "Играйте Nd5, като преместите коня от c3 на d5. Нападате дамата на f6 и създавате заплаха, на която противникът трябва да отговори.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933239_3750",
+                                              "fen": "r1b1k1nr/pppp1p1p/2n2qp1/2bNp3/2B1P3/5Q2/PPPP1PPP/R1B1K1NR b KQkq - 3 6",
+                                              "move": "c3d5",
+                                              "notes": "",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790900933239_3751",
+                                                  "fen": "r1b1k1nr/pppp1p1p/2n3p1/2bNp3/2B1P3/5q2/PPPP1PPP/R1B1K1NR w KQkq - 0 7",
+                                                  "move": "f6f3",
+                                                  "notes": "Вземете дамата на f3 с Nxf3. Развивате коня и увеличавате контрола над централните полета.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933239_3752",
+                                                      "fen": "r1b1k1nr/pppp1p1p/2n3p1/2bNp3/2B1P3/5N2/PPPP1PPP/R1B1K2R b KQkq - 0 7",
+                                                      "move": "g1f3",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933239_3753",
+                                                          "fen": "r1b1k1nr/pppp1p1p/1bn3p1/3Np3/2B1P3/5N2/PPPP1PPP/R1B1K2R w KQkq - 1 8",
+                                                          "move": "c5b6",
+                                                          "notes": "Играйте d3 и преместете пешката от d2 на d3. Променяте централната пешечна структура. Проверете кои диагонали и линии се отварят за фигурите.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933239_3754",
+                                                              "fen": "r1b1k1nr/pppp1p1p/1bn3p1/3Np3/2B1P3/3P1N2/PPP2PPP/R1B1K2R b KQkq - 0 8",
+                                                              "move": "d2d3",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933240_3755",
+                                                                  "fen": "r1b1k2r/ppppnp1p/1bn3p1/3Np3/2B1P3/3P1N2/PPP2PPP/R1B1K2R w KQkq - 1 9",
+                                                                  "move": "g8e7",
+                                                                  "notes": "Дайте шах с Nf6+. Извеждате фигурата от непосредственото нападение и я запазвате за следващия план.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933240_3756",
+                                                                      "fen": "r1b1k2r/ppppnp1p/1bn2Np1/4p3/2B1P3/3P1N2/PPP2PPP/R1B1K2R b KQkq - 2 9",
+                                                                      "move": "d5f6",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933240_3757",
+                                                                          "fen": "r1b2k1r/ppppnp1p/1bn2Np1/4p3/2B1P3/3P1N2/PPP2PPP/R1B1K2R w KQ - 3 10",
+                                                                          "move": "e8f8",
+                                                                          "notes": "Завършете атаката с Bh6# — мат. Царят няма легална защита срещу шаха.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933240_3758",
+                                                                              "fen": "r1b2k1r/ppppnp1p/1bn2NpB/4p3/2B1P3/3P1N2/PPP2PPP/R3K2R b KQ - 4 10",
+                                                                              "move": "c1h6",
+                                                                              "notes": "Боже, това беше жестоко! Ще ми повярвате ли, ако кажа, че точно тази последователност е изиграна хиляди и хиляди пъти?",
+                                                                              "lineNumber": 3,
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "id": "node_1790900933265_3793",
+                                                                  "fen": "r1b1k1nr/ppp2p1p/1bnp2p1/3Np3/2B1P3/3P1N2/PPP2PPP/R1B1K2R w KQkq - 0 9",
+                                                                  "move": "d7d6",
+                                                                  "notes": "Играйте Be3, като преместите офицера от c1 на e3. Включвате офицера в играта. Следете активния му диагонал и подгответе безопасност за царя.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933265_3794",
+                                                                      "fen": "r1b1k1nr/ppp2p1p/1bnp2p1/3Np3/2B1P3/3PBN2/PPP2PPP/R3K2R b KQkq - 1 9",
+                                                                      "move": "c1e3",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933265_3795",
+                                                                          "fen": "r3k1nr/ppp2p1p/1bnpb1p1/3Np3/2B1P3/3PBN2/PPP2PPP/R3K2R w KQkq - 2 10",
+                                                                          "move": "c8e6",
+                                                                          "notes": "Вземете офицера на b6 с Bxb6. Разменяте еднотипни фигури. След размяната сравнете активността и пешечната структура.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933266_3796",
+                                                                              "fen": "r3k1nr/ppp2p1p/1Bnpb1p1/3Np3/2B1P3/3P1N2/PPP2PPP/R3K2R b KQkq - 0 10",
+                                                                              "move": "e3b6",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933266_3797",
+                                                                                  "fen": "r3k1nr/ppp2p1p/1Bnp2p1/3bp3/2B1P3/3P1N2/PPP2PPP/R3K2R w KQkq - 0 11",
+                                                                                  "move": "e6d5",
+                                                                                  "notes": "Вземете офицера на d5 с exd5. Нападате коня на c6 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933266_3798",
+                                                                                      "fen": "r3k1nr/ppp2p1p/1Bnp2p1/3Pp3/2B5/3P1N2/PPP2PPP/R3K2R b KQkq - 0 11",
+                                                                                      "move": "e4d5",
+                                                                                      "notes": "",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790900933266_3799",
+                                                                                          "fen": "r3k1nr/1pp2p1p/1pnp2p1/3Pp3/2B5/3P1N2/PPP2PPP/R3K2R w KQkq - 0 12",
+                                                                                          "move": "a7b6",
+                                                                                          "notes": "Вземете коня на c6 с dxc6. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790900933267_3800",
+                                                                                              "fen": "r3k1nr/1pp2p1p/1pPp2p1/4p3/2B5/3P1N2/PPP2PPP/R3K2R b KQkq - 0 12",
+                                                                                              "move": "d5c6",
+                                                                                              "notes": "Браво! Просто имаме фигура повече и ще спечелим тази партия.",
+                                                                                              "lineNumber": 7,
+                                                                                              "children": []
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        },
+                                                                        {
+                                                                          "id": "node_1790900933283_3817",
+                                                                          "fen": "r1b1k1nr/ppp2p1p/2np2p1/3Np3/2B1P3/3PbN2/PPP2PPP/R3K2R w KQkq - 0 10",
+                                                                          "move": "b6e3",
+                                                                          "notes": "Дайте шах с Nxc7+. Едновременно нападате топа на a8 и царя на e8.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933283_3818",
+                                                                              "fen": "r1b1k1nr/ppN2p1p/2np2p1/4p3/2B1P3/3PbN2/PPP2PPP/R3K2R b KQkq - 0 10",
+                                                                              "move": "d5c7",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933284_3819",
+                                                                                  "fen": "r1b3nr/ppNk1p1p/2np2p1/4p3/2B1P3/3PbN2/PPP2PPP/R3K2R w KQ - 1 11",
+                                                                                  "move": "e8d7",
+                                                                                  "notes": "Вземете топа на a8 с Nxa8. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933284_3820",
+                                                                                      "fen": "N1b3nr/pp1k1p1p/2np2p1/4p3/2B1P3/3PbN2/PPP2PPP/R3K2R b KQ - 0 11",
+                                                                                      "move": "c7a8",
+                                                                                      "notes": "",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790900933284_3821",
+                                                                                          "fen": "N1b3nr/pp1k1p1p/2np2p1/2b1p3/2B1P3/3P1N2/PPP2PPP/R3K2R w KQ - 1 12",
+                                                                                          "move": "e3c5",
+                                                                                          "notes": "Играйте c3 и преместете пешката от c2 на c3. Печелите флангово пространство. Проверете как пешечният ход променя защитата на царя и полетата за фигурите.",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790900933284_3822",
+                                                                                              "fen": "N1b3nr/pp1k1p1p/2np2p1/2b1p3/2B1P3/2PP1N2/PP3PPP/R3K2R b KQ - 0 12",
+                                                                                              "move": "c2c3",
+                                                                                              "notes": "Браво! Компютърът ни дава предимство от +3 точки.",
+                                                                                              "lineNumber": 10,
+                                                                                              "children": []
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "id": "node_1790900933275_3805",
+                                          "fen": "r1bqk2r/pppp1p1p/2n2np1/2b1p3/2B1P3/2N2Q2/PPPP1PPP/R1B1K1NR w KQkq - 2 6",
+                                          "move": "g8f6",
+                                          "notes": "Играйте Nge2, като преместите коня от g1 на e2. Развивате коня и увеличавате контрола над централните полета.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933276_3806",
+                                              "fen": "r1bqk2r/pppp1p1p/2n2np1/2b1p3/2B1P3/2N2Q2/PPPPNPPP/R1B1K2R b KQkq - 3 6",
+                                              "move": "g1e2",
+                                              "notes": "",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790900933276_3807",
+                                                  "fen": "r1bq1rk1/pppp1p1p/2n2np1/2b1p3/2B1P3/2N2Q2/PPPPNPPP/R1B1K2R w KQ - 4 7",
+                                                  "move": "e8g8",
+                                                  "notes": "Играйте d3 и преместете пешката от d2 на d3. Променяте централната пешечна структура. Проверете кои диагонали и линии се отварят за фигурите.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933277_3808",
+                                                      "fen": "r1bq1rk1/pppp1p1p/2n2np1/2b1p3/2B1P3/2NP1Q2/PPP1NPPP/R1B1K2R b KQ - 0 7",
+                                                      "move": "d2d3",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933277_3809",
+                                                          "fen": "r1bq1rk1/ppp2p1p/2np1np1/2b1p3/2B1P3/2NP1Q2/PPP1NPPP/R1B1K2R w KQ - 0 8",
+                                                          "move": "d7d6",
+                                                          "notes": "Играйте Bg5, като преместите офицера от c1 на g5. Свързвате коня на f6 към дамата на d8.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933278_3810",
+                                                              "fen": "r1bq1rk1/ppp2p1p/2np1np1/2b1p1B1/2B1P3/2NP1Q2/PPP1NPPP/R3K2R b KQ - 1 8",
+                                                              "move": "c1g5",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933278_3811",
+                                                                  "fen": "r1bq1r2/ppp2pkp/2np1np1/2b1p1B1/2B1P3/2NP1Q2/PPP1NPPP/R3K2R w KQ - 2 9",
+                                                                  "move": "g8g7",
+                                                                  "notes": "Играйте Nd5, като преместите коня от c3 на d5. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933278_3812",
+                                                                      "fen": "r1bq1r2/ppp2pkp/2np1np1/2bNp1B1/2B1P3/3P1Q2/PPP1NPPP/R3K2R b KQ - 3 9",
+                                                                      "move": "c3d5",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933279_3813",
+                                                                          "fen": "r2q1r2/ppp2pkp/2np1np1/2bNp1B1/2B1P1b1/3P1Q2/PPP1NPPP/R3K2R w KQ - 4 10",
+                                                                          "move": "c8g4",
+                                                                          "notes": "Дайте шах с Bxf6+. Едновременно нападате дамата на d8 и царя на g7.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933279_3814",
+                                                                              "fen": "r2q1r2/ppp2pkp/2np1Bp1/2bNp3/2B1P1b1/3P1Q2/PPP1NPPP/R3K2R b KQ - 0 10",
+                                                                              "move": "g5f6",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933279_3815",
+                                                                                  "fen": "r2q1rk1/ppp2p1p/2np1Bp1/2bNp3/2B1P1b1/3P1Q2/PPP1NPPP/R3K2R w KQ - 1 11",
+                                                                                  "move": "g7g8",
+                                                                                  "notes": "Вземете офицера на g4 с Qxg4. Свързвате пешката на g6 към царя на g8.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933279_3816",
+                                                                                      "fen": "r2q1rk1/ppp2p1p/2np1Bp1/2bNp3/2B1P1Q1/3P4/PPP1NPPP/R3K2R b KQ - 0 11",
+                                                                                      "move": "f3g4",
+                                                                                      "notes": "Добра игра! За черните всичко е напълно приключило.",
+                                                                                      "lineNumber": 9,
+                                                                                      "children": []
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "id": "node_1790900933328_3865",
+                                                          "fen": "r1bq1rk1/pppp1p1p/5np1/2b1p3/2BnP3/2NP1Q2/PPP1NPPP/R1B1K2R w KQ - 1 8",
+                                                          "move": "c6d4",
+                                                          "notes": "Вземете коня на d4 с Nxd4. Разменяте еднотипни фигури. След размяната сравнете активността и пешечната структура.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933328_3866",
+                                                              "fen": "r1bq1rk1/pppp1p1p/5np1/2b1p3/2BNP3/2NP1Q2/PPP2PPP/R1B1K2R b KQ - 0 8",
+                                                              "move": "e2d4",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933329_3867",
+                                                                  "fen": "r1bq1rk1/pppp1p1p/5np1/2b5/2BpP3/2NP1Q2/PPP2PPP/R1B1K2R w KQ - 0 9",
+                                                                  "move": "e5d4",
+                                                                  "notes": "Играйте Nd5, като преместите коня от c3 на d5. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933329_3868",
+                                                                      "fen": "r1bq1rk1/pppp1p1p/5np1/2bN4/2BpP3/3P1Q2/PPP2PPP/R1B1K2R b KQ - 1 9",
+                                                                      "move": "c3d5",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933329_3869",
+                                                                          "fen": "r1bq1rk1/pppp1p1p/6p1/2bn4/2BpP3/3P1Q2/PPP2PPP/R1B1K2R w KQ - 0 10",
+                                                                          "move": "f6d5",
+                                                                          "notes": "Вземете коня на d5 с Bxd5. Свързвате пешката на f7 към царя на g8.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933329_3870",
+                                                                              "fen": "r1bq1rk1/pppp1p1p/6p1/2bB4/3pP3/3P1Q2/PPP2PPP/R1B1K2R b KQ - 0 10",
+                                                                              "move": "c4d5",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933330_3871",
+                                                                                  "fen": "r1bq1rk1/pp1p1p1p/2p3p1/2bB4/3pP3/3P1Q2/PPP2PPP/R1B1K2R w KQ - 0 11",
+                                                                                  "move": "c7c6",
+                                                                                  "notes": "Играйте Bb3, като преместите офицера от d5 на b3. Свързвате пешката на f7 към царя на g8.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933330_3872",
+                                                                                      "fen": "r1bq1rk1/pp1p1p1p/2p3p1/2b5/3pP3/1B1P1Q2/PPP2PPP/R1B1K2R b KQ - 1 11",
+                                                                                      "move": "d5b3",
+                                                                                      "notes": "Браво! Компютърът ни дава леко предимство, но аз всъщност смятам, че белите са доста по-добре. Имаме огромен натиск върху пешката по линията f и по-нататък можем да играем офицер на h6, за да премахнем топа като защитник. Харесвам шансовете ни.",
+                                                                                      "lineNumber": 18,
+                                                                                      "children": []
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "node_1790900933251_3763",
+                          "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/2N5/PPPP1PPP/R1BQK1NR w KQkq - 4 4",
+                          "move": "g8f6",
+                          "notes": "Играйте d3 и преместете пешката от d2 на d3. Променяте централната пешечна структура. Проверете кои диагонали и линии се отварят за фигурите.",
+                          "lineNumber": null,
+                          "children": [
+                            {
+                              "id": "node_1790900933251_3764",
+                              "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/2NP4/PPP2PPP/R1BQK1NR b KQkq - 0 4",
+                              "move": "d2d3",
+                              "notes": "",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790900933251_3765",
+                                  "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2NP4/PPP2PPP/R1BQK1NR w KQkq - 1 5",
+                                  "move": "f8c5",
+                                  "notes": "Играйте f4 и преместете пешката от f2 на f4. Печелите флангово пространство. Проверете как пешечният ход променя защитата на царя и полетата за фигурите.",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790900933252_3766",
+                                      "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1PP2/2NP4/PPP3PP/R1BQK1NR b KQkq - 0 5",
+                                      "move": "f2f4",
+                                      "notes": "",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790900933252_3767",
+                                          "fen": "r1bqk2r/ppp2ppp/2np1n2/2b1p3/2B1PP2/2NP4/PPP3PP/R1BQK1NR w KQkq - 0 6",
+                                          "move": "d7d6",
+                                          "notes": "Играйте Nf3, като преместите коня от g1 на f3. Развивате коня и увеличавате контрола над централните полета.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933252_3768",
+                                              "fen": "r1bqk2r/ppp2ppp/2np1n2/2b1p3/2B1PP2/2NP1N2/PPP3PP/R1BQK2R b KQkq - 1 6",
+                                              "move": "g1f3",
+                                              "notes": "",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790900933252_3769",
+                                                  "fen": "r2qk2r/ppp2ppp/2np1n2/2b1p3/2B1PPb1/2NP1N2/PPP3PP/R1BQK2R w KQkq - 2 7",
+                                                  "move": "c8g4",
+                                                  "notes": "Играйте Na4, като преместите коня от c3 на a4. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933253_3770",
+                                                      "fen": "r2qk2r/ppp2ppp/2np1n2/2b1p3/N1B1PPb1/3P1N2/PPP3PP/R1BQK2R b KQkq - 3 7",
+                                                      "move": "c3a4",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933253_3771",
+                                                          "fen": "r2qk2r/ppp2ppp/3p1n2/2b1p3/N1BnPPb1/3P1N2/PPP3PP/R1BQK2R w KQkq - 4 8",
+                                                          "move": "c6d4",
+                                                          "notes": "Вземете офицера на c5 с Nxc5. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933253_3772",
+                                                              "fen": "r2qk2r/ppp2ppp/3p1n2/2N1p3/2BnPPb1/3P1N2/PPP3PP/R1BQK2R b KQkq - 0 8",
+                                                              "move": "a4c5",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933254_3773",
+                                                                  "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2BnPPb1/3P1N2/PPP3PP/R1BQK2R w KQkq - 0 9",
+                                                                  "move": "d6c5",
+                                                                  "notes": "Играйте c3 и преместете пешката от c2 на c3. Нападате коня на d4 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933254_3774",
+                                                                      "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2BnPPb1/2PP1N2/PP4PP/R1BQK2R b KQkq - 0 9",
+                                                                      "move": "c2c3",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933254_3775",
+                                                                          "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2B1PPb1/2PP1n2/PP4PP/R1BQK2R w KQkq - 0 10",
+                                                                          "move": "d4f3",
+                                                                          "notes": "Отговорете на шаха с gxf3. Нападате офицера на g4 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933254_3776",
+                                                                              "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2B1PPb1/2PP1P2/PP5P/R1BQK2R b KQkq - 0 10",
+                                                                              "move": "g2f3",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933255_3777",
+                                                                                  "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2B1PP2/2PP1P1b/PP5P/R1BQK2R w KQkq - 1 11",
+                                                                                  "move": "g4h3",
+                                                                                  "notes": "Играйте Rg1, като преместите топа от h1 на g1. Топът заема полуотворената линия g и може да упражнява натиск върху противниковите пешки.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933255_3778",
+                                                                                      "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2B1PP2/2PP1P1b/PP5P/R1BQK1R1 b Qkq - 2 11",
+                                                                                      "move": "h1g1",
+                                                                                      "notes": "",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790900933255_3779",
+                                                                                          "fen": "r2qk2r/ppp2ppp/8/2p1p2n/2B1PP2/2PP1P1b/PP5P/R1BQK1R1 w Qkq - 3 12",
+                                                                                          "move": "f6h5",
+                                                                                          "notes": "Играйте Rg5, като преместите топа от g1 на g5. Топът заема полуотворената линия g и може да упражнява натиск върху противниковите пешки.",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790900933255_3780",
+                                                                                              "fen": "r2qk2r/ppp2ppp/8/2p1p1Rn/2B1PP2/2PP1P1b/PP5P/R1BQK3 b Qkq - 4 12",
+                                                                                              "move": "g1g5",
+                                                                                              "notes": "",
+                                                                                              "lineNumber": null,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "id": "node_1790900933256_3781",
+                                                                                                  "fen": "r2qk2r/ppp2ppp/8/2p1p1R1/2B1Pn2/2PP1P1b/PP5P/R1BQK3 w Qkq - 0 13",
+                                                                                                  "move": "h5f4",
+                                                                                                  "notes": "Дайте шах с Rxe5+. Подобрявате разположението на топа. Следете кои централни линии могат да се отворят.",
+                                                                                                  "lineNumber": null,
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "id": "node_1790900933256_3782",
+                                                                                                      "fen": "r2qk2r/ppp2ppp/8/2p1R3/2B1Pn2/2PP1P1b/PP5P/R1BQK3 b Qkq - 0 13",
+                                                                                                      "move": "g5e5",
+                                                                                                      "notes": "Браво! Смазваме противника. Със силните ни фигури, контрола над центъра и слабия черен цар не виждам как можем да загубим това.",
+                                                                                                      "lineNumber": 5,
+                                                                                                      "children": []
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        },
+                                                                                        {
+                                                                                          "id": "node_1790900933289_3823",
+                                                                                          "fen": "r2qk2r/ppp2p1p/5np1/2p1p3/2B1PP2/2PP1P1b/PP5P/R1BQK1R1 w Qkq - 0 12",
+                                                                                          "move": "g7g6",
+                                                                                          "notes": "Вземете пешката на e5 с fxe5. Нападате коня на f6 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790900933289_3824",
+                                                                                              "fen": "r2qk2r/ppp2p1p/5np1/2p1P3/2B1P3/2PP1P1b/PP5P/R1BQK1R1 b Qkq - 0 12",
+                                                                                              "move": "f4e5",
+                                                                                              "notes": "",
+                                                                                              "lineNumber": null,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "id": "node_1790900933289_3825",
+                                                                                                  "fen": "r2qk2r/ppp2p1p/6p1/2p1P2n/2B1P3/2PP1P1b/PP5P/R1BQK1R1 w Qkq - 1 13",
+                                                                                                  "move": "f6h5",
+                                                                                                  "notes": "Играйте Bg5, като преместите офицера от c1 на g5. Нападате дамата на d8 и създавате заплаха, на която противникът трябва да отговори.",
+                                                                                                  "lineNumber": null,
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "id": "node_1790900933290_3826",
+                                                                                                      "fen": "r2qk2r/ppp2p1p/6p1/2p1P1Bn/2B1P3/2PP1P1b/PP5P/R2QK1R1 b Qkq - 2 13",
+                                                                                                      "move": "c1g5",
+                                                                                                      "notes": "Уау, това беше доста за запомняне. Добрата новина е, че позицията ни е смазваща.",
+                                                                                                      "lineNumber": 11,
+                                                                                                      "children": []
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        },
+                                                                        {
+                                                                          "id": "node_1790900933310_3843",
+                                                                          "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2BnPP2/2PP1b2/PP4PP/R1BQK2R w KQkq - 0 10",
+                                                                          "move": "g4f3",
+                                                                          "notes": "Вземете офицера на f3 с gxf3. След вземането проверете как противникът може да отвърне и кои линии се отварят.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933310_3844",
+                                                                              "fen": "r2qk2r/ppp2ppp/5n2/2p1p3/2BnPP2/2PP1P2/PP5P/R1BQK2R b KQkq - 0 10",
+                                                                              "move": "g2f3",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933311_3845",
+                                                                                  "fen": "r2qk2r/ppp2ppp/2n2n2/2p1p3/2B1PP2/2PP1P2/PP5P/R1BQK2R w KQkq - 1 11",
+                                                                                  "move": "d4c6",
+                                                                                  "notes": "Играйте Bb5, като преместите офицера от c4 на b5. Свързвате коня на c6 към царя на e8.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933311_3846",
+                                                                                      "fen": "r2qk2r/ppp2ppp/2n2n2/1Bp1p3/4PP2/2PP1P2/PP5P/R1BQK2R b KQkq - 2 11",
+                                                                                      "move": "c4b5",
+                                                                                      "notes": "Браво! Това е много удобна позиция за нас. Дори заплашваме да вземем коня на c6, което би утроило черните пешки по линията c.",
+                                                                                      "lineNumber": 14,
+                                                                                      "children": []
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "id": "node_1790900933321_3851",
+                                                          "fen": "r2qk2r/ppp2ppp/1bnp1n2/4p3/N1B1PPb1/3P1N2/PPP3PP/R1BQK2R w KQkq - 4 8",
+                                                          "move": "c5b6",
+                                                          "notes": "Вземете офицера на b6 с Nxb6. Нападате топа на a8 и създавате заплаха, на която противникът трябва да отговори.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933321_3852",
+                                                              "fen": "r2qk2r/ppp2ppp/1Nnp1n2/4p3/2B1PPb1/3P1N2/PPP3PP/R1BQK2R b KQkq - 0 8",
+                                                              "move": "a4b6",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933322_3853",
+                                                                  "fen": "r2qk2r/1pp2ppp/1pnp1n2/4p3/2B1PPb1/3P1N2/PPP3PP/R1BQK2R w KQkq - 0 9",
+                                                                  "move": "a7b6",
+                                                                  "notes": "Играйте c3 и преместете пешката от c2 на c3. Печелите флангово пространство. Проверете как пешечният ход променя защитата на царя и полетата за фигурите.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933322_3854",
+                                                                      "fen": "r2qk2r/1pp2ppp/1pnp1n2/4p3/2B1PPb1/2PP1N2/PP4PP/R1BQK2R b KQkq - 0 9",
+                                                                      "move": "c2c3",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933322_3855",
+                                                                          "fen": "r2q1rk1/1pp2ppp/1pnp1n2/4p3/2B1PPb1/2PP1N2/PP4PP/R1BQK2R w KQ - 1 10",
+                                                                          "move": "e8g8",
+                                                                          "notes": "Направете къса рокада с O-O. Царят напуска центъра, а топът се включва в играта.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933322_3856",
+                                                                              "fen": "r2q1rk1/1pp2ppp/1pnp1n2/4p3/2B1PPb1/2PP1N2/PP4PP/R1BQ1RK1 b - - 2 10",
+                                                                              "move": "e1g1",
+                                                                              "notes": "Браво! Царят ни е в безопасност и сме готови да продължим партията.",
+                                                                              "lineNumber": 16,
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": "node_1790900933293_3827",
+                                                  "fen": "r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1PP2/2NP1N2/PPP3PP/R1BQK2R w KQ - 2 7",
+                                                  "move": "e8g8",
+                                                  "notes": "Играйте f5 и преместете пешката от f4 на f5. Печелите флангово пространство. Проверете как пешечният ход променя защитата на царя и полетата за фигурите.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933293_3828",
+                                                      "fen": "r1bq1rk1/ppp2ppp/2np1n2/2b1pP2/2B1P3/2NP1N2/PPP3PP/R1BQK2R b KQ - 0 7",
+                                                      "move": "f4f5",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933294_3829",
+                                                          "fen": "r1bq1rk1/1pp2ppp/p1np1n2/2b1pP2/2B1P3/2NP1N2/PPP3PP/R1BQK2R w KQ - 0 8",
+                                                          "move": "a7a6",
+                                                          "notes": "Играйте Bg5, като преместите офицера от c1 на g5. Свързвате коня на f6 към дамата на d8.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933294_3830",
+                                                              "fen": "r1bq1rk1/1pp2ppp/p1np1n2/2b1pPB1/2B1P3/2NP1N2/PPP3PP/R2QK2R b KQ - 1 8",
+                                                              "move": "c1g5",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933294_3831",
+                                                                  "fen": "r1bq1rk1/1pp2pp1/p1np1n1p/2b1pPB1/2B1P3/2NP1N2/PPP3PP/R2QK2R w KQ - 0 9",
+                                                                  "move": "h7h6",
+                                                                  "notes": "Играйте Bh4, като преместите офицера от g5 на h4. Свързвате коня на f6 към дамата на d8.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933295_3832",
+                                                                      "fen": "r1bq1rk1/1pp2pp1/p1np1n1p/2b1pP2/2B1P2B/2NP1N2/PPP3PP/R2QK2R b KQ - 1 9",
+                                                                      "move": "g5h4",
+                                                                      "notes": "",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790900933295_3833",
+                                                                          "fen": "r1bq1rk1/1pp2pp1/p2p1n1p/2b1pP2/2BnP2B/2NP1N2/PPP3PP/R2QK2R w KQ - 2 10",
+                                                                          "move": "c6d4",
+                                                                          "notes": "Вземете коня на d4 с Nxd4. Разменяте еднотипни фигури. След размяната сравнете активността и пешечната структура.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933295_3834",
+                                                                              "fen": "r1bq1rk1/1pp2pp1/p2p1n1p/2b1pP2/2BNP2B/2NP4/PPP3PP/R2QK2R b KQ - 0 10",
+                                                                              "move": "f3d4",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933295_3835",
+                                                                                  "fen": "r1bq1rk1/1pp2pp1/p2p1n1p/4pP2/2BbP2B/2NP4/PPP3PP/R2QK2R w KQ - 0 11",
+                                                                                  "move": "c5d4",
+                                                                                  "notes": "Играйте Nd5, като преместите коня от c3 на d5. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933296_3836",
+                                                                                      "fen": "r1bq1rk1/1pp2pp1/p2p1n1p/3NpP2/2BbP2B/3P4/PPP3PP/R2QK2R b KQ - 1 11",
+                                                                                      "move": "c3d5",
+                                                                                      "notes": "Браво! Черните всъщност нямат добри възможности и ще загубят партията.",
+                                                                                      "lineNumber": 12,
+                                                                                      "children": []
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        },
+                                                                        {
+                                                                          "id": "node_1790900933300_3837",
+                                                                          "fen": "r1bq1rk1/2p2pp1/p1np1n1p/1pb1pP2/2B1P2B/2NP1N2/PPP3PP/R2QK2R w KQ - 0 10",
+                                                                          "move": "b7b5",
+                                                                          "notes": "Играйте Bb3, като преместите офицера от c4 на b3. Свързвате пешката на f7 към царя на g8.",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790900933301_3838",
+                                                                              "fen": "r1bq1rk1/2p2pp1/p1np1n1p/1pb1pP2/4P2B/1BNP1N2/PPP3PP/R2QK2R b KQ - 1 10",
+                                                                              "move": "c4b3",
+                                                                              "notes": "",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790900933301_3839",
+                                                                                  "fen": "r1bq1rk1/2p2pp1/p2p1n1p/1pb1pP2/3nP2B/1BNP1N2/PPP3PP/R2QK2R w KQ - 2 11",
+                                                                                  "move": "c6d4",
+                                                                                  "notes": "Вземете коня на d4 с Nxd4. Разменяте еднотипни фигури. След размяната сравнете активността и пешечната структура.",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790900933301_3840",
+                                                                                      "fen": "r1bq1rk1/2p2pp1/p2p1n1p/1pb1pP2/3NP2B/1BNP4/PPP3PP/R2QK2R b KQ - 0 11",
+                                                                                      "move": "f3d4",
+                                                                                      "notes": "",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790900933301_3841",
+                                                                                          "fen": "r1bq1rk1/2p2pp1/p2p1n1p/1p2pP2/3bP2B/1BNP4/PPP3PP/R2QK2R w KQ - 0 12",
+                                                                                          "move": "c5d4",
+                                                                                          "notes": "Играйте Nd5, като преместите коня от c3 на d5. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790900933301_3842",
+                                                                                              "fen": "r1bq1rk1/2p2pp1/p2p1n1p/1p1NpP2/3bP2B/1B1P4/PPP3PP/R2QK2R b KQ - 1 12",
+                                                                                              "move": "c3d5",
+                                                                                              "notes": "Свръзката ни е твърде силна. Вариантът вече стана достатъчно дълъг, затова ще го приключа тук. Знайте обаче, че от тази позиция белите печелят около 90% от партиите си.",
+                                                                                              "lineNumber": 13,
+                                                                                              "children": []
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "id": "node_1790900933332_3873",
+                                          "fen": "r1bqk2r/pppp1ppp/2n2n2/2b5/2B1Pp2/2NP4/PPP3PP/R1BQK1NR w KQkq - 0 6",
+                                          "move": "e5f4",
+                                          "notes": "Вземете пешката на f4 с Bxf4. Включвате офицера в играта. Следете активния му диагонал и подгответе безопасност за царя.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933332_3874",
+                                              "fen": "r1bqk2r/pppp1ppp/2n2n2/2b5/2B1PB2/2NP4/PPP3PP/R2QK1NR b KQkq - 0 6",
+                                              "move": "c1f4",
+                                              "notes": "",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790900933332_3875",
+                                                  "fen": "r1bq1rk1/pppp1ppp/2n2n2/2b5/2B1PB2/2NP4/PPP3PP/R2QK1NR w KQ - 1 7",
+                                                  "move": "e8g8",
+                                                  "notes": "Играйте Qd2, като преместите дамата от d1 на d2. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933333_3876",
+                                                      "fen": "r1bq1rk1/pppp1ppp/2n2n2/2b5/2B1PB2/2NP4/PPPQ2PP/R3K1NR b KQ - 2 7",
+                                                      "move": "d1d2",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933333_3877",
+                                                          "fen": "r1bq1rk1/ppp2ppp/2np1n2/2b5/2B1PB2/2NP4/PPPQ2PP/R3K1NR w KQ - 0 8",
+                                                          "move": "d7d6",
+                                                          "notes": "Направете дълга рокада с O-O-O. Царят напуска центъра, а топът се включва в играта.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933333_3878",
+                                                              "fen": "r1bq1rk1/ppp2ppp/2np1n2/2b5/2B1PB2/2NP4/PPPQ2PP/2KR2NR b - - 1 8",
+                                                              "move": "e1c1",
+                                                              "notes": "Ох, оттук ни чака истинска кървава битка! Браво и успех!",
+                                                              "lineNumber": 19,
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "node_1790900933316_3847",
+                                  "fen": "r1bqk2r/pppp1ppp/2n2n2/4p3/1bB1P3/2NP4/PPP2PPP/R1BQK1NR w KQkq - 1 5",
+                                  "move": "f8b4",
+                                  "notes": "Играйте Ne2, като преместите коня от g1 на e2. Развивате коня и увеличавате контрола над централните полета.",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790900933317_3848",
+                                      "fen": "r1bqk2r/pppp1ppp/2n2n2/4p3/1bB1P3/2NP4/PPP1NPPP/R1BQK2R b KQkq - 2 5",
+                                      "move": "g1e2",
+                                      "notes": "",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790900933317_3849",
+                                          "fen": "r1bq1rk1/pppp1ppp/2n2n2/4p3/1bB1P3/2NP4/PPP1NPPP/R1BQK2R w KQ - 3 6",
+                                          "move": "e8g8",
+                                          "notes": "Направете къса рокада с O-O. Царят напуска центъра, а топът се включва в играта.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933317_3850",
+                                              "fen": "r1bq1rk1/pppp1ppp/2n2n2/4p3/1bB1P3/2NP4/PPP1NPPP/R1BQ1RK1 b - - 4 6",
+                                              "move": "e1g1",
+                                              "notes": "Браво! Имаме предимство пред противника и сме готови да играем шах!",
+                                              "lineNumber": 15,
+                                              "children": []
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "id": "node_1790900933324_3857",
+                                          "fen": "r1bqk2r/ppp2ppp/2n2n2/3pp3/1bB1P3/2NP4/PPP1NPPP/R1BQK2R w KQkq - 0 6",
+                                          "move": "d7d5",
+                                          "notes": "Вземете пешката на d5 с exd5. Нападате коня на c6 и създавате заплаха, на която противникът трябва да отговори.",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790900933325_3858",
+                                              "fen": "r1bqk2r/ppp2ppp/2n2n2/3Pp3/1bB5/2NP4/PPP1NPPP/R1BQK2R b KQkq - 0 6",
+                                              "move": "e4d5",
+                                              "notes": "",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790900933325_3859",
+                                                  "fen": "r1bqk2r/ppp2ppp/2n5/3np3/1bB5/2NP4/PPP1NPPP/R1BQK2R w KQkq - 0 7",
+                                                  "move": "f6d5",
+                                                  "notes": "Направете къса рокада с O-O. Царят напуска центъра, а топът се включва в играта.",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790900933325_3860",
+                                                      "fen": "r1bqk2r/ppp2ppp/2n5/3np3/1bB5/2NP4/PPP1NPPP/R1BQ1RK1 b kq - 1 7",
+                                                      "move": "e1g1",
+                                                      "notes": "",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790900933325_3861",
+                                                          "fen": "r1bqk2r/ppp2ppp/2n5/4p3/1bB5/2nP4/PPP1NPPP/R1BQ1RK1 w kq - 0 8",
+                                                          "move": "d5c3",
+                                                          "notes": "Вземете коня на c3 с bxc3. Нападате офицера на b4 и създавате заплаха, на която противникът трябва да отговори.",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790900933325_3862",
+                                                              "fen": "r1bqk2r/ppp2ppp/2n5/4p3/1bB5/2PP4/P1P1NPPP/R1BQ1RK1 b kq - 0 8",
+                                                              "move": "b2c3",
+                                                              "notes": "",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790900933326_3863",
+                                                                  "fen": "r1bqk2r/ppp2ppp/2nb4/4p3/2B5/2PP4/P1P1NPPP/R1BQ1RK1 w kq - 1 9",
+                                                                  "move": "b4d6",
+                                                                  "notes": "Играйте Ng3, като преместите коня от e2 на g3. Подобрявате разположението на фигурата. Съгласувайте следващия ход с центъра и безопасността на царя.",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790900933326_3864",
+                                                                      "fen": "r1bqk2r/ppp2ppp/2nb4/4p3/2B5/2PP2N1/P1P2PPP/R1BQ1RK1 b kq - 2 9",
+                                                                      "move": "e2g3",
+                                                                      "notes": "Браво! И двете страни играха добре и сме готови за хубава партия.",
+                                                                      "lineNumber": 17,
+                                                                      "children": []
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

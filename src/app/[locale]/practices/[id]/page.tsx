@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import { getPractice } from "@/app/actions/practice";
 import { getPracticeProgress } from "@/app/actions/progress";
+import { getDueLineIds } from "@/app/actions/mission";
+import { getPracticeQuestions } from "@/app/actions/practiceQuestions";
+import { auth } from "@/auth";
 import PracticeSession from "@/components/PracticeSession";
 import Link from "next/link";
 
@@ -8,14 +11,19 @@ import { getTranslations } from "next-intl/server";
 
 interface PracticePageProps {
     params: Promise<{ id: string }>;
+    searchParams: Promise<{ review?: string }>;
 }
 
-export default async function PracticePage({ params }: PracticePageProps) {
+export default async function PracticePage({ params, searchParams }: PracticePageProps) {
     const { id } = await params;
+    const { review } = await searchParams;
     const t = await getTranslations("Practice");
-    const [practice, progressData] = await Promise.all([
+    const [practice, progressData, dueLineIds, questions, session] = await Promise.all([
         getPractice(id),
         getPracticeProgress(id),
+        review ? getDueLineIds(id) : Promise.resolve(undefined),
+        getPracticeQuestions(id),
+        auth(),
     ]);
 
     if (!practice || !practice.tree) {
@@ -33,7 +41,7 @@ export default async function PracticePage({ params }: PracticePageProps) {
                         ← {t("backToPractices")}
                     </Link>
                 </div>
-                <PracticeSession practice={practice} initialProgress={progressData} />
+                <PracticeSession practice={practice} initialProgress={progressData} dueLineIds={dueLineIds} questions={questions} canEditQuestions={session?.user?.role === "COACH"} />
             </div>
         </main>
     );

@@ -2,6 +2,17 @@ import { Chess } from "chess.js";
 import fs from "fs";
 import path from "path";
 
+interface OpeningData {
+    opening: {
+        lines: string[];
+        lineNames: Record<string, string>;
+        descriptions?: Record<string, string>;
+        shortDescriptions?: Record<string, string>;
+        sharedOpeningFen?: string;
+        sharedOpeningPgn?: string;
+    };
+}
+
 // Tree node structure for practice
 interface PracticeNode {
     id: string;
@@ -19,13 +30,13 @@ function generateNodeId(): string {
 }
 
 // Convert opening data to practice tree
-function convertOpeningToPractice(openingData: any): PracticeNode {
+function convertOpeningToPractice(openingData: OpeningData): PracticeNode {
     const { opening } = openingData;
-    const { lines, lineNames, descriptions, shortDescriptions, sharedOpeningFen, sharedOpeningPgn, playerSide, displayName } = opening;
+    const { lines, lineNames, descriptions, shortDescriptions, sharedOpeningFen, sharedOpeningPgn } = opening;
 
     // Create root node at starting position
     const rootFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    let rootNode: PracticeNode = {
+    const rootNode: PracticeNode = {
         id: generateNodeId(),
         fen: rootFen,
         move: null,
@@ -113,7 +124,7 @@ function convertOpeningToPractice(openingData: any): PracticeNode {
             if (sharedOpeningFen) {
                 // Find the move that brings us to the shared opening position
                 let moveIndex = 0;
-                let tempGame = new Chess();
+                const tempGame = new Chess();
                 while (moveIndex < history.length) {
                     tempGame.move(history[moveIndex].san);
                     if (tempGame.fen() === sharedOpeningFen) {
@@ -154,7 +165,7 @@ function convertOpeningToPractice(openingData: any): PracticeNode {
                     const from = uciMove.slice(0, 2);
                     const to = uciMove.slice(2, 4);
                     const promotion = uciMove[4] as "q" | "r" | "b" | "n" | undefined;
-                    const result = gameCopy.move({ from, to, promotion });
+                    gameCopy.move({ from, to, promotion });
                     
                     const newNode: PracticeNode = {
                         id: generateNodeId(),

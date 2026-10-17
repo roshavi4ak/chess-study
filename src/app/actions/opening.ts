@@ -5,6 +5,12 @@ import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+interface OpeningStepInput {
+    fen: string;
+    arrows: { startSquare: string; endSquare: string; color: string }[];
+    description: string;
+}
+
 export async function createOpening(formData: FormData) {
     const session = await auth();
 
@@ -22,7 +28,7 @@ export async function createOpening(formData: FormData) {
         throw new Error("Missing fields");
     }
 
-    let steps = [];
+    let steps: OpeningStepInput[] = [];
     if (stepsJson) {
         try {
             steps = JSON.parse(stepsJson);
@@ -38,7 +44,7 @@ export async function createOpening(formData: FormData) {
             description,
             createdBy: session.user.id!,
             steps: {
-                create: steps.map((step: any, index: number) => ({
+                create: steps.map((step, index) => ({
                     fen: step.fen,
                     arrows: JSON.stringify(step.arrows),
                     description: step.description,
@@ -111,7 +117,7 @@ export async function updateOpening(openingId: string, formData: FormData) {
         throw new Error("Missing fields");
     }
 
-    let steps = [];
+    let steps: OpeningStepInput[] = [];
     if (stepsJson) {
         try {
             steps = JSON.parse(stepsJson);
@@ -129,7 +135,7 @@ export async function updateOpening(openingId: string, formData: FormData) {
             description,
             steps: {
                 deleteMany: {},
-                create: steps.map((step: any, index: number) => ({
+                create: steps.map((step, index) => ({
                     fen: step.fen,
                     arrows: JSON.stringify(step.arrows),
                     description: step.description,

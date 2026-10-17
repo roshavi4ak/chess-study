@@ -14,7 +14,6 @@ async function fixPracticeLineNumbers(practiceId: string, practiceName: string) 
   console.log(`  Total nodes: ${nodes.length}`);
   
   // Find leaf nodes (nodes with no children)
-  const nodeIds = new Set(nodes.map(n => n.id));
   const nodesWithChildren = new Set(nodes.filter(n => n.parentId).map(n => n.parentId!));
   
   const leafNodes = nodes.filter(n => !nodesWithChildren.has(n.id));

@@ -1,0 +1,248 @@
+{
+  "status": "VALIDATED_LOCALLY",
+  "tacticalClaimsChecked": 610,
+  "totals": {
+    "lines": 483,
+    "nodes": 3879,
+    "notes": 2430
+  },
+  "practices": [
+    {
+      "slug": "french-defense",
+      "name": "Френска защита (French Defense)",
+      "playerColor": "BLACK",
+      "sourceLines": 26,
+      "lines": 26,
+      "nodes": 185,
+      "notes": 119,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "ruy-lopez",
+      "name": "Испанска партия (Ruy Lopez)",
+      "playerColor": "WHITE",
+      "sourceLines": 55,
+      "lines": 55,
+      "nodes": 490,
+      "notes": 300,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "queens-gambit-declined",
+      "name": "Отказан дамски гамбит (Queen's Gambit Declined)",
+      "playerColor": "WHITE",
+      "sourceLines": 20,
+      "lines": 20,
+      "nodes": 178,
+      "notes": 109,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "queens-gambit-accepted",
+      "name": "Приет дамски гамбит (Queen's Gambit Accepted)",
+      "playerColor": "WHITE",
+      "sourceLines": 16,
+      "lines": 16,
+      "nodes": 114,
+      "notes": 73,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "kings-indian-defense",
+      "name": "Староиндийска защита (King's Indian Defense)",
+      "playerColor": "BLACK",
+      "sourceLines": 35,
+      "lines": 35,
+      "nodes": 309,
+      "notes": 190,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "scandinavian-defense",
+      "name": "Скандинавска защита (Scandinavian Defense)",
+      "playerColor": "BLACK",
+      "sourceLines": 25,
+      "lines": 24,
+      "nodes": 135,
+      "notes": 93,
+      "removedPrefixes": [
+        {
+          "sourceLine": 3,
+          "pgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bf5 6. Bd2 e6 7. Ne4 Qb6 8. Nxf6+ gxf6 9. c3 Qxb2",
+          "reason": "Prefix of a retained longer line; its positions and notes remain in the tree."
+        }
+      ],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "petrov-defense",
+      "name": "Защита Петров (Petrov Defense)",
+      "playerColor": "BLACK",
+      "sourceLines": 24,
+      "lines": 24,
+      "nodes": 199,
+      "notes": 124,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "english",
+      "name": "Английско начало (English Opening)",
+      "playerColor": "WHITE",
+      "sourceLines": 17,
+      "lines": 17,
+      "nodes": 156,
+      "notes": 95,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "alapin-sicilian",
+      "name": "Сицилианска защита: вариант Алапин (Alapin Sicilian)",
+      "playerColor": "WHITE",
+      "sourceLines": 21,
+      "lines": 21,
+      "nodes": 202,
+      "notes": 122,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "bishop-opening",
+      "name": "Дебют на офицера (Bishop's Opening)",
+      "playerColor": "WHITE",
+      "sourceLines": 19,
+      "lines": 19,
+      "nodes": 200,
+      "notes": 119,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "vienna-game",
+      "name": "Виенска партия (Vienna Game)",
+      "playerColor": "WHITE",
+      "sourceLines": 19,
+      "lines": 19,
+      "nodes": 154,
+      "notes": 96,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "vienna-gambit-mastery",
+      "name": "Виенски гамбит – разширен курс (Vienna Gambit Mastery)",
+      "playerColor": "WHITE",
+      "sourceLines": 57,
+      "lines": 57,
+      "nodes": 362,
+      "notes": 238,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "vienna-gambit-counter",
+      "name": "Защита срещу Виенския гамбит (Vienna Gambit Counter)",
+      "playerColor": "BLACK",
+      "sourceLines": 14,
+      "lines": 14,
+      "nodes": 139,
+      "notes": 84,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "ponziani",
+      "name": "Дебют Понциани (Ponziani)",
+      "playerColor": "WHITE",
+      "sourceLines": 19,
+      "lines": 17,
+      "nodes": 130,
+      "notes": 84,
+      "removedPrefixes": [
+        {
+          "sourceLine": 11,
+          "pgn": "1. e4 e5 2. Nf3 Nc6 3. c3 Bc5 4. d4 exd4 5. cxd4 Bb4+ 6. Nc3 Nf6 7. d5 Ne7 8. Bd3",
+          "reason": "Prefix of a retained longer line; its positions and notes remain in the tree."
+        },
+        {
+          "sourceLine": 15,
+          "pgn": "1. e4 e5 2. Nf3 Nc6 3. c3 d6 4. d4 exd4 5. cxd4",
+          "reason": "Prefix of a retained longer line; its positions and notes remain in the tree."
+        }
+      ],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "kings-gambit",
+      "name": "Царски гамбит (King's Gambit)",
+      "playerColor": "WHITE",
+      "sourceLines": 22,
+      "lines": 22,
+      "nodes": 152,
+      "notes": 98,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "danish-gambit",
+      "name": "Датски гамбит (Danish Gambit)",
+      "playerColor": "WHITE",
+      "sourceLines": 15,
+      "lines": 15,
+      "nodes": 110,
+      "notes": 70,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "albin-countergambit",
+      "name": "Контрагамбит Албин (Albin Countergambit)",
+      "playerColor": "BLACK",
+      "sourceLines": 17,
+      "lines": 17,
+      "nodes": 157,
+      "notes": 96,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "traxler",
+      "name": "Контраатака Тракслер (Traxler Counterattack)",
+      "playerColor": "BLACK",
+      "sourceLines": 26,
+      "lines": 26,
+      "nodes": 211,
+      "notes": 132,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "rousseau-gambit",
+      "name": "Гамбит Русо (Rousseau Gambit)",
+      "playerColor": "BLACK",
+      "sourceLines": 24,
+      "lines": 24,
+      "nodes": 211,
+      "notes": 130,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    },
+    {
+      "slug": "englund-gambit",
+      "name": "Гамбит Енглунд (Englund Gambit)",
+      "playerColor": "BLACK",
+      "sourceLines": 15,
+      "lines": 15,
+      "nodes": 85,
+      "notes": 58,
+      "removedPrefixes": [],
+      "checkmatedStudentEndpoints": 0
+    }
+  ]
+}

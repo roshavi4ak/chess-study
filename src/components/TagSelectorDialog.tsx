@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { X, Check } from "lucide-react";
 
 interface TagSelectorDialogProps {
@@ -13,18 +13,19 @@ interface TagSelectorDialogProps {
 
 export default function TagSelectorDialog({
     isOpen,
+    ...props
+}: TagSelectorDialogProps) {
+    if (!isOpen) return null;
+    return <TagSelectorContent key={JSON.stringify(props.selectedTags)} {...props} />;
+}
+
+function TagSelectorContent({
     onClose,
     selectedTags,
     onSelectTags,
     availableTags
-}: TagSelectorDialogProps) {
+}: Omit<TagSelectorDialogProps, "isOpen">) {
     const [localSelectedTags, setLocalSelectedTags] = useState<string[]>(selectedTags);
-
-    useEffect(() => {
-        setLocalSelectedTags(selectedTags);
-    }, [selectedTags, isOpen]);
-
-    if (!isOpen) return null;
 
     const toggleTag = (tag: string) => {
         if (localSelectedTags.includes(tag)) {

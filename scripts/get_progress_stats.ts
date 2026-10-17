@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, type PracticeNode } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -50,9 +50,9 @@ async function main() {
             include: { children: true }
         });
 
-        function getLeafNodes(nodes: any[], parentId: string | null = null): any[] {
+        function getLeafNodes(nodes: PracticeNode[], parentId: string | null = null): PracticeNode[] {
             const children = nodes.filter(n => n.parentId === parentId);
-            const leaves: any[] = [];
+            const leaves: PracticeNode[] = [];
             for (const child of children) {
                 const childChildren = nodes.filter(n => n.parentId === child.id);
                 if (childChildren.length === 0) {

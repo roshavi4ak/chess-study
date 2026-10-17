@@ -86,8 +86,8 @@ async function main() {
                 return;
             }
             
-            const solvedPuzzles = Object.entries(userAttempts).filter(([_, stats]) => stats.solved);
-            const unsolvedPuzzles = Object.entries(userAttempts).filter(([_, stats]) => !stats.solved);
+            const solvedPuzzles = Object.entries(userAttempts).filter(([, stats]) => stats.solved);
+            const unsolvedPuzzles = Object.entries(userAttempts).filter(([, stats]) => !stats.solved);
             
             console.log(`Total solved puzzles: ${solvedPuzzles.length}`);
             console.log(`Total unsolved puzzles: ${unsolvedPuzzles.length}`);

@@ -9,6 +9,7 @@ interface SaveLineProgressParams {
     practiceId: string;
     nodeId: string;  // ID of the leaf node
     hadWrongMoves: boolean;
+    mistakes?: number; // Number of wrong moves in this attempt
     completed: boolean;
     coachNotesVisible: boolean;
 }
@@ -21,6 +22,7 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
     }
 
     const { practiceId, nodeId, hadWrongMoves, completed, coachNotesVisible } = params;
+    const mistakes = Math.max(hadWrongMoves ? 1 : 0, Math.min(1000, Math.round(params.mistakes ?? 0)));
 
     // Determine status
     let status: LineStatus;
@@ -73,6 +75,8 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
                 practiceId,
                 nodeId,
                 status,
+                mistakes,
+                usedHints: coachNotesVisible,
             }
         })
     ]);

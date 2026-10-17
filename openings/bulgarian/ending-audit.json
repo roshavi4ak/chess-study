@@ -1,0 +1,182 @@
+{
+  "date": "2026-10-08",
+  "method": "Full legal replay of every course path; factual closing explanations from the final learner moves, with individually reviewed Traxler endings. No unverified engine scores or win percentages.",
+  "practices": [
+    {
+      "name": "Италианска Игра (Italian Game)",
+      "lines": 22,
+      "missingEndings": 0,
+      "nodes": 256
+    },
+    {
+      "name": "Vienna Gambit (Виенски Гамбит) ",
+      "lines": 14,
+      "missingEndings": 2,
+      "nodes": 104
+    },
+    {
+      "name": "Stafford Gambit (Стафордски Гамбит)",
+      "lines": 13,
+      "missingEndings": 0,
+      "nodes": 115
+    },
+    {
+      "name": "Защита Каро-Кан (Caro-Kann)",
+      "lines": 28,
+      "missingEndings": 0,
+      "nodes": 261
+    },
+    {
+      "name": "Шотландска партия (Scotch Game)",
+      "lines": 27,
+      "missingEndings": 0,
+      "nodes": 234
+    },
+    {
+      "name": "Система Джобава–Лондон (Jobava-London)",
+      "lines": 26,
+      "missingEndings": 0,
+      "nodes": 204
+    },
+    {
+      "name": "Лондонска система (London)",
+      "lines": 28,
+      "missingEndings": 0,
+      "nodes": 240
+    },
+    {
+      "name": "Пържен дроп атака (Fried Liver Attack)",
+      "lines": 15,
+      "missingEndings": 0,
+      "nodes": 110
+    },
+    {
+      "name": "Сицилианска защита (Sicilian Defense)",
+      "lines": 38,
+      "missingEndings": 0,
+      "nodes": 335
+    },
+    {
+      "name": "Френска защита (French Defense)",
+      "lines": 26,
+      "missingEndings": 0,
+      "nodes": 185
+    },
+    {
+      "name": "Испанска партия (Ruy Lopez)",
+      "lines": 55,
+      "missingEndings": 0,
+      "nodes": 490
+    },
+    {
+      "name": "Отказан дамски гамбит (Queen's Gambit Declined)",
+      "lines": 20,
+      "missingEndings": 0,
+      "nodes": 178
+    },
+    {
+      "name": "Приет дамски гамбит (Queen's Gambit Accepted)",
+      "lines": 16,
+      "missingEndings": 0,
+      "nodes": 114
+    },
+    {
+      "name": "Староиндийска защита (King's Indian Defense)",
+      "lines": 35,
+      "missingEndings": 0,
+      "nodes": 309
+    },
+    {
+      "name": "Скандинавска защита (Scandinavian Defense)",
+      "lines": 24,
+      "missingEndings": 0,
+      "nodes": 135
+    },
+    {
+      "name": "Защита Петров (Petrov Defense)",
+      "lines": 24,
+      "missingEndings": 0,
+      "nodes": 199
+    },
+    {
+      "name": "Английско начало (English Opening)",
+      "lines": 17,
+      "missingEndings": 0,
+      "nodes": 156
+    },
+    {
+      "name": "Сицилианска защита: вариант Алапин (Alapin Sicilian)",
+      "lines": 21,
+      "missingEndings": 0,
+      "nodes": 202
+    },
+    {
+      "name": "Дебют на офицера (Bishop's Opening)",
+      "lines": 19,
+      "missingEndings": 0,
+      "nodes": 200
+    },
+    {
+      "name": "Виенска партия (Vienna Game)",
+      "lines": 19,
+      "missingEndings": 0,
+      "nodes": 154
+    },
+    {
+      "name": "Виенски гамбит – разширен курс (Vienna Gambit Mastery)",
+      "lines": 57,
+      "missingEndings": 0,
+      "nodes": 362
+    },
+    {
+      "name": "Защита срещу Виенския гамбит (Vienna Gambit Counter)",
+      "lines": 14,
+      "missingEndings": 0,
+      "nodes": 139
+    },
+    {
+      "name": "Дебют Понциани (Ponziani)",
+      "lines": 17,
+      "missingEndings": 0,
+      "nodes": 130
+    },
+    {
+      "name": "Царски гамбит (King's Gambit)",
+      "lines": 22,
+      "missingEndings": 0,
+      "nodes": 152
+    },
+    {
+      "name": "Датски гамбит (Danish Gambit)",
+      "lines": 15,
+      "missingEndings": 0,
+      "nodes": 110
+    },
+    {
+      "name": "Контрагамбит Албин (Albin Countergambit)",
+      "lines": 17,
+      "missingEndings": 0,
+      "nodes": 157
+    },
+    {
+      "name": "Контраатака Тракслер (Traxler Counterattack)",
+      "lines": 26,
+      "missingEndings": 0,
+      "nodes": 211
+    },
+    {
+      "name": "Гамбит Русо (Rousseau Gambit)",
+      "lines": 24,
+      "missingEndings": 0,
+      "nodes": 211
+    },
+    {
+      "name": "Гамбит Енглунд (Englund Gambit)",
+      "lines": 15,
+      "missingEndings": 0,
+      "nodes": 85
+    }
+  ],
+  "terminalLines": 694,
+  "positionsChecked": 13332
+}

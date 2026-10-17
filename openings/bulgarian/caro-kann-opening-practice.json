@@ -1,0 +1,2321 @@
+{
+  "id": "node_1790899526176_0",
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "move": null,
+  "notes": "В това упражнение играете с черните. След 1. e4 започнете защитата Каро-Кан с 1... c6, за да подготвите ...d5 и борба за центъра.",
+  "lineNumber": null,
+  "children": [
+    {
+      "id": "node_1790899526185_1",
+      "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+      "move": "e2e4",
+      "notes": "Нека научим защитата Каро-Кан! Играйте пешка на c6, за да подготвите ...d5 и да оспорите белия център.",
+      "lineNumber": null,
+      "children": [
+        {
+          "id": "node_1790899526185_2",
+          "fen": "rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+          "move": "c7c6",
+          "notes": "",
+          "lineNumber": null,
+          "children": [
+            {
+              "id": "node_1790899526186_3",
+              "fen": "rnbqkbnr/pp1ppppp/2p5/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+              "move": "d2d4",
+              "notes": "Белите заемат центъра с две пешки. Отговорете с ...d5: така атакувате пешката e4 и заставяте белите да изберат между размяна, придвижване и защита.",
+              "lineNumber": null,
+              "children": [
+                {
+                  "id": "node_1790899526186_4",
+                  "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+                  "move": "d7d5",
+                  "notes": "",
+                  "lineNumber": null,
+                  "children": [
+                    {
+                      "id": "node_1790899526199_5",
+                      "fen": "rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 3",
+                      "move": "e4e5",
+                      "notes": "С e5 белите влизат във варианта с придвижване. Играйте веднага ...c5, за да подкопаете опората на белия център на d4.",
+                      "lineNumber": null,
+                      "children": [
+                        {
+                          "id": "node_1790899526200_6",
+                          "fen": "rnbqkbnr/pp2pppp/8/2ppP3/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 0 4",
+                          "move": "c6c5",
+                          "notes": "",
+                          "lineNumber": null,
+                          "children": [
+                            {
+                              "id": "node_1790899526201_7",
+                              "fen": "rnbqkbnr/pp2pppp/8/2PpP3/8/8/PPP2PPP/RNBQKBNR b KQkq - 0 4",
+                              "move": "d4c5",
+                              "notes": "Белите взеха пешката c5. Развийте коня на c6 и атакувайте централните им пешки.",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790899526201_8",
+                                  "fen": "r1bqkbnr/pp2pppp/2n5/2PpP3/8/8/PPP2PPP/RNBQKBNR w KQkq - 1 5",
+                                  "move": "b8c6",
+                                  "notes": "",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790899526202_9",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/2PpP3/8/P7/1PP2PPP/RNBQKBNR b KQkq - 0 5",
+                                      "move": "a2a3",
+                                      "notes": "Не бързайте да вземате на e5. Играйте ...e6: освобождавате диагонал за офицера и поле за развитие на коня.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526202_10",
+                                          "fen": "r1bqkbnr/pp3ppp/2n1p3/2PpP3/8/P7/1PP2PPP/RNBQKBNR w KQkq - 0 6",
+                                          "move": "e7e6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526203_11",
+                                              "fen": "r1bqkbnr/pp3ppp/2n1p3/2PpP3/1P6/P7/2P2PPP/RNBQKBNR b KQkq - 0 6",
+                                              "move": "b2b4",
+                                              "notes": "Пешката e5 още не е подходяща за вземане. Играйте ...a5 и атакувайте белите пешки на дамския фланг.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526203_12",
+                                                  "fen": "r1bqkbnr/1p3ppp/2n1p3/p1PpP3/1P6/P7/2P2PPP/RNBQKBNR w KQkq - 0 7",
+                                                  "move": "a7a5",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526204_13",
+                                                      "fen": "r1bqkbnr/1p3ppp/2n1p3/pPPpP3/8/P7/2P2PPP/RNBQKBNR b KQkq - 0 7",
+                                                      "move": "b4b5",
+                                                      "notes": "След тази неточност на белите вече можете да вземете пешката e5 с коня.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526204_14",
+                                                          "fen": "r1bqkbnr/1p3ppp/4p3/pPPpn3/8/P7/2P2PPP/RNBQKBNR w KQkq - 0 8",
+                                                          "move": "c6e5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526205_15",
+                                                              "fen": "r1bqkbnr/1p3ppp/4p3/pPPpn3/8/P7/1BP2PPP/RN1QKBNR b KQkq - 1 8",
+                                                              "move": "c1b2",
+                                                              "notes": "Белият офицер е активен. Отговорете с ...f6 и атакувайте пешката e5, която поддържа белия център.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526205_16",
+                                                                  "fen": "r1bqkbnr/1p4pp/4pp2/pPPpn3/8/P7/1BP2PPP/RN1QKBNR w KQkq - 0 9",
+                                                                  "move": "f7f6",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526206_17",
+                                                                      "fen": "r1bqkbnr/1p4pp/4pp2/pPPpB3/8/P7/2P2PPP/RN1QKBNR b KQkq - 0 9",
+                                                                      "move": "b2e5",
+                                                                      "notes": "Вземете обратно на e5 с f-пешката и запазете силния пешечен център.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526206_18",
+                                                                          "fen": "r1bqkbnr/1p4pp/4p3/pPPpp3/8/P7/2P2PPP/RN1QKBNR w KQkq - 0 10",
+                                                                          "move": "f6e5",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526207_19",
+                                                                              "fen": "r1bqkbnr/1p4pp/4p3/pPPpp2Q/8/P7/2P2PPP/RN2KBNR b KQkq - 1 10",
+                                                                              "move": "d1h5",
+                                                                              "notes": "На шаха с дамата отговорете с ...g6. Закривате диагонала към царя и атакувате дамата.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526208_20",
+                                                                                  "fen": "r1bqkbnr/1p5p/4p1p1/pPPpp2Q/8/P7/2P2PPP/RN2KBNR w KQkq - 0 11",
+                                                                                  "move": "g7g6",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526209_21",
+                                                                                      "fen": "r1bqkbnr/1p5p/4p1p1/pPPpQ3/8/P7/2P2PPP/RN2KBNR b KQkq - 0 11",
+                                                                                      "move": "h5e5",
+                                                                                      "notes": "Развийте коня на f6 с темпо срещу бялата дама.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526210_22",
+                                                                                          "fen": "r1bqkb1r/1p5p/4pnp1/pPPpQ3/8/P7/2P2PPP/RN2KBNR w KQkq - 1 12",
+                                                                                          "move": "g8f6",
+                                                                                          "notes": "Браво!! Въпреки че имаме пешка по-малко, със сигурност скоро ще си я върнем, а силният ни център кара компютъра да ни дава предимство от 2 или 3 точки!!",
+                                                                                          "lineNumber": 1,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "id": "node_1790899526246_57",
+                                                      "fen": "r1bqkbnr/1p3ppp/2n1p3/p1PpP3/1P6/P7/1BP2PPP/RN1QKBNR b KQkq - 1 7",
+                                                      "move": "c1b2",
+                                                      "notes": "Белите не размениха пешките. Вземете на b4 с a-пешката и отворете линията a.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526246_58",
+                                                          "fen": "r1bqkbnr/1p3ppp/2n1p3/2PpP3/1p6/P7/1BP2PPP/RN1QKBNR w KQkq - 0 8",
+                                                          "move": "a5b4",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526247_59",
+                                                              "fen": "r1bqkbnr/1p3ppp/2n1p3/2PpP3/1P6/8/1BP2PPP/RN1QKBNR b KQkq - 0 8",
+                                                              "move": "a3b4",
+                                                              "notes": "По отворената линия разменете топовете с ...Rxa1.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526247_60",
+                                                                  "fen": "2bqkbnr/1p3ppp/2n1p3/2PpP3/1P6/8/1BP2PPP/rN1QKBNR w Kk - 0 9",
+                                                                  "move": "a8a1",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526247_61",
+                                                                      "fen": "2bqkbnr/1p3ppp/2n1p3/2PpP3/1P6/8/2P2PPP/BN1QKBNR b Kk - 0 9",
+                                                                      "move": "b2a1",
+                                                                      "notes": "Сега вземете пешката b4 с коня и възстановете материала.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526247_62",
+                                                                          "fen": "2bqkbnr/1p3ppp/4p3/2PpP3/1n6/8/2P2PPP/BN1QKBNR w Kk - 0 10",
+                                                                          "move": "c6b4",
+                                                                          "notes": "Браво!! Компютърът много харесва позицията ни тук, а белият офицер е заседнал и гледа собствената си пешка.",
+                                                                          "lineNumber": 6,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526217_23",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/2PpP3/5P2/8/PPP3PP/RNBQKBNR b KQkq - 0 5",
+                                      "move": "f2f4",
+                                      "notes": "Белите укрепват центъра с f4. Развийте коня на h6; оттам той може да се насочи към f5.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526217_24",
+                                          "fen": "r1bqkb1r/pp2pppp/2n4n/2PpP3/5P2/8/PPP3PP/RNBQKBNR w KQkq - 1 6",
+                                          "move": "g8h6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526218_25",
+                                              "fen": "r1bqkb1r/pp2pppp/2n4n/2PpP3/5P2/2P5/PP4PP/RNBQKBNR b KQkq - 0 6",
+                                              "move": "c2c3",
+                                              "notes": "Играйте ...e6, за да подкрепите d5 и да освободите диагонала на чернополия офицер.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526218_26",
+                                                  "fen": "r1bqkb1r/pp3ppp/2n1p2n/2PpP3/5P2/2P5/PP4PP/RNBQKBNR w KQkq - 0 7",
+                                                  "move": "e7e6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526218_27",
+                                                      "fen": "r1bqkb1r/pp3ppp/2n1p2n/2PpP3/1P3P2/2P5/P5PP/RNBQKBNR b KQkq - 0 7",
+                                                      "move": "b2b4",
+                                                      "notes": "Атакувайте белите пешки на дамския фланг с ...a5.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526219_28",
+                                                          "fen": "r1bqkb1r/1p3ppp/2n1p2n/p1PpP3/1P3P2/2P5/P5PP/RNBQKBNR w KQkq - 0 8",
+                                                          "move": "a7a5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526219_29",
+                                                              "fen": "r1bqkb1r/1p3ppp/2n1p2n/pBPpP3/1P3P2/2P5/P5PP/RNBQK1NR b KQkq - 1 8",
+                                                              "move": "f1b5",
+                                                              "notes": "Освободете коня от свръзката с офицер на d7.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526219_30",
+                                                                  "fen": "r2qkb1r/1p1b1ppp/2n1p2n/pBPpP3/1P3P2/2P5/P5PP/RNBQK1NR w KQkq - 2 9",
+                                                                  "move": "c8d7",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526220_31",
+                                                                      "fen": "r2qkb1r/1p1b1ppp/2B1p2n/p1PpP3/1P3P2/2P5/P5PP/RNBQK1NR b KQkq - 0 9",
+                                                                      "move": "b5c6",
+                                                                      "notes": "Вземете белия офицер на c6 с офицера от d7.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526220_32",
+                                                                          "fen": "r2qkb1r/1p3ppp/2b1p2n/p1PpP3/1P3P2/2P5/P5PP/RNBQK1NR w KQkq - 0 10",
+                                                                          "move": "d7c6",
+                                                                          "notes": "Понеже белият цар е толкова слаб, компютърът ни дава предимство от 1 или 2 точки в тази позиция.",
+                                                                          "lineNumber": 2,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "node_1790899526333_191",
+                                              "fen": "r1bqkb1r/pp2pppp/2n4n/2PpP3/5P2/5N2/PPP3PP/RNBQKB1R b KQkq - 2 6",
+                                              "move": "g1f3",
+                                              "notes": "След развитието на коня f3 го свържете с офицер на g4.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526333_192",
+                                                  "fen": "r2qkb1r/pp2pppp/2n4n/2PpP3/5Pb1/5N2/PPP3PP/RNBQKB1R w KQkq - 3 7",
+                                                  "move": "c8g4",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526333_193",
+                                                      "fen": "r2qkb1r/pp2pppp/2n4n/2PpP3/5Pb1/4BN2/PPP3PP/RN1QKB1R b KQkq - 4 7",
+                                                      "move": "c1e3",
+                                                      "notes": "Конят h6 вече може да скочи на f5 и да атакува белия офицер.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526333_194",
+                                                          "fen": "r2qkb1r/pp2pppp/2n5/2PpPn2/5Pb1/4BN2/PPP3PP/RN1QKB1R w KQkq - 5 8",
+                                                          "move": "h6f5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526334_195",
+                                                              "fen": "r2qkb1r/pp2pppp/2n5/2PpPn2/5Pb1/5N2/PPP2BPP/RN1QKB1R b KQkq - 6 8",
+                                                              "move": "e3f2",
+                                                              "notes": "Атакувайте устойчивата бяла пешечна верига с ...g5 и търсете начин да я разклатите.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526334_196",
+                                                                  "fen": "r2qkb1r/pp2pp1p/2n5/2PpPnp1/5Pb1/5N2/PPP2BPP/RN1QKB1R w KQkq - 0 9",
+                                                                  "move": "g7g5",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526334_197",
+                                                                      "fen": "r2qkb1r/pp2pp1p/2n5/2PpPnP1/6b1/5N2/PPP2BPP/RN1QKB1R b KQkq - 0 9",
+                                                                      "move": "f4g5",
+                                                                      "notes": "Играйте ...e6. С един ход освобождавате дамата към g5 и офицера към c5, създавайки две заплахи.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526334_198",
+                                                                          "fen": "r2qkb1r/pp3p1p/2n1p3/2PpPnP1/6b1/5N2/PPP2BPP/RN1QKB1R w KQkq - 0 10",
+                                                                          "move": "e7e6",
+                                                                          "notes": "Това беше страхотно! Сега дамата ни се прицелва в пешката на g5, а офицерът — в пешката на c5. Ще си върнем материала!",
+                                                                          "lineNumber": 20,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "id": "node_1790899526355_235",
+                                                      "fen": "r2qkb1r/pp2pppp/2n4n/2PpP3/5Pb1/5N2/PPP1B1PP/RNBQK2R b KQkq - 4 7",
+                                                      "move": "f1e2",
+                                                      "notes": "Играйте ...e6 и открийте диагонала на офицера към незащитената пешка c5.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526355_236",
+                                                          "fen": "r2qkb1r/pp3ppp/2n1p2n/2PpP3/5Pb1/5N2/PPP1B1PP/RNBQK2R w KQkq - 0 8",
+                                                          "move": "e7e6",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526355_237",
+                                                              "fen": "r2qkb1r/pp3ppp/2n1p2n/2PpP3/5Pb1/4BN2/PPP1B1PP/RN1QK2R b KQkq - 1 8",
+                                                              "move": "c1e3",
+                                                              "notes": "Скочете с коня на f5 и атакувайте белия офицер.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526356_238",
+                                                                  "fen": "r2qkb1r/pp3ppp/2n1p3/2PpPn2/5Pb1/4BN2/PPP1B1PP/RN1QK2R w KQkq - 2 9",
+                                                                  "move": "h6f5",
+                                                                  "notes": "Браво! Черните печелят повечето си партии от тази позиция.",
+                                                                  "lineNumber": 25,
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526312_151",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/1BPpP3/8/8/PPP2PPP/RNBQK1NR b KQkq - 2 5",
+                                      "move": "f1b5",
+                                      "notes": "Играйте ...e6. Освобождавате офицера за натиск върху c5 и подготвяте развитието на коня.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526312_152",
+                                          "fen": "r1bqkbnr/pp3ppp/2n1p3/1BPpP3/8/8/PPP2PPP/RNBQK1NR w KQkq - 0 6",
+                                          "move": "e7e6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526313_153",
+                                              "fen": "r1bqkbnr/pp3ppp/2n1p3/1BPpP3/1P6/8/P1P2PPP/RNBQK1NR b KQkq - 0 6",
+                                              "move": "b2b4",
+                                              "notes": "Белите подкрепят пешката c5. Атакувайте опората на тази верига с ...a5.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526313_154",
+                                                  "fen": "r1bqkbnr/1p3ppp/2n1p3/pBPpP3/1P6/8/P1P2PPP/RNBQK1NR w KQkq - 0 7",
+                                                  "move": "a7a5",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526313_155",
+                                                      "fen": "r1bqkbnr/1p3ppp/2n1p3/pBPpP3/1P6/2P5/P4PPP/RNBQK1NR b KQkq - 0 7",
+                                                      "move": "c2c3",
+                                                      "notes": "Вземете на b4 с a-пешката и отворете линията a за топа.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526314_156",
+                                                          "fen": "r1bqkbnr/1p3ppp/2n1p3/1BPpP3/1p6/2P5/P4PPP/RNBQK1NR w KQkq - 0 8",
+                                                          "move": "a5b4",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526314_157",
+                                                              "fen": "r1bqkbnr/1p3ppp/2n1p3/1BPpP3/1P6/8/P4PPP/RNBQK1NR b KQkq - 0 8",
+                                                              "move": "c3b4",
+                                                              "notes": "Освободете коня c6 от свръзката с офицер на d7. Така той отново може да атакува b4.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526314_158",
+                                                                  "fen": "r2qkbnr/1p1b1ppp/2n1p3/1BPpP3/1P6/8/P4PPP/RNBQK1NR w KQkq - 1 9",
+                                                                  "move": "c8d7",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526314_159",
+                                                                      "fen": "r2qkbnr/1p1b1ppp/2B1p3/2PpP3/1P6/8/P4PPP/RNBQK1NR b KQkq - 0 9",
+                                                                      "move": "b5c6",
+                                                                      "notes": "След размяната вземете офицера на c6 с вашия офицер.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526315_160",
+                                                                          "fen": "r2qkbnr/1p3ppp/2b1p3/2PpP3/1P6/8/P4PPP/RNBQK1NR w KQkq - 0 10",
+                                                                          "move": "d7c6",
+                                                                          "notes": "Браво! Оттук ще продължим с обичайното развитие на фигурите си.",
+                                                                          "lineNumber": 17,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "node_1790899526350_221",
+                                              "fen": "r1bqkbnr/pp3ppp/2B1p3/2PpP3/8/8/PPP2PPP/RNBQK1NR b KQkq - 0 6",
+                                              "move": "b5c6",
+                                              "notes": "Вземете белия офицер на c6 с b-пешката.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526350_222",
+                                                  "fen": "r1bqkbnr/p4ppp/2p1p3/2PpP3/8/8/PPP2PPP/RNBQK1NR w KQkq - 0 7",
+                                                  "move": "b7c6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526351_223",
+                                                      "fen": "r1bqkbnr/p4ppp/2p1p3/2PpP3/1P6/8/P1P2PPP/RNBQK1NR b KQkq - 0 7",
+                                                      "move": "b2b4",
+                                                      "notes": "Играйте ...a5 и атакувайте пешечната верига на дамския фланг.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526351_224",
+                                                          "fen": "r1bqkbnr/5ppp/2p1p3/p1PpP3/1P6/8/P1P2PPP/RNBQK1NR w KQkq - 0 8",
+                                                          "move": "a7a5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526351_225",
+                                                              "fen": "r1bqkbnr/5ppp/2p1p3/p1PpP3/1P6/2P5/P4PPP/RNBQK1NR b KQkq - 0 8",
+                                                              "move": "c2c3",
+                                                              "notes": "Вземете на b4 с a-пешката.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526351_226",
+                                                                  "fen": "r1bqkbnr/5ppp/2p1p3/2PpP3/1p6/2P5/P4PPP/RNBQK1NR w KQkq - 0 9",
+                                                                  "move": "a5b4",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526351_227",
+                                                                      "fen": "r1bqkbnr/5ppp/2p1p3/2PpP3/1P6/8/P4PPP/RNBQK1NR b KQkq - 0 9",
+                                                                      "move": "c3b4",
+                                                                      "notes": "Изведете дамата на h4. Атакувате пешката b4 по диагонала и подготвяте шахове срещу белия цар.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526351_228",
+                                                                          "fen": "r1b1kbnr/5ppp/2p1p3/2PpP3/1P5q/8/P4PPP/RNBQK1NR w KQkq - 1 10",
+                                                                          "move": "d8h4",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526352_229",
+                                                                              "fen": "r1b1kbnr/5ppp/2p1p3/2PpP3/1P5q/8/P2B1PPP/RN1QK1NR b KQkq - 2 10",
+                                                                              "move": "c1d2",
+                                                                              "notes": "Играйте дама на e4 с шах. Създавате двойни заплахи срещу царя и пешките g2 и e5.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526352_230",
+                                                                                  "fen": "r1b1kbnr/5ppp/2p1p3/2PpP3/1P2q3/8/P2B1PPP/RN1QK1NR w KQkq - 3 11",
+                                                                                  "move": "h4e4",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526352_231",
+                                                                                      "fen": "r1b1kbnr/5ppp/2p1p3/2PpP3/1P2q3/8/P2BQPPP/RN2K1NR b KQkq - 4 11",
+                                                                                      "move": "d1e2",
+                                                                                      "notes": "Запазете активната дама вместо да я разменяте. Вземете пешката g2.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526352_232",
+                                                                                          "fen": "r1b1kbnr/5ppp/2p1p3/2PpP3/1P6/8/P2BQPqP/RN2K1NR w KQkq - 0 12",
+                                                                                          "move": "e4g2",
+                                                                                          "notes": "",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790899526352_233",
+                                                                                              "fen": "r1b1kbnr/5ppp/2p1p3/2PpP3/1P6/5Q2/P2B1PqP/RN2K1NR b KQkq - 1 12",
+                                                                                              "move": "e2f3",
+                                                                                              "notes": "Отстъпете с дамата на g6, като запазите натиска срещу открития бял цар.",
+                                                                                              "lineNumber": null,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "id": "node_1790899526352_234",
+                                                                                                  "fen": "r1b1kbnr/5ppp/2p1p1q1/2PpP3/1P6/5Q2/P2B1P1P/RN2K1NR w KQkq - 2 13",
+                                                                                                  "move": "g2g6",
+                                                                                                  "notes": "Браво! Справяме се чудесно! Вижте колко слаб и открит е белият цар. Няма къде да се скрие. Докато държим дамата си на дъската, белите имат проблеми. Междувременно всичките ни пешки са свързани и координирани.",
+                                                                                                  "lineNumber": 24,
+                                                                                                  "children": []
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "node_1790899526367_255",
+                                              "fen": "r1bqkbnr/pp3ppp/2n1p3/1BPpP3/8/4B3/PPP2PPP/RN1QK1NR b KQkq - 1 6",
+                                              "move": "c1e3",
+                                              "notes": "Започнете маневрата на коня с ...Ne7. Следващата цел е полето f5.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526367_256",
+                                                  "fen": "r1bqkb1r/pp2nppp/2n1p3/1BPpP3/8/4B3/PPP2PPP/RN1QK1NR w KQkq - 2 7",
+                                                  "move": "g8e7",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526367_257",
+                                                      "fen": "r1bqkb1r/pp2nppp/2n1p3/1BPpP3/8/2P1B3/PP3PPP/RN1QK1NR b KQkq - 0 7",
+                                                      "move": "c2c3",
+                                                      "notes": "Скочете с коня на f5 и атакувайте белия офицер.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526367_258",
+                                                          "fen": "r1bqkb1r/pp3ppp/2n1p3/1BPpPn2/8/2P1B3/PP3PPP/RN1QK1NR w KQkq - 1 8",
+                                                          "move": "e7f5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526367_259",
+                                                              "fen": "r1bqkb1r/pp3ppp/2n1p3/1BPpPn2/3B4/2P5/PP3PPP/RN1QK1NR b KQkq - 2 8",
+                                                              "move": "e3d4",
+                                                              "notes": "Не бързайте да разменяте на d4, защото ще подобрите бялата пешечна структура. Освободете коня от свръзката с офицер на d7.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526367_260",
+                                                                  "fen": "r2qkb1r/pp1b1ppp/2n1p3/1BPpPn2/3B4/2P5/PP3PPP/RN1QK1NR w KQkq - 3 9",
+                                                                  "move": "c8d7",
+                                                                  "notes": "Браво! Имаме стабилна позиция и сме готови да завършим развитието си и да рокираме.",
+                                                                  "lineNumber": 28,
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526337_199",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/2PpP3/8/5N2/PPP2PPP/RNBQKB1R b KQkq - 2 5",
+                                      "move": "g1f3",
+                                      "notes": "Белите защитават пешките си. Развийте офицера на g4 и създайте допълнителен натиск.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526337_200",
+                                          "fen": "r2qkbnr/pp2pppp/2n5/2PpP3/6b1/5N2/PPP2PPP/RNBQKB1R w KQkq - 3 6",
+                                          "move": "c8g4",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526337_201",
+                                              "fen": "r2qkbnr/pp2pppp/2n5/1BPpP3/6b1/5N2/PPP2PPP/RNBQK2R b KQkq - 4 6",
+                                              "move": "f1b5",
+                                              "notes": "Изведете дамата на a5 с шах и спечелете темпо.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526337_202",
+                                                  "fen": "r3kbnr/pp2pppp/2n5/qBPpP3/6b1/5N2/PPP2PPP/RNBQK2R w KQkq - 5 7",
+                                                  "move": "d8a5",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526337_203",
+                                                      "fen": "r3kbnr/pp2pppp/2n5/qBPpP3/6b1/2N2N2/PPP2PPP/R1BQK2R b KQkq - 6 7",
+                                                      "move": "b1c3",
+                                                      "notes": "Играйте ...e6. Подкрепяте центъра, освобождавате офицера срещу c5 и подготвяте развитието на коня.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526338_204",
+                                                          "fen": "r3kbnr/pp3ppp/2n1p3/qBPpP3/6b1/2N2N2/PPP2PPP/R1BQK2R w KQkq - 0 8",
+                                                          "move": "e7e6",
+                                                          "notes": "Браво! Предстои ни шахматна партия.",
+                                                          "lineNumber": 21,
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "node_1790899526225_33",
+                              "fen": "rnbqkbnr/pp2pppp/8/2ppP3/3P4/2P5/PP3PPP/RNBQKBNR b KQkq - 0 4",
+                              "move": "c2c3",
+                              "notes": "Белите поддържат центъра с c3. Развийте коня на c6 и увеличете натиска върху d4.",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790899526225_34",
+                                  "fen": "r1bqkbnr/pp2pppp/2n5/2ppP3/3P4/2P5/PP3PPP/RNBQKBNR w KQkq - 1 5",
+                                  "move": "b8c6",
+                                  "notes": "",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790899526226_35",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/2ppP3/3P4/2P2N2/PP3PPP/RNBQKB1R b KQkq - 2 5",
+                                      "move": "g1f3",
+                                      "notes": "Изяснете централната структура с ...cxd4. След размяната пешката d4 ще стане основна цел.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526226_36",
+                                          "fen": "r1bqkbnr/pp2pppp/2n5/3pP3/3p4/2P2N2/PP3PPP/RNBQKB1R w KQkq - 0 6",
+                                          "move": "c5d4",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526227_37",
+                                              "fen": "r1bqkbnr/pp2pppp/2n5/3pP3/3P4/5N2/PP3PPP/RNBQKB1R b KQkq - 0 6",
+                                              "move": "c3d4",
+                                              "notes": "Планът е да атакувате d4. Играйте офицер на g4, за да свържете коня f3, който защитава тази пешка.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526227_38",
+                                                  "fen": "r2qkbnr/pp2pppp/2n5/3pP3/3P2b1/5N2/PP3PPP/RNBQKB1R w KQkq - 1 7",
+                                                  "move": "c8g4",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526227_39",
+                                                      "fen": "r2qkbnr/pp2pppp/2n5/3pP3/3P2b1/5N1P/PP3PP1/RNBQKB1R b KQkq - 0 7",
+                                                      "move": "h2h3",
+                                                      "notes": "След h3 разменете офицера за коня на f3 и премахнете защитник на d4.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526228_40",
+                                                          "fen": "r2qkbnr/pp2pppp/2n5/3pP3/3P4/5b1P/PP3PP1/RNBQKB1R w KQkq - 0 8",
+                                                          "move": "g4f3",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526228_41",
+                                                              "fen": "r2qkbnr/pp2pppp/2n5/3pP3/3P4/5Q1P/PP3PP1/RNB1KB1R b KQkq - 0 8",
+                                                              "move": "d1f3",
+                                                              "notes": "Вземете пешката d4 с коня. Ходът атакува и бялата дама.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526229_42",
+                                                                  "fen": "r2qkbnr/pp2pppp/8/3pP3/3n4/5Q1P/PP3PP1/RNB1KB1R w KQkq - 0 9",
+                                                                  "move": "c6d4",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526229_43",
+                                                                      "fen": "r2qkbnr/pp2pppp/8/3pP3/3n4/3Q3P/PP3PP1/RNB1KB1R b KQkq - 1 9",
+                                                                      "move": "f3d3",
+                                                                      "notes": "Върнете коня на c6, където отново атакува пешката e5.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526229_44",
+                                                                          "fen": "r2qkbnr/pp2pppp/2n5/3pP3/8/3Q3P/PP3PP1/RNB1KB1R w KQkq - 2 10",
+                                                                          "move": "d4c6",
+                                                                          "notes": "Красиво! Просто имаме пешка повече.",
+                                                                          "lineNumber": 3,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "id": "node_1790899526233_45",
+                                                              "fen": "r2qkbnr/pp2pppp/2n5/3pP3/3P4/5P1P/PP3P2/RNBQKB1R b KQkq - 0 8",
+                                                              "move": "g2f3",
+                                                              "notes": "Играйте дама на b6 и добавете още един нападател срещу d4.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526233_46",
+                                                                  "fen": "r3kbnr/pp2pppp/1qn5/3pP3/3P4/5P1P/PP3P2/RNBQKB1R w KQkq - 1 9",
+                                                                  "move": "d8b6",
+                                                                  "notes": "Браво! Тук на белите им е много трудно да защитят позицията си.",
+                                                                  "lineNumber": 4,
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "id": "node_1790899526263_77",
+                                                      "fen": "r2qkbnr/pp2pppp/2n5/3pP3/3P2b1/5N2/PP2BPPP/RNBQK2R b KQkq - 2 7",
+                                                      "move": "f1e2",
+                                                      "notes": "Играйте ...e6. Освобождавате чернополия офицер и полето e7 за коня g8.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526264_78",
+                                                          "fen": "r2qkbnr/pp3ppp/2n1p3/3pP3/3P2b1/5N2/PP2BPPP/RNBQK2R w KQkq - 0 8",
+                                                          "move": "e7e6",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526264_79",
+                                                              "fen": "r2qkbnr/pp3ppp/2n1p3/3pP3/3P2b1/5N1P/PP2BPP1/RNBQK2R b KQkq - 0 8",
+                                                              "move": "h2h3",
+                                                              "notes": "След h3 вземете коня f3 с офицера, за да премахнете защитник на d4.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526265_80",
+                                                                  "fen": "r2qkbnr/pp3ppp/2n1p3/3pP3/3P4/5b1P/PP2BPP1/RNBQK2R w KQkq - 0 9",
+                                                                  "move": "g4f3",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526265_81",
+                                                                      "fen": "r2qkbnr/pp3ppp/2n1p3/3pP3/3P4/5B1P/PP3PP1/RNBQK2R b KQkq - 0 9",
+                                                                      "move": "e2f3",
+                                                                      "notes": "Играйте дама на b6 и усилете натиска върху d4 и b2. Ранното придвижване на c-пешката е освободило този диагонал за дамата.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526266_82",
+                                                                          "fen": "r3kbnr/pp3ppp/1qn1p3/3pP3/3P4/5B1P/PP3PP1/RNBQK2R w KQkq - 1 10",
+                                                                          "move": "d8b6",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526266_83",
+                                                                              "fen": "r3kbnr/pp3ppp/1qn1p3/3pP3/3P4/4BB1P/PP3PP1/RN1QK2R b KQkq - 2 10",
+                                                                              "move": "c1e3",
+                                                                              "notes": "Белите защитиха d4, но оставиха b2. Вземете пешката b2 с дамата.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526267_84",
+                                                                                  "fen": "r3kbnr/pp3ppp/2n1p3/3pP3/3P4/4BB1P/Pq3PP1/RN1QK2R w KQkq - 0 11",
+                                                                                  "move": "b6b2",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526267_85",
+                                                                                      "fen": "r3kbnr/pp3ppp/2n1p3/3pP3/3P4/4BB1P/Pq1N1PP1/R2QK2R b KQkq - 1 11",
+                                                                                      "move": "b1d2",
+                                                                                      "notes": "Развийте офицера на b4 и свържете коня d2 към царя.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526268_86",
+                                                                                          "fen": "r3k1nr/pp3ppp/2n1p3/3pP3/1b1P4/4BB1P/Pq1N1PP1/R2QK2R w KQkq - 2 12",
+                                                                                          "move": "f8b4",
+                                                                                          "notes": "Браво! Имаме пешка повече и напълно подходяща за игра позиция.",
+                                                                                          "lineNumber": 8,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "id": "node_1790899526285_105",
+                                                              "fen": "r2qkbnr/pp3ppp/2n1p3/3pP3/3P2b1/5N2/PP2BPPP/RNBQ1RK1 b kq - 1 8",
+                                                              "move": "e1g1",
+                                                              "notes": "Започнете маневрата на коня към f5 с ...Ne7.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526285_106",
+                                                                  "fen": "r2qkb1r/pp2nppp/2n1p3/3pP3/3P2b1/5N2/PP2BPPP/RNBQ1RK1 w kq - 2 9",
+                                                                  "move": "g8e7",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526285_107",
+                                                                      "fen": "r2qkb1r/pp2nppp/2n1p3/3pP3/3P2b1/2N2N2/PP2BPPP/R1BQ1RK1 b kq - 3 9",
+                                                                      "move": "b1c3",
+                                                                      "notes": "Продължете с кон на f5 и увеличете натиска върху слабата пешка d4.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526285_108",
+                                                                          "fen": "r2qkb1r/pp3ppp/2n1p3/3pPn2/3P2b1/2N2N2/PP2BPPP/R1BQ1RK1 w kq - 4 10",
+                                                                          "move": "e7f5",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526286_109",
+                                                                              "fen": "r2qkb1r/pp3ppp/2n1p3/3pPn2/3P2b1/2N1BN2/PP2BPPP/R2Q1RK1 b kq - 5 10",
+                                                                              "move": "c1e3",
+                                                                              "notes": "Белият офицер е зает със защитата на d4. Развийте чернополия си офицер на e7.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526286_110",
+                                                                                  "fen": "r2qk2r/pp2bppp/2n1p3/3pPn2/3P2b1/2N1BN2/PP2BPPP/R2Q1RK1 w kq - 6 11",
+                                                                                  "move": "f8e7",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526286_111",
+                                                                                      "fen": "r2qk2r/pp2bppp/2n1p3/3pPn2/3P2b1/P1N1BN2/1P2BPPP/R2Q1RK1 b kq - 0 11",
+                                                                                      "move": "a2a3",
+                                                                                      "notes": "Направете къса рокада, за да обезопасите царя и да свържете топовете.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526287_112",
+                                                                                          "fen": "r2q1rk1/pp2bppp/2n1p3/3pPn2/3P2b1/P1N1BN2/1P2BPPP/R2Q1RK1 w - - 1 12",
+                                                                                          "move": "e8g8",
+                                                                                          "notes": "Браво! Тук имаме добра позиция.",
+                                                                                          "lineNumber": 11,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                      "id": "node_1790899526345_213",
+                                                                                      "fen": "r2qk2r/pp2bppp/2n1p3/3pPn2/3P2b1/2N1BN1P/PP2BPP1/R2Q1RK1 b kq - 0 11",
+                                                                                      "move": "h2h3",
+                                                                                      "notes": "Вземете коня f3 с офицера. Премахвате важен защитник на слабата пешка d4.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526346_214",
+                                                                                          "fen": "r2qk2r/pp2bppp/2n1p3/3pPn2/3P4/2N1Bb1P/PP2BPP1/R2Q1RK1 w kq - 0 12",
+                                                                                          "move": "g4f3",
+                                                                                          "notes": "",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790899526346_215",
+                                                                                              "fen": "r2qk2r/pp2bppp/2n1p3/3pPn2/3P4/2N1BB1P/PP3PP1/R2Q1RK1 b kq - 0 12",
+                                                                                              "move": "e2f3",
+                                                                                              "notes": "Направете къса рокада, преди да предприемете нови действия в центъра.",
+                                                                                              "lineNumber": null,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "id": "node_1790899526346_216",
+                                                                                                  "fen": "r2q1rk1/pp2bppp/2n1p3/3pPn2/3P4/2N1BB1P/PP3PP1/R2Q1RK1 w - - 1 13",
+                                                                                                  "move": "e8g8",
+                                                                                                  "notes": "",
+                                                                                                  "lineNumber": null,
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "id": "node_1790899526346_217",
+                                                                                                      "fen": "r2q1rk1/pp2bppp/2n1p3/3pPn2/3P4/2N1BB1P/PP3PP1/2RQ1RK1 b - - 2 13",
+                                                                                                      "move": "a1c1",
+                                                                                                      "notes": "Подкопайте белия център с ...f6. Това е важен пешечен пробив срещу e5.",
+                                                                                                      "lineNumber": null,
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "id": "node_1790899526346_218",
+                                                                                                          "fen": "r2q1rk1/pp2b1pp/2n1pp2/3pPn2/3P4/2N1BB1P/PP3PP1/2RQ1RK1 w - - 0 14",
+                                                                                                          "move": "f7f6",
+                                                                                                          "notes": "",
+                                                                                                          "lineNumber": null,
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "id": "node_1790899526346_219",
+                                                                                                              "fen": "r2q1rk1/pp2b1pp/2n1pP2/3p1n2/3P4/2N1BB1P/PP3PP1/2RQ1RK1 b - - 0 14",
+                                                                                                              "move": "e5f6",
+                                                                                                              "notes": "След размяната вземете на f6 с офицера. От това поле той усилва натиска върху d4.",
+                                                                                                              "lineNumber": null,
+                                                                                                              "children": [
+                                                                                                                {
+                                                                                                                  "id": "node_1790899526347_220",
+                                                                                                                  "fen": "r2q1rk1/pp4pp/2n1pb2/3p1n2/3P4/2N1BB1P/PP3PP1/2RQ1RK1 w - - 0 15",
+                                                                                                                  "move": "e7f6",
+                                                                                                                  "notes": "Браво! Това е чудесна позиция за игра с черните. Всичките ни фигури са насочени към най-голямата слабост на белите.",
+                                                                                                                  "lineNumber": 23,
+                                                                                                                  "children": []
+                                                                                                                }
+                                                                                                              ]
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526238_47",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/2ppP3/3P1P2/2P5/PP4PP/RNBQKBNR b KQkq - 0 5",
+                                      "move": "f2f4",
+                                      "notes": "Белите са направили много пешечни ходове и изостават в развитието. Вземете на d4 с c-пешката.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526238_48",
+                                          "fen": "r1bqkbnr/pp2pppp/2n5/3pP3/3p1P2/2P5/PP4PP/RNBQKBNR w KQkq - 0 6",
+                                          "move": "c5d4",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526238_49",
+                                              "fen": "r1bqkbnr/pp2pppp/2n5/3pP3/3P1P2/8/PP4PP/RNBQKBNR b KQkq - 0 6",
+                                              "move": "c3d4",
+                                              "notes": "Играйте ...h5. Пешката ограничава възможностите за g4 и създава пространство на царския фланг.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526238_50",
+                                                  "fen": "r1bqkbnr/pp2ppp1/2n5/3pP2p/3P1P2/8/PP4PP/RNBQKBNR w KQkq - 0 7",
+                                                  "move": "h7h5",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526239_51",
+                                                      "fen": "r1bqkbnr/pp2ppp1/2n5/3pP2p/3P1P2/5N2/PP4PP/RNBQKB1R b KQkq - 1 7",
+                                                      "move": "g1f3",
+                                                      "notes": "Развийте офицера на g4 и свържете коня f3.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526239_52",
+                                                          "fen": "r2qkbnr/pp2ppp1/2n5/3pP2p/3P1Pb1/5N2/PP4PP/RNBQKB1R w KQkq - 2 8",
+                                                          "move": "c8g4",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526239_53",
+                                                              "fen": "r2qkbnr/pp2ppp1/2n5/3pP2p/3P1Pb1/5N2/PP2B1PP/RNBQK2R b KQkq - 3 8",
+                                                              "move": "f1e2",
+                                                              "notes": "След като изведохте белополия офицер, играйте ...e6 и освободете другия офицер.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526240_54",
+                                                                  "fen": "r2qkbnr/pp3pp1/2n1p3/3pP2p/3P1Pb1/5N2/PP2B1PP/RNBQK2R w KQkq - 0 9",
+                                                                  "move": "e7e6",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526240_55",
+                                                                      "fen": "r2qkbnr/pp3pp1/2n1p3/3pP2p/3P1Pb1/5N2/PP2B1PP/RNBQ1RK1 b kq - 1 9",
+                                                                      "move": "e1g1",
+                                                                      "notes": "Развийте дамата на b6 и увеличете натиска върху d4 и b2.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526240_56",
+                                                                          "fen": "r3kbnr/pp3pp1/1qn1p3/3pP2p/3P1Pb1/5N2/PP2B1PP/RNBQ1RK1 w kq - 2 10",
+                                                                          "move": "d8b6",
+                                                                          "notes": "Браво! Въпреки че материалът е равен, компютърът смята, че сме по-добре в тази позиция.",
+                                                                          "lineNumber": 5,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526272_87",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/1BppP3/3P4/2P5/PP3PPP/RNBQK1NR b KQkq - 2 5",
+                                      "move": "f1b5",
+                                      "notes": "Белите свързаха коня c6. Отговорете с дама на a5: създавате свръзка по диагонала към белия цар.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526272_88",
+                                          "fen": "r1b1kbnr/pp2pppp/2n5/qBppP3/3P4/2P5/PP3PPP/RNBQK1NR w KQkq - 3 6",
+                                          "move": "d8a5",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526272_89",
+                                              "fen": "r1b1kbnr/pp2pppp/2B5/q1ppP3/3P4/2P5/PP3PPP/RNBQK1NR b KQkq - 0 6",
+                                              "move": "b5c6",
+                                              "notes": "Вземете офицера c6 с b-пешката.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526273_90",
+                                                  "fen": "r1b1kbnr/p3pppp/2p5/q1ppP3/3P4/2P5/PP3PPP/RNBQK1NR w KQkq - 0 7",
+                                                  "move": "b7c6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526273_91",
+                                                      "fen": "r1b1kbnr/p3pppp/2p5/q1ppP3/3P4/2P5/PP1B1PPP/RN1QK1NR b KQkq - 1 7",
+                                                      "move": "c1d2",
+                                                      "notes": "Белите подготвят открито нападение срещу дамата. Отстъпете на b6, като продължите да защитавате пешката c5.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526273_92",
+                                                          "fen": "r1b1kbnr/p3pppp/1qp5/2ppP3/3P4/2P5/PP1B1PPP/RN1QK1NR w KQkq - 2 8",
+                                                          "move": "a5b6",
+                                                          "notes": "Браво! Имаме по-добра позиция и идеи за офицер на a6 в бъдеще.",
+                                                          "lineNumber": 9,
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526292_117",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/2ppP3/3P4/2P1B3/PP3PPP/RN1QKBNR b KQkq - 2 5",
+                                      "move": "c1e3",
+                                      "notes": "Целта е да атакувате белия офицер. Развийте коня на h6, за да го насочите към f5.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526293_118",
+                                          "fen": "r1bqkb1r/pp2pppp/2n4n/2ppP3/3P4/2P1B3/PP3PPP/RN1QKBNR w KQkq - 3 6",
+                                          "move": "g8h6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526293_119",
+                                              "fen": "r1bqkb1r/pp2pppp/2n4B/2ppP3/3P4/2P5/PP3PPP/RN1QKBNR b KQkq - 0 6",
+                                              "move": "e3h6",
+                                              "notes": "Белите размениха офицера за коня h6. Вземете обратно с g-пешката, въпреки че пешките по линията h ще се удвоят.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526293_120",
+                                                  "fen": "r1bqkb1r/pp2pp1p/2n4p/2ppP3/3P4/2P5/PP3PPP/RN1QKBNR w KQkq - 0 7",
+                                                  "move": "g7h6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526293_121",
+                                                      "fen": "r1bqkb1r/pp2pp1p/2n4p/2ppP3/3P4/2P2N2/PP3PPP/RN1QKB1R b KQkq - 1 7",
+                                                      "move": "g1f3",
+                                                      "notes": "Играйте дама на b6 и създайте натиск срещу белия център и пешката b2.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526293_122",
+                                                          "fen": "r1b1kb1r/pp2pp1p/1qn4p/2ppP3/3P4/2P2N2/PP3PPP/RN1QKB1R w KQkq - 2 8",
+                                                          "move": "d8b6",
+                                                          "notes": "Браво! Имаме множество заплахи срещу белите и на противника ще му бъде трудно да се справи с тях. Черните печелят в над 60% от случаите от тази позиция.",
+                                                          "lineNumber": 13,
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "node_1790899526252_63",
+                      "fen": "rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 3",
+                      "move": "e4d5",
+                      "notes": "Белите избират разменния вариант. Вземете обратно на d5 с c-пешката.",
+                      "lineNumber": null,
+                      "children": [
+                        {
+                          "id": "node_1790899526253_64",
+                          "fen": "rnbqkbnr/pp2pppp/8/3p4/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 0 4",
+                          "move": "c6d5",
+                          "notes": "",
+                          "lineNumber": null,
+                          "children": [
+                            {
+                              "id": "node_1790899526253_65",
+                              "fen": "rnbqkbnr/pp2pppp/8/3p4/2PP4/8/PP3PPP/RNBQKBNR b KQkq - 0 4",
+                              "move": "c2c4",
+                              "notes": "С c4 започва атаката на Панов–Ботвиник. Развийте коня на f6 и укрепете контрола над центъра.",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790899526253_66",
+                                  "fen": "rnbqkb1r/pp2pppp/5n2/3p4/2PP4/8/PP3PPP/RNBQKBNR w KQkq - 1 5",
+                                  "move": "g8f6",
+                                  "notes": "",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790899526253_67",
+                                      "fen": "rnbqkb1r/pp2pppp/5n2/3p4/2PP4/2N5/PP3PPP/R1BQKBNR b KQkq - 2 5",
+                                      "move": "b1c3",
+                                      "notes": "Подгответе фианкетото с ...g6. Офицерът на g7 ще оказва натиск върху d4.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526254_68",
+                                          "fen": "rnbqkb1r/pp2pp1p/5np1/3p4/2PP4/2N5/PP3PPP/R1BQKBNR w KQkq - 0 6",
+                                          "move": "g7g6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526254_69",
+                                              "fen": "rnbqkb1r/pp2pp1p/5np1/3p4/2PP4/2N2N2/PP3PPP/R1BQKB1R b KQkq - 1 6",
+                                              "move": "g1f3",
+                                              "notes": "Изпълнете плана: развийте офицера на g7.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526254_70",
+                                                  "fen": "rnbqk2r/pp2ppbp/5np1/3p4/2PP4/2N2N2/PP3PPP/R1BQKB1R w KQkq - 2 7",
+                                                  "move": "f8g7",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526255_71",
+                                                      "fen": "rnbqk2r/pp2ppbp/5np1/3P4/3P4/2N2N2/PP3PPP/R1BQKB1R b KQkq - 0 7",
+                                                      "move": "c4d5",
+                                                      "notes": "Вземете пешката d5 с коня и заемете централно поле.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526255_72",
+                                                          "fen": "rnbqk2r/pp2ppbp/6p1/3n4/3P4/2N2N2/PP3PPP/R1BQKB1R w KQkq - 0 8",
+                                                          "move": "f6d5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526255_73",
+                                                              "fen": "rnbqk2r/pp2ppbp/6p1/3n4/2BP4/2N2N2/PP3PPP/R1BQK2R b KQkq - 1 8",
+                                                              "move": "f1c4",
+                                                              "notes": "Конят d5 е нападнат. Разменете го за коня c3, вместо да губите темпо с отстъпление.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526256_74",
+                                                                  "fen": "rnbqk2r/pp2ppbp/6p1/8/2BP4/2n2N2/PP3PPP/R1BQK2R w KQkq - 0 9",
+                                                                  "move": "d5c3",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526256_75",
+                                                                      "fen": "rnbqk2r/pp2ppbp/6p1/8/2BP4/2P2N2/P4PPP/R1BQK2R b KQkq - 0 9",
+                                                                      "move": "b2c3",
+                                                                      "notes": "Играйте дама на c7. По линията c създавате натиск срещу офицера на c4 и пешката c3.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526256_76",
+                                                                          "fen": "rnb1k2r/ppq1ppbp/6p1/8/2BP4/2P2N2/P4PPP/R1BQK2R w KQkq - 1 10",
+                                                                          "move": "d8c7",
+                                                                          "notes": "Браво! Оказваме сериозен натиск върху белите с дамата си. Компютърът смята, че тук имаме по-добра позиция.",
+                                                                          "lineNumber": 7,
+                                                                          "children": []
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526299_131",
+                                      "fen": "rnbqkb1r/pp2pppp/5n2/3P4/3P4/8/PP3PPP/RNBQKBNR b KQkq - 0 5",
+                                      "move": "c4d5",
+                                      "notes": "След размяната на пешки вземете обратно на d5 с коня.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526300_132",
+                                          "fen": "rnbqkb1r/pp2pppp/8/3n4/3P4/8/PP3PPP/RNBQKBNR w KQkq - 0 6",
+                                          "move": "f6d5",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526300_133",
+                                              "fen": "rnbqkb1r/pp2pppp/8/3n4/3P4/2N5/PP3PPP/R1BQKBNR b KQkq - 1 6",
+                                              "move": "b1c3",
+                                              "notes": "Развийте коня на c6 и усилете контрола над центъра.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526300_134",
+                                                  "fen": "r1bqkb1r/pp2pppp/2n5/3n4/3P4/2N5/PP3PPP/R1BQKBNR w KQkq - 2 7",
+                                                  "move": "b8c6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526300_135",
+                                                      "fen": "r1bqkb1r/pp2pppp/2n5/3n4/3P4/2N2N2/PP3PPP/R1BQKB1R b KQkq - 3 7",
+                                                      "move": "g1f3",
+                                                      "notes": "Развийте офицера на f5, преди да затворите диагонала му с ...e6.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526300_136",
+                                                          "fen": "r2qkb1r/pp2pppp/2n5/3n1b2/3P4/2N2N2/PP3PPP/R1BQKB1R w KQkq - 4 8",
+                                                          "move": "c8f5",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526300_137",
+                                                              "fen": "r2qkb1r/pp2pppp/2n5/3n1b2/2BP4/2N2N2/PP3PPP/R1BQK2R b KQkq - 5 8",
+                                                              "move": "f1c4",
+                                                              "notes": "Конят d5 е нападнат два пъти. Подкрепете го с ...e6.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526301_138",
+                                                                  "fen": "r2qkb1r/pp3ppp/2n1p3/3n1b2/2BP4/2N2N2/PP3PPP/R1BQK2R w KQkq - 0 9",
+                                                                  "move": "e7e6",
+                                                                  "notes": "Браво! Тук имаме стабилна позиция.",
+                                                                  "lineNumber": 15,
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "node_1790899526296_123",
+                              "fen": "rnbqkbnr/pp2pppp/8/3p4/3P4/3B4/PPP2PPP/RNBQK1NR b KQkq - 1 4",
+                              "move": "f1d3",
+                              "notes": "В този остър вариант развийте коня на c6 и атакувайте недостатъчно защитената централна пешка.",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790899526296_124",
+                                  "fen": "r1bqkbnr/pp2pppp/2n5/3p4/3P4/3B4/PPP2PPP/RNBQK1NR w KQkq - 2 5",
+                                  "move": "b8c6",
+                                  "notes": "",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790899526296_125",
+                                      "fen": "r1bqkbnr/pp2pppp/2n5/3p4/3P4/2PB4/PP3PPP/RNBQK1NR b KQkq - 0 5",
+                                      "move": "c2c3",
+                                      "notes": "Развийте и другия кон на f6. Това подготвя възможността за офицер на g4.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526296_126",
+                                          "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/3P4/2PB4/PP3PPP/RNBQK1NR w KQkq - 1 6",
+                                          "move": "g8f6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526297_127",
+                                              "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/3P4/2PB3P/PP3PP1/RNBQK1NR b KQkq - 0 6",
+                                              "move": "h2h3",
+                                              "notes": "Белите губят темпо с h3. Отворете играта в центъра с ...e5.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526297_128",
+                                                  "fen": "r1bqkb1r/pp3ppp/2n2n2/3pp3/3P4/2PB3P/PP3PP1/RNBQK1NR w KQkq - 0 7",
+                                                  "move": "e7e5",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526297_129",
+                                                      "fen": "r1bqkb1r/pp3ppp/2n2n2/3pP3/8/2PB3P/PP3PP1/RNBQK1NR b KQkq - 0 7",
+                                                      "move": "d4e5",
+                                                      "notes": "Вземете пешката e5 с коня и заемете активно централно поле.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526297_130",
+                                                          "fen": "r1bqkb1r/pp3ppp/5n2/3pn3/8/2PB3P/PP3PP1/RNBQK1NR w KQkq - 0 8",
+                                                          "move": "c6e5",
+                                                          "notes": "Браво! Имаме добра позиция и сме готови да продължим партията.",
+                                                          "lineNumber": 14,
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "node_1790899526305_139",
+                                              "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/3P1B2/2PB4/PP3PPP/RN1QK1NR b KQkq - 2 6",
+                                              "move": "c1f4",
+                                              "notes": "Изпълнете подготвения план: развийте офицера на g4 и свържете коня f3.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526305_140",
+                                                  "fen": "r2qkb1r/pp2pppp/2n2n2/3p4/3P1Bb1/2PB4/PP3PPP/RN1QK1NR w KQkq - 3 7",
+                                                  "move": "c8g4",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526306_141",
+                                                      "fen": "r2qkb1r/pp2pppp/2n2n2/3p4/3P1Bb1/1QPB4/PP3PPP/RN2K1NR b KQkq - 4 7",
+                                                      "move": "d1b3",
+                                                      "notes": "Белите атакуват пешката b7. Защитете я с дама на d7.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526306_142",
+                                                          "fen": "r3kb1r/pp1qpppp/2n2n2/3p4/3P1Bb1/1QPB4/PP3PPP/RN2K1NR w KQkq - 5 8",
+                                                          "move": "d8d7",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526306_143",
+                                                              "fen": "r3kb1r/pp1qpppp/2n2n2/3p4/3P1Bb1/1QPB4/PP1N1PPP/R3K1NR b KQkq - 6 8",
+                                                              "move": "b1d2",
+                                                              "notes": "Освободете чернополия офицер с ...e6, за да завършите развитието.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526307_144",
+                                                                  "fen": "r3kb1r/pp1q1ppp/2n1pn2/3p4/3P1Bb1/1QPB4/PP1N1PPP/R3K1NR w KQkq - 0 9",
+                                                                  "move": "e7e6",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526307_145",
+                                                                      "fen": "r3kb1r/pp1q1ppp/2n1pn2/3p4/3P1Bb1/1QPB1N2/PP1N1PPP/R3K2R b KQkq - 1 9",
+                                                                      "move": "g1f3",
+                                                                      "notes": "Белият чернопол офицер е активен. Предложете размяна с офицер на d6.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526307_146",
+                                                                          "fen": "r3k2r/pp1q1ppp/2nbpn2/3p4/3P1Bb1/1QPB1N2/PP1N1PPP/R3K2R w KQkq - 2 10",
+                                                                          "move": "f8d6",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526308_147",
+                                                                              "fen": "r3k2r/pp1q1ppp/2nBpn2/3p4/3P2b1/1QPB1N2/PP1N1PPP/R3K2R b KQkq - 0 10",
+                                                                              "move": "f4d6",
+                                                                              "notes": "След размяната вземете обратно на d6 с дамата.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526308_148",
+                                                                                  "fen": "r3k2r/pp3ppp/2nqpn2/3p4/3P2b1/1QPB1N2/PP1N1PPP/R3K2R w KQkq - 0 11",
+                                                                                  "move": "d7d6",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526308_149",
+                                                                                      "fen": "r3k2r/pp3ppp/2nqpn2/3p4/3P2b1/1QPB1N2/PP1N1PPP/R4RK1 b kq - 1 11",
+                                                                                      "move": "e1g1",
+                                                                                      "notes": "Направете къса рокада и обезопасете царя.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526308_150",
+                                                                                          "fen": "r4rk1/pp3ppp/2nqpn2/3p4/3P2b1/1QPB1N2/PP1N1PPP/R4RK1 w - - 2 12",
+                                                                                          "move": "e8g8",
+                                                                                          "notes": "Браво, справихте се с основния вариант на Каро-Кан!! Гордея се с вас.",
+                                                                                          "lineNumber": 16,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "node_1790899526327_175",
+                              "fen": "rnbqkbnr/pp2pppp/8/3p4/3P4/5N2/PPP2PPP/RNBQKB1R b KQkq - 1 4",
+                              "move": "g1f3",
+                              "notes": "Развийте коня на f6 и укрепете контрола над центъра.",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790899526327_176",
+                                  "fen": "rnbqkb1r/pp2pppp/5n2/3p4/3P4/5N2/PPP2PPP/RNBQKB1R w KQkq - 2 5",
+                                  "move": "g8f6",
+                                  "notes": "",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790899526328_177",
+                                      "fen": "rnbqkb1r/pp2pppp/5n2/3p4/3P4/3B1N2/PPP2PPP/RNBQK2R b KQkq - 3 5",
+                                      "move": "f1d3",
+                                      "notes": "Ранното развитие на белия офицер позволява свръзка на коня. Играйте офицер на g4.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526328_178",
+                                          "fen": "rn1qkb1r/pp2pppp/5n2/3p4/3P2b1/3B1N2/PPP2PPP/RNBQK2R w KQkq - 4 6",
+                                          "move": "c8g4",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526328_179",
+                                              "fen": "rn1qkb1r/pp2pppp/5n2/3p4/3P2b1/3B1N2/PPP2PPP/RNBQ1RK1 b kq - 5 6",
+                                              "move": "e1g1",
+                                              "notes": "Развийте другия кон на c6 и атакувайте пешката d4, чийто защитник е свързан.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526328_180",
+                                                  "fen": "r2qkb1r/pp2pppp/2n2n2/3p4/3P2b1/3B1N2/PPP2PPP/RNBQ1RK1 w kq - 6 7",
+                                                  "move": "b8c6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526328_181",
+                                                      "fen": "r2qkb1r/pp2pppp/2n2n2/3p4/3P2b1/2PB1N2/PP3PPP/RNBQ1RK1 b kq - 0 7",
+                                                      "move": "c2c3",
+                                                      "notes": "Играйте ...e6, за да освободите другия офицер и да подкрепите центъра.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526328_182",
+                                                          "fen": "r2qkb1r/pp3ppp/2n1pn2/3p4/3P2b1/2PB1N2/PP3PPP/RNBQ1RK1 w kq - 0 8",
+                                                          "move": "e7e6",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526329_183",
+                                                              "fen": "r2qkb1r/pp3ppp/2n1pn2/3p4/3P2b1/2PB1N1P/PP3PP1/RNBQ1RK1 b kq - 0 8",
+                                                              "move": "h2h3",
+                                                              "notes": "Запазете свръзката, като отстъпите с офицера на h5.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526329_184",
+                                                                  "fen": "r2qkb1r/pp3ppp/2n1pn2/3p3b/3P4/2PB1N1P/PP3PP1/RNBQ1RK1 w kq - 1 9",
+                                                                  "move": "g4h5",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526329_185",
+                                                                      "fen": "r2qkb1r/pp3ppp/2n1pn2/3p2Bb/3P4/2PB1N1P/PP3PP1/RN1Q1RK1 b kq - 2 9",
+                                                                      "move": "c1g5",
+                                                                      "notes": "Развийте офицера на d6 и насочете погледа му към царския фланг.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526329_186",
+                                                                          "fen": "r2qk2r/pp3ppp/2nbpn2/3p2Bb/3P4/2PB1N1P/PP3PP1/RN1Q1RK1 w kq - 3 10",
+                                                                          "move": "f8d6",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526329_187",
+                                                                              "fen": "r2qk2r/pp3ppp/2nbpn2/3p2Bb/3P4/2PB1N1P/PP1N1PP1/R2Q1RK1 b kq - 4 10",
+                                                                              "move": "b1d2",
+                                                                              "notes": "Играйте ...h6, за да прогоните белия офицер.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526329_188",
+                                                                                  "fen": "r2qk2r/pp3pp1/2nbpn1p/3p2Bb/3P4/2PB1N1P/PP1N1PP1/R2Q1RK1 w kq - 0 11",
+                                                                                  "move": "h7h6",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526330_189",
+                                                                                      "fen": "r2qk2r/pp3pp1/2nbpn1p/3p3b/3P3B/2PB1N1P/PP1N1PP1/R2Q1RK1 b kq - 1 11",
+                                                                                      "move": "g5h4",
+                                                                                      "notes": "Поставете дамата на c7 и образувайте батарея с офицера d6 по диагонала към h2.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526330_190",
+                                                                                          "fen": "r3k2r/ppq2pp1/2nbpn1p/3p3b/3P3B/2PB1N1P/PP1N1PP1/R2Q1RK1 w kq - 2 12",
+                                                                                          "move": "d8c7",
+                                                                                          "notes": "Браво! Компютърът харесва позицията ни тук, а черните печелят приблизително в 60% от случаите от тази позиция.",
+                                                                                          "lineNumber": 19,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "id": "node_1790899526340_205",
+                                                              "fen": "r2qkb1r/pp3ppp/2n1pn2/3p2B1/3P2b1/2PB1N2/PP3PPP/RN1Q1RK1 b kq - 1 8",
+                                                              "move": "c1g5",
+                                                              "notes": "Освободете коня от свръзката с офицер на e7.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526341_206",
+                                                                  "fen": "r2qk2r/pp2bppp/2n1pn2/3p2B1/3P2b1/2PB1N2/PP3PPP/RN1Q1RK1 w kq - 2 9",
+                                                                  "move": "f8e7",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526341_207",
+                                                                      "fen": "r2qk2r/pp2bppp/2n1pn2/3p2B1/3P2b1/2PB1N2/PP1N1PPP/R2Q1RK1 b kq - 3 9",
+                                                                      "move": "b1d2",
+                                                                      "notes": "Направете къса рокада и обезопасете царя.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526341_208",
+                                                                          "fen": "r2q1rk1/pp2bppp/2n1pn2/3p2B1/3P2b1/2PB1N2/PP1N1PPP/R2Q1RK1 w - - 4 10",
+                                                                          "move": "e8g8",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526341_209",
+                                                                              "fen": "r2q1rk1/pp2bppp/2n1pn2/3p2B1/3P2b1/2PB1N2/PPQN1PPP/R4RK1 b - - 5 10",
+                                                                              "move": "d1c2",
+                                                                              "notes": "Белите образуваха батарея срещу h7. Играйте ...h6, за да изведете пешката от нападението.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526341_210",
+                                                                                  "fen": "r2q1rk1/pp2bpp1/2n1pn1p/3p2B1/3P2b1/2PB1N2/PPQN1PPP/R4RK1 w - - 0 11",
+                                                                                  "move": "h7h6",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526342_211",
+                                                                                      "fen": "r2q1rk1/pp2bpp1/2n1pn1p/3p4/3P2bB/2PB1N2/PPQN1PPP/R4RK1 b - - 1 11",
+                                                                                      "move": "g5h4",
+                                                                                      "notes": "Поставете топа на c8. Подготвяте натиск по линията c, където стои и бялата дама.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526342_212",
+                                                                                          "fen": "2rq1rk1/pp2bpp1/2n1pn1p/3p4/3P2bB/2PB1N2/PPQN1PPP/R4RK1 w - - 2 12",
+                                                                                          "move": "a8c8",
+                                                                                          "notes": "Браво! Позицията е равна и сме готови за игра!",
+                                                                                          "lineNumber": 22,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "node_1790899526278_93",
+                      "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b KQkq - 1 3",
+                      "move": "b1c3",
+                      "notes": "Белите не придвижиха пешката e4. Вземете я с d-пешката.",
+                      "lineNumber": null,
+                      "children": [
+                        {
+                          "id": "node_1790899526278_94",
+                          "fen": "rnbqkbnr/pp2pppp/2p5/8/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq - 0 4",
+                          "move": "d5e4",
+                          "notes": "",
+                          "lineNumber": null,
+                          "children": [
+                            {
+                              "id": "node_1790899526279_95",
+                              "fen": "rnbqkbnr/pp2pppp/2p5/8/3PN3/8/PPP2PPP/R1BQKBNR b KQkq - 0 4",
+                              "move": "c3e4",
+                              "notes": "Развийте коня на f6 с нападение срещу белия кон в центъра.",
+                              "lineNumber": null,
+                              "children": [
+                                {
+                                  "id": "node_1790899526279_96",
+                                  "fen": "rnbqkb1r/pp2pppp/2p2n2/8/3PN3/8/PPP2PPP/R1BQKBNR w KQkq - 1 5",
+                                  "move": "g8f6",
+                                  "notes": "",
+                                  "lineNumber": null,
+                                  "children": [
+                                    {
+                                      "id": "node_1790899526279_97",
+                                      "fen": "rnbqkb1r/pp2pppp/2p2n2/8/3P4/6N1/PPP2PPP/R1BQKBNR b KQkq - 2 5",
+                                      "move": "e4g3",
+                                      "notes": "Белите отказаха размяната. Играйте ...h5 и атакувайте коня на g4.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526279_98",
+                                          "fen": "rnbqkb1r/pp2ppp1/2p2n2/7p/3P4/6N1/PPP2PPP/R1BQKBNR w KQkq - 0 6",
+                                          "move": "h7h5",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526279_99",
+                                              "fen": "rnbqkb1r/pp2ppp1/2p2n2/7p/3P3P/6N1/PPP2PP1/R1BQKBNR b KQkq - 0 6",
+                                              "move": "h2h4",
+                                              "notes": "След отдалечаването на h-пешката развийте офицера на g4 с нападение срещу дамата.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526280_100",
+                                                  "fen": "rn1qkb1r/pp2ppp1/2p2n2/7p/3P2bP/6N1/PPP2PP1/R1BQKBNR w KQkq - 1 7",
+                                                  "move": "c8g4",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526280_101",
+                                                      "fen": "rn1qkb1r/pp2ppp1/2p2n2/7p/3P2bP/6N1/PPP1BPP1/R1BQK1NR b KQkq - 2 7",
+                                                      "move": "f1e2",
+                                                      "notes": "Играйте ...e6, за да освободите чернополия офицер.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526280_102",
+                                                          "fen": "rn1qkb1r/pp3pp1/2p1pn2/7p/3P2bP/6N1/PPP1BPP1/R1BQK1NR w KQkq - 0 8",
+                                                          "move": "e7e6",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526280_103",
+                                                              "fen": "rn1qkb1r/pp3pp1/2p1pn2/7p/3P2bP/5NN1/PPP1BPP1/R1BQK2R b KQkq - 1 8",
+                                                              "move": "g1f3",
+                                                              "notes": "Развийте офицера на d6 и насочете фигурите към белия царски фланг.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526281_104",
+                                                                  "fen": "rn1qk2r/pp3pp1/2pbpn2/7p/3P2bP/5NN1/PPP1BPP1/R1BQK2R w KQkq - 2 9",
+                                                                  "move": "f8d6",
+                                                                  "notes": "Браво! Заплашваме да вземем белия кон и да удвоим пешките на белите. Компютърът ни дава предимство в тази позиция.",
+                                                                  "lineNumber": 10,
+                                                                  "children": []
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "node_1790899526289_113",
+                                              "fen": "rnbqkb1r/pp2ppp1/2p2n2/7p/3P4/5NN1/PPP2PPP/R1BQKB1R b KQkq - 1 6",
+                                              "move": "g1f3",
+                                              "notes": "Продължете настъплението с ...h4 и ограничете белите фигури на царския фланг.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526289_114",
+                                                  "fen": "rnbqkb1r/pp2ppp1/2p2n2/8/3P3p/5NN1/PPP2PPP/R1BQKB1R w KQkq - 0 7",
+                                                  "move": "h5h4",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526290_115",
+                                                      "fen": "rnbqkb1r/pp2ppp1/2p2n2/8/3P3p/5N2/PPP1NPPP/R1BQKB1R b KQkq - 1 7",
+                                                      "move": "g3e2",
+                                                      "notes": "Развийте офицера на g4 с активна игра срещу белите фигури.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526290_116",
+                                                          "fen": "rn1qkb1r/pp2ppp1/2p2n2/8/3P2bp/5N2/PPP1NPPP/R1BQKB1R w KQkq - 2 8",
+                                                          "move": "c8g4",
+                                                          "notes": "Браво! Черните печелят повечето партии от тази позиция.",
+                                                          "lineNumber": 12,
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "node_1790899526320_161",
+                                      "fen": "rnbqkb1r/pp2pppp/2p2N2/8/3P4/8/PPP2PPP/R1BQKBNR b KQkq - 0 5",
+                                      "move": "e4f6",
+                                      "notes": "След размяната на f6 вземете обратно с e-пешката. Отваряте линията e и запазвате c-пешката за контрол над центъра.",
+                                      "lineNumber": null,
+                                      "children": [
+                                        {
+                                          "id": "node_1790899526320_162",
+                                          "fen": "rnbqkb1r/pp3ppp/2p2p2/8/3P4/8/PPP2PPP/R1BQKBNR w KQkq - 0 6",
+                                          "move": "e7f6",
+                                          "notes": "",
+                                          "lineNumber": null,
+                                          "children": [
+                                            {
+                                              "id": "node_1790899526320_163",
+                                              "fen": "rnbqkb1r/pp3ppp/2p2p2/8/3P4/2P5/PP3PPP/R1BQKBNR b KQkq - 0 6",
+                                              "move": "c2c3",
+                                              "notes": "Развийте офицера на d6 и подгответе къса рокада.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526320_164",
+                                                  "fen": "rnbqk2r/pp3ppp/2pb1p2/8/3P4/2P5/PP3PPP/R1BQKBNR w KQkq - 1 7",
+                                                  "move": "f8d6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526321_165",
+                                                      "fen": "rnbqk2r/pp3ppp/2pb1p2/8/3P4/2PB4/PP3PPP/R1BQK1NR b KQkq - 2 7",
+                                                      "move": "f1d3",
+                                                      "notes": "Направете къса рокада и поставете царя в безопасност.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526321_166",
+                                                          "fen": "rnbq1rk1/pp3ppp/2pb1p2/8/3P4/2PB4/PP3PPP/R1BQK1NR w KQ - 3 8",
+                                                          "move": "e8g8",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526322_167",
+                                                              "fen": "rnbq1rk1/pp3ppp/2pb1p2/8/3P4/2PB4/PPQ2PPP/R1B1K1NR b KQ - 4 8",
+                                                              "move": "d1c2",
+                                                              "notes": "Белите насочват дамата и офицера към h7. Първо активирайте топа с шах на e8.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526322_168",
+                                                                  "fen": "rnbqr1k1/pp3ppp/2pb1p2/8/3P4/2PB4/PPQ2PPP/R1B1K1NR w KQ - 5 9",
+                                                                  "move": "f8e8",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526322_169",
+                                                                      "fen": "rnbqr1k1/pp3ppp/2pb1p2/8/3P4/2PB4/PPQ1NPPP/R1B1K2R b KQ - 6 9",
+                                                                      "move": "g1e2",
+                                                                      "notes": "Играйте ...h5, за да изведете пешката от нападението и да спечелите пространство на царския фланг.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526322_170",
+                                                                          "fen": "rnbqr1k1/pp3pp1/2pb1p2/7p/3P4/2PB4/PPQ1NPPP/R1B1K2R w KQ - 0 10",
+                                                                          "move": "h7h5",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526322_171",
+                                                                              "fen": "rnbqr1k1/pp3pp1/2pb1p2/7p/3P4/2PBB3/PPQ1NPPP/R3K2R b KQ - 1 10",
+                                                                              "move": "c1e3",
+                                                                              "notes": "Белите подготвят дълга рокада. Развийте коня на d7; при рокади на различни флангове активността и защитата на царя са особено важни.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526323_172",
+                                                                                  "fen": "r1bqr1k1/pp1n1pp1/2pb1p2/7p/3P4/2PBB3/PPQ1NPPP/R3K2R w KQ - 2 11",
+                                                                                  "move": "b8d7",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526323_173",
+                                                                                      "fen": "r1bqr1k1/pp1n1pp1/2pb1p2/7p/3P4/2PBB3/PPQ1NPPP/2KR3R b - - 3 11",
+                                                                                      "move": "e1c1",
+                                                                                      "notes": "Продължете маневрата с кон на f8. Оттам конят защитава важната пешка h7.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526323_174",
+                                                                                          "fen": "r1bqrnk1/pp3pp1/2pb1p2/7p/3P4/2PBB3/PPQ1NPPP/2KR3R w - - 4 12",
+                                                                                          "move": "d7f8",
+                                                                                          "notes": "Браво! Позицията е равна и сме готови да изиграем прекрасна шахматна партия. Между другото, всичко, което направихме, беше теория: тази точна позиция е достигана сто хиляди пъти!",
+                                                                                          "lineNumber": 18,
+                                                                                          "children": []
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            },
+                                                                            {
+                                                                              "id": "node_1790899526363_249",
+                                                                              "fen": "rnbqr1k1/pp3pp1/2pb1p2/7p/3P4/2PB4/PPQ1NPPP/R1B2RK1 b - - 1 10",
+                                                                              "move": "e1g1",
+                                                                              "notes": "Белите рокираха на царския фланг. Продължете пешечното настъпление с ...h4.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526363_250",
+                                                                                  "fen": "rnbqr1k1/pp3pp1/2pb1p2/8/3P3p/2PB4/PPQ1NPPP/R1B2RK1 w - - 0 11",
+                                                                                  "move": "h5h4",
+                                                                                  "notes": "",
+                                                                                  "lineNumber": null,
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "id": "node_1790899526363_251",
+                                                                                      "fen": "rnbqr1k1/pp3pp1/2pb1p2/8/3P3p/2PB3P/PPQ1NPP1/R1B2RK1 b - - 0 11",
+                                                                                      "move": "h2h3",
+                                                                                      "notes": "Развийте коня на d7, за да го насочите към защитата на вашия цар.",
+                                                                                      "lineNumber": null,
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "id": "node_1790899526363_252",
+                                                                                          "fen": "r1bqr1k1/pp1n1pp1/2pb1p2/8/3P3p/2PB3P/PPQ1NPP1/R1B2RK1 w - - 1 12",
+                                                                                          "move": "b8d7",
+                                                                                          "notes": "",
+                                                                                          "lineNumber": null,
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "id": "node_1790899526364_253",
+                                                                                              "fen": "r1bqr1k1/pp1n1pp1/2pb1p2/8/3P3p/2PBB2P/PPQ1NPP1/R4RK1 b - - 2 12",
+                                                                                              "move": "c1e3",
+                                                                                              "notes": "Преместете коня на f8 и подкрепете важните полета около царя.",
+                                                                                              "lineNumber": null,
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "id": "node_1790899526364_254",
+                                                                                                  "fen": "r1bqrnk1/pp3pp1/2pb1p2/8/3P3p/2PBB2P/PPQ1NPP1/R4RK1 w - - 3 13",
+                                                                                                  "move": "d7f8",
+                                                                                                  "notes": "Браво! Сцената е подготвена и партията може да започне!",
+                                                                                                  "lineNumber": 27,
+                                                                                                  "children": []
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "node_1790899526358_239",
+                                              "fen": "rnbqkb1r/pp3ppp/2p2p2/8/3P4/5N2/PPP2PPP/R1BQKB1R b KQkq - 1 6",
+                                              "move": "g1f3",
+                                              "notes": "Развийте офицера на d6 и подгответе къса рокада.",
+                                              "lineNumber": null,
+                                              "children": [
+                                                {
+                                                  "id": "node_1790899526358_240",
+                                                  "fen": "rnbqk2r/pp3ppp/2pb1p2/8/3P4/5N2/PPP2PPP/R1BQKB1R w KQkq - 2 7",
+                                                  "move": "f8d6",
+                                                  "notes": "",
+                                                  "lineNumber": null,
+                                                  "children": [
+                                                    {
+                                                      "id": "node_1790899526359_241",
+                                                      "fen": "rnbqk2r/pp3ppp/2pb1p2/8/3P4/3B1N2/PPP2PPP/R1BQK2R b KQkq - 3 7",
+                                                      "move": "f1d3",
+                                                      "notes": "Направете къса рокада.",
+                                                      "lineNumber": null,
+                                                      "children": [
+                                                        {
+                                                          "id": "node_1790899526359_242",
+                                                          "fen": "rnbq1rk1/pp3ppp/2pb1p2/8/3P4/3B1N2/PPP2PPP/R1BQK2R w KQ - 4 8",
+                                                          "move": "e8g8",
+                                                          "notes": "",
+                                                          "lineNumber": null,
+                                                          "children": [
+                                                            {
+                                                              "id": "node_1790899526359_243",
+                                                              "fen": "rnbq1rk1/pp3ppp/2pb1p2/8/3P4/3B1N2/PPP2PPP/R1BQ1RK1 b - - 5 8",
+                                                              "move": "e1g1",
+                                                              "notes": "Заемете отворената линия e с топ на e8.",
+                                                              "lineNumber": null,
+                                                              "children": [
+                                                                {
+                                                                  "id": "node_1790899526359_244",
+                                                                  "fen": "rnbqr1k1/pp3ppp/2pb1p2/8/3P4/3B1N2/PPP2PPP/R1BQ1RK1 w - - 6 9",
+                                                                  "move": "f8e8",
+                                                                  "notes": "",
+                                                                  "lineNumber": null,
+                                                                  "children": [
+                                                                    {
+                                                                      "id": "node_1790899526359_245",
+                                                                      "fen": "rnbqr1k1/pp3ppp/2pb1p2/8/3P4/3B1N1P/PPP2PP1/R1BQ1RK1 b - - 0 9",
+                                                                      "move": "h2h3",
+                                                                      "notes": "Развийте коня на d7. Планът е да го прехвърлите към f8 за защита на царя.",
+                                                                      "lineNumber": null,
+                                                                      "children": [
+                                                                        {
+                                                                          "id": "node_1790899526359_246",
+                                                                          "fen": "r1bqr1k1/pp1n1ppp/2pb1p2/8/3P4/3B1N1P/PPP2PP1/R1BQ1RK1 w - - 1 10",
+                                                                          "move": "b8d7",
+                                                                          "notes": "",
+                                                                          "lineNumber": null,
+                                                                          "children": [
+                                                                            {
+                                                                              "id": "node_1790899526360_247",
+                                                                              "fen": "r1bqr1k1/pp1n1ppp/2pb1p2/8/3P4/2PB1N1P/PP3PP1/R1BQ1RK1 b - - 0 10",
+                                                                              "move": "c2c3",
+                                                                              "notes": "Продължете маневрата с кон на f8, откъдето той защитава h7.",
+                                                                              "lineNumber": null,
+                                                                              "children": [
+                                                                                {
+                                                                                  "id": "node_1790899526360_248",
+                                                                                  "fen": "r1bqrnk1/pp3ppp/2pb1p2/8/3P4/2PB1N1P/PP3PP1/R1BQ1RK1 w - - 1 11",
+                                                                                  "move": "d7f8",
+                                                                                  "notes": "Добре, оказа се, че маратонът беше само две стъпки. Черните печелят приблизително в 60% от случаите от тази позиция. Успех!",
+                                                                                  "lineNumber": 26,
+                                                                                  "children": []
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

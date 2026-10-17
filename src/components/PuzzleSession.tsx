@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useMemo, useSyncExternalStore } from "react";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import PuzzleSolver from "./PuzzleSolver";
 
@@ -20,28 +20,45 @@ interface PuzzleSessionProps {
     tag?: string;
 }
 
-export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hints, tag }: PuzzleSessionProps) {
-    const [solvedPuzzles, setSolvedPuzzles] = useState<SolvedPuzzle[]>([]);
+const SESSION_KEY = "puzzleSession";
+const SESSION_CHANGED = "puzzleSessionChanged";
 
-    useEffect(() => {
-        // Load session from sessionStorage
-        const stored = sessionStorage.getItem("puzzleSession");
-        if (stored) {
-            try {
-                setSolvedPuzzles(JSON.parse(stored));
-            } catch (error) {
-                console.warn("Failed to parse 'puzzleSession' from sessionStorage. Falling back to default.", { error, stored });
-                sessionStorage.removeItem("puzzleSession");
-                setSolvedPuzzles([]);
-            }
-        } else {
-            // New session
-            sessionStorage.setItem("puzzleSession", JSON.stringify([]));
-        }
-    }, []);
+function subscribeToSession(onChange: () => void) {
+    const onStorage = (event: StorageEvent) => {
+        if (event.key === SESSION_KEY || event.key === null) onChange();
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener(SESSION_CHANGED, onChange);
+    return () => {
+        window.removeEventListener("storage", onStorage);
+        window.removeEventListener(SESSION_CHANGED, onChange);
+    };
+}
+
+const getSessionSnapshot = () => sessionStorage.getItem(SESSION_KEY) || "[]";
+const getServerSnapshot = () => "[]";
+
+function parseSession(stored: string): SolvedPuzzle[] {
+    try {
+        const parsed: unknown = JSON.parse(stored);
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter((item): item is SolvedPuzzle =>
+            item !== null && typeof item === "object" &&
+            typeof item.name === "string" &&
+            (item.result === "success" || item.result === "mistake" || item.result === "hint")
+        );
+    } catch (error) {
+        console.warn("Failed to parse puzzleSession from sessionStorage.", error);
+        return [];
+    }
+}
+
+export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hints, tag }: PuzzleSessionProps) {
+    const storedSession = useSyncExternalStore(subscribeToSession, getSessionSnapshot, getServerSnapshot);
+    const solvedPuzzles = useMemo(() => parseSession(storedSession), [storedSession]);
 
     const handleSolve = (result: "success" | "mistake" | "hint") => {
-        const newSolved = [...solvedPuzzles];
+        const newSolved = parseSession(getSessionSnapshot()).map(puzzle => ({ ...puzzle }));
         const existingIndex = newSolved.findIndex(p => p.id === id || p.name === currentPuzzleName);
 
         if (existingIndex !== -1) {
@@ -51,13 +68,13 @@ export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hi
                 newSolved[existingIndex].result = "success";
                 // Ensure id is also set/updated for migration from name-only storage
                 newSolved[existingIndex].id = id;
-                setSolvedPuzzles(newSolved);
-                sessionStorage.setItem("puzzleSession", JSON.stringify(newSolved));
+                sessionStorage.setItem(SESSION_KEY, JSON.stringify(newSolved));
+                window.dispatchEvent(new Event(SESSION_CHANGED));
             }
         } else {
             newSolved.push({ id, name: currentPuzzleName, result });
-            setSolvedPuzzles(newSolved);
-            sessionStorage.setItem("puzzleSession", JSON.stringify(newSolved));
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(newSolved));
+            window.dispatchEvent(new Event(SESSION_CHANGED));
         }
     };
 
@@ -69,7 +86,8 @@ export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hi
                     {solvedPuzzles.map((p, i) => (
                         <Link
                             key={p.id || p.name}
-                            href={`/puzzles/${p.name}${tag ? `?tag=${tag}` : ''}`}
+                            href={{ pathname: `/puzzles/${p.name}`, query: tag ? { tag } : undefined }}
+                            prefetch={false}
                             className={cn(
                                 "w-8 h-8 flex-shrink-0 rounded flex items-center justify-center text-xs font-bold text-white transition-transform hover:scale-110",
                                 p.result === "success" && "bg-green-500",
@@ -92,6 +110,7 @@ export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hi
 
             {/* Puzzle Solver */}
             <PuzzleSolver
+                key={id}
                 id={id}
                 fen={fen}
                 solution={solution}

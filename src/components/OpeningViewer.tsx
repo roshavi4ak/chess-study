@@ -1,20 +1,34 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import { Chess } from "chess.js";
-import { Chessboard } from "react-chessboard";
+import { Chessboard, type ChessboardOptions } from "react-chessboard";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
+import LichessAnalysisLink from "@/components/LichessAnalysisLink";
 
 interface OpeningViewerProps {
     pgn: string;
 }
 
 export default function OpeningViewer({ pgn }: OpeningViewerProps) {
+    return <OpeningViewerContent key={pgn} pgn={pgn} />;
+}
+
+function OpeningViewerContent({ pgn }: OpeningViewerProps) {
     // Opening line state
-    const [history, setHistory] = useState<string[]>([]);
+    const [{ history, loadError }] = useState(() => {
+        try {
+            const game = new Chess();
+            game.loadPgn(pgn);
+            return { history: game.history({ verbose: true }).map(move => move.after), loadError: false };
+        } catch (error) {
+            console.error("Error loading PGN:", error);
+            return { history: [] as string[], loadError: true };
+        }
+    });
     const [moveIndex, setMoveIndex] = useState(-1); // -1 = start position
     const [currentFen, setCurrentFen] = useState("start");
-    const [message, setMessage] = useState("Follow the opening line");
+    const [message, setMessage] = useState(loadError ? "Error loading opening" : "Follow the opening line");
     const chessGameRef = useRef(new Chess());
 
     const handleMove = (move: { from: string; to: string; promotion?: string }) => {
@@ -71,7 +85,7 @@ export default function OpeningViewer({ pgn }: OpeningViewerProps) {
                 setMessage("Exploring beyond the opening");
                 return true;
             }
-        } catch (e) {
+        } catch {
             return false;
         }
     };
@@ -80,20 +94,6 @@ export default function OpeningViewer({ pgn }: OpeningViewerProps) {
         game: useMemo(() => new Chess(currentFen === "start" ? undefined : currentFen), [currentFen]),
         onMove: handleMove
     });
-
-    // Load PGN and parse moves
-    useEffect(() => {
-        const newGame = new Chess();
-        try {
-            newGame.loadPgn(pgn);
-            const moves = newGame.history({ verbose: true });
-            setHistory(moves.map(m => m.after)); // Store FEN after each move
-            console.log(`Loaded ${moves.length} moves from PGN`);
-        } catch (e) {
-            console.error("Error loading PGN:", e);
-            setMessage("Error loading opening");
-        }
-    }, [pgn]);
 
     // Navigation handlers
     function handleNext() {
@@ -120,9 +120,9 @@ export default function OpeningViewer({ pgn }: OpeningViewerProps) {
         setMessage("Follow the opening line");
     }
 
-    const chessboardOptions = {
+    const chessboardOptions: ChessboardOptions = {
         position: currentFen,
-        onPieceDrop: onPieceDrop as any,
+        onPieceDrop: (args) => { void onPieceDrop(args); return false; },
         id: 'opening-viewer',
         onSquareClick,
         onPieceClick,
@@ -135,7 +135,7 @@ export default function OpeningViewer({ pgn }: OpeningViewerProps) {
                 <Chessboard options={chessboardOptions} />
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
                 <button
                     onClick={handleReset}
                     className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors font-medium"
@@ -159,6 +159,7 @@ export default function OpeningViewer({ pgn }: OpeningViewerProps) {
                 >
                     Next ▶
                 </button>
+                <LichessAnalysisLink fen={currentFen === "start" ? new Chess().fen() : currentFen} />
             </div>
 
             <div className="text-center">

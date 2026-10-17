@@ -3,20 +3,21 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Menu, X, User, LogOut } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Menu, X, LogOut } from "lucide-react";
+import { useState, useSyncExternalStore } from "react";
 import { useParams } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
+
+const subscribeNoop = () => () => {};
 
 export default function Navbar() {
     const t = useTranslations("Navigation");
     const { data: session } = useSession();
     const [isOpen, setIsOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
+    // False during server rendering and hydration, true afterwards: the session-dependent menu renders only in the browser.
+    const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
     const params = useParams();
     const locale = params?.locale as string || "bg";
-
-    useEffect(() => setMounted(true), []);
 
     if (!mounted) return null;
 
@@ -32,7 +33,7 @@ export default function Navbar() {
                                 ChessStudy
                             </Link>
                         </div>
-                        <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <div className="hidden lg:ml-6 lg:flex lg:space-x-6 xl:space-x-8">
                             <Link href="/dashboard" locale={locale} className="text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
                                 {t("home")}
                             </Link>
@@ -56,6 +57,16 @@ export default function Navbar() {
                                     {t("leaderboard")}
                                 </Link>
                             )}
+                            {session && (
+                                <Link href="/fun" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                    {t("fun")}
+                                </Link>
+                            )}
+                            {session && (
+                                <Link href="/cards" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
+                                    {t("cards")}
+                                </Link>
+                            )}
                             {session?.user?.role === "COACH" && (
                                 <Link href="/coach/dashboard" locale={locale} className="text-gray-500 dark:text-gray-300 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-blue-500">
                                     {t("coachDashboard")}
@@ -63,7 +74,7 @@ export default function Navbar() {
                             )}
                         </div>
                     </div>
-                    <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+                    <div className="hidden lg:ml-6 lg:flex lg:items-center space-x-4">
                         <LanguageSwitcher />
                         {session ? (
                             <div className="flex items-center space-x-4">
@@ -86,7 +97,7 @@ export default function Navbar() {
                             </button>
                         )}
                     </div>
-                    <div className="-mr-2 flex items-center sm:hidden">
+                    <div className="-mr-2 flex items-center lg:hidden">
                         <button
                             onClick={toggleMenu}
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
@@ -99,7 +110,7 @@ export default function Navbar() {
 
             {/* Mobile menu */}
             {isOpen && (
-                <div className="sm:hidden">
+                <div className="lg:hidden">
                     <div className="pt-2 pb-3 space-y-1">
                         <Link href="/dashboard" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-blue-500 text-base font-medium text-blue-700 bg-blue-50">
                             {t("home")}
@@ -122,6 +133,16 @@ export default function Navbar() {
                         {session && (
                             <Link href="/leaderboard" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
                                 {t("leaderboard")}
+                            </Link>
+                        )}
+                        {session && (
+                            <Link href="/fun" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                                {t("fun")}
+                            </Link>
+                        )}
+                        {session && (
+                            <Link href="/cards" locale={locale} className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
+                                {t("cards")}
                             </Link>
                         )}
                         {session?.user?.role === "COACH" && (

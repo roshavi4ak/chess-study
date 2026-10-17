@@ -1,6 +1,9 @@
 import { prisma } from "@/lib/db";
 import PuzzleSession from "@/components/PuzzleSession";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { isSkillTag } from "@/lib/dailyMission";
+import { orderThemes, themeLabel } from "@/lib/puzzleThemes";
 
 interface PageProps {
     params: Promise<{
@@ -27,6 +30,9 @@ export default async function PuzzlePage(props: PageProps) {
     const isCreator = session?.user?.id === puzzle.createdBy;
 
     const { tag } = await props.searchParams;
+    const [t, tCommon, tCategories] = await Promise.all([getTranslations("Puzzles"), getTranslations("Common"), getTranslations("PuzzleCategories")]);
+    // Imported puzzles all carry the description "Lichess Puzzle <id>".
+    const lichessId = puzzle.description?.match(/^Lichess Puzzle (\S+)$/)?.[1];
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -41,25 +47,26 @@ export default async function PuzzlePage(props: PageProps) {
                                 href={`/puzzles/${puzzle.name}/edit`}
                                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-medium"
                             >
-                                Edit Puzzle
+                                {tCommon("edit")}
                             </a>
                         </div>
                     )}
-                    <div className="flex justify-center gap-2 mt-2">
-                        <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-bold">
-                            {puzzle.rating}
+                    <div className="flex flex-wrap justify-center items-center gap-2 mt-2">
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{t("themes")}:</span>
+                        <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-bold" title={t("rating")}>
+                            {t("ratingValue", { rating: puzzle.rating })}
                         </span>
-                        {puzzle.tags.map((t: string) => (
-                            <span key={t} className={`px-2 py-1 rounded text-xs ${t === tag ? 'bg-green-100 text-green-800 font-bold' : 'bg-blue-100 text-blue-800'}`}>
-                                {t}
+                        {orderThemes(puzzle.tags, tag).map(theme => (
+                            <span key={theme} title={theme} className={`px-2 py-1 rounded text-xs ${theme === tag ? "bg-green-100 text-green-800 font-bold" : isSkillTag(theme) ? "bg-blue-100 text-blue-800" : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}>
+                                {themeLabel(theme, tCategories)}
                             </span>
                         ))}
                     </div>
                     <p className="mt-4 text-gray-600 dark:text-gray-400">
-                        {puzzle.description}
+                        {lichessId ? t("lichessPuzzle", { id: lichessId }) : puzzle.description}
                     </p>
                     <p className="text-sm text-gray-500 mt-1">
-                        Created by {puzzle.creator.name}
+                        {tCommon("createdBy", { name: puzzle.creator.name ?? tCommon("unknown") })}
                     </p>
                 </div>
 

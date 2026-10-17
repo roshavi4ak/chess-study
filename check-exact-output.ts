@@ -29,17 +29,17 @@ async function run() {
     });
 
     const results = students.filter(s => s.name === "meliproto" || s.name === "todorpro").map(student => {
-        const weeklyPuzzleAttempts = student.puzzleAttempts.filter((a: any) => a.createdAt >= weekStart);
+        const weeklyPuzzleAttempts = student.puzzleAttempts.filter((a) => a.createdAt >= weekStart);
         return {
             name: student.name,
             puzzleStats: {
                 weekly: {
-                    count: weeklyPuzzleAttempts.filter((a: any) => a.success).length,
-                    points: weeklyPuzzleAttempts.reduce((sum: number, a: any) => sum + (a.points || 0), 0)
+                    count: weeklyPuzzleAttempts.filter((a) => a.success).length,
+                    points: weeklyPuzzleAttempts.reduce((sum, a) => sum + (a.points || 0), 0)
                 },
                 allTime: {
-                    count: student.puzzleAttempts.filter((a: any) => a.success).length,
-                    points: student.puzzleAttempts.reduce((sum: number, a: any) => sum + (a.points || 0), 0)
+                    count: student.puzzleAttempts.filter((a) => a.success).length,
+                    points: student.puzzleAttempts.reduce((sum, a) => sum + (a.points || 0), 0)
                 }
             }
         };

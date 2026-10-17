@@ -52,8 +52,6 @@ async function main() {
         
         attempts.forEach(attempt => {
             const userId = attempt.user.lichessId;
-            const puzzleId = attempt.puzzleId;
-            const points = attempt.points;
             
             if (!userId) return;
             
@@ -105,11 +103,11 @@ async function main() {
                 return;
             }
             
-            const solvedEntries = Object.entries(puzzleData).filter(([_, stats]) => stats.solved);
-            const unsolvedEntries = Object.entries(puzzleData).filter(([_, stats]) => !stats.solved);
+            const solvedEntries = Object.entries(puzzleData).filter(([, stats]) => stats.solved);
+            const unsolvedEntries = Object.entries(puzzleData).filter(([, stats]) => !stats.solved);
             
             // Calculate total points from solved puzzles
-            const totalPoints = solvedEntries.reduce((sum, [_, stats]) => sum + stats.points, 0);
+            const totalPoints = solvedEntries.reduce((sum, [, stats]) => sum + stats.points, 0);
             const totalSolved = solvedEntries.length;
             const averagePointsPerSolved = totalSolved > 0 ? (totalPoints / totalSolved).toFixed(2) : '0';
             
@@ -120,7 +118,7 @@ async function main() {
             const uniquePuzzles = Object.keys(puzzleData).length;
             
             // Calculate percentage of puzzles solved on first try
-            const firstTrySolved = solvedEntries.filter(([_, stats]) => stats.attempts === 1).length;
+            const firstTrySolved = solvedEntries.filter(([, stats]) => stats.attempts === 1).length;
             const firstTryPercentage = totalSolved > 0 ? ((firstTrySolved / totalSolved) * 100).toFixed(1) : '0';
             
             console.log(`\nSummary:`);
@@ -167,12 +165,12 @@ async function main() {
             
             if (!puzzleData) return;
             
-            const solvedEntries = Object.entries(puzzleData).filter(([_, stats]) => stats.solved);
-            const totalPoints = solvedEntries.reduce((sum, [_, stats]) => sum + stats.points, 0);
+            const solvedEntries = Object.entries(puzzleData).filter(([, stats]) => stats.solved);
+            const totalPoints = solvedEntries.reduce((sum, [, stats]) => sum + stats.points, 0);
             const totalSolved = solvedEntries.length;
             const averagePoints = totalSolved > 0 ? (totalPoints / totalSolved).toFixed(2) : '0';
             
-            const firstTrySolved = solvedEntries.filter(([_, stats]) => stats.attempts === 1).length;
+            const firstTrySolved = solvedEntries.filter(([, stats]) => stats.attempts === 1).length;
             const firstTryPercentage = totalSolved > 0 ? ((firstTrySolved / totalSolved) * 100).toFixed(1) : '0';
             
             const ratingStr = (user?.ratingPuzzle || 'N/A').toString();

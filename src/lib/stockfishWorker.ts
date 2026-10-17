@@ -100,3 +100,42 @@ export function uciToMove(uciMove: string): { from: string; to: string; promotio
 
     return { from, to, promotion };
 }
+
+let sharedWorker: Worker | null = null;
+
+/**
+ * Ask Stockfish for a move at a limited skill level and depth (used by the animal bots).
+ * Resolves to null if the engine cannot start or does not answer in time, so callers can fall back.
+ */
+export function requestBotMove(fen: string, { skill, depth }: { skill: number; depth: number }, timeoutMs = 8000): Promise<string | null> {
+    return new Promise((resolve) => {
+        try {
+            if (!sharedWorker) {
+                sharedWorker = new Worker('/stockfish.js');
+                sharedWorker.postMessage('uci');
+            }
+        } catch (error) {
+            console.error('Stockfish could not start:', error);
+            resolve(null);
+            return;
+        }
+        const worker = sharedWorker;
+        const timer = setTimeout(() => {
+            worker.removeEventListener('message', onMessage);
+            worker.postMessage('stop');
+            resolve(null);
+        }, timeoutMs);
+        function onMessage(e: MessageEvent) {
+            if (typeof e.data !== 'string' || !e.data.startsWith('bestmove')) return;
+            clearTimeout(timer);
+            worker.removeEventListener('message', onMessage);
+            const move = e.data.split(' ')[1];
+            resolve(move && move !== '(none)' ? move : null);
+        }
+        worker.addEventListener('message', onMessage);
+        worker.postMessage('ucinewgame');
+        worker.postMessage(`setoption name Skill Level value ${Math.max(0, Math.min(20, Math.round(skill)))}`);
+        worker.postMessage(`position fen ${fen}`);
+        worker.postMessage(`go depth ${Math.max(1, Math.round(depth))}`);
+    });
+}

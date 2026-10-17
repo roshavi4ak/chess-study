@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import type { PieceDropHandlerArgs } from "react-chessboard";
+import type { PieceDropHandlerArgs, PieceHandlerArgs, ChessboardOptions } from "react-chessboard";
 import { uciToMove } from "@/lib/stockfishWorker";
 import { getAvailableUsers, type AvailableUser } from "@/app/actions/users";
 import {
@@ -48,9 +48,9 @@ export default function PlayPage() {
     const t = useTranslations("Play");
     const commonT = useTranslations("Common");
     // Game state
-    const chessGameRef = useRef(new Chess());
-    const chessGame = chessGameRef.current;
-    const [chessPosition, setChessPosition] = useState(chessGame.fen());
+    const [chessGame, setChessGame] = useState(() => new Chess());
+    const chessGameRef = useRef(chessGame);
+    const [chessPosition, setChessPosition] = useState(() => chessGame.fen());
 
     // Mode and difficulty
     const [gameMode, setGameMode] = useState<GameMode>('lichess');
@@ -76,7 +76,7 @@ export default function PlayPage() {
     const [blackTime, setBlackTime] = useState<number | undefined>();
 
     // Clock countdown refs - for client-side countdown between Lichess updates
-    const lastClockUpdateRef = useRef<number>(Date.now());
+    const lastClockUpdateRef = useRef<number>(0);
     const clockIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const whiteTimeRef = useRef<number | undefined>(undefined);
     const blackTimeRef = useRef<number | undefined>(undefined);
@@ -99,6 +99,84 @@ export default function PlayPage() {
     const [incomingChallenge, setIncomingChallenge] = useState<IncomingChallenge | null>(null);
     const [isWaitingForChallenge, setIsWaitingForChallenge] = useState(false);
     const myLichessIdRef = useRef<string | null>(null);
+
+    const handleLichessGameState = useCallback(function handleLichessGameState(gameState: LichessGameState) {
+        console.log('Lichess game state update:', gameState);
+
+        if (gameState.playerColor) {
+            setBoardOrientation(gameState.playerColor);
+            setPlayerColor(gameState.playerColor);
+            playerColorRef.current = gameState.playerColor;
+        }
+
+        if (gameState.whiteName) setWhiteName(gameState.whiteName);
+        if (gameState.blackName) setBlackName(gameState.blackName);
+        if (gameState.whiteRating !== undefined) setWhiteRating(gameState.whiteRating);
+        if (gameState.blackRating !== undefined) setBlackRating(gameState.blackRating);
+
+        if (gameState.wtime !== undefined) {
+            setWhiteTime(gameState.wtime);
+            whiteTimeRef.current = gameState.wtime;
+            lastClockUpdateRef.current = Date.now();
+        }
+        if (gameState.btime !== undefined) {
+            setBlackTime(gameState.btime);
+            blackTimeRef.current = gameState.btime;
+            lastClockUpdateRef.current = Date.now();
+        }
+
+        if (gameState.moves !== undefined) {
+            try {
+                const newGame = new Chess();
+                const movesArray = gameState.moves.trim().split(' ').filter(m => m);
+                for (const uciMove of movesArray) {
+                    const move = uciToMove(uciMove);
+                    newGame.move(move);
+                }
+                chessGameRef.current = newGame;
+                setChessGame(newGame);
+                setChessPosition(newGame.fen());
+
+                if (gameState.status === 'finished') {
+                    setStatus(`${t("gameFinished")} ${t("winner")}: ${gameState.winner || t("draw")}`);
+                } else {
+                    const currentTurn = newGame.turn();
+                    const myTurn = playerColorRef.current === 'white' ? 'w' : 'b';
+                    if (currentTurn === myTurn) setStatus(t("yourTurn"));
+                    else setStatus(t("opponentThinking"));
+                }
+            } catch (err) {
+                console.error('Error applying Lichess moves:', err);
+                setError('Failed to sync game state');
+            }
+        }
+    }, [t]);
+
+    const connectToLichessGame = useCallback(function connectToLichessGame(gameId: string) {
+        if (!lichessTokenRef.current) return;
+
+        setStatus(t("connectingToLichess"));
+        lichessGameIdRef.current = gameId;
+        setLichessGameStarted(true);
+
+        // Stream game events
+        const cleanup = streamLichessGame(
+            lichessTokenRef.current,
+            gameId,
+            myLichessIdRef.current,
+            (gameState) => {
+                // ... existing game state handling ...
+                // Reuse the logic from startLichessGame but extracted
+                handleLichessGameState(gameState);
+            },
+            (errorMsg) => {
+                setError(errorMsg);
+                setStatus('');
+            }
+        );
+
+        lichessCleanupRef.current = cleanup;
+    }, [t, handleLichessGameState]);
 
     // Initialize Lichess event stream
     useEffect(() => {
@@ -168,7 +246,7 @@ export default function PlayPage() {
                 lichessEventCleanupRef.current();
             }
         };
-    }, []);
+    }, [connectToLichessGame]);
 
     // Clock countdown effect - runs every 100ms to update the active player's clock
     useEffect(() => {
@@ -208,91 +286,14 @@ export default function PlayPage() {
 
 
     // Connect to an existing Lichess game
-    async function connectToLichessGame(gameId: string) {
-        if (!lichessTokenRef.current) return;
-
-        setStatus(t("connectingToLichess"));
-        lichessGameIdRef.current = gameId;
-        setLichessGameStarted(true);
-
-        // Stream game events
-        const cleanup = streamLichessGame(
-            lichessTokenRef.current,
-            gameId,
-            myLichessIdRef.current,
-            (gameState) => {
-                // ... existing game state handling ...
-                // Reuse the logic from startLichessGame but extracted
-                handleLichessGameState(gameState);
-            },
-            (errorMsg) => {
-                setError(errorMsg);
-                setStatus('');
-            }
-        );
-
-        lichessCleanupRef.current = cleanup;
-    }
-
     // Check if a piece is draggable (only allow dragging your own pieces)
-    function isDraggablePiece({ piece }: { piece: string }): boolean {
+    function isDraggablePiece({ piece }: PieceHandlerArgs): boolean {
         // If no Lichess game is active, allow all pieces to be dragged
         if (!lichessGameStarted) return true;
 
         // piece format is like 'wP', 'bK' etc - first char is color
-        const pieceColor = piece[0] === 'w' ? 'white' : 'black';
+        const pieceColor = piece.pieceType[0] === 'w' ? 'white' : 'black';
         return pieceColor === playerColorRef.current;
-    }
-
-    function handleLichessGameState(gameState: LichessGameState) {
-        console.log('Lichess game state update:', gameState);
-
-        if (gameState.playerColor) {
-            setBoardOrientation(gameState.playerColor);
-            setPlayerColor(gameState.playerColor);
-            playerColorRef.current = gameState.playerColor;
-        }
-
-        if (gameState.whiteName) setWhiteName(gameState.whiteName);
-        if (gameState.blackName) setBlackName(gameState.blackName);
-        if (gameState.whiteRating !== undefined) setWhiteRating(gameState.whiteRating);
-        if (gameState.blackRating !== undefined) setBlackRating(gameState.blackRating);
-
-        if (gameState.wtime !== undefined) {
-            setWhiteTime(gameState.wtime);
-            whiteTimeRef.current = gameState.wtime;
-            lastClockUpdateRef.current = Date.now();
-        }
-        if (gameState.btime !== undefined) {
-            setBlackTime(gameState.btime);
-            blackTimeRef.current = gameState.btime;
-            lastClockUpdateRef.current = Date.now();
-        }
-
-        if (gameState.moves !== undefined) {
-            try {
-                const newGame = new Chess();
-                const movesArray = gameState.moves.trim().split(' ').filter(m => m);
-                for (const uciMove of movesArray) {
-                    const move = uciToMove(uciMove);
-                    newGame.move(move);
-                }
-                chessGameRef.current = newGame;
-                setChessPosition(newGame.fen());
-
-                if (gameState.status === 'finished') {
-                    setStatus(`${t("gameFinished")} ${t("winner")}: ${gameState.winner || t("draw")}`);
-                } else {
-                    const currentTurn = newGame.turn();
-                    const myTurn = playerColorRef.current === 'white' ? 'w' : 'b';
-                    if (currentTurn === myTurn) setStatus(t("yourTurn"));
-                    else setStatus(t("opponentThinking"));
-                }
-            } catch (err) {
-                console.error('Error applying Lichess moves:', err);
-                setError('Failed to sync game state');
-            }
-        }
     }
 
     async function startLichessGame() {
@@ -313,7 +314,7 @@ export default function PlayPage() {
             }
             connectToLichessGame(gameId);
             setStatus(t("connectedGamedStarted"));
-        } catch (err) {
+        } catch {
             setError(t("errorConnectingLichess"));
             setStatus('');
         }
@@ -347,7 +348,7 @@ export default function PlayPage() {
                 setIsWaitingForChallenge(false);
                 setStatus('');
             }
-        } catch (err) {
+        } catch {
             setError(t("errorConnectingLichess"));
             setIsWaitingForChallenge(false);
         }
@@ -419,16 +420,18 @@ export default function PlayPage() {
     };
 
     const { onSquareClick, onPieceClick, optionSquares, setOptionSquares, onPieceDrop } = useLegalMoves({
-        game: chessGameRef.current,
+        game: chessGame,
         onMove: handleMove
     });
 
     const handlePieceDrop = ({ sourceSquare, targetSquare }: PieceDropHandlerArgs) => {
-        return onPieceDrop({ sourceSquare, targetSquare });
+        void onPieceDrop({ sourceSquare, targetSquare });
+        return false;
     };
 
     function startNewGame(mode?: GameMode) {
         chessGameRef.current = new Chess();
+        setChessGame(chessGameRef.current);
         setChessPosition(chessGameRef.current.fen());
         setError('');
         setStatus(t("makeYourMove"));
@@ -467,11 +470,11 @@ export default function PlayPage() {
         else setError(t("failedOfferDraw"));
     }
 
-    const chessboardOptions = {
+    const chessboardOptions: ChessboardOptions = {
         position: chessPosition,
-        onPieceDrop: handlePieceDrop as any,
+        onPieceDrop: handlePieceDrop,
         boardOrientation: boardOrientation,
-        isDraggablePiece,
+        canDragPiece: isDraggablePiece,
         id: `play-vs-${gameMode}`,
         onSquareClick,
         onPieceClick,
@@ -623,7 +626,7 @@ export default function PlayPage() {
                                             </label>
                                             <select
                                                 value={challengeConfig.color}
-                                                onChange={(e) => setChallengeConfig({ ...challengeConfig, color: e.target.value as any })}
+                                                onChange={(e) => setChallengeConfig({ ...challengeConfig, color: e.target.value as ChallengeOptions["color"] })}
                                                 className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                                             >
                                                 <option value="random">{t("random")}</option>
@@ -701,7 +704,7 @@ export default function PlayPage() {
                                         </span>
                                     )}
                                 </div>
-                                <div className={`px-3 py-1 rounded font-mono text-lg ${chessGameRef.current.turn() !== (playerColor === 'white' ? 'w' : 'b')
+                                <div className={`px-3 py-1 rounded font-mono text-lg ${chessGame.turn() !== (playerColor === 'white' ? 'w' : 'b')
                                     ? 'bg-green-600 text-white'
                                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                                     }`}>
@@ -728,7 +731,7 @@ export default function PlayPage() {
                                     )}
                                     <span className="text-xs text-blue-500 ml-2">({t("you")})</span>
                                 </div>
-                                <div className={`px-3 py-1 rounded font-mono text-lg ${chessGameRef.current.turn() === (playerColor === 'white' ? 'w' : 'b')
+                                <div className={`px-3 py-1 rounded font-mono text-lg ${chessGame.turn() === (playerColor === 'white' ? 'w' : 'b')
                                     ? 'bg-green-600 text-white'
                                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                                     }`}>

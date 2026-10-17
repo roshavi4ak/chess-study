@@ -25,10 +25,10 @@ async function main() {
 
     // Test that UserTagStats table exists in database
     console.log('Checking if UserTagStats table exists...')
-    const tableInfo = await prisma.$queryRaw`
+    const tableInfo = await prisma.$queryRaw<Record<string, unknown>[]>`
       SELECT * FROM information_schema.tables 
       WHERE table_name = 'UserTagStats' OR table_name = 'usertagstats'
-    ` as any[]
+    `
     console.log('Table info:', tableInfo)
     
     if (tableInfo.length === 0) {

@@ -1,0 +1,4653 @@
+[
+  {
+    "id": "1",
+    "text": "Well done! We have a pawn up and white's knight is in trouble. ",
+    "uses": [
+      "french-defense:1"
+    ]
+  },
+  {
+    "id": "2",
+    "text": "French defense just won us a pawn! Woohoo!",
+    "uses": [
+      "french-defense:2"
+    ]
+  },
+  {
+    "id": "3",
+    "text": "Very nice! Can't complain about a free pawn. ",
+    "uses": [
+      "french-defense:3"
+    ]
+  },
+  {
+    "id": "4",
+    "text": "Woohoo! We are up a free pawn :) ",
+    "uses": [
+      "french-defense:4"
+    ]
+  },
+  {
+    "id": "5",
+    "text": "Well done! We are almost done developing and have 2 central pawns to white's 1. ",
+    "uses": [
+      "french-defense:5"
+    ]
+  },
+  {
+    "id": "6",
+    "text": "Well done! We have 2 central pawns to white's 1, leaving us with a bit of an advantage. ",
+    "uses": [
+      "french-defense:6"
+    ]
+  },
+  {
+    "id": "7",
+    "text": "Well done! We have a 60% winrate from here. ",
+    "uses": [
+      "french-defense:7"
+    ]
+  },
+  {
+    "id": "8",
+    "text": "Well done! With white's queen slightly mispositioned, we have a small advantage coming into the middlegame",
+    "uses": [
+      "french-defense:8"
+    ]
+  },
+  {
+    "id": "9",
+    "text": "Well done! White is going to have a hard time holding onto that weak e5 pawn. ",
+    "uses": [
+      "french-defense:9"
+    ]
+  },
+  {
+    "id": "10",
+    "text": "Well done! We're going to get rid of the d4 pawn, which destabilizes the e5 pawn and white's whole center. ",
+    "uses": [
+      "french-defense:10"
+    ]
+  },
+  {
+    "id": "11",
+    "text": "The exchange french is super boring. White did not want us to have any fun this game. ",
+    "uses": [
+      "french-defense:11"
+    ]
+  },
+  {
+    "id": "12",
+    "text": "Well done! We have a slight eval advantage and we win over half our games from here! Next, we'll continue developing and castle kingside ",
+    "uses": [
+      "french-defense:12"
+    ]
+  },
+  {
+    "id": "13",
+    "text": "Perfectly played! We'll castle and finish up our development next. ",
+    "uses": [
+      "french-defense:13"
+    ]
+  },
+  {
+    "id": "14",
+    "text": "We are looking fantastic here. Well done.",
+    "uses": [
+      "french-defense:14"
+    ]
+  },
+  {
+    "id": "15",
+    "text": "Well done! Both sides played at literally 100% accuracy. ",
+    "uses": [
+      "french-defense:15"
+    ]
+  },
+  {
+    "id": "16",
+    "text": "Nice! Because we wasted one of whites moves, we are slightly ahead in the eval bar. ",
+    "uses": [
+      "french-defense:16"
+    ]
+  },
+  {
+    "id": "17",
+    "text": "Nice! In the future we'll go g-knight to e7 and short-castle. ",
+    "uses": [
+      "french-defense:17"
+    ]
+  },
+  {
+    "id": "18",
+    "text": "Nice, we have a bit more development and will be first to castle. ",
+    "uses": [
+      "french-defense:18"
+    ]
+  },
+  {
+    "id": "19",
+    "text": "Nice! It's a symmetrical and dead even position ",
+    "uses": [
+      "french-defense:19"
+    ]
+  },
+  {
+    "id": "20",
+    "text": "Nice - both sides played absolutely perfectly. ",
+    "uses": [
+      "french-defense:20"
+    ]
+  },
+  {
+    "id": "21",
+    "text": "Nice, the game is dead even so far. Good luck with the rest of it. ",
+    "uses": [
+      "french-defense:21"
+    ]
+  },
+  {
+    "id": "22",
+    "text": "Well done! Once black removes their bishop, we can finally bring our knight to safety.  ",
+    "uses": [
+      "french-defense:22"
+    ]
+  },
+  {
+    "id": "23",
+    "text": "It's a completely even and symmetrical position - good luck with the rest of your game :) ",
+    "uses": [
+      "french-defense:23"
+    ]
+  },
+  {
+    "id": "24",
+    "text": "Nice!! Look how white's e2 bishop, d2 knight, and c1 bishop all can't move. It's wild how paralyzed they are. ",
+    "uses": [
+      "french-defense:24"
+    ]
+  },
+  {
+    "id": "25",
+    "text": "This was a perfectly played opening from both sides - now onto the rest of the game! ",
+    "uses": [
+      "french-defense:25"
+    ]
+  },
+  {
+    "id": "26",
+    "text": "Both sides. 100% accuracy. Wow. ",
+    "uses": [
+      "french-defense:26"
+    ]
+  },
+  {
+    "id": "27",
+    "text": "Well done! We are up a pawn and also threatening a nasty fork on f7. The computer loves our position and graces it with a +2.5 point advantage. ",
+    "uses": [
+      "ruy-lopez:1"
+    ]
+  },
+  {
+    "id": "28",
+    "text": "Nice!! I won't complain about a free bishop. ",
+    "uses": [
+      "ruy-lopez:2"
+    ]
+  },
+  {
+    "id": "29",
+    "text": "Sweet! A free pawn!",
+    "uses": [
+      "ruy-lopez:3"
+    ]
+  },
+  {
+    "id": "30",
+    "text": "Well done!! There's a few ways black can try to untangle themselves out of this, but honestly none of them will work. We have a crushing position. ",
+    "uses": [
+      "ruy-lopez:4"
+    ]
+  },
+  {
+    "id": "31",
+    "text": "Nice! That bishop is ours. ",
+    "uses": [
+      "ruy-lopez:5"
+    ]
+  },
+  {
+    "id": "32",
+    "text": "Well done! Our dominant center gives us a +2.5 point advantage over our poor opponent. ",
+    "uses": [
+      "ruy-lopez:6"
+    ]
+  },
+  {
+    "id": "33",
+    "text": "Nice!! Black is likely going to be checkmated here, or if not, they're going to be in a world of trouble.",
+    "uses": [
+      "ruy-lopez:7"
+    ]
+  },
+  {
+    "id": "34",
+    "text": "Nice! We're up a whole knight. ",
+    "uses": [
+      "ruy-lopez:8"
+    ]
+  },
+  {
+    "id": "35",
+    "text": "Well done! Our attack is going to destroy black. ",
+    "uses": [
+      "ruy-lopez:9"
+    ]
+  },
+  {
+    "id": "36",
+    "text": "Well done! We literally just have a pawn. I can't complain. ",
+    "uses": [
+      "ruy-lopez:10"
+    ]
+  },
+  {
+    "id": "37",
+    "text": "LMAO, you're a queen up! This win isn't so much because we played perfectly, but more because Black tried to be sneaky and completely misunderstood the position. Well, a win is a win! ",
+    "uses": [
+      "ruy-lopez:11"
+    ]
+  },
+  {
+    "id": "38",
+    "text": "We are simply a knight up. Nice job!!",
+    "uses": [
+      "ruy-lopez:12"
+    ]
+  },
+  {
+    "id": "39",
+    "text": "Up 7 points of material. Not bad.",
+    "uses": [
+      "ruy-lopez:13"
+    ]
+  },
+  {
+    "id": "40",
+    "text": "I mean seriously, the rest of blacks pieces haven't even MOVED yet. We are dominating here. ",
+    "uses": [
+      "ruy-lopez:14"
+    ]
+  },
+  {
+    "id": "41",
+    "text": "If you do this in a game, screenshot it and send it to me at ethan@chessreps.com",
+    "uses": [
+      "ruy-lopez:15"
+    ]
+  },
+  {
+    "id": "42",
+    "text": "Well done! Black's knight is essentially trapped in the middle of the board. The computer puts us at a +4 point advantage and we win from here 80% of the time, even though the material is completely equal!",
+    "uses": [
+      "ruy-lopez:16"
+    ]
+  },
+  {
+    "id": "43",
+    "text": "Nice!! We are up a pawn & own the center. We have like an 80% winrate from here. ",
+    "uses": [
+      "ruy-lopez:17"
+    ]
+  },
+  {
+    "id": "44",
+    "text": "That's how it's done!! ",
+    "uses": [
+      "ruy-lopez:18"
+    ]
+  },
+  {
+    "id": "45",
+    "text": "Aaaaaand now we have a rook. Game over. Black should resign. Chess is easy huh? ",
+    "uses": [
+      "ruy-lopez:19"
+    ]
+  },
+  {
+    "id": "46",
+    "text": "Well done! From here, do whatever you can to put your queen on g4 and win the game. ",
+    "uses": [
+      "ruy-lopez:20"
+    ]
+  },
+  {
+    "id": "47",
+    "text": "Now that's how you play chess! Black's position is completely devastated. ",
+    "uses": [
+      "ruy-lopez:21"
+    ]
+  },
+  {
+    "id": "48",
+    "text": "Boom. ",
+    "uses": [
+      "ruy-lopez:22"
+    ]
+  },
+  {
+    "id": "49",
+    "text": "Nice!! That rook is ours. ",
+    "uses": [
+      "ruy-lopez:23"
+    ]
+  },
+  {
+    "id": "50",
+    "text": "Well done! There's a few continuations from here but they're all completely winning for us. Especially when we connect our rooks and try and pin the queen against the king - it's game over. ",
+    "uses": [
+      "ruy-lopez:24"
+    ]
+  },
+  {
+    "id": "51",
+    "text": "That was insane. ",
+    "uses": [
+      "ruy-lopez:25"
+    ]
+  },
+  {
+    "id": "52",
+    "text": "Nice job! Just watch out for any discovered attacks on our queen but otherwise we should be good! ",
+    "uses": [
+      "ruy-lopez:26"
+    ]
+  },
+  {
+    "id": "53",
+    "text": "Up 5 points of material. Not bad. ",
+    "uses": [
+      "ruy-lopez:27"
+    ]
+  },
+  {
+    "id": "54",
+    "text": "We have a free rook! It should be very easy to convert this to a win",
+    "uses": [
+      "ruy-lopez:28"
+    ]
+  },
+  {
+    "id": "55",
+    "text": "Nice!! Would you be surprised if I told you that white has a 90% winrate from here? ",
+    "uses": [
+      "ruy-lopez:29"
+    ]
+  },
+  {
+    "id": "56",
+    "text": "OK winning from here will be easy. We have a +5 point advantage and a literal 95% win rate lol. ",
+    "uses": [
+      "ruy-lopez:30"
+    ]
+  },
+  {
+    "id": "57",
+    "text": "Black is cooked. ",
+    "uses": [
+      "ruy-lopez:31"
+    ]
+  },
+  {
+    "id": "58",
+    "text": "Well done! We have a 75% winrate from here :)",
+    "uses": [
+      "ruy-lopez:32"
+    ]
+  },
+  {
+    "id": "59",
+    "text": "Well done! Not only are we completely fine here, we're actually WINNING. Our center is too strong and black will actually have a tough time getting to our king. ",
+    "uses": [
+      "ruy-lopez:33"
+    ]
+  },
+  {
+    "id": "60",
+    "text": "Well done! It looks weird having our king so exposed, but we are actually completely safe. Not only are we safe, but we are actually WINNING! We have a +1.5 point advantage and an 85% winrate from here. ",
+    "uses": [
+      "ruy-lopez:34"
+    ]
+  },
+  {
+    "id": "61",
+    "text": "Look how sad black's position is here. Every piece is literally doing nothing. You win this easily.",
+    "uses": [
+      "ruy-lopez:35"
+    ]
+  },
+  {
+    "id": "62",
+    "text": "Well done! We are completely crushing here. Our two knights are unstoppable, and our queen and rook stare down the center. Black's queen is out of place. The computer loooooves our position. ",
+    "uses": [
+      "ruy-lopez:36"
+    ]
+  },
+  {
+    "id": "63",
+    "text": "Well done! We have (nearly) transposed to another line we've already learned so just know that we are completely winning from here and it'll be tough for black to keep ownership of that knight. ",
+    "uses": [
+      "ruy-lopez:37"
+    ]
+  },
+  {
+    "id": "64",
+    "text": "Well done! We'll castle, finish development, and be left with a +1 point positional advantage. ",
+    "uses": [
+      "ruy-lopez:38"
+    ]
+  },
+  {
+    "id": "65",
+    "text": "Well done! We have a +1 point advantage simply because we own more of the center and our king is safer. ",
+    "uses": [
+      "ruy-lopez:39"
+    ]
+  },
+  {
+    "id": "66",
+    "text": "Well done! We evened up the material and have way more space than our opponent. From here, we win over 2/3rds of the time. ",
+    "uses": [
+      "ruy-lopez:40"
+    ]
+  },
+  {
+    "id": "67",
+    "text": "Well done! We have a better position than our opponent. ",
+    "uses": [
+      "ruy-lopez:41"
+    ]
+  },
+  {
+    "id": "68",
+    "text": "Well done! Black's dark squares are completely weak. Despite being down a pawn we are actually UP a point of advantage. Our dark square control is just too good. ",
+    "uses": [
+      "ruy-lopez:42"
+    ]
+  },
+  {
+    "id": "69",
+    "text": "Well done! We secured a +1 point advantage and are ready to continue playing chess. ",
+    "uses": [
+      "ruy-lopez:43"
+    ]
+  },
+  {
+    "id": "70",
+    "text": "Well done! Our dark square control is just too overpowering for black. ",
+    "uses": [
+      "ruy-lopez:44"
+    ]
+  },
+  {
+    "id": "71",
+    "text": "Well done! We get to choose whether we want to castle kingside or queenside in the future. ",
+    "uses": [
+      "ruy-lopez:45"
+    ]
+  },
+  {
+    "id": "72",
+    "text": "Well done! We have a better position than black here. ",
+    "uses": [
+      "ruy-lopez:46"
+    ]
+  },
+  {
+    "id": "73",
+    "text": "Well done! You played the opening perfectly and now we have a +1 point advantage over our opponent. ",
+    "uses": [
+      "ruy-lopez:47"
+    ]
+  },
+  {
+    "id": "74",
+    "text": "Well done! Our strong center gives us a +1 point advantage over our opponent. ",
+    "uses": [
+      "ruy-lopez:48"
+    ]
+  },
+  {
+    "id": "75",
+    "text": "Well done! Our strong center is giving us a +1 point advantage over our opponent. Meanwhile, black's position is incredibly cramped. ",
+    "uses": [
+      "ruy-lopez:49"
+    ]
+  },
+  {
+    "id": "76",
+    "text": "Well done! Our safe king and strong center gives us a +1 point advantage over our opponent. ",
+    "uses": [
+      "ruy-lopez:50"
+    ]
+  },
+  {
+    "id": "77",
+    "text": "Well done! We completely own the center and have a better position than black.",
+    "uses": [
+      "ruy-lopez:51"
+    ]
+  },
+  {
+    "id": "78",
+    "text": "Well done! Black's knight is actually trapped by the way. They have a couple ways to get out of it but its straightforward to play on our end. We have a 70% winrate from here! ",
+    "uses": [
+      "ruy-lopez:52"
+    ]
+  },
+  {
+    "id": "79",
+    "text": "Nice!! We're winning back our piece and we have a 70% winrate from here. ",
+    "uses": [
+      "ruy-lopez:53"
+    ]
+  },
+  {
+    "id": "80",
+    "text": "Well done! We played perfectly and earned a slight advantage from the opening. ",
+    "uses": [
+      "ruy-lopez:54"
+    ]
+  },
+  {
+    "id": "81",
+    "text": "Well done! Honestly both us and our opponent played pretty perfectly, so the position is equal and we have a game ahead of us. ",
+    "uses": [
+      "ruy-lopez:55"
+    ]
+  },
+  {
+    "id": "82",
+    "text": "Great. We are simply winning here. ",
+    "uses": [
+      "queens-gambit-declined:1"
+    ]
+  },
+  {
+    "id": "83",
+    "text": "Well done! We are up a pawn and life is good. ",
+    "uses": [
+      "queens-gambit-declined:2"
+    ]
+  },
+  {
+    "id": "84",
+    "text": "Well done! The computer is absolutely in love with our position here. We'll develop our knight, bishop, and castle kingside soon. ",
+    "uses": [
+      "queens-gambit-declined:3"
+    ]
+  },
+  {
+    "id": "85",
+    "text": "Well done! We are up a pawn and have a better position. Life is good.  ",
+    "uses": [
+      "queens-gambit-declined:4"
+    ]
+  },
+  {
+    "id": "86",
+    "text": "Well done! We are threatening a fork on the next move with pawn to e5, and even though the material is equal, the computer thinks we are 2 point ahead. ",
+    "uses": [
+      "queens-gambit-declined:5"
+    ]
+  },
+  {
+    "id": "87",
+    "text": "Well done! Our position is great and chess engines think we are 1 point ahead here. ",
+    "uses": [
+      "queens-gambit-declined:6"
+    ]
+  },
+  {
+    "id": "88",
+    "text": "Well done! The computer loves our position and white wins like 70% of the time here. ",
+    "uses": [
+      "queens-gambit-declined:7"
+    ]
+  },
+  {
+    "id": "89",
+    "text": "Well done! I'd be so annoyed if I were Black right now.",
+    "uses": [
+      "queens-gambit-declined:8"
+    ]
+  },
+  {
+    "id": "90",
+    "text": "Well done! Our pieces are coordinated beautifully and the computer loves our position - even giving us a 1 or 2 point advantage. ",
+    "uses": [
+      "queens-gambit-declined:9"
+    ]
+  },
+  {
+    "id": "91",
+    "text": "Well done - we have transposed into the Queen's Gambit Accepted variation. To learn about how to play from here - go check out that course. I know the author and he's a really good guy. ",
+    "uses": [
+      "queens-gambit-declined:10"
+    ]
+  },
+  {
+    "id": "92",
+    "text": "Well done! We have 2 pieces aimed right at Black's undefended f-pawn, and black really has no good way to defend it. ",
+    "uses": [
+      "queens-gambit-declined:11"
+    ]
+  },
+  {
+    "id": "93",
+    "text": "Well done! The computer likes our position here. ",
+    "uses": [
+      "queens-gambit-declined:12"
+    ]
+  },
+  {
+    "id": "94",
+    "text": "Well done! We simply outplayed black in the opening and now have a better position for the middlegame. ",
+    "uses": [
+      "queens-gambit-declined:13"
+    ]
+  },
+  {
+    "id": "95",
+    "text": "Well done! The computer gives us the edge in this position",
+    "uses": [
+      "queens-gambit-declined:14"
+    ]
+  },
+  {
+    "id": "96",
+    "text": "Well done! Even though we are down two pawns, our rook will be coming into the open file, our dark-square bishop is piercing the position, and our queen is staring down the d-file. The computer is giving us a 1 point advantage here. ",
+    "uses": [
+      "queens-gambit-declined:15"
+    ]
+  },
+  {
+    "id": "97",
+    "text": "Well done! We are simply up a pawn. We need to develop and castle but not a bad start! And the computer likes our position.",
+    "uses": [
+      "queens-gambit-declined:16"
+    ]
+  },
+  {
+    "id": "98",
+    "text": "Well done! We have a rook on the open c-file, more development, and a safer king. ",
+    "uses": [
+      "queens-gambit-declined:17"
+    ]
+  },
+  {
+    "id": "99",
+    "text": "Well done! Our position is solid and we are ready to play chess!",
+    "uses": [
+      "queens-gambit-declined:18"
+    ]
+  },
+  {
+    "id": "100",
+    "text": "Well done! Let's play chess. ",
+    "uses": [
+      "queens-gambit-declined:19"
+    ]
+  },
+  {
+    "id": "101",
+    "text": "Well done! We are ready to continue our game.",
+    "uses": [
+      "queens-gambit-declined:20"
+    ]
+  },
+  {
+    "id": "102",
+    "text": "This is just complete brutality. No hope at all for them in this position.",
+    "uses": [
+      "queens-gambit-accepted:1"
+    ]
+  },
+  {
+    "id": "103",
+    "text": "Well done! Believe it or not, thousands of games end up exactly like this.",
+    "uses": [
+      "queens-gambit-accepted:2"
+    ]
+  },
+  {
+    "id": "104",
+    "text": "Thank you, next!",
+    "uses": [
+      "queens-gambit-accepted:3"
+    ]
+  },
+  {
+    "id": "105",
+    "text": "Well done! We are up an exchange here and are crushing it. Once we finish developing and castle, the game will be ours. ",
+    "uses": [
+      "queens-gambit-accepted:4"
+    ]
+  },
+  {
+    "id": "106",
+    "text": "Beautiful! Black is behind in development and can't castle.",
+    "uses": [
+      "queens-gambit-accepted:5"
+    ]
+  },
+  {
+    "id": "107",
+    "text": "That's how its done! ",
+    "uses": [
+      "queens-gambit-accepted:6"
+    ]
+  },
+  {
+    "id": "108",
+    "text": "Checkmate! You did it boss. ",
+    "uses": [
+      "queens-gambit-accepted:7"
+    ]
+  },
+  {
+    "id": "109",
+    "text": "We won BOTH pawns, own the center, and Black's pawn structure is atrocious. This is just a trainwreck for Black. ",
+    "uses": [
+      "queens-gambit-accepted:8"
+    ]
+  },
+  {
+    "id": "110",
+    "text": "Well done! We are threatening checkmate on the next move with queen to f7. The computer loves our position.",
+    "uses": [
+      "queens-gambit-accepted:9"
+    ]
+  },
+  {
+    "id": "111",
+    "text": "Before you say \"my opponent would never play this badly\" - this is an EXACT game that happened between 2400 ELOs....",
+    "uses": [
+      "queens-gambit-accepted:10"
+    ]
+  },
+  {
+    "id": "112",
+    "text": "Look how trapped every single one of Black's pieces is. Their king's bishop is not getting out. Their king's knight is not getting out. It's honestly depressing. ",
+    "uses": [
+      "queens-gambit-accepted:11"
+    ]
+  },
+  {
+    "id": "113",
+    "text": "Well done! We have a great position and the computer puts us at a 1 or 2 point advantage. ",
+    "uses": [
+      "queens-gambit-accepted:12"
+    ]
+  },
+  {
+    "id": "114",
+    "text": "Well done! We are putting pressure on Black's pinned rook and attacking the e6 pawn. Things are looking great for us. ",
+    "uses": [
+      "queens-gambit-accepted:13"
+    ]
+  },
+  {
+    "id": "115",
+    "text": "Well done! This is a great position for us as we have the center and traded a knight for a rook. ",
+    "uses": [
+      "queens-gambit-accepted:14"
+    ]
+  },
+  {
+    "id": "116",
+    "text": "Well done! We have a better position and white wins more than 60% of the time from here. ",
+    "uses": [
+      "queens-gambit-accepted:15"
+    ]
+  },
+  {
+    "id": "117",
+    "text": "Well done! We are ready to continue playing chess. ",
+    "uses": [
+      "queens-gambit-accepted:16"
+    ]
+  },
+  {
+    "id": "118",
+    "text": "Well done! The game is essentially over.",
+    "uses": [
+      "kings-indian-defense:1"
+    ]
+  },
+  {
+    "id": "119",
+    "text": "Well done! We left our knight to die, but we are completely winning here because we'll actually get TWO pieces back. In our next moves, we'll take the knight on d4 with our bishop with check, then proceed to take the c4 bishop. Because we end a piece up, the computer gives us a +3 point advantage. ",
+    "uses": [
+      "kings-indian-defense:2"
+    ]
+  },
+  {
+    "id": "120",
+    "text": "Not only will we win our material back, this position is very hard to hold on to as White. In fact, we're winning from here like 75% of the time, and the computer gives us a big advantage. ",
+    "uses": [
+      "kings-indian-defense:3"
+    ]
+  },
+  {
+    "id": "121",
+    "text": "Well done!! We are simply up a piece and will win this game.  ",
+    "uses": [
+      "kings-indian-defense:4"
+    ]
+  },
+  {
+    "id": "122",
+    "text": "Well done! We're in an endgame up a pawn, with a safer king, and more developed pieces. The computer gives us a +4 point advantage and we win here over 70% of the time. ",
+    "uses": [
+      "kings-indian-defense:5"
+    ]
+  },
+  {
+    "id": "123",
+    "text": "Well done! In a second we'll grab the bishop and move our rook to d8 to pin the knight to the queen. The computer gives us a +2 point advantage. ",
+    "uses": [
+      "kings-indian-defense:6"
+    ]
+  },
+  {
+    "id": "124",
+    "text": "Well done! The computer gives us a +1 point advantage and we win over 60% of our games from here. ",
+    "uses": [
+      "kings-indian-defense:7"
+    ]
+  },
+  {
+    "id": "125",
+    "text": "Well done! The computer gives us a +1 point advantage even though material is equal, and black wins SEVENTY percent of games here. Our safe king  and better pawn structure will give us the edge. ",
+    "uses": [
+      "kings-indian-defense:8"
+    ]
+  },
+  {
+    "id": "126",
+    "text": "Well done! We have a safe king, a crushing queen, and are preventing white from castling. All of this means that we win 70% of the time from here, and the computer loves our position. ",
+    "uses": [
+      "kings-indian-defense:9"
+    ]
+  },
+  {
+    "id": "127",
+    "text": "Well done!! Our attacking marching down the board - and the computer gives us an advantage for it. ",
+    "uses": [
+      "kings-indian-defense:10"
+    ]
+  },
+  {
+    "id": "128",
+    "text": "Well done! White will probably castle out of the pin, but we own a very powerful file now. ",
+    "uses": [
+      "kings-indian-defense:11"
+    ]
+  },
+  {
+    "id": "129",
+    "text": "Well done! We're up a pawn, the computer gives us a +1 point advantage, and Black wins most of the time from here. ",
+    "uses": [
+      "kings-indian-defense:12"
+    ]
+  },
+  {
+    "id": "130",
+    "text": "Well done! Even though we're down a pawn or two, our position is so active and developed that we will win our material back and still be compensated with a good position. Black wins over 2/3 games from here. ",
+    "uses": [
+      "kings-indian-defense:13"
+    ]
+  },
+  {
+    "id": "131",
+    "text": "Well done! Our pieces are developed, active, and coordinated, and we will likely win our pawn back. ",
+    "uses": [
+      "kings-indian-defense:14"
+    ]
+  },
+  {
+    "id": "132",
+    "text": "Well done! Black wins over 60% of the time here, and we will likely win the c4 pawn soon after adding another attacker or two.",
+    "uses": [
+      "kings-indian-defense:15"
+    ]
+  },
+  {
+    "id": "133",
+    "text": "Well done! We are in a great spot here, and Black wins most of the time from this position. Look how powerful our dark-squared diagonal is! ",
+    "uses": [
+      "kings-indian-defense:16"
+    ]
+  },
+  {
+    "id": "134",
+    "text": "Well done! The computer puts this position as equal despite us being a pawn down because of our strong bishops and ownership of the d-file.",
+    "uses": [
+      "kings-indian-defense:17"
+    ]
+  },
+  {
+    "id": "135",
+    "text": "Well done! Black wins over 66% of the time from here. ",
+    "uses": [
+      "kings-indian-defense:18"
+    ]
+  },
+  {
+    "id": "136",
+    "text": "Well done! Our knight is a monster on that square. ",
+    "uses": [
+      "kings-indian-defense:19"
+    ]
+  },
+  {
+    "id": "137",
+    "text": "Well done! The position is equal and we are ready to play a game of chess! ",
+    "uses": [
+      "kings-indian-defense:20"
+    ]
+  },
+  {
+    "id": "138",
+    "text": "Well done! Black wins over 70% of their games from here!! ",
+    "uses": [
+      "kings-indian-defense:21"
+    ]
+  },
+  {
+    "id": "139",
+    "text": "Well done! We're doing very well here. ",
+    "uses": [
+      "kings-indian-defense:22"
+    ]
+  },
+  {
+    "id": "140",
+    "text": "Well done! Black wins 60% of the time here because of how misplaced their pieces are and the pressure coming down the diagonal from our bishop and down files from our rook and queen.",
+    "uses": [
+      "kings-indian-defense:23"
+    ]
+  },
+  {
+    "id": "141",
+    "text": "Well done! The position is equal and we are ready to continue our game. ",
+    "uses": [
+      "kings-indian-defense:24"
+    ]
+  },
+  {
+    "id": "142",
+    "text": "Well done! Look how cramped White's position is here. ",
+    "uses": [
+      "kings-indian-defense:25"
+    ]
+  },
+  {
+    "id": "143",
+    "text": "Well done! the position is equal and now we get to play chess. ",
+    "uses": [
+      "kings-indian-defense:26"
+    ]
+  },
+  {
+    "id": "144",
+    "text": "Well done! The position is equal.",
+    "uses": [
+      "kings-indian-defense:27"
+    ]
+  },
+  {
+    "id": "145",
+    "text": "Well done! We are ready to continue our game. ",
+    "uses": [
+      "kings-indian-defense:28",
+      "scandinavian-defense:13"
+    ]
+  },
+  {
+    "id": "146",
+    "text": "Well done! We have an equal position here. ",
+    "uses": [
+      "kings-indian-defense:29"
+    ]
+  },
+  {
+    "id": "147",
+    "text": "Well done! In the future we will set up the f5 pawn break. ",
+    "uses": [
+      "kings-indian-defense:30"
+    ]
+  },
+  {
+    "id": "148",
+    "text": "Well done! The position is equal and we are ready to play a game of chess!",
+    "uses": [
+      "kings-indian-defense:31"
+    ]
+  },
+  {
+    "id": "149",
+    "text": "Well done! We have a solid position and will take white's light-square bishop on the next move. ",
+    "uses": [
+      "kings-indian-defense:32"
+    ]
+  },
+  {
+    "id": "150",
+    "text": "Well done! The position is equal and we are ready to start playing chess!",
+    "uses": [
+      "kings-indian-defense:33"
+    ]
+  },
+  {
+    "id": "151",
+    "text": "Well done! The position is equal and its time to play chess.",
+    "uses": [
+      "kings-indian-defense:34"
+    ]
+  },
+  {
+    "id": "152",
+    "text": "Well done! Black wins most of the games from here!",
+    "uses": [
+      "kings-indian-defense:35"
+    ]
+  },
+  {
+    "id": "153",
+    "text": "Well done! We are absolutely crushing White's position and its not clear how they'll get out of this. The computer puts us at a +3 point advantage simply because of how dominant our position is. ",
+    "uses": [
+      "scandinavian-defense:1"
+    ]
+  },
+  {
+    "id": "154",
+    "text": "Great! We are up a full rook and the game is ours. ",
+    "uses": [
+      "scandinavian-defense:2"
+    ]
+  },
+  {
+    "id": "155",
+    "text": "Well done! We are up a pawn and the computer loves our position. ",
+    "uses": [
+      "scandinavian-defense:3"
+    ]
+  },
+  {
+    "id": "156",
+    "text": "We are winning that pawn, and more often than not, winning the game. The computer loves our position here. ",
+    "uses": [
+      "scandinavian-defense:4"
+    ]
+  },
+  {
+    "id": "157",
+    "text": "Well done! We are threatening to win the pawn on d4 and are ready to castle queenside. The computer puts us at a slight advantage. ",
+    "uses": [
+      "scandinavian-defense:5"
+    ]
+  },
+  {
+    "id": "158",
+    "text": "Great job! We are ready to develop our other knight and castle queenside! ",
+    "uses": [
+      "scandinavian-defense:6"
+    ]
+  },
+  {
+    "id": "159",
+    "text": "Great job! We are ready to castle and continue our game. ",
+    "uses": [
+      "scandinavian-defense:7"
+    ]
+  },
+  {
+    "id": "160",
+    "text": "Well done! After castling next move, we will have strong pressure on White's d4 pawn. The computer thinks we are ahead in this position. ",
+    "uses": [
+      "scandinavian-defense:8"
+    ]
+  },
+  {
+    "id": "161",
+    "text": "Well done! We have a very strong attack against White's knight. The computer thinks we are ahead in this position. ",
+    "uses": [
+      "scandinavian-defense:9"
+    ]
+  },
+  {
+    "id": "162",
+    "text": "White's position is completely destroyed. There is just so much pressure coming from every angle. Black wins almost every time in this position just because it is nearly impossible to play white here. ",
+    "uses": [
+      "scandinavian-defense:10"
+    ]
+  },
+  {
+    "id": "163",
+    "text": "Way to stick with it! We are developed and have a safe king.",
+    "uses": [
+      "scandinavian-defense:11"
+    ]
+  },
+  {
+    "id": "164",
+    "text": "Well done! We'll castle on the next move and continue our chess game. ",
+    "uses": [
+      "scandinavian-defense:12"
+    ]
+  },
+  {
+    "id": "165",
+    "text": "Congrats on navigating through the scandinavian. Nobody made any mistakes. Time to play chess. ",
+    "uses": [
+      "scandinavian-defense:14"
+    ]
+  },
+  {
+    "id": "166",
+    "text": "Well done! We will continue developing and castle. ",
+    "uses": [
+      "scandinavian-defense:15"
+    ]
+  },
+  {
+    "id": "167",
+    "text": "Well done! We are ready to castle queenside and cause more issues. ",
+    "uses": [
+      "scandinavian-defense:16"
+    ]
+  },
+  {
+    "id": "168",
+    "text": "Well done! We'll develop our other knight and castle queenside in the future. ",
+    "uses": [
+      "scandinavian-defense:17"
+    ]
+  },
+  {
+    "id": "169",
+    "text": "Great! We're ready to continue developing and castle our king. ",
+    "uses": [
+      "scandinavian-defense:18"
+    ]
+  },
+  {
+    "id": "170",
+    "text": "Well done! You're getting good at understanding the subtle differences between these positions. ",
+    "uses": [
+      "scandinavian-defense:19"
+    ]
+  },
+  {
+    "id": "171",
+    "text": "Well done! We are ready to finish development and castle very soon. ",
+    "uses": [
+      "scandinavian-defense:20"
+    ]
+  },
+  {
+    "id": "172",
+    "text": "We are in a good position to play the bishop out, castle our king, and continue the rest of our game! ",
+    "uses": [
+      "scandinavian-defense:21"
+    ]
+  },
+  {
+    "id": "173",
+    "text": "Well done! We'll continue developing and castle very soon. ",
+    "uses": [
+      "scandinavian-defense:22"
+    ]
+  },
+  {
+    "id": "174",
+    "text": "Well done! We are developed and ready to continue the game. ",
+    "uses": [
+      "scandinavian-defense:23"
+    ]
+  },
+  {
+    "id": "175",
+    "text": "Well done! We have set up a fork against our opponent and will likely win material.  Good job avoiding that attack on our queen. ",
+    "uses": [
+      "scandinavian-defense:24"
+    ]
+  },
+  {
+    "id": "176",
+    "text": "I can't believe white blundered a piece like that. What were they thinking??",
+    "uses": [
+      "petrov-defense:1"
+    ]
+  },
+  {
+    "id": "177",
+    "text": "That bishop is as good as ours! ",
+    "uses": [
+      "petrov-defense:2"
+    ]
+  },
+  {
+    "id": "178",
+    "text": "Being a piece up never hurt anyone!",
+    "uses": [
+      "petrov-defense:3"
+    ]
+  },
+  {
+    "id": "179",
+    "text": "The eval bar gives us +3 points here. We're crushing. ",
+    "uses": [
+      "petrov-defense:4"
+    ]
+  },
+  {
+    "id": "180",
+    "text": "Well done! We navigated through some tricky traps white had for us, and now we're completely crushing. ",
+    "uses": [
+      "petrov-defense:5"
+    ]
+  },
+  {
+    "id": "181",
+    "text": "I don't even have to tell you - you already KNOW that white has no hope here. ",
+    "uses": [
+      "petrov-defense:6"
+    ]
+  },
+  {
+    "id": "182",
+    "text": "Look how active our pieces are - and on the next move, we'll bring our last rook into the center and start checkmating white. ",
+    "uses": [
+      "petrov-defense:7"
+    ]
+  },
+  {
+    "id": "183",
+    "text": "White blundered before move 10. Tragic. ",
+    "uses": [
+      "petrov-defense:8"
+    ]
+  },
+  {
+    "id": "184",
+    "text": "That was a clever pin we found, and our bishops are so strong that we have a +2 point advantage",
+    "uses": [
+      "petrov-defense:9"
+    ]
+  },
+  {
+    "id": "185",
+    "text": "One of the most gorgeous lines I've seen on this website. Well done. ",
+    "uses": [
+      "petrov-defense:10"
+    ]
+  },
+  {
+    "id": "186",
+    "text": "Veryyy nice. Our future moves include winning the bishop and discovering an attack on the queen!",
+    "uses": [
+      "petrov-defense:11"
+    ]
+  },
+  {
+    "id": "187",
+    "text": "Who doesn't love a good fork? ",
+    "uses": [
+      "petrov-defense:12"
+    ]
+  },
+  {
+    "id": "188",
+    "text": "That was relentless. All our pieces are swarming white's defenseless king. Forced checkmate in 4 from here. ",
+    "uses": [
+      "petrov-defense:13"
+    ]
+  },
+  {
+    "id": "189",
+    "text": "Nice nice nice! We are so much more developed than white - and while we're a pawn down, but that e5 pawn will be impossible for white to hold on to. ",
+    "uses": [
+      "petrov-defense:14"
+    ]
+  },
+  {
+    "id": "190",
+    "text": "Nice! White is NEVER castling now - and we have a +1 point advantage. ",
+    "uses": [
+      "petrov-defense:15"
+    ]
+  },
+  {
+    "id": "191",
+    "text": "Nicely done! We'll develop our bishop next and bring our other rook to the center. ",
+    "uses": [
+      "petrov-defense:16"
+    ]
+  },
+  {
+    "id": "192",
+    "text": "Nice! We have the advantage over white now",
+    "uses": [
+      "petrov-defense:17"
+    ]
+  },
+  {
+    "id": "193",
+    "text": "Well done! We have a slight advantage coming out of the opening.",
+    "uses": [
+      "petrov-defense:18"
+    ]
+  },
+  {
+    "id": "194",
+    "text": "We defended all of white's threats, and after castling on the next move, our position is completely safe. ",
+    "uses": [
+      "petrov-defense:19"
+    ]
+  },
+  {
+    "id": "195",
+    "text": "Next we'll move our other rook to the center and start attacking white's exposed king. ",
+    "uses": [
+      "petrov-defense:20"
+    ]
+  },
+  {
+    "id": "196",
+    "text": "That was easy! We'll develop and castle from here. ",
+    "uses": [
+      "petrov-defense:21"
+    ]
+  },
+  {
+    "id": "197",
+    "text": "Nice! Both sides played that perfectly. ",
+    "uses": [
+      "petrov-defense:22"
+    ]
+  },
+  {
+    "id": "198",
+    "text": "White has a pawn, we have an active bishop. The computer says it's and equal game from here.",
+    "uses": [
+      "petrov-defense:23"
+    ]
+  },
+  {
+    "id": "199",
+    "text": "The position is completely equal - from here you'll have to play chess. ",
+    "uses": [
+      "petrov-defense:24"
+    ]
+  },
+  {
+    "id": "200",
+    "text": "Well done! We're winning that knight :D ",
+    "uses": [
+      "english:1"
+    ]
+  },
+  {
+    "id": "201",
+    "text": "Nice! Even though material is equal, black's knight is so misplaced that the computer gives us a +2 point advantage. ",
+    "uses": [
+      "english:2"
+    ]
+  },
+  {
+    "id": "202",
+    "text": "You just won yourself a free bishop :D",
+    "uses": [
+      "english:3"
+    ]
+  },
+  {
+    "id": "203",
+    "text": "Our development and our center are soooo much better than black's. Even with equal material, the computer is giving us a +1.3 point advantage. Awesome job!",
+    "uses": [
+      "english:4"
+    ]
+  },
+  {
+    "id": "204",
+    "text": "Beautiful! Black has a few ways to save the g7 pawn, but they all come at a cost of pawn structure or development. The computer loves our position so much that we get a +1.3 point advantage. ",
+    "uses": [
+      "english:5"
+    ]
+  },
+  {
+    "id": "205",
+    "text": "Nice!! We have a solid space advantage over black. The eval bar says +0.8 for us. ",
+    "uses": [
+      "english:6"
+    ]
+  },
+  {
+    "id": "206",
+    "text": "Nice! Our center is stronger and we have more development than black. The computer gives us a +1 point advantage. ",
+    "uses": [
+      "english:7"
+    ]
+  },
+  {
+    "id": "207",
+    "text": "Well done! Our bishop pair gives us a +1 eval advantage",
+    "uses": [
+      "english:8"
+    ]
+  },
+  {
+    "id": "208",
+    "text": "Well done! Now we have 2 pawns in the center while black has 0 - and they also have to spend a turn moving their bishop. ",
+    "uses": [
+      "english:9"
+    ]
+  },
+  {
+    "id": "209",
+    "text": "Well done!! We are slightly ahead in evaluation and winrate",
+    "uses": [
+      "english:10"
+    ]
+  },
+  {
+    "id": "210",
+    "text": "Well done! That's what I like to see :) It's a symmetrical game, and you'll play on from here. ",
+    "uses": [
+      "english:11"
+    ]
+  },
+  {
+    "id": "211",
+    "text": "That was... emotional ",
+    "uses": [
+      "english:12"
+    ]
+  },
+  {
+    "id": "212",
+    "text": "Nice!! We got out of that sticky pin. And if black ever trades our queens, we're happy to open up the a-file for our rook. ",
+    "uses": [
+      "english:13"
+    ]
+  },
+  {
+    "id": "213",
+    "text": "Well done! We'll plant our bishop on b2 next, and then play the game from there.",
+    "uses": [
+      "english:14"
+    ]
+  },
+  {
+    "id": "214",
+    "text": "Well done! After a castle, we'll enjoy the rest of the game with an extremely strong bishop on g2. ",
+    "uses": [
+      "english:15"
+    ]
+  },
+  {
+    "id": "215",
+    "text": "Nice! Next, we'll develop our bishop to d3 and then castle. The position is about equal.",
+    "uses": [
+      "english:16"
+    ]
+  },
+  {
+    "id": "216",
+    "text": "Nice! We put an end to blacks central pawn storm. ",
+    "uses": [
+      "english:17"
+    ]
+  },
+  {
+    "id": "217",
+    "text": "Well done! Black is completely paralyzed here",
+    "uses": [
+      "alapin-sicilian:1"
+    ]
+  },
+  {
+    "id": "218",
+    "text": "What a gorgeous line. Your opponent will probably report you for cheating. ",
+    "uses": [
+      "alapin-sicilian:2"
+    ]
+  },
+  {
+    "id": "219",
+    "text": "Better development, better center, and did I mention we're a piece up? ",
+    "uses": [
+      "alapin-sicilian:3"
+    ]
+  },
+  {
+    "id": "220",
+    "text": "The computer gives us a +2 eval advantage just because our center is soooo good. ",
+    "uses": [
+      "alapin-sicilian:4"
+    ]
+  },
+  {
+    "id": "221",
+    "text": "The piece is ours and the game is OVER! ",
+    "uses": [
+      "alapin-sicilian:5"
+    ]
+  },
+  {
+    "id": "222",
+    "text": "Well done! Although the material is equal, black is in huge trouble here. Their pieces are uncoordinated, undeveloped, and unsafe. The computer loves our position so much that it gives us a +3 point advantage and 70% winrate from here!",
+    "uses": [
+      "alapin-sicilian:6"
+    ]
+  },
+  {
+    "id": "223",
+    "text": "Crazy how quick we went from defending black's attack to checkmating black ourselves. ",
+    "uses": [
+      "alapin-sicilian:7"
+    ]
+  },
+  {
+    "id": "224",
+    "text": "We are completely and utterly crushing black here. In a second we are about to win their rook and then probably the game. ",
+    "uses": [
+      "alapin-sicilian:8"
+    ]
+  },
+  {
+    "id": "225",
+    "text": "I love a free knight",
+    "uses": [
+      "alapin-sicilian:9"
+    ]
+  },
+  {
+    "id": "226",
+    "text": "Black is humiliated here.",
+    "uses": [
+      "alapin-sicilian:10"
+    ]
+  },
+  {
+    "id": "227",
+    "text": "We got everything we wanted out of this opening - the center and development. You can play bishop to b5 next",
+    "uses": [
+      "alapin-sicilian:11"
+    ]
+  },
+  {
+    "id": "228",
+    "text": "We're looking great! Pawns in the center, pieces developed, and king castled. The eval bar gives us +1 point advantage. ",
+    "uses": [
+      "alapin-sicilian:12"
+    ]
+  },
+  {
+    "id": "229",
+    "text": "Well done! We're a bit better than black here",
+    "uses": [
+      "alapin-sicilian:13"
+    ]
+  },
+  {
+    "id": "230",
+    "text": "Well done! We're slightly better than black here",
+    "uses": [
+      "alapin-sicilian:14"
+    ]
+  },
+  {
+    "id": "231",
+    "text": "Well done! I like our position here",
+    "uses": [
+      "alapin-sicilian:15"
+    ]
+  },
+  {
+    "id": "232",
+    "text": "OK, pretty even game from here, though I'll definitely take our position over Black's",
+    "uses": [
+      "alapin-sicilian:16"
+    ]
+  },
+  {
+    "id": "233",
+    "text": "Well done! Both sides played perfectly here",
+    "uses": [
+      "alapin-sicilian:17"
+    ]
+  },
+  {
+    "id": "234",
+    "text": "Both sides played perfectly, but at least we have an interesting game ahead of us a free pawn in our pocket. ",
+    "uses": [
+      "alapin-sicilian:18"
+    ]
+  },
+  {
+    "id": "235",
+    "text": "Well done! Both sides played perfectly here so the evaluation is equal",
+    "uses": [
+      "alapin-sicilian:19"
+    ]
+  },
+  {
+    "id": "236",
+    "text": "Nice! Both sides played perfectly. ",
+    "uses": [
+      "alapin-sicilian:20"
+    ]
+  },
+  {
+    "id": "237",
+    "text": "Well done! Middle-game is next",
+    "uses": [
+      "alapin-sicilian:21"
+    ]
+  },
+  {
+    "id": "238",
+    "text": "A pawn for a knight? That's a good trade ",
+    "uses": [
+      "bishop-opening:1"
+    ]
+  },
+  {
+    "id": "239",
+    "text": "With black's bishop pinned to the king, black's rook is lost. There is no good way to save it. The best black can do is try and get their king to escape before checkmate but honestly, they have no chance at winning this game. ",
+    "uses": [
+      "bishop-opening:2"
+    ]
+  },
+  {
+    "id": "240",
+    "text": "Points to black for the cool (but meaningless) sacrifice",
+    "uses": [
+      "bishop-opening:3"
+    ]
+  },
+  {
+    "id": "241",
+    "text": "But hey! At least black didn't lose their queen right :D",
+    "uses": [
+      "bishop-opening:4"
+    ]
+  },
+  {
+    "id": "242",
+    "text": "Don't you just love free queens? ",
+    "uses": [
+      "bishop-opening:5"
+    ]
+  },
+  {
+    "id": "243",
+    "text": "Nice! After we castle on the next move, we'll be a clean piece up",
+    "uses": [
+      "bishop-opening:6"
+    ]
+  },
+  {
+    "id": "244",
+    "text": "That was insane",
+    "uses": [
+      "bishop-opening:7"
+    ]
+  },
+  {
+    "id": "245",
+    "text": "Our knight is trapped but who cares - we won a rook!",
+    "uses": [
+      "bishop-opening:8"
+    ]
+  },
+  {
+    "id": "246",
+    "text": "This line was one of my favorites from the Vienna Game course. There are a lot of variations, so if you want to dive deeper, definitely check out that course—after finishing this one, of course.",
+    "uses": [
+      "bishop-opening:9"
+    ]
+  },
+  {
+    "id": "247",
+    "text": "Well done! From here we'll win the game with our 2 point material advantage",
+    "uses": [
+      "bishop-opening:10"
+    ]
+  },
+  {
+    "id": "248",
+    "text": "Who doesn't love being a pawn up? ",
+    "uses": [
+      "bishop-opening:11"
+    ]
+  },
+  {
+    "id": "249",
+    "text": "Black is almost paralyzed. Meanwhile all our pieces are super active and pointed towards his king. That's why from here, we win over 75% of the time! ",
+    "uses": [
+      "bishop-opening:12"
+    ]
+  },
+  {
+    "id": "250",
+    "text": "Nice! Black can't castle and they have doubled isolated pawns on the f-file. The computer gives us almost a +1 point advantage for that. ",
+    "uses": [
+      "bishop-opening:13"
+    ]
+  },
+  {
+    "id": "251",
+    "text": "Perfectly played! Black's kingside pawn structure is so messed up that we have +0.5 point advantage on the eval bar",
+    "uses": [
+      "bishop-opening:14"
+    ]
+  },
+  {
+    "id": "252",
+    "text": "Nice! Black's kingside is extremely weak and we have a +1 point eval advantage over our opponent.",
+    "uses": [
+      "bishop-opening:15"
+    ]
+  },
+  {
+    "id": "253",
+    "text": "Nice! Not the craziest line in the bishop's opening, but we made it out with a slight advantage over black. ",
+    "uses": [
+      "bishop-opening:16"
+    ]
+  },
+  {
+    "id": "254",
+    "text": "Perfectly played! We have an advantage over black in this game. ",
+    "uses": [
+      "bishop-opening:17"
+    ]
+  },
+  {
+    "id": "255",
+    "text": "A perfectly played game from both sides! From here you'll have to play a real game of chess",
+    "uses": [
+      "bishop-opening:18"
+    ]
+  },
+  {
+    "id": "256",
+    "text": "Mate in 1 after this. You got it :) ",
+    "uses": [
+      "bishop-opening:19"
+    ]
+  },
+  {
+    "id": "257",
+    "text": "Black won't often hang their queen, but I included this because, as White, it's crucial to remember that other lines from this position only work because we have a bishop defending that square. That said, over 10,000 games have reached this position, sooo...",
+    "uses": [
+      "vienna-game:1"
+    ]
+  },
+  {
+    "id": "258",
+    "text": "It's so so over for Black here. Well done.",
+    "uses": [
+      "vienna-game:2"
+    ]
+  },
+  {
+    "id": "259",
+    "text": "Oh my GOD that was nasty. Would you believe me if I said this exact sequence has been played thousands and thousands of times? ",
+    "uses": [
+      "vienna-game:3"
+    ]
+  },
+  {
+    "id": "260",
+    "text": "Well done! We are completely safe now and we can capture the rook on the next move. The game is pretty much over. ",
+    "uses": [
+      "vienna-game:4"
+    ]
+  },
+  {
+    "id": "261",
+    "text": "Well done! We are crushing our opponent here. Between our strong pieces, our ownership of the center, and Black's weak king, I don't see how we can lose this.",
+    "uses": [
+      "vienna-game:5"
+    ]
+  },
+  {
+    "id": "262",
+    "text": "Well done! This is one of the coolest chess lines I have ever seen. ",
+    "uses": [
+      "vienna-game:6"
+    ]
+  },
+  {
+    "id": "263",
+    "text": "Well done! We are simply up a piece and will win this game",
+    "uses": [
+      "vienna-game:7"
+    ]
+  },
+  {
+    "id": "264",
+    "text": "Well done! We are capturing the rook on the next move. The computer gives this position a 5 or 6 point advantage. ",
+    "uses": [
+      "vienna-game:8"
+    ]
+  },
+  {
+    "id": "265",
+    "text": "GG. It is so, so over for Black. ",
+    "uses": [
+      "vienna-game:9"
+    ]
+  },
+  {
+    "id": "266",
+    "text": "Well done! The computer puts us at a +3 point advantage here. ",
+    "uses": [
+      "vienna-game:10"
+    ]
+  },
+  {
+    "id": "267",
+    "text": "Wow, that was a lot to remember. The good news is our position is crushing here. ",
+    "uses": [
+      "vienna-game:11"
+    ]
+  },
+  {
+    "id": "268",
+    "text": "Well done! Black really has no options here and they will lose the game. ",
+    "uses": [
+      "vienna-game:12"
+    ]
+  },
+  {
+    "id": "269",
+    "text": "Our pin is too strong. This line has gone on long enough so I'll end it here, but just know from this position white wins like 90% of their games. ",
+    "uses": [
+      "vienna-game:13"
+    ]
+  },
+  {
+    "id": "270",
+    "text": "Well done! This is a very comfortable position for us. We're even threatening to capture the knight on c6 which would triple Black's pawns on the c file",
+    "uses": [
+      "vienna-game:14"
+    ]
+  },
+  {
+    "id": "271",
+    "text": "Well done! We have an edge on our opponent and are ready to play some chess!",
+    "uses": [
+      "vienna-game:15"
+    ]
+  },
+  {
+    "id": "272",
+    "text": "Well done! Our king is safe and we are ready to continue our game. ",
+    "uses": [
+      "vienna-game:16"
+    ]
+  },
+  {
+    "id": "273",
+    "text": "Well done! Both sides played well and we are ready to have ourselves a good game. ",
+    "uses": [
+      "vienna-game:17"
+    ]
+  },
+  {
+    "id": "274",
+    "text": "Well done! The computer gives us a slight edge, but honestly I think white is doing a lot better here. We have a ton of pressure on the f pawn and in the future we may play bishop to h6 to remove the rook as a defender. I like our chances.",
+    "uses": [
+      "vienna-game:18"
+    ]
+  },
+  {
+    "id": "275",
+    "text": "Oh boy! From here, it'll be a bloodbath. Good job and good luck. ",
+    "uses": [
+      "vienna-game:19"
+    ]
+  },
+  {
+    "id": "276",
+    "text": "We're up 1.8 on the eval bar and have a 66% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:1"
+    ]
+  },
+  {
+    "id": "277",
+    "text": "We're up 2.7 on the eval bar and have a 68% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:2"
+    ]
+  },
+  {
+    "id": "278",
+    "text": "We're up 3.6 on the eval bar and have a 70% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:3"
+    ]
+  },
+  {
+    "id": "279",
+    "text": "We're up 3.8 on the eval bar and have a 74% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:4"
+    ]
+  },
+  {
+    "id": "280",
+    "text": "We're up 3.4 on the eval bar and have a 71% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:5"
+    ]
+  },
+  {
+    "id": "281",
+    "text": "We're up 3.2 on the eval bar and have a 73% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:6"
+    ]
+  },
+  {
+    "id": "282",
+    "text": "We're up 3.7 on the eval bar and have a 71% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:7"
+    ]
+  },
+  {
+    "id": "283",
+    "text": "Well that was fun! Enjoy the free ELO.",
+    "uses": [
+      "vienna-gambit-mastery:8",
+      "vienna-gambit-original:2"
+    ]
+  },
+  {
+    "id": "284",
+    "text": "Wow. You actually need to be evil to play like this... well done.",
+    "uses": [
+      "vienna-gambit-mastery:9",
+      "vienna-gambit-original:3"
+    ]
+  },
+  {
+    "id": "285",
+    "text": "We're up 4.4 on the eval bar and have an 82% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:10"
+    ]
+  },
+  {
+    "id": "286",
+    "text": "We're up 3.7 on the eval bar and have a 76% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:11"
+    ]
+  },
+  {
+    "id": "287",
+    "text": "We're up 4.5 on the eval bar and have a 79% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:12"
+    ]
+  },
+  {
+    "id": "288",
+    "text": "We're up 2.6 on the eval bar and have a 79% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:13"
+    ]
+  },
+  {
+    "id": "289",
+    "text": "We're up 3.2 on the eval bar and have a 79% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:14"
+    ]
+  },
+  {
+    "id": "290",
+    "text": "We're up 3.6 on the eval bar and have a 76% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:15"
+    ]
+  },
+  {
+    "id": "291",
+    "text": "We're up 4.0 on the eval bar and have a 76% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:16"
+    ]
+  },
+  {
+    "id": "292",
+    "text": "We're up 10.0 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:17"
+    ]
+  },
+  {
+    "id": "293",
+    "text": "We're up 4.1 on the eval bar and have an 81% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:18"
+    ]
+  },
+  {
+    "id": "294",
+    "text": "We're up 6.6 on the eval bar and have a 96% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:19"
+    ]
+  },
+  {
+    "id": "295",
+    "text": "We're up 6.6 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:20"
+    ]
+  },
+  {
+    "id": "296",
+    "text": "We're up 7.2 on the eval bar and have a 94% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:21"
+    ]
+  },
+  {
+    "id": "297",
+    "text": "We're up 2.2 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:22",
+      "vienna-gambit-mastery:23"
+    ]
+  },
+  {
+    "id": "298",
+    "text": "We're up 7.8 on the eval bar and have a 96% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:24"
+    ]
+  },
+  {
+    "id": "299",
+    "text": "We're up 2.6 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:25"
+    ]
+  },
+  {
+    "id": "300",
+    "text": "We're up 5.2 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:26",
+      "vienna-gambit-mastery:40"
+    ]
+  },
+  {
+    "id": "301",
+    "text": "We're up 4.8 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:27"
+    ]
+  },
+  {
+    "id": "302",
+    "text": "We're up 2.8 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:28"
+    ]
+  },
+  {
+    "id": "303",
+    "text": "We're up 9.2 on the eval bar and have a 98% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:29"
+    ]
+  },
+  {
+    "id": "304",
+    "text": "Well done! You have a huge lead in development and have recaptured all your material.",
+    "uses": [
+      "vienna-gambit-mastery:30",
+      "vienna-gambit-original:5"
+    ]
+  },
+  {
+    "id": "305",
+    "text": "We're up 3.8 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:31"
+    ]
+  },
+  {
+    "id": "306",
+    "text": "We're up 9.0 on the eval bar and have a 97% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:32"
+    ]
+  },
+  {
+    "id": "307",
+    "text": "We're up 3.7 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:33"
+    ]
+  },
+  {
+    "id": "308",
+    "text": "We're up 8.3 on the eval bar and have a 95% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:34"
+    ]
+  },
+  {
+    "id": "309",
+    "text": "We're up 3.2 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:35"
+    ]
+  },
+  {
+    "id": "310",
+    "text": "We're up 3.4 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:36"
+    ]
+  },
+  {
+    "id": "311",
+    "text": "We're up 2.3 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:37",
+      "vienna-gambit-mastery:43"
+    ]
+  },
+  {
+    "id": "312",
+    "text": "We're up 5.1 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:38"
+    ]
+  },
+  {
+    "id": "313",
+    "text": "Checkmate.",
+    "uses": [
+      "vienna-gambit-mastery:39"
+    ]
+  },
+  {
+    "id": "314",
+    "text": "We're up 5.3 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:41"
+    ]
+  },
+  {
+    "id": "315",
+    "text": "We're up 1.7 on the eval bar",
+    "uses": [
+      "vienna-gambit-mastery:42"
+    ]
+  },
+  {
+    "id": "316",
+    "text": "Well done! Our pin is so strong against Black's king that despite being down a pawn, the computer puts our position at a +1 point advantage.",
+    "uses": [
+      "vienna-gambit-mastery:44",
+      "vienna-gambit-original:6"
+    ]
+  },
+  {
+    "id": "317",
+    "text": "What a deadly, deadly trick. Well done!",
+    "uses": [
+      "vienna-gambit-mastery:45",
+      "vienna-gambit-original:4"
+    ]
+  },
+  {
+    "id": "318",
+    "text": "We're up 1.2 on the eval bar and have a 65% winrate from here",
+    "uses": [
+      "vienna-gambit-mastery:46"
+    ]
+  },
+  {
+    "id": "319",
+    "text": "Well done! We lost 2 pieces but our development is just too much for black to handle. We'll bring our rook and knight to the party next and the game is ours.",
+    "uses": [
+      "vienna-gambit-mastery:47",
+      "vienna-gambit-original:10"
+    ]
+  },
+  {
+    "id": "320",
+    "text": "Well done! We have a huge lead in development, we have recaptured our pawns, and we are ready to castle queenside.",
+    "uses": [
+      "vienna-gambit-mastery:48",
+      "vienna-gambit-original:7"
+    ]
+  },
+  {
+    "id": "321",
+    "text": "Well done! Our queen is forking the c7 and g7 pawns. Black is in trouble here and the game is likely ours.",
+    "uses": [
+      "vienna-gambit-mastery:49",
+      "vienna-gambit-original:8"
+    ]
+  },
+  {
+    "id": "322",
+    "text": "Well done! We own the center and are about to win back our material!",
+    "uses": [
+      "vienna-gambit-mastery:50",
+      "vienna-gambit-original:12"
+    ]
+  },
+  {
+    "id": "323",
+    "text": "Well done! We are ready to castle and continue our game.",
+    "uses": [
+      "vienna-gambit-mastery:51",
+      "vienna-gambit-original:13"
+    ]
+  },
+  {
+    "id": "324",
+    "text": "Well done! We have a lead in development, are ready to castle, and have prepared a strong attack on our opponent's king!",
+    "uses": [
+      "vienna-gambit-mastery:52",
+      "vienna-gambit-original:14"
+    ]
+  },
+  {
+    "id": "325",
+    "text": "Well done! We have a nice position here because our pieces are developed and active, and Black's pieces are kind of just... not doing anything.",
+    "uses": [
+      "vienna-gambit-mastery:53",
+      "vienna-gambit-original:9"
+    ]
+  },
+  {
+    "id": "326",
+    "text": "Mate in 4.",
+    "uses": [
+      "vienna-gambit-mastery:54"
+    ]
+  },
+  {
+    "id": "327",
+    "text": "Mate in 3.",
+    "uses": [
+      "vienna-gambit-mastery:55"
+    ]
+  },
+  {
+    "id": "328",
+    "text": "Mate in 1.",
+    "uses": [
+      "vienna-gambit-mastery:56",
+      "vienna-gambit-mastery:57"
+    ]
+  },
+  {
+    "id": "329",
+    "text": "Something tells me we're winning this game. ",
+    "uses": [
+      "vienna-gambit-counter:1"
+    ]
+  },
+  {
+    "id": "330",
+    "text": "That'll teach white a lesson to never play the Vienna gambit against us. ",
+    "uses": [
+      "vienna-gambit-counter:2"
+    ]
+  },
+  {
+    "id": "331",
+    "text": "I don't really know what to say here",
+    "uses": [
+      "vienna-gambit-counter:3"
+    ]
+  },
+  {
+    "id": "332",
+    "text": "It's GG. ",
+    "uses": [
+      "vienna-gambit-counter:4"
+    ]
+  },
+  {
+    "id": "333",
+    "text": "IDK why I got so emotional there...",
+    "uses": [
+      "vienna-gambit-counter:5"
+    ]
+  },
+  {
+    "id": "334",
+    "text": "Well done! We have a lead in development, own the center, the computer gives us a +2 point advantage, and we win over 70% of these games. Happy? ",
+    "uses": [
+      "vienna-gambit-counter:6"
+    ]
+  },
+  {
+    "id": "335",
+    "text": "Well done! Our king is safe while White's king is still in the middle of the board. Even though material is equal, the computer gives us a +1 advantage and black wins over 60% of the games from here.",
+    "uses": [
+      "vienna-gambit-counter:7"
+    ]
+  },
+  {
+    "id": "336",
+    "text": "Beautiful! We have a battery looking straight at White's kingside, and our queen is also looking directly at the undefended c2 pawn. Our position is awesome. ",
+    "uses": [
+      "vienna-gambit-counter:8"
+    ]
+  },
+  {
+    "id": "337",
+    "text": "Well done! White will have a tough time defending the e5 pawn, and their king who is very-much vulnerable right now. Because of this, we win like 60+% of the games from here. ",
+    "uses": [
+      "vienna-gambit-counter:9"
+    ]
+  },
+  {
+    "id": "338",
+    "text": "Well done! This transposes to the other line we've already seen. ",
+    "uses": [
+      "vienna-gambit-counter:10"
+    ]
+  },
+  {
+    "id": "339",
+    "text": "Well done! We're up a pawn and Black wins like 70% of their games from here. ",
+    "uses": [
+      "vienna-gambit-counter:11"
+    ]
+  },
+  {
+    "id": "340",
+    "text": "I love how white's king is in front of his queen. And they say chivalry is dead. ",
+    "uses": [
+      "vienna-gambit-counter:12"
+    ]
+  },
+  {
+    "id": "341",
+    "text": "Well done! It's a tense position, but we win over 60% of our games from here. ",
+    "uses": [
+      "vienna-gambit-counter:13"
+    ]
+  },
+  {
+    "id": "342",
+    "text": "Well done! I'm not kidding you when I say black has won 90% of games from here, just because white literally can't move any pieces. They are completely stuck. In the future we'll long castle and life is good. ",
+    "uses": [
+      "vienna-gambit-counter:14"
+    ]
+  },
+  {
+    "id": "343",
+    "text": "Well done! We are a full piece ahead and have a dominant position. ",
+    "uses": [
+      "ponziani:1"
+    ]
+  },
+  {
+    "id": "344",
+    "text": "Well done! We are up a pawn and have much better position than our opponent. We'll move our queen to safety, develop our bishop, and castle kingside.",
+    "uses": [
+      "ponziani:2"
+    ]
+  },
+  {
+    "id": "345",
+    "text": "Well done! Black will have to move their king out of the way, losing their ability to castle. We are a pawn up and our position is so good that the computer puts our position at a +4 point advantage.",
+    "uses": [
+      "ponziani:3"
+    ]
+  },
+  {
+    "id": "346",
+    "text": "Beautifully executed! We are way ahead in material.",
+    "uses": [
+      "ponziani:4"
+    ]
+  },
+  {
+    "id": "347",
+    "text": "Well done! We are a full piece ahead and have a dominant position. The computer puts our position at a +4 point advantage.",
+    "uses": [
+      "ponziani:5"
+    ]
+  },
+  {
+    "id": "348",
+    "text": "Well done! We are up an entire piece and have humiliated Black's position. The computer puts this at a +5 point advantage for White. ",
+    "uses": [
+      "ponziani:6"
+    ]
+  },
+  {
+    "id": "349",
+    "text": "Well done! We own the center and have a better position than our opponent.",
+    "uses": [
+      "ponziani:7"
+    ]
+  },
+  {
+    "id": "350",
+    "text": "Well done! Although we are tied in material, we are completely dominating the board and the computer puts our position at +2. ",
+    "uses": [
+      "ponziani:8"
+    ]
+  },
+  {
+    "id": "351",
+    "text": "Well done! Black's position is crumbled and we will win this game.",
+    "uses": [
+      "ponziani:9"
+    ]
+  },
+  {
+    "id": "352",
+    "text": "Wow. Even though the material is equal, the computer puts our position at +5 point advantage. Look at how none of blacks pieces can move! They literally have no moves. The rest of the game is converting your dominant position into a win.",
+    "uses": [
+      "ponziani:10"
+    ]
+  },
+  {
+    "id": "353",
+    "text": "Well done! We have a winning position and are ready to continue developing.",
+    "uses": [
+      "ponziani:11"
+    ]
+  },
+  {
+    "id": "354",
+    "text": "Well done! We completly own the center. Even though material is equal, the computer puts our position at a +1 point advantage.",
+    "uses": [
+      "ponziani:12"
+    ]
+  },
+  {
+    "id": "355",
+    "text": "Well done! We are up an entire piece and have humiliated Black's position. The computer puts this at a +6 point advantage for White. ",
+    "uses": [
+      "ponziani:13"
+    ]
+  },
+  {
+    "id": "356",
+    "text": "Well done! According to the computer, we have a +1 point advantage against our opponent. We'll be looking to develop our bishop and castle kingside in the future.",
+    "uses": [
+      "ponziani:14"
+    ]
+  },
+  {
+    "id": "357",
+    "text": "It's a tense position, but we are better and ready to castle at any point to move our king to safety.",
+    "uses": [
+      "ponziani:15"
+    ]
+  },
+  {
+    "id": "358",
+    "text": "Black has played the opening by the book, and we are in an equal position.",
+    "uses": [
+      "ponziani:16"
+    ]
+  },
+  {
+    "id": "359",
+    "text": "Well done! We are up a pawn and are ready to castle kingside.",
+    "uses": [
+      "ponziani:17"
+    ]
+  },
+  {
+    "id": "360",
+    "text": "You probably have a forced checkmate here. At minimum you end up gobbling a few pieces and leaving their king stranded in the center of the board. Game is as good as over.",
+    "uses": [
+      "kings-gambit:1"
+    ]
+  },
+  {
+    "id": "361",
+    "text": "Beautiful! We are ahead in development and have the entire center. ",
+    "uses": [
+      "kings-gambit:2"
+    ]
+  },
+  {
+    "id": "362",
+    "text": "We're doing great here! The material is equal but the computer loves our position. ",
+    "uses": [
+      "kings-gambit:3"
+    ]
+  },
+  {
+    "id": "363",
+    "text": "You definitely got it from here.",
+    "uses": [
+      "kings-gambit:4"
+    ]
+  },
+  {
+    "id": "364",
+    "text": "Job well done.",
+    "uses": [
+      "kings-gambit:5"
+    ]
+  },
+  {
+    "id": "365",
+    "text": "I just don't think it can get better than that.",
+    "uses": [
+      "kings-gambit:6"
+    ]
+  },
+  {
+    "id": "366",
+    "text": "GG! This is a win for us. ",
+    "uses": [
+      "kings-gambit:7"
+    ]
+  },
+  {
+    "id": "367",
+    "text": "Black is not surviving this. Good job with this tricky trap!",
+    "uses": [
+      "kings-gambit:8"
+    ]
+  },
+  {
+    "id": "368",
+    "text": "Black can do nothing. Multiple pieces will be lost. Multiple tears will be shed. Multiple ELO points will be gained by you. ",
+    "uses": [
+      "kings-gambit:9"
+    ]
+  },
+  {
+    "id": "369",
+    "text": "Well done! Our pawn gambit turned into a pawn gain. The computer says we have a 1 or 2 point advantage here!",
+    "uses": [
+      "kings-gambit:10"
+    ]
+  },
+  {
+    "id": "370",
+    "text": "Well done navigating through all that! For the price of one pawn, we have the complete center, tons of development, and a safe king. Sure, some play is needed to win the game, but I like our odds.  ",
+    "uses": [
+      "kings-gambit:11"
+    ]
+  },
+  {
+    "id": "371",
+    "text": "Everything is defended in our position & we have a strong attack coming. Good job!",
+    "uses": [
+      "kings-gambit:12"
+    ]
+  },
+  {
+    "id": "372",
+    "text": "We have a slightly favorable position and are ready to continue the game!",
+    "uses": [
+      "kings-gambit:13"
+    ]
+  },
+  {
+    "id": "373",
+    "text": "Well done. With a better position, we are ready to continue our game. ",
+    "uses": [
+      "kings-gambit:14"
+    ]
+  },
+  {
+    "id": "374",
+    "text": "This is a great position for us, we are farther ahead in development and own the center. And what is Black's knight even doing? ",
+    "uses": [
+      "kings-gambit:15"
+    ]
+  },
+  {
+    "id": "375",
+    "text": "Look - it's a weird position. Frankly, Black played all the right moves and you don't always get a dominant position at the end of an opening. That said, our pieces are strong, developed, and in the center. Everything is defending everything else. Our king is safe. Life could be worse. ",
+    "uses": [
+      "kings-gambit:16"
+    ]
+  },
+  {
+    "id": "376",
+    "text": "Well done! Our king loves running around in the King's Gambit, and that's totally fine! Go, little king, go. ",
+    "uses": [
+      "kings-gambit:17"
+    ]
+  },
+  {
+    "id": "377",
+    "text": "The position is about equal and it's in your hands to win the game. ",
+    "uses": [
+      "kings-gambit:18"
+    ]
+  },
+  {
+    "id": "378",
+    "text": "Black played well; we played well. Black has a safe king; we have the whole center. It's going to be a good rest of the game. ",
+    "uses": [
+      "kings-gambit:19"
+    ]
+  },
+  {
+    "id": "379",
+    "text": "Another good playing from both sides. Good luck!",
+    "uses": [
+      "kings-gambit:20"
+    ]
+  },
+  {
+    "id": "380",
+    "text": "Look it's not a great end of the opening for us... We played a risky gambit at the start of the game and the opponent played all the right moves with 100% accuracy. Very very few games end up like this. Now it's time to earn your keep and play your heart out. ",
+    "uses": [
+      "kings-gambit:21"
+    ]
+  },
+  {
+    "id": "381",
+    "text": "It's a funky position, but at the end of the day the burden is on Black to justify why they have two weak pawns on f4 and g4, and why they allowed us to take the center.",
+    "uses": [
+      "kings-gambit:22"
+    ]
+  },
+  {
+    "id": "382",
+    "text": "Well that was easy. ",
+    "uses": [
+      "danish-gambit:1"
+    ]
+  },
+  {
+    "id": "383",
+    "text": "How does Black even play this position? It is impossible. The computer thinks that despite being a few pawns down, our position is so good we actually have a +3 point advantage. White wins over 80% of the time from here. ",
+    "uses": [
+      "danish-gambit:2"
+    ]
+  },
+  {
+    "id": "384",
+    "text": "Black's position is just destroyed. No two-ways around it. Good job. ",
+    "uses": [
+      "danish-gambit:3"
+    ]
+  },
+  {
+    "id": "385",
+    "text": "Well done! Black really did not want to move their knight back, and for that they just lost the piece altogether. ",
+    "uses": [
+      "danish-gambit:4"
+    ]
+  },
+  {
+    "id": "386",
+    "text": "Oh hi there mr. king. ",
+    "uses": [
+      "danish-gambit:5"
+    ]
+  },
+  {
+    "id": "387",
+    "text": "Black is not having fun right now. ",
+    "uses": [
+      "danish-gambit:6"
+    ]
+  },
+  {
+    "id": "388",
+    "text": "Not much else to say here except black is completely destroyed. ",
+    "uses": [
+      "danish-gambit:7"
+    ]
+  },
+  {
+    "id": "389",
+    "text": "Wow wow wow. We sacrificed 3 pawns and a knight and won all of it back and MORE. Good job. ",
+    "uses": [
+      "danish-gambit:8"
+    ]
+  },
+  {
+    "id": "390",
+    "text": "Well done. We are winning the opponent's rook and also the game.",
+    "uses": [
+      "danish-gambit:9"
+    ]
+  },
+  {
+    "id": "391",
+    "text": "Well done! We will continue developing, castling, and have ourselves a good game!",
+    "uses": [
+      "danish-gambit:10"
+    ]
+  },
+  {
+    "id": "392",
+    "text": "Well done! We'll continue developing and castle kingside.",
+    "uses": [
+      "danish-gambit:11"
+    ]
+  },
+  {
+    "id": "393",
+    "text": "Well done! Black declined our gambit in this line. Our plan here is to just continue developing and castle king-side. You got this!",
+    "uses": [
+      "danish-gambit:12"
+    ]
+  },
+  {
+    "id": "394",
+    "text": "Well done! Black played perfectly against our opening and we managed to make it all the way to an endgame where we have a slight advantage. Good luck! ",
+    "uses": [
+      "danish-gambit:13"
+    ]
+  },
+  {
+    "id": "395",
+    "text": "Well done! This is an absolutely beautiful position for us. We have a safe king, more development, and a pawn that is a huge asset 1 square from becoming a queen. ",
+    "uses": [
+      "danish-gambit:14"
+    ]
+  },
+  {
+    "id": "396",
+    "text": "Black played against us perfectly, but we aren't doing too bad. We have more development. We have a pawn in the center. We have a killer battery. This position looks really really good for us and White wins something like 60% of the time from here.",
+    "uses": [
+      "danish-gambit:15"
+    ]
+  },
+  {
+    "id": "397",
+    "text": "Well done! We literally just have a free bishop. I don't need to tell you why that's winning.  ",
+    "uses": [
+      "albin-countergambit:1"
+    ]
+  },
+  {
+    "id": "398",
+    "text": "One of my favorite lines on this website. I mean, we literally PROMOTED TO A KNIGHT TO WIN A QUEEN. ",
+    "uses": [
+      "albin-countergambit:2"
+    ]
+  },
+  {
+    "id": "399",
+    "text": "Well done! We are a pawn up, we have a pawn 1 square from becoming a queen, we have stopped white from castling, and we have damaged white's pawn structure. Life is good.",
+    "uses": [
+      "albin-countergambit:3"
+    ]
+  },
+  {
+    "id": "400",
+    "text": "Well done! We're winning this knight no-matter what white does. ",
+    "uses": [
+      "albin-countergambit:4"
+    ]
+  },
+  {
+    "id": "401",
+    "text": "Yay!",
+    "uses": [
+      "albin-countergambit:5"
+    ]
+  },
+  {
+    "id": "402",
+    "text": "Well done! We now own the center and the computer gives us a HUGE edge over our opponent. We'll likely win from here. ",
+    "uses": [
+      "albin-countergambit:6"
+    ]
+  },
+  {
+    "id": "403",
+    "text": "Time for white to resign. ",
+    "uses": [
+      "albin-countergambit:7"
+    ]
+  },
+  {
+    "id": "404",
+    "text": "Well done! We got our pawn back and are ready to continue playing chess! We win 60% of the time from here. ",
+    "uses": [
+      "albin-countergambit:8"
+    ]
+  },
+  {
+    "id": "405",
+    "text": "Well done! We've equalized our material and have a better pawn structure. Odds are, we win this game. ",
+    "uses": [
+      "albin-countergambit:9"
+    ]
+  },
+  {
+    "id": "406",
+    "text": "Well done! We're about equal in this position and have a good game ahead of us. ",
+    "uses": [
+      "albin-countergambit:10"
+    ]
+  },
+  {
+    "id": "407",
+    "text": "Well done! We are stopping White from castling and we have pressure on the e5 pawn. We win 60% of games from here! ",
+    "uses": [
+      "albin-countergambit:11"
+    ]
+  },
+  {
+    "id": "408",
+    "text": "Well done! We're ready to play a game of chess!",
+    "uses": [
+      "albin-countergambit:12"
+    ]
+  },
+  {
+    "id": "409",
+    "text": "Well done! We'll be hunting down those weak e-file pawns. ",
+    "uses": [
+      "albin-countergambit:13"
+    ]
+  },
+  {
+    "id": "410",
+    "text": "Well done! Thanks to our very strong bishop and rook, we'll win most of the games from here. ",
+    "uses": [
+      "albin-countergambit:14"
+    ]
+  },
+  {
+    "id": "411",
+    "text": "Well done! 13 moves in, and there have still been thousands of games that have reached this exact position. ",
+    "uses": [
+      "albin-countergambit:15"
+    ]
+  },
+  {
+    "id": "412",
+    "text": "Honestly, white played that pretty perfectly. We have our work cut out for us to win this game.",
+    "uses": [
+      "albin-countergambit:16"
+    ]
+  },
+  {
+    "id": "413",
+    "text": "Well done! We'll march our pawn all the way to white's king. This opens up a file for our rook, and it'll be very uncomfortable for white. ",
+    "uses": [
+      "albin-countergambit:17"
+    ]
+  },
+  {
+    "id": "414",
+    "text": "Sheesh. ",
+    "uses": [
+      "traxler:1"
+    ]
+  },
+  {
+    "id": "415",
+    "text": "Game is as good as over. ",
+    "uses": [
+      "traxler:2"
+    ]
+  },
+  {
+    "id": "416",
+    "text": "Look at white's queenside! It's the exact starting position, except the White queen has turned black. ",
+    "uses": [
+      "traxler:3"
+    ]
+  },
+  {
+    "id": "417",
+    "text": "Well done! We're down TEN points of material but our attack is so strong that Black wins 90% of the time here. I have never seen anything like it. ",
+    "uses": [
+      "traxler:4"
+    ]
+  },
+  {
+    "id": "418",
+    "text": "You're playing like Magnus",
+    "uses": [
+      "traxler:5"
+    ]
+  },
+  {
+    "id": "419",
+    "text": "It's overrrrr",
+    "uses": [
+      "traxler:6"
+    ]
+  },
+  {
+    "id": "420",
+    "text": "It's hard to go wrong with this attack. The computer gives us a +10 advantage. ",
+    "uses": [
+      "traxler:7"
+    ]
+  },
+  {
+    "id": "421",
+    "text": "Well done!!!",
+    "uses": [
+      "traxler:8"
+    ]
+  },
+  {
+    "id": "422",
+    "text": "Well done! We are completely winning here. ",
+    "uses": [
+      "traxler:9"
+    ]
+  },
+  {
+    "id": "423",
+    "text": "GG. It's over. ",
+    "uses": [
+      "traxler:10"
+    ]
+  },
+  {
+    "id": "424",
+    "text": "Well done! We'll win the knight on the next move. The knight can't really move because of our checkmate threat on f1. ",
+    "uses": [
+      "traxler:11"
+    ]
+  },
+  {
+    "id": "425",
+    "text": "After all these shenanigans, we're actually up material and have a safer king. Well done.",
+    "uses": [
+      "traxler:12"
+    ]
+  },
+  {
+    "id": "426",
+    "text": "Well done! White's knight is stuck in the corner, most of the other pieces aren't developed, and the king is unsafe. the computer gives us a HUGE advantage here, and black almost always wins from this position. ",
+    "uses": [
+      "traxler:13"
+    ]
+  },
+  {
+    "id": "427",
+    "text": "I don't even know what else to say except White played awful.",
+    "uses": [
+      "traxler:14"
+    ]
+  },
+  {
+    "id": "428",
+    "text": "That was beautiful. ",
+    "uses": [
+      "traxler:15"
+    ]
+  },
+  {
+    "id": "429",
+    "text": "Look at White's home row - half their pieces haven't even moved! We're down a bit of material but we have a suffocating position. Black wins from here 85% of the time. ",
+    "uses": [
+      "traxler:16"
+    ]
+  },
+  {
+    "id": "430",
+    "text": "We have a deadly pin on white's knight and - I hope you didn't forget - White's rook is still trapped in the corner, ready to be taken by our knight whenever we want. ",
+    "uses": [
+      "traxler:17"
+    ]
+  },
+  {
+    "id": "431",
+    "text": "I. Am. Speechless. ",
+    "uses": [
+      "traxler:18"
+    ]
+  },
+  {
+    "id": "432",
+    "text": "Nice!!!",
+    "uses": [
+      "traxler:19"
+    ]
+  },
+  {
+    "id": "433",
+    "text": "White resigns here. ",
+    "uses": [
+      "traxler:20"
+    ]
+  },
+  {
+    "id": "434",
+    "text": "Well done!  I won't bore you with the details on this checkmate. All you need to know is you're completely winning from here! ",
+    "uses": [
+      "traxler:21"
+    ]
+  },
+  {
+    "id": "435",
+    "text": "Oh, and there's checkmate in 6 on the board. GG.",
+    "uses": [
+      "traxler:22"
+    ]
+  },
+  {
+    "id": "436",
+    "text": "I love how White's queenside just... hasn't moved. Anyways, we will be winning the knight and likely the game here. ",
+    "uses": [
+      "traxler:23"
+    ]
+  },
+  {
+    "id": "437",
+    "text": "Well done! Honestly, White played that perfectly and the position is about equal. ",
+    "uses": [
+      "traxler:24"
+    ]
+  },
+  {
+    "id": "438",
+    "text": "It is what it is...",
+    "uses": [
+      "traxler:25"
+    ]
+  },
+  {
+    "id": "439",
+    "text": "Honestly this was just really good play by White. We're down material but the engine thinks we have some winning chances here. because white is so underdeveloped and all our pieces are surrounding the king. Good luck with the game! ",
+    "uses": [
+      "traxler:26"
+    ]
+  },
+  {
+    "id": "440",
+    "text": "We're winning a piece. We're winning the game.",
+    "uses": [
+      "rousseau-gambit:1"
+    ]
+  },
+  {
+    "id": "441",
+    "text": "We have absolutely smoked white here - just look at their development! Or should I say, their lack-of-development. ",
+    "uses": [
+      "rousseau-gambit:2"
+    ]
+  },
+  {
+    "id": "442",
+    "text": "Well done! We're just crushing white here because of our strong central control. The computer gives us a +1.5 point advantage",
+    "uses": [
+      "rousseau-gambit:3"
+    ]
+  },
+  {
+    "id": "443",
+    "text": "I think you got it from here :D ",
+    "uses": [
+      "rousseau-gambit:4"
+    ]
+  },
+  {
+    "id": "444",
+    "text": "Two pawns in the center? Check. More pieces developed? Check. Going to win this game? Check. ",
+    "uses": [
+      "rousseau-gambit:5"
+    ]
+  },
+  {
+    "id": "445",
+    "text": "We just checkmated our opponent in 12 moves - chess is so easy. ",
+    "uses": [
+      "rousseau-gambit:6"
+    ]
+  },
+  {
+    "id": "446",
+    "text": "It might not look like it, but we are actually way ahead here. Either white moves their bishop and loses their knight, or they move their knight and lose their bishop. ",
+    "uses": [
+      "rousseau-gambit:7"
+    ]
+  },
+  {
+    "id": "447",
+    "text": "Well done! We simply have the center and more development, and we'll probably find a way to win that f5 pawn soon. The computer has us at a +1.5 point advantage. ",
+    "uses": [
+      "rousseau-gambit:8"
+    ]
+  },
+  {
+    "id": "448",
+    "text": "It's a forced checkmate in 4, but I guarantee you white resigns at this point ",
+    "uses": [
+      "rousseau-gambit:9"
+    ]
+  },
+  {
+    "id": "449",
+    "text": "Our attack on white is unstoppable. White's king is completely trapped with no squares to go to, and we're about to play knight to f3, forking the king and queen. The computer gives us a +6 point advantage. ",
+    "uses": [
+      "rousseau-gambit:10"
+    ]
+  },
+  {
+    "id": "450",
+    "text": "I’m ending the line here because White can try a few moves to delay the inevitable, but in the end White’s rook is completely trapped and our pawn will turn into a queen.",
+    "uses": [
+      "rousseau-gambit:11"
+    ]
+  },
+  {
+    "id": "451",
+    "text": "White should probably uninstall chess.com",
+    "uses": [
+      "rousseau-gambit:12"
+    ]
+  },
+  {
+    "id": "452",
+    "text": "We trapped a queen! We trapped a queen!!!",
+    "uses": [
+      "rousseau-gambit:13"
+    ]
+  },
+  {
+    "id": "453",
+    "text": "We're going to win whites queen, and then the game :)",
+    "uses": [
+      "rousseau-gambit:14"
+    ]
+  },
+  {
+    "id": "454",
+    "text": "It's times like these that make me remember why I love chess so much.",
+    "uses": [
+      "rousseau-gambit:15"
+    ]
+  },
+  {
+    "id": "455",
+    "text": "Our attack is just crushing here. Despite being down two points of material, the computer gives us a +5 point advantage! ",
+    "uses": [
+      "rousseau-gambit:16"
+    ]
+  },
+  {
+    "id": "456",
+    "text": "Look how depressing white's position is here. They can't move their bishop (it's blocked in), they can't castle (or they'll lose their knight), they can't move their queen (or they'll get checkmated), and they can't move their knight (they'll lose their queen).",
+    "uses": [
+      "rousseau-gambit:17"
+    ]
+  },
+  {
+    "id": "457",
+    "text": "Now white's position will get completely messed up! If they try and recapture with their bishop, it's an ugly retreating move, and if they recapture with their king, they can no longer castle. ",
+    "uses": [
+      "rousseau-gambit:18"
+    ]
+  },
+  {
+    "id": "458",
+    "text": "With our bishop staring at f2, our queen pinning g2, and our bishop on it's way to g4 or h3, white is in a LOT of trouble here. ",
+    "uses": [
+      "rousseau-gambit:19"
+    ]
+  },
+  {
+    "id": "459",
+    "text": "Nicely done. Besides our king not being able to castle, life is great. ",
+    "uses": [
+      "rousseau-gambit:20"
+    ]
+  },
+  {
+    "id": "460",
+    "text": "Well done! On our next move we'll play knight to d4 and apply maximum pressure on that poor f3 knight.",
+    "uses": [
+      "rousseau-gambit:21"
+    ]
+  },
+  {
+    "id": "461",
+    "text": "Well done! We resisted white's trap, equalized the position, and white really has nothing.",
+    "uses": [
+      "rousseau-gambit:22"
+    ]
+  },
+  {
+    "id": "462",
+    "text": "Well done! The position is almost equal, and once we develop our light-squared bishop we'll be able to castle our king queenside for safety. ",
+    "uses": [
+      "rousseau-gambit:23"
+    ]
+  },
+  {
+    "id": "463",
+    "text": "Well done! We can't castle kingside because of white's annoying c4 bishop, so our #1 priority going forward will be to develop our ligh-squared bishop and castle queenside. Once you do that, you should be in fine shape. ",
+    "uses": [
+      "rousseau-gambit:24"
+    ]
+  },
+  {
+    "id": "464",
+    "text": "And thats GG hahaha",
+    "uses": [
+      "englund-gambit:1"
+    ]
+  },
+  {
+    "id": "465",
+    "text": "Well done! We are simply up a bishop. ",
+    "uses": [
+      "englund-gambit:2"
+    ]
+  },
+  {
+    "id": "466",
+    "text": "We are simply up a bishop - and thats a good thing ;). ",
+    "uses": [
+      "englund-gambit:3"
+    ]
+  },
+  {
+    "id": "467",
+    "text": "Congratulations!! We just checkmated White in 8 moves. It doesn't get better than that. ",
+    "uses": [
+      "englund-gambit:4"
+    ]
+  },
+  {
+    "id": "468",
+    "text": "actual goals af",
+    "uses": [
+      "englund-gambit:5"
+    ]
+  },
+  {
+    "id": "469",
+    "text": "Damn! Well done. ",
+    "uses": [
+      "englund-gambit:6"
+    ]
+  },
+  {
+    "id": "470",
+    "text": "It's... it's lookin real bad for White here. Good job. ",
+    "uses": [
+      "englund-gambit:7"
+    ]
+  },
+  {
+    "id": "471",
+    "text": "With White's knight stuck in jail, and our queen strong in the center, our position is good. Well done! ",
+    "uses": [
+      "englund-gambit:8"
+    ]
+  },
+  {
+    "id": "472",
+    "text": "Well done! We have a slight edge on our opponent. ",
+    "uses": [
+      "englund-gambit:9"
+    ]
+  },
+  {
+    "id": "473",
+    "text": "Well done untangling yourself from that tricky situation! ",
+    "uses": [
+      "englund-gambit:10"
+    ]
+  },
+  {
+    "id": "474",
+    "text": "Well done! Now to play chess...",
+    "uses": [
+      "englund-gambit:11"
+    ]
+  },
+  {
+    "id": "475",
+    "text": "We gambited a pawn and won it back! Time to continue the rest of the game. ",
+    "uses": [
+      "englund-gambit:12"
+    ]
+  },
+  {
+    "id": "476",
+    "text": "White is ahead here because they have a slight developmental advantage. It's a gambit and this happens sometimes. ",
+    "uses": [
+      "englund-gambit:13"
+    ]
+  },
+  {
+    "id": "477",
+    "text": "That's a wrap. We are in a bad position but not completely lost. The material is still equal. ",
+    "uses": [
+      "englund-gambit:14"
+    ]
+  },
+  {
+    "id": "478",
+    "text": "Not a great ending for us, but that's how it goes sometimes. ",
+    "uses": [
+      "englund-gambit:15"
+    ]
+  },
+  {
+    "id": "479",
+    "text": "Well done!! Even though we are down a pawn, We are definitely winning one back soon and our strong center means the computer gives us a 2 or 3 point advantage!!",
+    "uses": [
+      "caro-kann:1"
+    ]
+  },
+  {
+    "id": "480",
+    "text": "Because White's king is so weak, the computer gives us a 1 or 2 point advantage from this position.",
+    "uses": [
+      "caro-kann:2"
+    ]
+  },
+  {
+    "id": "481",
+    "text": "Beautiful! We are simply up a pawn. ",
+    "uses": [
+      "caro-kann:3"
+    ]
+  },
+  {
+    "id": "482",
+    "text": "Well done! White has a really hard time defending their position here. ",
+    "uses": [
+      "caro-kann:4"
+    ]
+  },
+  {
+    "id": "483",
+    "text": "Well done! Even though the material is equal, the computer thinks we are better in this position. ",
+    "uses": [
+      "caro-kann:5"
+    ]
+  },
+  {
+    "id": "484",
+    "text": "Well done!! The computer loves our position here, and white bishop is stuck staring at his pawn.",
+    "uses": [
+      "caro-kann:6"
+    ]
+  },
+  {
+    "id": "485",
+    "text": "Well done! We are putting serious pressure on White with our queen. The computer thinks we have a better position here. ",
+    "uses": [
+      "caro-kann:7"
+    ]
+  },
+  {
+    "id": "486",
+    "text": "Well done! We are up a pawn and have a very playable position. ",
+    "uses": [
+      "caro-kann:8"
+    ]
+  },
+  {
+    "id": "487",
+    "text": "Well done! We are better in this position. And we have ideas of bishop to a6 in the future. ",
+    "uses": [
+      "caro-kann:9"
+    ]
+  },
+  {
+    "id": "488",
+    "text": "Well done! We are threatening to take White's knight and double his pawns. The computer is giving us the edge in this position.",
+    "uses": [
+      "caro-kann:10"
+    ]
+  },
+  {
+    "id": "489",
+    "text": "Well done! We have a good position here. ",
+    "uses": [
+      "caro-kann:11"
+    ]
+  },
+  {
+    "id": "490",
+    "text": "Well done! Black wins most games from this position.",
+    "uses": [
+      "caro-kann:12"
+    ]
+  },
+  {
+    "id": "491",
+    "text": "Well done! We have a ton of threats on white and it'll be hard for our opponent to deal with them. Black wins over 60% of the time from this position. ",
+    "uses": [
+      "caro-kann:13"
+    ]
+  },
+  {
+    "id": "492",
+    "text": "Well done! We have a good position and are ready to continue our game. ",
+    "uses": [
+      "caro-kann:14"
+    ]
+  },
+  {
+    "id": "493",
+    "text": "Well done! We have a solid position here. ",
+    "uses": [
+      "caro-kann:15"
+    ]
+  },
+  {
+    "id": "494",
+    "text": "Well done navigating the caro kann main line!! Proud of you. ",
+    "uses": [
+      "caro-kann:16"
+    ]
+  },
+  {
+    "id": "495",
+    "text": "Well done! We'll continue with our regular development from here. ",
+    "uses": [
+      "caro-kann:17"
+    ]
+  },
+  {
+    "id": "496",
+    "text": "Well done! The positions are equal and we are ready to play a fantastic game of chess. Everything we did was theory by the way: this exact position has been reached a hundred thousand times!",
+    "uses": [
+      "caro-kann:18"
+    ]
+  },
+  {
+    "id": "497",
+    "text": "Well done! The computer likes our position here, and  black wins something like 60% of the time from this position. ",
+    "uses": [
+      "caro-kann:19"
+    ]
+  },
+  {
+    "id": "498",
+    "text": "That was cool! Now our queen looks at the pawn on g5 and the bishop looks at the pawn on c5. We are going to get our material back!",
+    "uses": [
+      "caro-kann:20"
+    ]
+  },
+  {
+    "id": "499",
+    "text": "Well done! We have a chess game ahead of us. ",
+    "uses": [
+      "caro-kann:21"
+    ]
+  },
+  {
+    "id": "500",
+    "text": "Well done! The position is equal and we are ready to play!",
+    "uses": [
+      "caro-kann:22"
+    ]
+  },
+  {
+    "id": "501",
+    "text": "Well done! This is a great position to play as black. All our pieces are aligned towards White's biggest weakness. ",
+    "uses": [
+      "caro-kann:23"
+    ]
+  },
+  {
+    "id": "502",
+    "text": "Well done! We are doing great here! Look how weak and exposed White's king is. There is nowhere for him to hide. As long as we keep our queen on the board, White has problems. Meanwhile, all our pawns are connected and coordinated",
+    "uses": [
+      "caro-kann:24"
+    ]
+  },
+  {
+    "id": "503",
+    "text": "Well done! Black wins most of their games from this position.",
+    "uses": [
+      "caro-kann:25"
+    ]
+  },
+  {
+    "id": "504",
+    "text": "OK turns out the marathon was only two steps. Black wins something like 60% of the time from this position. Good luck!",
+    "uses": [
+      "caro-kann:26"
+    ]
+  },
+  {
+    "id": "505",
+    "text": "Well done! The stage is set and the game can begin!",
+    "uses": [
+      "caro-kann:27"
+    ]
+  },
+  {
+    "id": "506",
+    "text": "Well done! We have a solid position position and are ready to finish developing and castle. ",
+    "uses": [
+      "caro-kann:28"
+    ]
+  },
+  {
+    "id": "507",
+    "text": "Smoked. ",
+    "uses": [
+      "scotch-game:1"
+    ]
+  },
+  {
+    "id": "508",
+    "text": "Well done! We have transposed into another line we've already learned :) ",
+    "uses": [
+      "scotch-game:2"
+    ]
+  },
+  {
+    "id": "509",
+    "text": "Nice! We have an extra knight. ",
+    "uses": [
+      "scotch-game:3"
+    ]
+  },
+  {
+    "id": "510",
+    "text": "That was easy.... ",
+    "uses": [
+      "scotch-game:4"
+    ]
+  },
+  {
+    "id": "511",
+    "text": "Wow. The material is equal but we will win from here 100% of the time. Our knight is just too good. We'll castle now, develop our last pieces, and then launch a huge attack on black's weak position.",
+    "uses": [
+      "scotch-game:5"
+    ]
+  },
+  {
+    "id": "512",
+    "text": "Incredible. ",
+    "uses": [
+      "scotch-game:6"
+    ]
+  },
+  {
+    "id": "513",
+    "text": "Knight will be coming to c7. Knight will win a rook. GG. ",
+    "uses": [
+      "scotch-game:7"
+    ]
+  },
+  {
+    "id": "514",
+    "text": "Nice job winning a queen!",
+    "uses": [
+      "scotch-game:8"
+    ]
+  },
+  {
+    "id": "515",
+    "text": "It's over. We just have too much pressure on the c7 square. There's a bunch of ways black COULD respond here, but none of them are good. ",
+    "uses": [
+      "scotch-game:9"
+    ]
+  },
+  {
+    "id": "516",
+    "text": "It's over. We're winning a rook and probably a few other pieces too. ",
+    "uses": [
+      "scotch-game:10"
+    ]
+  },
+  {
+    "id": "517",
+    "text": "Nice! We made out like bandits and are now up two pawns!",
+    "uses": [
+      "scotch-game:11"
+    ]
+  },
+  {
+    "id": "518",
+    "text": "Nice! We have a very comfortable position. It'll be up to you to convert our 1.5 point advantage into a win. ",
+    "uses": [
+      "scotch-game:12"
+    ]
+  },
+  {
+    "id": "519",
+    "text": "Even though material is equal, this game is not even close. Our development is so much better, and our king is about to be so much safer. ",
+    "uses": [
+      "scotch-game:13"
+    ]
+  },
+  {
+    "id": "520",
+    "text": "Well done! The material is equal but we will literally win this game 100% of the time. Our pieces are just so good, and the computer gives us a +5 point advantage. ",
+    "uses": [
+      "scotch-game:14"
+    ]
+  },
+  {
+    "id": "521",
+    "text": "Well done! Black will scramble to stop our attack, and in the meantime we'll castle and keep developing our pieces. The computer has at a +2 point advantage. ",
+    "uses": [
+      "scotch-game:15"
+    ]
+  },
+  {
+    "id": "522",
+    "text": "Well done! We have so much space - giving us a +1 point advantage. ",
+    "uses": [
+      "scotch-game:16"
+    ]
+  },
+  {
+    "id": "523",
+    "text": "Well done! Our position is just terrifying for black.",
+    "uses": [
+      "scotch-game:17"
+    ]
+  },
+  {
+    "id": "524",
+    "text": "Well done! We will develop and castle - something our opponent no longer has the ability to do. ",
+    "uses": [
+      "scotch-game:18"
+    ]
+  },
+  {
+    "id": "525",
+    "text": "Well done! We own the center and have more development and a better pawn structure. The computer gives us a +1 point advantage. ",
+    "uses": [
+      "scotch-game:19"
+    ]
+  },
+  {
+    "id": "526",
+    "text": "Well done! We simply own the center now. ",
+    "uses": [
+      "scotch-game:20"
+    ]
+  },
+  {
+    "id": "527",
+    "text": "Well done! That pawn push is giving us an edge of the opponent.",
+    "uses": [
+      "scotch-game:21"
+    ]
+  },
+  {
+    "id": "528",
+    "text": "Well done! We win over 70% of the time from here. ",
+    "uses": [
+      "scotch-game:22"
+    ]
+  },
+  {
+    "id": "529",
+    "text": "Well done! We are ready to play some chess. ",
+    "uses": [
+      "scotch-game:23"
+    ]
+  },
+  {
+    "id": "530",
+    "text": "Well done! We'll try and take that bishop if we can, and castle if we can't.",
+    "uses": [
+      "scotch-game:24"
+    ]
+  },
+  {
+    "id": "531",
+    "text": "Well done! Let's play some chess now. ",
+    "uses": [
+      "scotch-game:25"
+    ]
+  },
+  {
+    "id": "532",
+    "text": "Well done! We have a slightly better position. ",
+    "uses": [
+      "scotch-game:26"
+    ]
+  },
+  {
+    "id": "533",
+    "text": "Well done! Both you and black played absolutely perfectly. ",
+    "uses": [
+      "scotch-game:27"
+    ]
+  },
+  {
+    "id": "534",
+    "text": "We sacrificed our queen and we won 3 pawns. That's pretty cool.",
+    "uses": [
+      "jobava-london:1"
+    ]
+  },
+  {
+    "id": "535",
+    "text": "That may seem silly but 100,000+ games have gone exactly like this LOL",
+    "uses": [
+      "jobava-london:2"
+    ]
+  },
+  {
+    "id": "536",
+    "text": "Two pawns up and ready to castle, woohoo!",
+    "uses": [
+      "jobava-london:3"
+    ]
+  },
+  {
+    "id": "537",
+    "text": "We are about to castle queenside and be unstoppable. ",
+    "uses": [
+      "jobava-london:4"
+    ]
+  },
+  {
+    "id": "538",
+    "text": "Bam.",
+    "uses": [
+      "jobava-london:5"
+    ]
+  },
+  {
+    "id": "539",
+    "text": "This is one of the most humiliating positions I have ever seen for Black. ",
+    "uses": [
+      "jobava-london:6"
+    ]
+  },
+  {
+    "id": "540",
+    "text": "So beautiful.",
+    "uses": [
+      "jobava-london:7"
+    ]
+  },
+  {
+    "id": "541",
+    "text": "You're amazing. ",
+    "uses": [
+      "jobava-london:8"
+    ]
+  },
+  {
+    "id": "542",
+    "text": "OK I don't care what your ELO is. You're winning this game lol. ",
+    "uses": [
+      "jobava-london:9"
+    ]
+  },
+  {
+    "id": "543",
+    "text": "What else is there to say. ",
+    "uses": [
+      "jobava-london:10"
+    ]
+  },
+  {
+    "id": "544",
+    "text": "Well done! We have an incredible position here. And with our queen still on the board, I think we win this every single time",
+    "uses": [
+      "jobava-london:11"
+    ]
+  },
+  {
+    "id": "545",
+    "text": "I would just resign here if I were black...",
+    "uses": [
+      "jobava-london:12"
+    ]
+  },
+  {
+    "id": "546",
+    "text": "The position is delicious. The computer puts us at a +2 point advantage. ",
+    "uses": [
+      "jobava-london:13"
+    ]
+  },
+  {
+    "id": "547",
+    "text": "We just trapped their bishop. Black should resign here. ",
+    "uses": [
+      "jobava-london:14"
+    ]
+  },
+  {
+    "id": "548",
+    "text": "Well done! We are strangling our opponent with this strong attack. It's not going to end well for Black. ",
+    "uses": [
+      "jobava-london:15"
+    ]
+  },
+  {
+    "id": "549",
+    "text": "Well done! The computer hates Black's position. Every piece is just so passive. Despite material being equal, the computer gives us a 1.5 point advantage. ",
+    "uses": [
+      "jobava-london:16"
+    ]
+  },
+  {
+    "id": "550",
+    "text": "Well done! The chess engine loves our position here. We have pieces and pawns and rooks that are about to swarm blacks king. And frankly black doesn't have the resources to defend.",
+    "uses": [
+      "jobava-london:17"
+    ]
+  },
+  {
+    "id": "551",
+    "text": "Well done! The computer really likes our position here. Look how weak Black's pieces are. ",
+    "uses": [
+      "jobava-london:18"
+    ]
+  },
+  {
+    "id": "552",
+    "text": "Well done! Our position looks great. ",
+    "uses": [
+      "jobava-london:19"
+    ]
+  },
+  {
+    "id": "553",
+    "text": "Well done! The computer gives us the edge in this position. ",
+    "uses": [
+      "jobava-london:20"
+    ]
+  },
+  {
+    "id": "554",
+    "text": "Well done! Our position looks nice. ",
+    "uses": [
+      "jobava-london:21"
+    ]
+  },
+  {
+    "id": "555",
+    "text": "Although our pawn structure is kind of messed up, the computer thinks we have a great position and, after castling, life will be good. ",
+    "uses": [
+      "jobava-london:22"
+    ]
+  },
+  {
+    "id": "556",
+    "text": "Well done! We are waiting to see what side black castles and we'll start a strong attack from there. ",
+    "uses": [
+      "jobava-london:23"
+    ]
+  },
+  {
+    "id": "557",
+    "text": "Well done! Both white and black played perfectly and we ended up in this fun position. Enjoy!",
+    "uses": [
+      "jobava-london:24"
+    ]
+  },
+  {
+    "id": "558",
+    "text": "Well done! The computer likes our position against black here. ",
+    "uses": [
+      "jobava-london:25"
+    ]
+  },
+  {
+    "id": "559",
+    "text": "Well done! Our king is safe. ",
+    "uses": [
+      "jobava-london:26"
+    ]
+  },
+  {
+    "id": "560",
+    "text": "A free pawn is a free pawn! ",
+    "uses": [
+      "london:1"
+    ]
+  },
+  {
+    "id": "561",
+    "text": "Black just lost the game in like 5 moves hahaha",
+    "uses": [
+      "london:2"
+    ]
+  },
+  {
+    "id": "562",
+    "text": "A pawn for a bishop - that's a good trade",
+    "uses": [
+      "london:3"
+    ]
+  },
+  {
+    "id": "563",
+    "text": "Well done! We are +4 on the eval-bar and the only thing to keep in mind is to NOT castle queenside because black's knight is eyeing our f2 pawn. ",
+    "uses": [
+      "london:4"
+    ]
+  },
+  {
+    "id": "564",
+    "text": "We have the center. We have more development. We have a safer king. We have 2 of our opponent's pawns. We have a 3 point eval advantage.",
+    "uses": [
+      "london:5"
+    ]
+  },
+  {
+    "id": "565",
+    "text": "We're a clean pawn up! ",
+    "uses": [
+      "london:6"
+    ]
+  },
+  {
+    "id": "566",
+    "text": "At the end of the day, we're going to play knight to c7. Black has a couple ways they can try to get out of it, but none of them work. We will win material and then win the game. ",
+    "uses": [
+      "london:7"
+    ]
+  },
+  {
+    "id": "567",
+    "text": "Rest in peace, black",
+    "uses": [
+      "london:8"
+    ]
+  },
+  {
+    "id": "568",
+    "text": "We're up a bishop - I don't need to tell you why that's winning. ",
+    "uses": [
+      "london:9"
+    ]
+  },
+  {
+    "id": "569",
+    "text": "Awesome. No-matter where black goes next, we'll recapture the bishop on f4, ending up up-a-pawn and also up-4-points-on-the-eval-bar. ",
+    "uses": [
+      "london:10"
+    ]
+  },
+  {
+    "id": "570",
+    "text": "That knight sacrifice was a chess.com certified brilliant move!!! Awesome job",
+    "uses": [
+      "london:11"
+    ]
+  },
+  {
+    "id": "571",
+    "text": "Our attack is absolutely crushing black. All our pieces are pointing to c7, we are attacking the undefended a6 knight, and our queen has a discovered check up her sleeve whenever we move our knight. ",
+    "uses": [
+      "london:12"
+    ]
+  },
+  {
+    "id": "572",
+    "text": "This exact game has been played by 2200+ ELO players over and over and over again. ",
+    "uses": [
+      "london:13"
+    ]
+  },
+  {
+    "id": "573",
+    "text": "Lights out. ",
+    "uses": [
+      "london:14"
+    ]
+  },
+  {
+    "id": "574",
+    "text": "We literally have a 100% winrate from here. ",
+    "uses": [
+      "london:15"
+    ]
+  },
+  {
+    "id": "575",
+    "text": "Great! Black just gave us the center and a slight advantage",
+    "uses": [
+      "london:16"
+    ]
+  },
+  {
+    "id": "576",
+    "text": "Well done! We have an even position and will have to play chess to win from here. ",
+    "uses": [
+      "london:17"
+    ]
+  },
+  {
+    "id": "577",
+    "text": "Well done! We have a 60% winrate from here :) ",
+    "uses": [
+      "london:18"
+    ]
+  },
+  {
+    "id": "578",
+    "text": "Both sides played that pretty perfectly - it's an even game. ",
+    "uses": [
+      "london:19"
+    ]
+  },
+  {
+    "id": "579",
+    "text": "Well done! This was a pretty normal london setup game, now it's up to you to get the win! ",
+    "uses": [
+      "london:20"
+    ]
+  },
+  {
+    "id": "580",
+    "text": "Well done! We have an edge over our opponent going into the middlegame. ",
+    "uses": [
+      "london:21"
+    ]
+  },
+  {
+    "id": "581",
+    "text": "Well done! We have the center and a slight advantage over black",
+    "uses": [
+      "london:22"
+    ]
+  },
+  {
+    "id": "582",
+    "text": "Well done! We're slightly ahead on the eval bar. ",
+    "uses": [
+      "london:23"
+    ]
+  },
+  {
+    "id": "583",
+    "text": "Well done! We have an equal position and are ready for the middlegame",
+    "uses": [
+      "london:24"
+    ]
+  },
+  {
+    "id": "584",
+    "text": "Well done! You successfully played the most boring opening in chess",
+    "uses": [
+      "london:25"
+    ]
+  },
+  {
+    "id": "585",
+    "text": "Well done! That was.... just a very normal london setup game. ",
+    "uses": [
+      "london:26"
+    ]
+  },
+  {
+    "id": "586",
+    "text": "Well done! We'll keep developing and look for a c4 pawn break in the future. ",
+    "uses": [
+      "london:27"
+    ]
+  },
+  {
+    "id": "587",
+    "text": "Well done! Nothing too exciting here, but we'll look for queen to b3 in the future to target that undefended b7 pawn. ",
+    "uses": [
+      "london:28"
+    ]
+  },
+  {
+    "id": "588",
+    "text": "Well done! We have a dominant position against Black's exposed king. The computer puts our position at a +2 point advantage.",
+    "uses": [
+      "fried-liver-attack:1"
+    ]
+  },
+  {
+    "id": "589",
+    "text": "That was best case for the Fried Liver Attack. But let's be real, most of our opponents won't play those awful moves LOL - so how do we win if black has other ideas?",
+    "uses": [
+      "fried-liver-attack:2"
+    ]
+  },
+  {
+    "id": "590",
+    "text": "This is a crazy position. We are down 7 points of material, but our position is so crushing that the computer puts us at +9 point advantage.",
+    "uses": [
+      "fried-liver-attack:3"
+    ]
+  },
+  {
+    "id": "591",
+    "text": "Well done! Wherever black moves their knight, we will be able to escape or trade our pieces out of danger, leaving us with a +3 point positional advantage. White wins this position over 80% of the time.",
+    "uses": [
+      "fried-liver-attack:4"
+    ]
+  },
+  {
+    "id": "592",
+    "text": "Well done! We are up a queen and have an easy win ahead of us.",
+    "uses": [
+      "fried-liver-attack:5"
+    ]
+  },
+  {
+    "id": "593",
+    "text": "Well done! Despite being equal in material, the computer puts us at a +2 point advantage.",
+    "uses": [
+      "fried-liver-attack:6"
+    ]
+  },
+  {
+    "id": "594",
+    "text": "Well done! Black's king is in the middle of the board and we are up in material. This is a completely winning position for us.",
+    "uses": [
+      "fried-liver-attack:7"
+    ]
+  },
+  {
+    "id": "595",
+    "text": "Well done! Black is in an awful position down material, with their king checked in the middle of the board, and our pieces about to swarm.",
+    "uses": [
+      "fried-liver-attack:8"
+    ]
+  },
+  {
+    "id": "596",
+    "text": "Well done! Even though we are a knight down, all pieces are aiming right for Blacks king in the middle of the board and the computer puts us at a +4 point advantage.",
+    "uses": [
+      "fried-liver-attack:9"
+    ]
+  },
+  {
+    "id": "597",
+    "text": "You stuck with it! You are mastering how to convert your positional advantage into a win.",
+    "uses": [
+      "fried-liver-attack:10"
+    ]
+  },
+  {
+    "id": "598",
+    "text": "Well done! We are completely winning from here.",
+    "uses": [
+      "fried-liver-attack:11"
+    ]
+  },
+  {
+    "id": "599",
+    "text": "Well done! This game is over for Black. His queen is gone and all our pieces are pointed at him. It's only a matter of time.",
+    "uses": [
+      "fried-liver-attack:12"
+    ]
+  },
+  {
+    "id": "600",
+    "text": "Way to stick with it! Enjoy the win.",
+    "uses": [
+      "fried-liver-attack:13"
+    ]
+  },
+  {
+    "id": "601",
+    "text": "Well done! We are a pawn up, the Black king is exposed, and we are ready to castle.",
+    "uses": [
+      "fried-liver-attack:14"
+    ]
+  },
+  {
+    "id": "602",
+    "text": "OK! The position is equal and we are ready to continue the game.",
+    "uses": [
+      "fried-liver-attack:15"
+    ]
+  },
+  {
+    "id": "603",
+    "text": "Yes!! We are a pawn up, but more than that: our position is so strong here the computer gives us a +4 point advantage and we win over NINETY PERCENT OF THE TIME FROM HERE",
+    "uses": [
+      "sicilian-defense:1"
+    ]
+  },
+  {
+    "id": "604",
+    "text": "Well done! White will defend their c2 pawn and our knight will gobble on f3 to win a pawn. ",
+    "uses": [
+      "sicilian-defense:2"
+    ]
+  },
+  {
+    "id": "605",
+    "text": "White is dead. We are simply threating too many things. The knight on f3 is hanging, and we also have backrank checkmate in one. ",
+    "uses": [
+      "sicilian-defense:3"
+    ]
+  },
+  {
+    "id": "606",
+    "text": "We won our rook back, and we'll win even more material soon because we have pawn to e4 discover-checking the king and hitting the f3 knight. ",
+    "uses": [
+      "sicilian-defense:4"
+    ]
+  },
+  {
+    "id": "607",
+    "text": "Obliterated. All our pieces are coming to hunt down this king. By the way - don't forget about our hanging knight on f6. ",
+    "uses": [
+      "sicilian-defense:5"
+    ]
+  },
+  {
+    "id": "608",
+    "text": "We literally win 90% of the time from here. It's over for white. ",
+    "uses": [
+      "sicilian-defense:6"
+    ]
+  },
+  {
+    "id": "609",
+    "text": "Even though material is equal, our attack is so strong and white's pieces are so weak that the computer gives us a +3 point advantage.",
+    "uses": [
+      "sicilian-defense:7"
+    ]
+  },
+  {
+    "id": "610",
+    "text": "Well done! The computer gives us a huge advantage because, at the end of the day, our queen is taking the a2 pawn and getting into the white position. ",
+    "uses": [
+      "sicilian-defense:8"
+    ]
+  },
+  {
+    "id": "611",
+    "text": "We literally just have an extra piece and pawn. Not bad! ",
+    "uses": [
+      "sicilian-defense:9"
+    ]
+  },
+  {
+    "id": "612",
+    "text": "That, right there, is how it's done. ",
+    "uses": [
+      "sicilian-defense:10"
+    ]
+  },
+  {
+    "id": "613",
+    "text": "Well done! White has no defense from the upcoming rook battery we'll build on the c-file",
+    "uses": [
+      "sicilian-defense:11"
+    ]
+  },
+  {
+    "id": "614",
+    "text": "White is completely losing here ALREADY. We're putting way too much pressure on the queenside. ",
+    "uses": [
+      "sicilian-defense:12"
+    ]
+  },
+  {
+    "id": "615",
+    "text": "Yay! We're up a pawn and we'll win the game. ",
+    "uses": [
+      "sicilian-defense:13"
+    ]
+  },
+  {
+    "id": "616",
+    "text": "Nice. Now our dark-squared bishop is even more powerful, and we are likely winning this game. ",
+    "uses": [
+      "sicilian-defense:14"
+    ]
+  },
+  {
+    "id": "617",
+    "text": "Now that the white dark-squared bishop is gone, our dark-squared bishop has become even stronger than it already was",
+    "uses": [
+      "sicilian-defense:15"
+    ]
+  },
+  {
+    "id": "618",
+    "text": "Nice! We'll bring our bishop to f5 to attack the c2 and our rooks to center to start attacking white's weak pawns.",
+    "uses": [
+      "sicilian-defense:16"
+    ]
+  },
+  {
+    "id": "619",
+    "text": "Nice! We actually have a solid edge against our opponent here. ",
+    "uses": [
+      "sicilian-defense:17"
+    ]
+  },
+  {
+    "id": "620",
+    "text": "Nice work! Our pieces are just better coordinated than white’s, and our king is completely safe. Our g7 bishop is dominating the board, and the position is looking great—the engine agrees, we’re in control.",
+    "uses": [
+      "sicilian-defense:18"
+    ]
+  },
+  {
+    "id": "621",
+    "text": "Nice! White tried to rush-attack us but we ended up in a better position with a higher winrate. ",
+    "uses": [
+      "sicilian-defense:19"
+    ]
+  },
+  {
+    "id": "622",
+    "text": "Nice! We'll march our a-pawn up the board and cause serious problems for white. ",
+    "uses": [
+      "sicilian-defense:20"
+    ]
+  },
+  {
+    "id": "623",
+    "text": "And now its time to play chess! ",
+    "uses": [
+      "sicilian-defense:21"
+    ]
+  },
+  {
+    "id": "624",
+    "text": "Well done! Now it's time to play chess. ",
+    "uses": [
+      "sicilian-defense:22"
+    ]
+  },
+  {
+    "id": "625",
+    "text": "Nice! The material is equal but we win like 70% of the time from here. ",
+    "uses": [
+      "sicilian-defense:23"
+    ]
+  },
+  {
+    "id": "626",
+    "text": "Well done! We stopped the Aalapin Sicilian in its tracks. ",
+    "uses": [
+      "sicilian-defense:24"
+    ]
+  },
+  {
+    "id": "627",
+    "text": "Well done! We'll castle and continue on with our game. ",
+    "uses": [
+      "sicilian-defense:25"
+    ]
+  },
+  {
+    "id": "628",
+    "text": "White led us into a pretty boring and passive game. Whatever, now its time to play chess. ",
+    "uses": [
+      "sicilian-defense:26"
+    ]
+  },
+  {
+    "id": "629",
+    "text": "Well done! We have a solid position and in the future we'll hop our knight from b8, to c6, to d4 and apply even more pressure on that f3 knight.",
+    "uses": [
+      "sicilian-defense:27"
+    ]
+  },
+  {
+    "id": "630",
+    "text": "Well done! The pawn storm is coming.",
+    "uses": [
+      "sicilian-defense:28"
+    ]
+  },
+  {
+    "id": "631",
+    "text": "Nice! Look how our pawns are strong and control the center! In the future we'll creep our c6 pawn up to take even more space away from white and even threaten a fork with pawn to d4. ",
+    "uses": [
+      "sicilian-defense:29"
+    ]
+  },
+  {
+    "id": "632",
+    "text": "Well done! We win most of the games from here. ",
+    "uses": [
+      "sicilian-defense:30"
+    ]
+  },
+  {
+    "id": "633",
+    "text": "Nice job handling that pawn attack from white!",
+    "uses": [
+      "sicilian-defense:31"
+    ]
+  },
+  {
+    "id": "634",
+    "text": "Well done! We have serious pressure on the a2 pawn and the c3 knight. ",
+    "uses": [
+      "sicilian-defense:32"
+    ]
+  },
+  {
+    "id": "635",
+    "text": "Well done! We'll bring our rook to c8 and begin our queenside attack.",
+    "uses": [
+      "sicilian-defense:33"
+    ]
+  },
+  {
+    "id": "636",
+    "text": "Well done! Even though it looks like our pawn structure is damaged, it's actually quite strong against white's position. ",
+    "uses": [
+      "sicilian-defense:34"
+    ]
+  },
+  {
+    "id": "637",
+    "text": "Well done! White did all that work just to blunder and give us a winning position. ",
+    "uses": [
+      "sicilian-defense:35"
+    ]
+  },
+  {
+    "id": "638",
+    "text": "Nice job! We win more often than not from here.",
+    "uses": [
+      "sicilian-defense:36"
+    ]
+  },
+  {
+    "id": "639",
+    "text": "Well done! We'll continue playing from here with the same sacrifice ideas we've been learning.",
+    "uses": [
+      "sicilian-defense:37"
+    ]
+  },
+  {
+    "id": "640",
+    "text": "Nice, it'll be a fun game from here. ",
+    "uses": [
+      "sicilian-defense:38"
+    ]
+  },
+  {
+    "id": "641",
+    "text": "Wow! That's what black gets for trying to take our rook. Maybe next time they'll learn their lesson. ",
+    "uses": [
+      "italian-game:1"
+    ]
+  },
+  {
+    "id": "642",
+    "text": "Well done! We are simply up a piece.",
+    "uses": [
+      "italian-game:2"
+    ]
+  },
+  {
+    "id": "643",
+    "text": "Well done! We have absolutely humiliated black's position and we will be winning this game. The computer gives a +4 point advantage here. ",
+    "uses": [
+      "italian-game:3"
+    ]
+  },
+  {
+    "id": "644",
+    "text": "Well done! We are up a piece and up in development. Black really has nothing here. ",
+    "uses": [
+      "italian-game:4"
+    ]
+  },
+  {
+    "id": "645",
+    "text": "Well done! We are up a piece, our king is castled, and our pieces are more developed. ",
+    "uses": [
+      "italian-game:5"
+    ]
+  },
+  {
+    "id": "646",
+    "text": "Well done! Would you believe me if I said thousands of games went exactly this way?",
+    "uses": [
+      "italian-game:6"
+    ]
+  },
+  {
+    "id": "647",
+    "text": "Well done! Our position is the definition of good chess: pieces developed, pawns in the center, king castled to safety. The computer actually gives us a +2 point advantage just because we played so solid. ",
+    "uses": [
+      "italian-game:7"
+    ]
+  },
+  {
+    "id": "648",
+    "text": "Well done! Black blundered and now we are winning the game. ",
+    "uses": [
+      "italian-game:8"
+    ]
+  },
+  {
+    "id": "649",
+    "text": "Well done! It is pretty much impossible to lose in this position. We are simply threatening too much. A fork with rook e8, a checkmate in 2 with queen to f7. It's all but over. ",
+    "uses": [
+      "italian-game:9"
+    ]
+  },
+  {
+    "id": "650",
+    "text": "When the dust settles, we have a rook for a bishop, more active pieces, and a safer king. ",
+    "uses": [
+      "italian-game:10"
+    ]
+  },
+  {
+    "id": "651",
+    "text": "Wow. That was pretty long for an \"openings\" course huh? I like this checkmate because the Black queen cut off the Black king's escape square. She is suffocating her husband. ",
+    "uses": [
+      "italian-game:11"
+    ]
+  },
+  {
+    "id": "652",
+    "text": "Well done! Hundreds of thousands of games end up in this exact position believe it or not. We have a stronger center, our king is safe, more pieces are developed and active, and the computer is giving us a +1 point advantage. ",
+    "uses": [
+      "italian-game:12"
+    ]
+  },
+  {
+    "id": "653",
+    "text": "Well done! We just have a very comfortable position against black here. White has a 60% winrate from here. ",
+    "uses": [
+      "italian-game:13"
+    ]
+  },
+  {
+    "id": "654",
+    "text": "Well done! The computer gives us a slight edge because of our space advantage. ",
+    "uses": [
+      "italian-game:14"
+    ]
+  },
+  {
+    "id": "655",
+    "text": "Well done! We navigated through the opening and have a better position than our opponent. ",
+    "uses": [
+      "italian-game:15"
+    ]
+  },
+  {
+    "id": "656",
+    "text": "Well done! We have more development and better pawn structure than our opponent. ",
+    "uses": [
+      "italian-game:16"
+    ]
+  },
+  {
+    "id": "657",
+    "text": "Well done! The computer gives us a slight edge here but honestly, White wins more than 60% of their games from here because of how threatening our position is. As long as your opponent doesn't play perfectly, you have a great chance at a win here. ",
+    "uses": [
+      "italian-game:17"
+    ]
+  },
+  {
+    "id": "658",
+    "text": "Well done! Black pretty much played perfectly here, not falling for any of our traps, and we still came out slightly ahead. ",
+    "uses": [
+      "italian-game:18"
+    ]
+  },
+  {
+    "id": "659",
+    "text": "Black can't capture our pawn because then we win the Queen (the bishop on e6 is pinned). This is a very comfortable position for white, and Black is completely tangled up. ",
+    "uses": [
+      "italian-game:19"
+    ]
+  },
+  {
+    "id": "660",
+    "text": "Black played perfectly this time - we have an interesting attack but its by no means a guaranteed win. Good luck!",
+    "uses": [
+      "italian-game:20"
+    ]
+  },
+  {
+    "id": "661",
+    "text": "Well done! We navigated through the opening and are left with an equal position. ",
+    "uses": [
+      "italian-game:21"
+    ]
+  },
+  {
+    "id": "662",
+    "text": "It doesn't take a chess engine to see that black is losing this game LOL. ",
+    "uses": [
+      "italian-game:22"
+    ]
+  }
+]

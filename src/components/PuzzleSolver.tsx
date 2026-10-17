@@ -3,10 +3,9 @@
 import { useState, useEffect } from "react";
 import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import type { PieceDropHandlerArgs } from "react-chessboard";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { CheckCircle, XCircle, RotateCcw, Lightbulb, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 interface PuzzleSolverProps {
@@ -19,7 +18,11 @@ interface PuzzleSolverProps {
     tag?: string;
 }
 
-export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSolve, tag }: PuzzleSolverProps) {
+export default function PuzzleSolver(props: PuzzleSolverProps) {
+    return <PuzzleSolverContent key={JSON.stringify([props.id, props.fen, props.solution])} {...props} />;
+}
+
+function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag }: PuzzleSolverProps) {
     const t = useTranslations("PuzzleSolver");
     const [game, setGame] = useState(new Chess(fen));
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
@@ -33,7 +36,7 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
     const [submitted, setSubmitted] = useState(false);
     const router = useRouter();
 
-    const { onSquareClick, onPieceClick, onPieceDrop, optionSquares, setOptionSquares } = useLegalMoves({
+    const { onSquareClick, onPieceClick, onPieceDrop, optionSquares } = useLegalMoves({
         game,
         onMove: ({ from, to, promotion }) => {
             const result = handleMove(from, to, promotion);
@@ -45,24 +48,14 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
     const solutionMoves = solution.split(" ").filter(m => m.trim() !== "");
 
     useEffect(() => {
-        // Reset state when puzzle changes
         const newGame = new Chess(fen);
-        setGame(newGame);
-        setCurrentMoveIndex(0);
-        setStatus("playing");
-        setMessage("");
-        setShowHint(false);
-        setMistakeMade(false);
-        setHintUsed(false);
-        setSubmitted(false);
-        setRatingChange(null);
-
+        const initialMoves = solution.split(" ").filter(move => move.trim() !== "");
         // Lichess puzzles start with the opponent's move (the first move in the solution)
         // We need to play this move immediately to set up the board for the player
-        if (solutionMoves.length > 0) {
-            setTimeout(() => {
+        if (initialMoves.length > 0) {
+            const timer = setTimeout(() => {
                 try {
-                    const firstMove = solutionMoves[0];
+                    const firstMove = initialMoves[0];
                     let moveResult;
                         if (firstMove.length === 4 || firstMove.length === 5) {
                             moveResult = newGame.move({
@@ -83,6 +76,7 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
                     console.error("Failed to play initial move:", e);
                 }
             }, 500);
+            return () => clearTimeout(timer);
         }
     }, [fen, solution]); // Re-run when puzzle changes
 
@@ -264,10 +258,12 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
 
     async function handleNextPuzzle() {
         try {
-            const res = await fetch(`/api/puzzles/next?exclude=${name}${tag ? `&tag=${tag}` : ''}`);
+            const query = new URLSearchParams({ exclude: name });
+            if (tag) query.set("tag", tag);
+            const res = await fetch(`/api/puzzles/next?${query}`);
             const data = await res.json();
             if (data.puzzleName) {
-                router.push(`/puzzles/${data.puzzleName}${tag ? `?tag=${tag}` : ''}`);
+                router.push({ pathname: `/puzzles/${data.puzzleName}`, query: tag ? { tag } : undefined });
             } else {
                 alert(t("noMorePuzzles"));
             }
@@ -293,13 +289,13 @@ export default function PuzzleSolver({ id, fen, solution, hints = [], name, onSo
                     options={{
                         id: "puzzle-solver",
                         position: game.fen(),
-                        onPieceDrop: onPieceDrop as any,
+                        onPieceDrop: (args) => { void onPieceDrop(args); return false; },
                         onSquareClick: onSquareClick,
                         onPieceClick: onPieceClick,
                         boardOrientation: new Chess(fen).turn() === 'w' ? 'black' : 'white',
                         animationDurationInMs: 200,
                         squareStyles: { ...squareStyles, ...optionSquares },
-                    } as any}
+                    }}
                 />
 
                 {/* Overlay for Wrong Move */}

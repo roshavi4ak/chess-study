@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { PlayerColor } from "@prisma/client";
+import type { PracticeTreeNode } from "@/types/practice";
 
 // TypeScript interface for the tree node structure from the frontend
 interface PracticeNodeInput {
@@ -35,7 +36,7 @@ export async function createPractice(formData: FormData) {
     let tree: PracticeNodeInput;
     try {
         tree = JSON.parse(treeJson);
-    } catch (e) {
+    } catch {
         throw new Error("Invalid tree data");
     }
 
@@ -108,7 +109,7 @@ export async function updatePractice(practiceId: string, formData: FormData) {
     let tree: PracticeNodeInput;
     try {
         tree = JSON.parse(treeJson);
-    } catch (e) {
+    } catch {
         throw new Error("Invalid tree data");
     }
 
@@ -299,8 +300,8 @@ export async function getPractice(id: string) {
     }
 
     // Build tree structure from flat nodes
-    const nodeMap = new Map<string, any>();
-    let rootNode: any = null;
+    const nodeMap = new Map<string, PracticeTreeNode>();
+    let rootNode: PracticeTreeNode | null = null;
 
     // First pass: create map of all nodes
     for (const node of practice.nodes) {
@@ -326,6 +327,8 @@ export async function getPractice(id: string) {
             rootNode = mappedNode;
         }
     }
+
+    if (!rootNode) return null;
 
     return {
         id: practice.id,

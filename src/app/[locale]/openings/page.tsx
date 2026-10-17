@@ -1,14 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ComponentProps } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import OpeningCard from "@/components/OpeningCard";
 import PracticeCard from "@/components/PracticeCard";
 
+type OpeningSummary = ComponentProps<typeof OpeningCard>["opening"] & { createdBy: string };
+type PracticeSummary = ComponentProps<typeof PracticeCard>["practice"] & { createdBy: string };
+
 // API function to fetch openings
-async function fetchOpenings(): Promise<any[]> {
+async function fetchOpenings(): Promise<OpeningSummary[]> {
     const response = await fetch("/api/openings", {
         method: "GET",
         headers: {
@@ -24,7 +27,7 @@ async function fetchOpenings(): Promise<any[]> {
 }
 
 // API function to fetch practices
-async function fetchPractices(): Promise<any[]> {
+async function fetchPractices(): Promise<PracticeSummary[]> {
     const response = await fetch("/api/practices", {
         method: "GET",
         headers: {
@@ -40,13 +43,13 @@ async function fetchPractices(): Promise<any[]> {
 }
 
 export default function OpeningsPage() {
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
     const navigationT = useTranslations("Navigation");
     const openingsT = useTranslations("Openings");
     const commonT = useTranslations("Common");
     
-    const [openings, setOpenings] = useState<any[]>([]);
-    const [practices, setPractices] = useState<any[]>([]);
+    const [openings, setOpenings] = useState<OpeningSummary[]>([]);
+    const [practices, setPractices] = useState<PracticeSummary[]>([]);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState(true);
 

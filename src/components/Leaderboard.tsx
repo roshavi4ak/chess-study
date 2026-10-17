@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Trophy, Puzzle, GraduationCap, BarChart3, ChevronUp, ChevronDown } from "lucide-react";
+import { Trophy, Puzzle, GraduationCap, BarChart3, ChevronUp, ChevronDown, Flame, Shield } from "lucide-react";
 import { LeaderboardEntry } from "@/types/leaderboard";
 import { WeeklyWinner, AllTimeWinner } from "@/app/actions/statistics";
+import type { EffortBoardData } from "@/app/actions/effort";
+import EffortBoard from "@/components/EffortBoard";
+import LeagueBoard from "@/components/LeagueBoard";
+import type { LeagueView } from "@/app/actions/leagues";
+import Image from "next/image";
+import ProfileLink from "@/components/ProfileLink";
 
 interface LeaderboardProps {
     data: LeaderboardEntry[];
@@ -12,17 +18,29 @@ interface LeaderboardProps {
         weekly: {
             puzzleWinners: WeeklyWinner[];
             practiceWinners: WeeklyWinner[];
+            dateRange: { start: string; end: string };
         };
         allTime: AllTimeWinner[];
     };
+    effort?: EffortBoardData;
+    leagues?: LeagueView | null;
+    currentUserId?: string;
+    initialSection?: string;
 }
+
+type Section = "effort" | "leagues" | "puzzles" | "openings" | "statistics";
 
 type SortField = "count" | "points" | "completed" | "perfected";
 type SortOrder = "asc" | "desc";
 
-export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
+export default function Leaderboard({ data, weeklyStats, effort, leagues, currentUserId, initialSection }: LeaderboardProps) {
     const t = useTranslations("Leaderboard");
-    const [section, setSection] = useState<"puzzles" | "openings" | "statistics">("puzzles");
+    // Effort comes first: it is the board every child can top, whatever their rating.
+    const [section, setSection] = useState<Section>(() => {
+        if (initialSection === "leagues" && leagues) return "leagues";
+        if (initialSection && ["puzzles", "openings", "statistics"].includes(initialSection)) return initialSection as Section;
+        return effort ? "effort" : "puzzles";
+    });
     const [timeframe, setTimeframe] = useState<"weekly" | "allTime">("weekly");
     const [statisticsTimeframe, setStatisticsTimeframe] = useState<"lastWeek" | "allTime">("lastWeek");
     const [sortField, setSortField] = useState<SortField>(section === "puzzles" ? "points" : "perfected");
@@ -57,7 +75,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
 
     const sortedData = sortData(data);
 
-    const SortIcon = ({ field }: { field: SortField }) => {
+    const sortIcon = (field: SortField) => {
         if (sortField !== field) return null;
         return sortOrder === "asc" ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />;
     };
@@ -73,40 +91,64 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
 
             {/* Section Toggles */}
             <div className="flex justify-center p-1 bg-gray-100 dark:bg-gray-800 rounded-xl max-w-2xl mx-auto shadow-inner">
+                {effort && (
+                    <button
+                        onClick={() => setSection("effort")}
+                        className={`flex-1 flex items-center justify-center py-3 px-2 sm:px-6 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 ${section === "effort"
+                            ? "bg-white dark:bg-gray-700 text-orange-600 dark:text-orange-400 shadow-md transform scale-105"
+                            : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                            }`}
+                    >
+                        <Flame className="w-5 h-5 mr-1 sm:mr-2 shrink-0" />
+                        {t("effort")}
+                    </button>
+                )}
+                {leagues && (
+                    <button
+                        onClick={() => setSection("leagues")}
+                        className={`flex-1 flex items-center justify-center py-3 px-2 sm:px-6 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 ${section === "leagues"
+                            ? "bg-white dark:bg-gray-700 text-sky-600 dark:text-sky-400 shadow-md transform scale-105"
+                            : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                            }`}
+                    >
+                        <Shield className="w-5 h-5 mr-1 sm:mr-2 shrink-0" />
+                        {t("leagues")}
+                    </button>
+                )}
                 <button
                     onClick={() => { setSection("puzzles"); setSortField("points"); setSortOrder("desc"); }}
-                    className={`flex-1 flex items-center justify-center py-3 px-6 rounded-lg text-sm font-bold transition-all duration-200 ${section === "puzzles"
+                    className={`flex-1 flex items-center justify-center py-3 px-2 sm:px-6 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 ${section === "puzzles"
                         ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-md transform scale-105"
                         : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                         }`}
                 >
-                    <Puzzle className="w-5 h-5 mr-2" />
+                    <Puzzle className="w-5 h-5 mr-1 sm:mr-2 shrink-0" />
                     {t("puzzles")}
                 </button>
                 <button
                     onClick={() => { setSection("openings"); setSortField("perfected"); setSortOrder("desc"); }}
-                    className={`flex-1 flex items-center justify-center py-3 px-6 rounded-lg text-sm font-bold transition-all duration-200 ${section === "openings"
+                    className={`flex-1 flex items-center justify-center py-3 px-2 sm:px-6 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 ${section === "openings"
                         ? "bg-white dark:bg-gray-700 text-green-600 dark:text-green-400 shadow-md transform scale-105"
                         : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                         }`}
                 >
-                    <GraduationCap className="w-5 h-5 mr-2" />
+                    <GraduationCap className="w-5 h-5 mr-1 sm:mr-2 shrink-0" />
                     {t("openings")}
                 </button>
                 <button
                     onClick={() => { setSection("statistics"); }}
-                    className={`flex-1 flex items-center justify-center py-3 px-6 rounded-lg text-sm font-bold transition-all duration-200 ${section === "statistics"
+                    className={`flex-1 flex items-center justify-center py-3 px-2 sm:px-6 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 ${section === "statistics"
                         ? "bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-md transform scale-105"
                         : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                         }`}
                 >
-                    <BarChart3 className="w-5 h-5 mr-2" />
+                    <BarChart3 className="w-5 h-5 mr-1 sm:mr-2 shrink-0" />
                     {t("statistics")}
                 </button>
             </div>
 
             {/* Timeframe Toggles - only show for puzzles and openings */}
-            {section !== "statistics" && (
+            {section !== "statistics" && section !== "effort" && section !== "leagues" && (
                 <div className="flex justify-center space-x-2">
                     {["weekly", "allTime"].map((tf) => (
                         <button
@@ -128,7 +170,11 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
             )}
 
             {/* Content */}
-            {section === "statistics" ? (
+            {section === "effort" && effort ? (
+                <EffortBoard data={effort} currentUserId={currentUserId} />
+            ) : section === "leagues" && leagues ? (
+                <LeagueBoard view={leagues} currentUserId={currentUserId} />
+            ) : section === "statistics" ? (
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 p-8">
                     {/* Timeframe Toggles */}
                     <div className="flex justify-center space-x-2 mb-8">
@@ -168,7 +214,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 </div>
                                                 {weeklyStats.weekly.puzzleWinners[0].image ? (
                                                     <div className="w-14 h-14 rounded-full mr-4 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={weeklyStats.weekly.puzzleWinners[0].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={80} height={80} />
+                                                        <Image src={weeklyStats.weekly.puzzleWinners[0].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={80} height={80} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center mr-4">
@@ -179,7 +225,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 )}
                                                 <div className="flex-1">
                                                     <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                                                        {weeklyStats.weekly.puzzleWinners[0].name}
+                                                        <ProfileLink id={weeklyStats.weekly.puzzleWinners[0].id}>{weeklyStats.weekly.puzzleWinners[0].name}</ProfileLink>
                                                     </h4>
                                                     {weeklyStats.weekly.puzzleWinners[0].lichessId && (
                                                         <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -209,7 +255,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 </div>
                                                 {weeklyStats.weekly.puzzleWinners[1].image ? (
                                                     <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={weeklyStats.weekly.puzzleWinners[1].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                        <Image src={weeklyStats.weekly.puzzleWinners[1].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center mr-3">
@@ -220,7 +266,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 )}
                                                 <div className="flex-1">
                                                     <h4 className="text-base font-bold text-gray-900 dark:text-white">
-                                                        {weeklyStats.weekly.puzzleWinners[1].name}
+                                                        <ProfileLink id={weeklyStats.weekly.puzzleWinners[1].id}>{weeklyStats.weekly.puzzleWinners[1].name}</ProfileLink>
                                                     </h4>
                                                     {weeklyStats.weekly.puzzleWinners[1].lichessId && (
                                                         <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -247,7 +293,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 </div>
                                                 {weeklyStats.weekly.puzzleWinners[2].image ? (
                                                     <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={weeklyStats.weekly.puzzleWinners[2].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                        <Image src={weeklyStats.weekly.puzzleWinners[2].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center mr-3">
@@ -258,7 +304,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 )}
                                                 <div className="flex-1">
                                                     <h4 className="text-base font-bold text-gray-900 dark:text-white">
-                                                        {weeklyStats.weekly.puzzleWinners[2].name}
+                                                        <ProfileLink id={weeklyStats.weekly.puzzleWinners[2].id}>{weeklyStats.weekly.puzzleWinners[2].name}</ProfileLink>
                                                     </h4>
                                                     {weeklyStats.weekly.puzzleWinners[2].lichessId && (
                                                         <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -304,7 +350,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 </div>
                                                 {weeklyStats.weekly.practiceWinners[0].image ? (
                                                     <div className="w-14 h-14 rounded-full mr-4 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={weeklyStats.weekly.practiceWinners[0].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={80} height={80} />
+                                                        <Image src={weeklyStats.weekly.practiceWinners[0].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={80} height={80} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-14 h-14 rounded-full bg-purple-600 flex items-center justify-center mr-4">
@@ -315,7 +361,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 )}
                                                 <div className="flex-1">
                                                     <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                                                        {weeklyStats.weekly.practiceWinners[0].name}
+                                                        <ProfileLink id={weeklyStats.weekly.practiceWinners[0].id}>{weeklyStats.weekly.practiceWinners[0].name}</ProfileLink>
                                                     </h4>
                                                     {weeklyStats.weekly.practiceWinners[0].lichessId && (
                                                         <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -345,7 +391,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 </div>
                                                 {weeklyStats.weekly.practiceWinners[1].image ? (
                                                     <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={weeklyStats.weekly.practiceWinners[1].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                        <Image src={weeklyStats.weekly.practiceWinners[1].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center mr-3">
@@ -356,7 +402,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 )}
                                                 <div className="flex-1">
                                                     <h4 className="text-base font-bold text-gray-900 dark:text-white">
-                                                        {weeklyStats.weekly.practiceWinners[1].name}
+                                                        <ProfileLink id={weeklyStats.weekly.practiceWinners[1].id}>{weeklyStats.weekly.practiceWinners[1].name}</ProfileLink>
                                                     </h4>
                                                     {weeklyStats.weekly.practiceWinners[1].lichessId && (
                                                         <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -383,7 +429,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 </div>
                                                 {weeklyStats.weekly.practiceWinners[2].image ? (
                                                     <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={weeklyStats.weekly.practiceWinners[2].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                        <Image src={weeklyStats.weekly.practiceWinners[2].image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center mr-3">
@@ -394,7 +440,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 )}
                                                 <div className="flex-1">
                                                     <h4 className="text-base font-bold text-gray-900 dark:text-white">
-                                                        {weeklyStats.weekly.practiceWinners[2].name}
+                                                        <ProfileLink id={weeklyStats.weekly.practiceWinners[2].id}>{weeklyStats.weekly.practiceWinners[2].name}</ProfileLink>
                                                     </h4>
                                                     {weeklyStats.weekly.practiceWinners[2].lichessId && (
                                                         <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -420,12 +466,11 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                         )}
                     </div>
 
-                    <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-                        {t("weekDateRange", {
-                            start: "19.01.2026",
-                            end: "25.01.2026"
-                        })}
-                    </div>
+                    {weeklyStats?.weekly.dateRange && (
+                        <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                            {t("weekDateRange", weeklyStats.weekly.dateRange)}
+                        </div>
+                    )}
                         </>
                     ) : (
                         /* All Time Winners */
@@ -450,7 +495,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                             </div>
                                             {winner.image ? (
                                                 <div className="w-12 h-12 rounded-full mr-4 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                    <img src={winner.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                    <Image src={winner.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
                                                 </div>
                                             ) : (
                                                 <div className="w-12 h-12 rounded-full bg-gray-500 flex items-center justify-center mr-4">
@@ -461,7 +506,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                             )}
                                             <div className="flex-1">
                                                 <h4 className="text-lg font-bold text-gray-900 dark:text-white">
-                                                    {winner.name}
+                                                    <ProfileLink id={winner.id}>{winner.name}</ProfileLink>
                                                 </h4>
                                                 {winner.lichessId && (
                                                     <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -501,13 +546,13 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
                                                 onClick={() => handleSort("count")}
                                             >
-                                                <div className="flex items-center">{t("number")} <SortIcon field="count" /></div>
+                                                <div className="flex items-center">{t("number")} {sortIcon("count")}</div>
                                             </th>
                                             <th
                                                 className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
                                                 onClick={() => handleSort("points")}
                                             >
-                                                <div className="flex items-center">{t("points")} <SortIcon field="points" /></div>
+                                                <div className="flex items-center">{t("points")} {sortIcon("points")}</div>
                                             </th>
                                         </>
                                     ) : (
@@ -516,13 +561,13 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                 className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-green-600 transition-colors"
                                                 onClick={() => handleSort("completed")}
                                             >
-                                                <div className="flex items-center">{t("linesCompleted")} <SortIcon field="completed" /></div>
+                                                <div className="flex items-center">{t("linesCompleted")} {sortIcon("completed")}</div>
                                             </th>
                                             <th
                                                 className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-green-600 transition-colors"
                                                 onClick={() => handleSort("perfected")}
                                             >
-                                                <div className="flex items-center">{t("linesPerfected")} <SortIcon field="perfected" /></div>
+                                                <div className="flex items-center">{t("linesPerfected")} {sortIcon("perfected")}</div>
                                             </th>
                                         </>
                                     )}
@@ -535,10 +580,11 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                             {index + 1}
                                         </td>
                                         <td className="px-6 py-5 whitespace-nowrap">
+                                            <ProfileLink id={student.id}>
                                             <div className="flex items-center">
                                                 {student.image ? (
                                                     <div className="w-10 h-10 rounded-full mr-3 ring-2 ring-gray-100 dark:ring-gray-700 overflow-hidden relative bg-white dark:bg-gray-800 flex items-center justify-center">
-                                                        <img src={student.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
+                                                        <Image src={student.image} className="w-full h-full object-contain p-0.5" alt="" loading="lazy" width={64} height={64} />
                                                     </div>
                                                 ) : (
                                                     <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 ring-2 ring-gray-100 dark:ring-gray-700 font-bold text-blue-600 dark:text-blue-400">
@@ -549,6 +595,7 @@ export default function Leaderboard({ data, weeklyStats }: LeaderboardProps) {
                                                     {student.name || t("anonymous")}
                                                 </span>
                                             </div>
+                                            </ProfileLink>
                                         </td>
                                         {section === "puzzles" ? (
                                             <>

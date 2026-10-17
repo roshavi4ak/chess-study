@@ -21,6 +21,8 @@ model User {
   emailVerified DateTime?
   image         String?
   role          Role      @default(STUDENT)
+  // Curriculum level a coach placed the child at (levels before it count as passed); null = start at the beginning.
+  startLevel    String?
   lichessId     String?   @unique
   
   // Ratings
@@ -47,6 +49,16 @@ model User {
   puzzleAttempts    PuzzleAttempt[]
   practiceAttempts  PracticeAttempt[]
   tagStats          UserTagStats[]
+
+  // Coach homework
+  assignmentsCreated  Assignment[] @relation("AssignmentCoach")
+  assignmentsReceived Assignment[] @relation("AssignmentStudent")
+
+  // Fun modes (streaks, races, bots, mini-games, level tests)
+  playSessions        PlaySession[]
+  racesHosted         PuzzleRace[]
+  raceEntries         PuzzleRaceEntry[]
+  league              LeagueMembership?
 }
 
 model Account {
@@ -165,6 +177,7 @@ model Practice {
   nodes       PracticeNode[]
   progress    PracticeLineProgress[]
   attempts    PracticeAttempt[]
+  assignments Assignment[]
 }
 
 model PracticeNode {
@@ -181,6 +194,7 @@ model PracticeNode {
   lineNumber  Int?     // For ordering lines in practice (only set on leaf nodes)
   progress    PracticeLineProgress[]
   attempts    PracticeAttempt[]
+  question    PracticeQuestion?
 }
 
 // ============================================
@@ -222,6 +236,8 @@ model PracticeAttempt {
   nodeId     String
   node       PracticeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
   status     LineStatus
+  mistakes   Int        @default(0)     // Wrong moves in this attempt (recorded since the student profile was added)
+  usedHints  Boolean    @default(false) // Coach notes or arrows were shown during this attempt
   createdAt  DateTime   @default(now())
 
   @@index([userId])
@@ -259,4 +275,171 @@ model GameRecord {
   
   @@index([userId])
   @@index([lichessGameId])
+}
+
+enum AssignmentKind {
+  PRACTICE      // Complete `target` different lines of a practice
+  PUZZLE_THEME  // Try `target` puzzles with a theme tag
+  LEVEL         // Pass the test of the curriculum level in `tag` (target is always 1)
+}
+
+// Homework a coach sets for one student, or for every student when studentId is null.
+model Assignment {
+  id         String         @id @default(cuid())
+  coachId    String
+  coach      User           @relation("AssignmentCoach", fields: [coachId], references: [id], onDelete: Cascade)
+  studentId  String?
+  student    User?          @relation("AssignmentStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  kind       AssignmentKind
+  practiceId String?
+  practice   Practice?      @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+  tag        String?
+  target     Int
+  note       String?
+  dueOn      DateTime       @db.Date  // Last Sofia calendar day to finish it
+  createdAt  DateTime       @default(now())
+
+  @@index([studentId])
+  @@index([dueOn])
+}
+
+// Lichess accounts left out of the leaderboards (e.g. coaches' or test accounts). Edited on /leaderboard/settings.
+// "Show again" sets hidden to false instead of deleting the row, so an empty table always means "never set up"
+// and the original list is filled in automatically (see src/lib/leaderboardExclusions.ts).
+model LeaderboardExclusion {
+  lichessId String   @id
+  hidden    Boolean  @default(true)
+  addedBy   String?  // Lichess id of whoever last changed it
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PlayKind {
+  STREAK
+  COORDINATES
+  DUEL
+  RACE
+  MINIGAME
+  BOT_GAME
+  LEVEL_TEST
+  LEVEL_PRACTICE
+  TOURNAMENT
+}
+
+// One finished fun activity. Fun modes never touch the puzzle rating; personal bests, bot wins,
+// mini-game stars and level passes are all read from here.
+model PlaySession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind      PlayKind
+  key       String   @default("")  // e.g. bot id, mini-game level id, race id, level id
+  score     Int      @default(0)
+  won       Boolean?
+  details   Json?
+  createdAt DateTime @default(now())
+
+  @@index([userId, kind])
+  @@index([kind, createdAt])
+}
+
+enum RaceMode {
+  RACE  // Coach-hosted club race shown on a projector
+  DUEL  // Two children, started by either of them
+}
+
+// A puzzle race or duel. Everyone gets the same puzzles in the same order; the race is unrated.
+// The phase (waiting / countdown / running / finished) follows from startsAt and endsAt.
+model PuzzleRace {
+  id          String            @id @default(cuid())
+  code        String            // 4 digits, typed by children to join; reused after a race finishes
+  hostId      String
+  host        User              @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  mode        RaceMode
+  puzzleIds   String[]
+  durationSec Int
+  startsAt    DateTime?
+  endsAt      DateTime?
+  recorded    Boolean           @default(false) // Play sessions written for every racer
+  nextRaceId  String?           // Rematch
+  createdAt   DateTime          @default(now())
+  entries     PuzzleRaceEntry[]
+
+  @@index([code, createdAt])
+}
+
+model PuzzleRaceEntry {
+  raceId    String
+  race      PuzzleRace @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nextIndex Int        @default(0)
+  score     Int        @default(0)
+  solved    Int        @default(0)
+  combo     Int        @default(0)
+  bonuses   Int        @default(0)
+  skipped   Boolean    @default(false)
+  joinedAt  DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@id([raceId, userId])
+}
+
+// An optional "why?" question a coach attaches to the last move of an opening line; asked after the line is played.
+model PracticeQuestion {
+  nodeId      String       @id
+  node        PracticeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  prompt      String
+  options     String[]
+  answer      Int          // index into options
+  explanation String?
+  updatedBy   String?
+  updatedAt   DateTime     @updatedAt
+}
+
+enum LeagueTier {
+  WOOD
+  STONE
+  BRONZE
+  SILVER
+  GOLD
+  DIAMOND
+}
+
+// A child's league tier. Children without a row are in WOOD. Tiers only go up.
+model LeagueMembership {
+  userId    String     @id
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tier      LeagueTier @default(WOOD)
+  updatedAt DateTime   @updatedAt
+}
+
+// Marks a finished week as processed (promotions applied), so it happens exactly once.
+model LeagueWeek {
+  weekStart   String   @id // Sofia Monday, "YYYY-MM-DD"
+  promoted    Int      @default(0)
+  processedAt DateTime @default(now())
+}
+
+enum TournamentKind {
+  ARENA
+  SWISS
+}
+
+// A Lichess arena or Swiss tournament a coach pasted for the club. Results are read from Lichess once it ends.
+model ClubTournament {
+  id         String         @id @default(cuid())
+  kind       TournamentKind
+  lichessId  String
+  name       String
+  startsAt   DateTime
+  finishesAt DateTime?
+  finished   Boolean        @default(false)
+  // Club members' results once finished: [{ lichessId, rank, score }]
+  results    Json?
+  createdBy  String
+  createdAt  DateTime       @default(now())
+
+  @@unique([kind, lichessId])
+  @@index([startsAt])
 }

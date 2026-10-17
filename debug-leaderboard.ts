@@ -1,4 +1,3 @@
-import { prisma } from "./src/lib/db";
 import { getLeaderboardData } from "./src/app/actions/leaderboard";
 
 async function debug() {

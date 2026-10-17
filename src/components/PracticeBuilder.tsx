@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import type { Square } from "chess.js";
-import { useRouter } from "next/navigation";
+import type { PieceDropHandlerArgs } from "react-chessboard";
+import type { PracticeTreeNode } from "@/types/practice";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 // Tree node structure
 interface PracticeNode {
@@ -104,7 +105,6 @@ function TreeView({
 }
 
 export default function PracticeBuilder() {
-    const router = useRouter();
     const [tree, setTree] = useState<PracticeNode>(createRootNode);
     const [currentNode, setCurrentNode] = useState<PracticeNode>(tree);
     const [path, setPath] = useState<PracticeNode[]>([tree]); // Breadcrumb path from root
@@ -146,7 +146,8 @@ export default function PracticeBuilder() {
     }, [currentNode]);
 
     // Handle piece drop - create new node
-    function onPieceDrop({ sourceSquare, targetSquare }: { sourceSquare: Square, targetSquare: Square }) {
+    function onPieceDrop({ sourceSquare, targetSquare }: PieceDropHandlerArgs) {
+        if (!targetSquare) return false;
         const gameCopy = new Chess(game.fen());
 
         try {
@@ -197,7 +198,7 @@ export default function PracticeBuilder() {
             setGame(gameCopy);
 
             return true;
-        } catch (e) {
+        } catch {
             return false;
         }
     }
@@ -320,10 +321,13 @@ export default function PracticeBuilder() {
         setIsSubmitting(true);
 
         // Strip out the 'san' property before sending (not in DB schema)
-        function stripSan(node: PracticeNode): any {
-            const { san, ...rest } = node;
+        function stripSan(node: PracticeNode): PracticeTreeNode {
             return {
-                ...rest,
+                id: node.id,
+                fen: node.fen,
+                move: node.move,
+                notes: node.notes,
+                lineNumber: node.lineNumber,
                 children: node.children.map(stripSan),
             };
         }
@@ -338,9 +342,9 @@ export default function PracticeBuilder() {
             const { createPractice } = await import("@/app/actions/practice");
             setHasUnsavedChanges(false);
             await createPractice(formData);
-        } catch (error: any) {
+        } catch (error) {
             // Next.js redirect throws a special error - don't show alert for it
-            if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+            if (isRedirectError(error)) {
                 // This is expected - the redirect is working
                 return;
             }
@@ -363,7 +367,7 @@ export default function PracticeBuilder() {
                                 position: game.fen(),
                                 onPieceDrop: onPieceDrop,
                                 boardOrientation: playerColor.toLowerCase() as "white" | "black",
-                            } as any}
+                            }}
                         />
                     </div>
 
@@ -427,7 +431,7 @@ export default function PracticeBuilder() {
                     {/* Notes */}
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
                         <label className="block text-sm font-medium mb-2">
-                            📝 Coach Notes for "{currentNode.san || 'Starting Position'}"
+                            📝 Coach Notes for &quot;{currentNode.san || 'Starting Position'}&quot;
                         </label>
                         <textarea
                             value={currentNotes}
@@ -570,9 +574,9 @@ export default function PracticeBuilder() {
                     <div className="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg border-2 border-purple-200 dark:border-purple-800">
                         <h3 className="font-bold text-purple-800 dark:text-purple-200 mb-2">💡 How to create variations:</h3>
                         <ol className="text-sm text-purple-700 dark:text-purple-300 space-y-2 list-decimal list-inside">
-                            <li>Navigate to an <strong>opponent's position</strong> (blue in tree)</li>
+                            <li>Navigate to an <strong>opponent&apos;s position</strong> (blue in tree)</li>
                             <li>Make a move on the board</li>
-                            <li>Click <strong>"← Back"</strong> to return</li>
+                            <li>Click <strong>&quot;← Back&quot;</strong> to return</li>
                             <li>Make a <strong>different move</strong> - this creates a variation!</li>
                             <li>The app will randomly pick between variations during practice</li>
                         </ol>

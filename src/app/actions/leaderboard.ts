@@ -1,8 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/db";
-
-import { LeaderboardEntry, PuzzleStats, OpeningStats } from "@/types/leaderboard";
+import { getExcludedLichessIds } from "@/lib/leaderboardExclusions";
 
 export async function getLeaderboardData() {
     const now = new Date();
@@ -13,14 +12,12 @@ export async function getLeaderboardData() {
     weekStart.setDate(diff);
     weekStart.setHours(0, 0, 0, 0);
 
-    const excludedLichessIds = ["mi666ka", "belozem", "petar1976"];
-
     // Get all students
     const allStudents = await prisma.user.findMany({
         where: {
             role: "STUDENT",
             lichessId: {
-                notIn: excludedLichessIds,
+                notIn: await getExcludedLichessIds(),
             }
         },
         select: { id: true }

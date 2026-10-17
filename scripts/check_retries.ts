@@ -38,7 +38,7 @@ async function main() {
 
         // Count puzzles with multiple attempts
         const puzzlesWithMultipleAttempts = Object.entries(puzzleAttempts).filter(
-            ([_, attempts]) => attempts.length > 1
+            ([, attempts]) => attempts.length > 1
         );
 
         console.log(`Puzzles with multiple attempts: ${puzzlesWithMultipleAttempts.length}`);

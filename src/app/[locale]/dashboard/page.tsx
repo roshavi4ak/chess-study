@@ -6,6 +6,11 @@ import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import DashboardNameManager from "@/components/DashboardNameManager";
 import AvatarPicker from "@/components/AvatarPicker";
+import DailyMission from "@/components/DailyMission";
+import CardsSummary from "@/components/CardsSummary";
+import LevelSummary from "@/components/LevelSummary";
+import LeagueSummary from "@/components/LeagueSummary";
+import { Link } from "@/i18n/navigation";
 
 export default function Dashboard() {
     const { data: session, status } = useSession();
@@ -54,6 +59,13 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+                <div className="mt-8 max-w-2xl space-y-4">
+                    <DailyMission />
+                    <LevelSummary />
+                    {session.user.id && <LeagueSummary userId={session.user.id} />}
+                    {session.user.id && <CardsSummary userId={session.user.id} />}
+                </div>
+
                 <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {/* Cards for features */}
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
@@ -65,9 +77,9 @@ export default function Dashboard() {
                                 <p>{t("dailyPuzzleDesc")}</p>
                             </div>
                             <div className="mt-5">
-                                <a href="/puzzles" className="text-blue-600 hover:text-blue-500 font-medium">
+                                <Link href="/puzzles" className="text-blue-600 hover:text-blue-500 font-medium">
                                     {t("goToPuzzles")} &rarr;
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -81,9 +93,9 @@ export default function Dashboard() {
                                 <p>{t("studyOpeningsDesc")}</p>
                             </div>
                             <div className="mt-5">
-                                <a href="/openings" className="text-blue-600 hover:text-blue-500 font-medium">
+                                <Link href="/openings" className="text-blue-600 hover:text-blue-500 font-medium">
                                     {t("goToOpenings")} &rarr;
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -97,9 +109,9 @@ export default function Dashboard() {
                                 <p>{t("playChessDesc")}</p>
                             </div>
                             <div className="mt-5">
-                                <a href="/play" className="text-blue-600 hover:text-blue-500 font-medium">
+                                <Link href="/play" className="text-blue-600 hover:text-blue-500 font-medium">
                                     {t("playNow")} &rarr;
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

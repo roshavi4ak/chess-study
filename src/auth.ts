@@ -7,6 +7,13 @@ const NEXTAUTH_URL = process.env.NEXTAUTH_URL;
 const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET;
 const LICHESS_CLIENT_ID = process.env.LICHESS_CLIENT_ID || "chess-study-app";
 
+interface LichessProfile {
+    id: string;
+    username: string;
+    email?: string;
+    perfs?: Partial<Record<"puzzle" | "bullet" | "blitz" | "rapid" | "classical" | "correspondence", { rating: number }>>;
+}
+
 if (!NEXTAUTH_SECRET) {
     console.error('[Auth] ERROR: NEXTAUTH_SECRET or AUTH_SECRET environment variable is not set');
 }
@@ -41,7 +48,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             },
             userinfo: "https://lichess.org/api/account",
 
-            profile(profile: any) {
+            profile(profile: LichessProfile) {
                 const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
                 return {
                     id: profile.id,
@@ -69,10 +76,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     callbacks: {
         async session({ session, user }) {
             if (session.user && user) {
-                session.user.role = (user as any).role || "STUDENT";
-                session.user.lichessId = (user as any).lichessId || null;
-                session.user.ratingPuzzle = (user as any).ratingPuzzle || null;
-                session.user.isNameSet = (user as any).isNameSet || false;
+                session.user.role = user.role || "STUDENT";
+                session.user.lichessId = user.lichessId || null;
+                session.user.ratingPuzzle = user.ratingPuzzle || null;
+                session.user.isNameSet = user.isNameSet || false;
             }
             return session;
         }

@@ -1,0 +1,201 @@
+{
+  "status": "IMPORTED_AND_VERIFIED",
+  "coach": {
+    "id": "cmidi8gr50000v8vc36ubbgir",
+    "name": "Кръстьо Треньор",
+    "role": "COACH",
+    "lichessId": "roshavi4ak"
+  },
+  "practices": [
+    {
+      "slug": "french-defense",
+      "id": "cmuqh3n5p0001lcrjvfjnlxfj",
+      "name": "Френска защита (French Defense)",
+      "lines": 26,
+      "nodes": 185,
+      "notes": 119,
+      "verified": true
+    },
+    {
+      "slug": "ruy-lopez",
+      "id": "cmuqh3nhr00adlcrjd9b041nq",
+      "name": "Испанска партия (Ruy Lopez)",
+      "lines": 55,
+      "nodes": 490,
+      "notes": 300,
+      "verified": true
+    },
+    {
+      "slug": "queens-gambit-declined",
+      "id": "cmuqh3o88011nlcrjxl6lm9ln",
+      "name": "Отказан дамски гамбит (Queen's Gambit Declined)",
+      "lines": 20,
+      "nodes": 178,
+      "notes": 109,
+      "verified": true
+    },
+    {
+      "slug": "queens-gambit-accepted",
+      "id": "cmuqh3oh001bllcrj463nxuaf",
+      "name": "Приет дамски гамбит (Queen's Gambit Accepted)",
+      "lines": 16,
+      "nodes": 114,
+      "notes": 73,
+      "verified": true
+    },
+    {
+      "slug": "kings-indian-defense",
+      "id": "cmuqh3ome01hzlcrjd0nhjs7n",
+      "name": "Староиндийска защита (King's Indian Defense)",
+      "lines": 35,
+      "nodes": 309,
+      "notes": 190,
+      "verified": true
+    },
+    {
+      "slug": "scandinavian-defense",
+      "id": "cmuqh3ozu01z7lcrjtc9jpp2w",
+      "name": "Скандинавска защита (Scandinavian Defense)",
+      "lines": 24,
+      "nodes": 135,
+      "notes": 93,
+      "verified": true
+    },
+    {
+      "slug": "petrov-defense",
+      "id": "cmuqh3p6y026rlcrjwiplh88z",
+      "name": "Защита Петров (Petrov Defense)",
+      "lines": 24,
+      "nodes": 199,
+      "notes": 124,
+      "verified": true
+    },
+    {
+      "slug": "english",
+      "id": "cmuqh3phi02hvlcrjpr348bex",
+      "name": "Английско начало (English Opening)",
+      "lines": 17,
+      "nodes": 156,
+      "notes": 95,
+      "verified": true
+    },
+    {
+      "slug": "alapin-sicilian",
+      "id": "cmuqh3pph02qllcrjqnnoo3os",
+      "name": "Сицилианска защита: вариант Алапин (Alapin Sicilian)",
+      "lines": 21,
+      "nodes": 202,
+      "notes": 122,
+      "verified": true
+    },
+    {
+      "slug": "bishop-opening",
+      "id": "cmuqh3q00031vlcrjhld8xkj8",
+      "name": "Дебют на офицера (Bishop's Opening)",
+      "lines": 19,
+      "nodes": 200,
+      "notes": 119,
+      "verified": true
+    },
+    {
+      "slug": "vienna-game",
+      "id": "cmuqh3qau03d1lcrjsr5wobos",
+      "name": "Виенска партия (Vienna Game)",
+      "lines": 19,
+      "nodes": 154,
+      "notes": 96,
+      "verified": true
+    },
+    {
+      "slug": "vienna-gambit-mastery",
+      "id": "cmuqh3qi403lnlcrj4mtj0d77",
+      "name": "Виенски гамбит – разширен курс (Vienna Gambit Mastery)",
+      "lines": 57,
+      "nodes": 362,
+      "notes": 238,
+      "verified": true
+    },
+    {
+      "slug": "vienna-gambit-counter",
+      "id": "cmuqh3r24045tlcrj85p48ax2",
+      "name": "Защита срещу Виенския гамбит (Vienna Gambit Counter)",
+      "lines": 14,
+      "nodes": 139,
+      "notes": 84,
+      "verified": true
+    },
+    {
+      "slug": "ponziani",
+      "id": "cmuqh3r9504dllcrjt5fkboq3",
+      "name": "Дебют Понциани (Ponziani)",
+      "lines": 17,
+      "nodes": 130,
+      "notes": 84,
+      "verified": true
+    },
+    {
+      "slug": "kings-gambit",
+      "id": "cmuqh3rfg04kvlcrjltyt78ko",
+      "name": "Царски гамбит (King's Gambit)",
+      "lines": 22,
+      "nodes": 152,
+      "notes": 98,
+      "verified": true
+    },
+    {
+      "slug": "danish-gambit",
+      "id": "cmuqh3rn004tdlcrj9nl3qoi0",
+      "name": "Датски гамбит (Danish Gambit)",
+      "lines": 15,
+      "nodes": 110,
+      "notes": 70,
+      "verified": true
+    },
+    {
+      "slug": "albin-countergambit",
+      "id": "cmuqh3rsb04zjlcrjjgd2lid7",
+      "name": "Контрагамбит Албин (Albin Countergambit)",
+      "lines": 17,
+      "nodes": 157,
+      "notes": 96,
+      "verified": true
+    },
+    {
+      "slug": "traxler",
+      "id": "cmuqh3s07058blcrj3tnngly0",
+      "name": "Контраатака Тракслер (Traxler Counterattack)",
+      "lines": 26,
+      "nodes": 211,
+      "notes": 132,
+      "verified": true
+    },
+    {
+      "slug": "rousseau-gambit",
+      "id": "cmuqh3sau05k3lcrjbjtvjqtr",
+      "name": "Гамбит Русо (Rousseau Gambit)",
+      "lines": 24,
+      "nodes": 211,
+      "notes": 130,
+      "verified": true
+    },
+    {
+      "slug": "englund-gambit",
+      "id": "cmuqh3skg05vvlcrjj1w2rsdf",
+      "name": "Гамбит Енглунд (Englund Gambit)",
+      "lines": 15,
+      "nodes": 85,
+      "notes": 58,
+      "verified": true
+    }
+  ],
+  "importedAt": "2026-10-02T04:38:17.520Z",
+  "verifiedAt": "2026-10-02T04:39:52.823Z",
+  "totalLivePractices": 29,
+  "totals": {
+    "lines": 483,
+    "nodes": 3879,
+    "notes": 2430
+  },
+  "existingPracticesPreserved": 9,
+  "verification": "Every stored title, description, student side, creator, move, FEN, note, sibling order, parent relation, root and line number matched the local manifest. Existing practice content fingerprints matched and existing progress/attempt counts did not decrease."
+}

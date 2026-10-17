@@ -1,5 +1,5 @@
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, type Prisma } from '@prisma/client';
 import fs from 'fs';
 import readline from 'readline';
 import path from 'path';
@@ -14,9 +14,9 @@ const USER_ID = 'cmidi8gr50000v8vc36ubbgir'; // roshavi4ak
 // - 2000-2200: 50,000 puzzles  
 // - 2200-2300: 50,000 puzzles
 const BATCHES = [
-    { min: 1700, max: 2000, target: 50000, inserted: 0, buffer: [] as any[] },
-    { min: 2000, max: 2200, target: 50000, inserted: 0, buffer: [] as any[] },
-    { min: 2200, max: 2300, target: 50000, inserted: 0, buffer: [] as any[] }
+    { min: 1700, max: 2000, target: 50000, inserted: 0, buffer: [] as Prisma.PuzzleCreateManyInput[] },
+    { min: 2000, max: 2200, target: 50000, inserted: 0, buffer: [] as Prisma.PuzzleCreateManyInput[] },
+    { min: 2200, max: 2300, target: 50000, inserted: 0, buffer: [] as Prisma.PuzzleCreateManyInput[] }
 ];
 
 const FLUSH_THRESHOLD = 500; // Insert to DB when buffer reaches this size

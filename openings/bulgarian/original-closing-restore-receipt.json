@@ -1,0 +1,175 @@
+{
+  "status": "RESTORED_AND_VERIFIED_LIVE",
+  "verifiedAt": "2026-10-08T14:14:06.262Z",
+  "method": "Original closing commentary translated faithfully into Bulgarian; original Bulgarian backup only when downloaded commentary is unavailable.",
+  "originalEnglishNotes": 679,
+  "originalBulgarianNotes": 15,
+  "uniqueEnglishTextsTranslated": 662,
+  "closingNotesMatched": 694,
+  "notesChanged": 694,
+  "nodesChecked": 5738,
+  "otherPracticeOrNodeFieldsChanged": 0,
+  "countsBefore": {
+    "practices": 29,
+    "nodes": 5738,
+    "progress": 449,
+    "attempts": 1076
+  },
+  "countsAfter": {
+    "practices": 29,
+    "nodes": 5738,
+    "progress": 449,
+    "attempts": 1076
+  },
+  "hintFixPreserved": true,
+  "sourceMapping": "original-closing-notes.json",
+  "beforeSnapshot": "backups/opening-original-restore-before-2026-10-08.json",
+  "afterSnapshot": "backups/opening-original-restore-after-2026-10-08.json",
+  "courses": [
+    {
+      "slug": "french-defense",
+      "practiceId": "cmuqh3n5p0001lcrjvfjnlxfj",
+      "lines": 26
+    },
+    {
+      "slug": "ruy-lopez",
+      "practiceId": "cmuqh3nhr00adlcrjd9b041nq",
+      "lines": 55
+    },
+    {
+      "slug": "queens-gambit-declined",
+      "practiceId": "cmuqh3o88011nlcrjxl6lm9ln",
+      "lines": 20
+    },
+    {
+      "slug": "queens-gambit-accepted",
+      "practiceId": "cmuqh3oh001bllcrj463nxuaf",
+      "lines": 16
+    },
+    {
+      "slug": "kings-indian-defense",
+      "practiceId": "cmuqh3ome01hzlcrjd0nhjs7n",
+      "lines": 35
+    },
+    {
+      "slug": "scandinavian-defense",
+      "practiceId": "cmuqh3ozu01z7lcrjtc9jpp2w",
+      "lines": 24
+    },
+    {
+      "slug": "petrov-defense",
+      "practiceId": "cmuqh3p6y026rlcrjwiplh88z",
+      "lines": 24
+    },
+    {
+      "slug": "english",
+      "practiceId": "cmuqh3phi02hvlcrjpr348bex",
+      "lines": 17
+    },
+    {
+      "slug": "alapin-sicilian",
+      "practiceId": "cmuqh3pph02qllcrjqnnoo3os",
+      "lines": 21
+    },
+    {
+      "slug": "bishop-opening",
+      "practiceId": "cmuqh3q00031vlcrjhld8xkj8",
+      "lines": 19
+    },
+    {
+      "slug": "vienna-game",
+      "practiceId": "cmuqh3qau03d1lcrjsr5wobos",
+      "lines": 19
+    },
+    {
+      "slug": "vienna-gambit-mastery",
+      "practiceId": "cmuqh3qi403lnlcrj4mtj0d77",
+      "lines": 57
+    },
+    {
+      "slug": "vienna-gambit-counter",
+      "practiceId": "cmuqh3r24045tlcrj85p48ax2",
+      "lines": 14
+    },
+    {
+      "slug": "ponziani",
+      "practiceId": "cmuqh3r9504dllcrjt5fkboq3",
+      "lines": 17
+    },
+    {
+      "slug": "kings-gambit",
+      "practiceId": "cmuqh3rfg04kvlcrjltyt78ko",
+      "lines": 22
+    },
+    {
+      "slug": "danish-gambit",
+      "practiceId": "cmuqh3rn004tdlcrj9nl3qoi0",
+      "lines": 15
+    },
+    {
+      "slug": "albin-countergambit",
+      "practiceId": "cmuqh3rsb04zjlcrjjgd2lid7",
+      "lines": 17
+    },
+    {
+      "slug": "traxler",
+      "practiceId": "cmuqh3s07058blcrj3tnngly0",
+      "lines": 26
+    },
+    {
+      "slug": "rousseau-gambit",
+      "practiceId": "cmuqh3sau05k3lcrjbjtvjqtr",
+      "lines": 24
+    },
+    {
+      "slug": "englund-gambit",
+      "practiceId": "cmuqh3skg05vvlcrjj1w2rsdf",
+      "lines": 15
+    },
+    {
+      "slug": "caro-kann",
+      "practiceId": "cmupzpezg0001lcymszsy9bjn",
+      "lines": 28
+    },
+    {
+      "slug": "scotch-game",
+      "practiceId": "cmupzpfgl00ellcymqbkoz7xm",
+      "lines": 27
+    },
+    {
+      "slug": "jobava-london",
+      "practiceId": "cmupzpfss00rnlcympo4ksxq4",
+      "lines": 26
+    },
+    {
+      "slug": "london",
+      "practiceId": "cmuq7dmq50001lcb28jk0peem",
+      "lines": 28
+    },
+    {
+      "slug": "fried-liver-attack",
+      "practiceId": "cmuq7dn4w00dflcb24ho2uec8",
+      "lines": 15
+    },
+    {
+      "slug": "sicilian-defense",
+      "practiceId": "cmuq7dnb200jllcb2b1n3veco",
+      "lines": 38
+    },
+    {
+      "slug": "italian-game",
+      "practiceId": "cmkyaf9tt0001v8h4v8ddb4u2",
+      "lines": 22
+    },
+    {
+      "slug": "vienna-gambit-original",
+      "practiceId": "cmixqeggi0001v8fgg83pi4on",
+      "lines": 14
+    },
+    {
+      "slug": "stafford-gambit-original",
+      "practiceId": "cmkd2uwkv00039aado1ihyc98",
+      "lines": 13
+    }
+  ]
+}

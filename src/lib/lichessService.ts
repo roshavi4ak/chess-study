@@ -25,16 +25,20 @@ export interface LichessGameState {
 
 interface LichessGameEvent {
     type: 'gameFull' | 'gameState' | 'chatLine';
+    wtime?: number;
+    btime?: number;
     id?: string;
     white?: {
         id?: string;
         name?: string;
         aiLevel?: number;
+        rating?: number;
     };
     black?: {
         id?: string;
         name?: string;
         aiLevel?: number;
+        rating?: number;
     };
     state?: {
         moves: string;
@@ -256,12 +260,12 @@ export async function createLichessUserChallenge(
                                 resolve({ accepted: false, reason: data.done });
                                 return;
                             }
-                        } catch (e) {
+                        } catch {
                             // ignore parse errors
                         }
                     }
                 }
-            } catch (e) {
+            } catch {
                 resolve({ accepted: false, reason: 'Stream error' });
             }
         });
@@ -272,12 +276,17 @@ export async function createLichessUserChallenge(
     }
 }
 
+type LichessUserEvent =
+    | { type: 'challenge'; challenge: NonNullable<LichessGameEvent['challenge']> }
+    | { type: 'gameStart'; game: { id: string } }
+    | { type: 'challengeCanceled' | 'challengeDeclined' | 'gameFinish' };
+
 export function streamLichessEvents(
     accessToken: string,
-    onEvent: (event: any) => void,
+    onEvent: (event: LichessUserEvent) => void,
     onError: (error: string) => void
 ): () => void {
-    let abortController = new AbortController();
+    const abortController = new AbortController();
 
     const startStream = async () => {
         try {
@@ -316,8 +325,8 @@ export function streamLichessEvents(
                     }
                 }
             }
-        } catch (error: any) {
-            if (error.name !== 'AbortError') {
+        } catch (error) {
+            if (!(error instanceof Error && error.name === 'AbortError')) {
                 console.error('Event stream error:', error);
                 onError('Event stream connection lost');
             }
@@ -378,7 +387,7 @@ export function streamLichessGame(
     onGameState: (state: LichessGameState) => void,
     onError: (error: string) => void
 ): () => void {
-    let abortController = new AbortController();
+    const abortController = new AbortController();
 
     const startStream = async () => {
         try {
@@ -455,9 +464,9 @@ export function streamLichessGame(
                                 status: 'started',
                                 playerColor: playerColor,
                                 whiteName: whiteName,
-                                whiteRating: (data.white as any)?.rating,
+                                whiteRating: data.white?.rating,
                                 blackName: blackName,
-                                blackRating: (data.black as any)?.rating,
+                                blackRating: data.black?.rating,
                                 wtime: data.state?.wtime,
                                 btime: data.state?.btime,
                             });
@@ -478,8 +487,8 @@ export function streamLichessGame(
                                     ? (data.winner || data.state?.winner) as 'white' | 'black' | 'draw'
                                     : undefined,
                                 // Clock times - available in gameState events
-                                wtime: (data as any).wtime ?? data.state?.wtime,
-                                btime: (data as any).btime ?? data.state?.btime,
+                                wtime: data.wtime ?? data.state?.wtime,
+                                btime: data.btime ?? data.state?.btime,
                             });
                         }
                     } catch (error) {
@@ -487,8 +496,8 @@ export function streamLichessGame(
                     }
                 }
             }
-        } catch (error: any) {
-            if (error.name !== 'AbortError') {
+        } catch (error) {
+            if (!(error instanceof Error && error.name === 'AbortError')) {
                 console.error('Lichess stream error:', error);
                 onError('Connection to Lichess lost');
             }

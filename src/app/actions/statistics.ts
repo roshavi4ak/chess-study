@@ -1,8 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/db";
+import { getLeaderboardWeek } from "@/lib/leaderboardWeeks";
 
 export interface WeeklyWinner {
+  id: string;
   name: string;
   points: number;
   lichessId: string | null;
@@ -10,6 +12,7 @@ export interface WeeklyWinner {
 }
 
 export interface AllTimeWinner {
+  id: string;
   name: string;
   weeklyWins: number;
   lichessId: string | null;
@@ -17,8 +20,7 @@ export interface AllTimeWinner {
 }
 
 export async function getWeeklyStatistics() {
-  const startDate = new Date('2026-01-19');
-  const endDate = new Date('2026-01-26'); // Exclusive end date, includes up to 25th Jan
+  const { startDate, endDate, dateRange } = getLeaderboardWeek(new Date(), 1);
 
   // Get top 3 weekly puzzle winners
   const puzzlePointsResult = await prisma.puzzleAttempt.groupBy({
@@ -55,6 +57,7 @@ export async function getWeeklyStatistics() {
       }
     });
     puzzleWinners.push({
+      id: result.userId,
       name: user?.name || 'Anonymous',
       points: result._sum.points || 0,
       lichessId: user?.lichessId || null,
@@ -97,6 +100,7 @@ export async function getWeeklyStatistics() {
       }
     });
     practiceWinners.push({
+      id: result.userId,
       name: user?.name || 'Anonymous',
       points: result._count.userId,
       lichessId: user?.lichessId || null,
@@ -106,7 +110,8 @@ export async function getWeeklyStatistics() {
 
   return {
     puzzleWinners,
-    practiceWinners
+    practiceWinners,
+    dateRange
   };
 }
 
@@ -206,6 +211,7 @@ export async function getAllTimeWinners() {
   const allTimeWinners: AllTimeWinner[] = winnerUserIds.map(userId => {
     const info = userInfoMap.get(userId);
     return {
+      id: userId,
       name: info?.name || 'Anonymous',
       weeklyWins: winnerCounts.get(userId)?.count || 0,
       lichessId: info?.lichessId || null,

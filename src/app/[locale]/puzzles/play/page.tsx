@@ -2,15 +2,16 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter, useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 export default function PuzzlePlayPage() {
+    const t = useTranslations("Puzzles");
     const [error, setError] = useState<string | null>(null);
     const { data: session, status } = useSession();
     const router = useRouter();
-    const params = useParams();
     const searchParams = useSearchParams();
-    const locale = params.locale as string;
 
     const tag = searchParams.get('tag');
 
@@ -31,14 +32,14 @@ export default function PuzzlePlayPage() {
 
             const data = await response.json();
             if (data.puzzleName) {
-                router.push(`/${locale}/puzzles/${data.puzzleName}${tag ? `?tag=${encodeURIComponent(tag)}` : ''}`);
+                router.push({ pathname: `/puzzles/${data.puzzleName}`, query: tag ? { tag } : undefined });
             } else {
-                setError("No puzzles found. Try selecting a different category.");
+                setError(t("noneFound"));
             }
-        } catch (err) {
-            setError("Failed to fetch next puzzle. Please try again.");
+        } catch {
+            setError(t("loadFailed"));
         }
-    }, [session, tag, locale, router]);
+    }, [session, tag, router, t]);
 
     useEffect(() => {
         if (status === 'loading') return;
@@ -49,12 +50,12 @@ export default function PuzzlePlayPage() {
         }
 
         fetchNextPuzzle();
-    }, [status, fetchNextPuzzle]);
+    }, [status, fetchNextPuzzle, router]);
 
     if (error) {
         return (
             <div className="p-8 text-center">
-                <h1 className="text-2xl font-bold text-red-600">Error</h1>
+                <h1 className="text-2xl font-bold text-red-600">{t("errorTitle")}</h1>
                 <p className="mt-2 text-gray-600">{error}</p>
             </div>
         );

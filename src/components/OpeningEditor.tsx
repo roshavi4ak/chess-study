@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { Square } from "chess.js";
+import type { SquareHandlerArgs } from "react-chessboard";
 import { useRouter } from "next/navigation";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { updateOpening } from "@/app/actions/opening";
@@ -61,7 +62,13 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
     const [name, setName] = useState(opening.name);
     const [description, setDescription] = useState(opening.description || "");
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+    const [savedValues, setSavedValues] = useState(() => JSON.stringify({
+        name: opening.name,
+        description: opening.description || "",
+        steps: initialSteps,
+    }));
+    const currentValues = JSON.stringify({ name, description, steps });
+    const hasUnsavedChanges = currentValues !== savedValues;
     const [editingStepIndex, setEditingStepIndex] = useState<number | null>(null);
 
     const handleMove = (move: { from: string; to: string; promotion?: string }) => {
@@ -78,7 +85,7 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
             if (m === null) return false;
             setGame(new Chess(game.fen()));
             return true;
-        } catch (e) {
+        } catch {
             return false;
         }
     };
@@ -90,15 +97,6 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
 
     // Arrow drawing state
     const [rightClickStart, setRightClickStart] = useState<Square | null>(null);
-
-    // Track changes
-    useEffect(() => {
-        const hasChanges =
-            name !== opening.name ||
-            description !== (opening.description || "") ||
-            JSON.stringify(steps) !== JSON.stringify(initialSteps);
-        setHasUnsavedChanges(hasChanges);
-    }, [name, description, steps, opening.name, opening.description, initialSteps]);
 
     // Warn before leaving with unsaved changes
     useEffect(() => {
@@ -115,7 +113,8 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
 
 
 
-    function handleSquareRightClick({ square }: { square: Square }) {
+    function handleSquareRightClick({ square: clickedSquare }: SquareHandlerArgs) {
+        const square = clickedSquare as Square;
         if (rightClickStart) {
             // Complete arrow
             if (rightClickStart === square) {
@@ -266,7 +265,7 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
 
         try {
             await updateOpening(opening.id, formData);
-            setHasUnsavedChanges(false);
+            setSavedValues(currentValues);
         } catch (error) {
             console.error(error);
             alert("Failed to update opening");
@@ -295,7 +294,7 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
                             options={{
                                 id: "editor-board",
                                 position: game.fen(),
-                                onPieceDrop: onPieceDrop as any,
+                                onPieceDrop: (args) => { void onPieceDrop(args); return false; },
                                 onSquareRightClick: handleSquareRightClick,
                                 arrows: currentArrows,
                                 boardOrientation: "white",
@@ -306,7 +305,7 @@ export default function OpeningEditor({ opening }: OpeningEditorProps) {
                                     ...(rightClickStart ? { [rightClickStart]: { backgroundColor: "rgba(255, 255, 0, 0.5)" } } : {}),
                                     ...optionSquares
                                 }
-                            } as any}
+                            }}
                         />
                     </div>
                     <div className="text-sm text-gray-500 text-center">

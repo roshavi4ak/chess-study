@@ -1,35 +1,59 @@
 import { getLeaderboardData } from "@/app/actions/leaderboard";
 import { getWeeklyStatistics, getAllTimeWinners } from "@/app/actions/statistics";
+import { getEffortBoard } from "@/app/actions/effort";
+import { getLeagueView } from "@/app/actions/leagues";
+import { isLeaderboardAdmin } from "@/lib/leaderboardExclusions";
+import { Link } from "@/i18n/navigation";
 import Leaderboard from "@/components/Leaderboard";
+import { ProfileLinksProvider } from "@/components/ProfileLink";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
-export default async function LeaderboardPage() {
+export default async function LeaderboardPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
+    const { tab } = await searchParams;
     const session = await auth();
     if (!session) {
         redirect("/");
     }
 
     try {
-        const [data, weeklyStats, allTimeStats] = await Promise.all([
+        const [data, weeklyStats, allTimeStats, effort, leagues] = await Promise.all([
             getLeaderboardData(),
             getWeeklyStatistics(),
-            getAllTimeWinners()
+            getAllTimeWinners(),
+            // The effort board is optional: if it fails, the other boards still show.
+            getEffortBoard().catch(error => {
+                console.error("Failed to load effort board:", error);
+                return undefined;
+            }),
+            // Leagues are optional too; null when their tables do not exist yet.
+            getLeagueView(),
         ]);
+
+        const tSettings = await getTranslations("LeaderboardSettings");
 
         // Transform data to ensure compatibility
         const stats = {
             weekly: {
                 puzzleWinners: weeklyStats.puzzleWinners || [],
-                practiceWinners: weeklyStats.practiceWinners || []
+                practiceWinners: weeklyStats.practiceWinners || [],
+                dateRange: weeklyStats.dateRange
             },
             allTime: allTimeStats || []
         };
 
         return (
             <main className="py-12 bg-gray-50 dark:bg-gray-950 min-h-screen">
-                <Leaderboard data={data} weeklyStats={stats} />
+                {isLeaderboardAdmin(session.user?.lichessId) && (
+                    <div className="max-w-4xl mx-auto px-4 flex justify-end">
+                        <Link href="/leaderboard/settings" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">{tSettings("editHidden")} →</Link>
+                    </div>
+                )}
+                {/* Coaches can open each child's profile from any name on the boards. */}
+                <ProfileLinksProvider value={session.user?.role === "COACH"}>
+                    <Leaderboard data={data} weeklyStats={stats} effort={effort} leagues={leagues} currentUserId={session.user?.id} initialSection={tab} />
+                </ProfileLinksProvider>
             </main>
         );
     } catch (error) {
@@ -56,12 +80,12 @@ export default async function LeaderboardPage() {
                     <p className="text-gray-600 dark:text-gray-400 mb-8">
                         {t('tryAgainLater', { name: "leaderboard" })}
                     </p>
-                    <a
+                    <Link
                         href="/leaderboard"
                         className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
                     >
                         {t('tryAgain')}
-                    </a>
+                    </Link>
                 </div>
             </main>
         );

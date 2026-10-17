@@ -1,0 +1,33 @@
+{
+  "status": "IMPORTED_AND_VERIFIED",
+  "date": "2026-10-02",
+  "coachLichessId": "roshavi4ak",
+  "practices": [
+    {
+      "slug": "london",
+      "id": "cmuq7dmq50001lcb28jk0peem",
+      "name": "Лондонска система (London)",
+      "lines": 28,
+      "nodes": 240,
+      "notes": 148
+    },
+    {
+      "slug": "fried-liver-attack",
+      "id": "cmuq7dn4w00dflcb24ho2uec8",
+      "name": "Пържен дроп атака (Fried Liver Attack)",
+      "lines": 15,
+      "nodes": 110,
+      "notes": 70
+    },
+    {
+      "slug": "sicilian-defense",
+      "id": "cmuq7dnb200jllcb2b1n3veco",
+      "name": "Сицилианска защита (Sicilian Defense)",
+      "lines": 38,
+      "nodes": 335,
+      "notes": 206
+    }
+  ],
+  "databaseComparison": "Every imported move, FEN, note, child order, line number, title, description and student side matched the validated local batch.",
+  "existingPracticesPreserved": 6
+}

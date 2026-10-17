@@ -65,10 +65,10 @@ export async function GET(request: Request) {
                 clientId: LICHESS_CLIENT_ID
             }
         });
-    } catch (error: any) {
+    } catch (error) {
         return NextResponse.json({
-            error: error.message,
-            stack: error.stack
+            error: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined
         }, { status: 500 });
     }
 }

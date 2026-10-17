@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AVATARS, getAvatarPath } from "@/lib/avatars";
 import { updateAvatar } from "@/app/actions/user";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { X, Check } from "lucide-react";
+import Image from "next/image";
 
 interface AvatarPickerProps {
     currentImage: string | null;
@@ -16,7 +16,6 @@ export default function AvatarPicker({ currentImage }: AvatarPickerProps) {
     const t = useTranslations("AvatarPicker");
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const router = useRouter();
     const { update } = useSession();
 
     const handleAvatarSelect = async (filename: string) => {
@@ -37,7 +36,7 @@ export default function AvatarPicker({ currentImage }: AvatarPickerProps) {
             <div className="relative group">
                 {currentImage ? (
                     <div className="w-16 h-16 rounded-full border-2 border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center relative">
-                        <img
+                        <Image
                             src={currentImage}
                             alt="Current Avatar"
                             width={64}
@@ -89,7 +88,7 @@ export default function AvatarPicker({ currentImage }: AvatarPickerProps) {
                                                 }`}
                                         >
                                             <div className="w-full h-full p-2 flex items-center justify-center">
-                                                <img
+                                                <Image
                                                     src={path}
                                                     alt={filename.replace(".png", "")}
                                                     width={100}

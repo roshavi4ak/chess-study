@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ComponentProps } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import PracticeCard from "@/components/PracticeCard";
 
+type PracticeSummary = ComponentProps<typeof PracticeCard>["practice"] & { createdBy: string };
+
 // API function to fetch practices
-async function fetchPractices(): Promise<any[]> {
+async function fetchPractices(): Promise<PracticeSummary[]> {
     const response = await fetch("/api/practices", {
         method: "GET",
         headers: {
@@ -23,11 +25,11 @@ async function fetchPractices(): Promise<any[]> {
 }
 
 export default function PracticesPage() {
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
     const openingsT = useTranslations("Openings");
     const commonT = useTranslations("Common");
     
-    const [practices, setPractices] = useState<any[]>([]);
+    const [practices, setPractices] = useState<PracticeSummary[]>([]);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState(true);
 
