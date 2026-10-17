@@ -23,7 +23,7 @@ function loadSource(relativePath) {
     return mod.exports;
 }
 
-const { sofiaDay, addDays, weekDays, getLineReviewState, isDue } = loadSource('../src/lib/reviewSchedule.ts');
+const { sofiaDay, addDays, weekDays, getLineReviewState, isDue, isLineMastered } = loadSource('../src/lib/reviewSchedule.ts');
 const { buildDailyMission } = loadSource('../src/lib/dailyMission.ts');
 
 // Sofia days: 21:30 UTC in October is already the next day in Bulgaria (UTC+3).
@@ -59,6 +59,16 @@ assert.equal(getLineReviewState([
 const many = ['01', '02', '03', '04', '05', '06', '07', '08'].map(d => attempt('PERFECT', `2026-10-${d}`)).reverse();
 assert.equal(getLineReviewState([...many, attempt('PARTIAL', '2026-10-09')]).level, 5);
 assert.equal(getLineReviewState([...many, attempt('PARTIAL', '2026-10-09')]).lastDay, '2026-10-08');
+
+// Mastery: three perfect runs in a row (same day counts), a run with mistakes takes one step back,
+// and after 5 runs at least 80% of the last 10 must be perfect. P = PERFECT, M = with mistakes.
+const runs = seq => [...seq].map((c, i) => ({ status: c === 'P' ? 'PERFECT' : 'COMPLETED', createdAt: new Date(at('2026-10-01', 9).getTime() + i * 60000) }));
+for (const [seq, expected] of [
+    ['', false], ['PP', false], ['PPP', true], ['PPM', false], ['PPMP', false], ['PPMPP', true], ['PPPM', false],
+    ['PPPPM', true], ['PPPPPM', true], ['PPPPMM', false], ['MMMPPP', false], ['MMPPPPPPPPP', true],
+    ['PPPPPPPPPPMM', true], ['PPPPPPPPPPMMM', false],
+]) assert.equal(isLineMastered(runs(seq)), expected, seq);
+assert.equal(isLineMastered([...runs('PPP'), attempt('PARTIAL', '2026-10-02')]), true);
 
 // Daily mission.
 const now = at('2026-10-13', 15);
@@ -215,8 +225,8 @@ assert.deepEqual(byId(practiceCards([
     // Vienna: targets 3 / 4 / 5 lines; 3 mastered = bronze.
     ...perfectOn('vienna', 'v1', ['01', '02', '03']),
     ...perfectOn('vienna', 'v2', ['01', '02', '03']),
-    ...perfectOn('vienna', 'v3', ['01', '02', '03']),
-    ...perfectOn('vienna', 'v4', ['01', '01', '02']),  // only two different days
+    ...perfectOn('vienna', 'v3', ['01', '01', '01']),  // three in a row on one day also counts
+    ...perfectOn('vienna', 'v4', ['01', '02']), pa('vienna', 'v4', 'COMPLETED', '2026-10-03'),  // slipped on the third run
     // Caro-Kann: started, nothing mastered yet.
     pa('caro', 'c1', 'COMPLETED', '2026-10-01'),
     // Fried Liver: single line, mastered = straight to gold.
