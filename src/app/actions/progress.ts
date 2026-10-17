@@ -102,6 +102,21 @@ export async function getPracticeProgress(practiceId: string) {
     return progress;
 }
 
+// Every run of this practice's lines, used to pick the next line to practice
+export async function getPracticeAttempts(practiceId: string) {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        return [];
+    }
+
+    return await prisma.practiceAttempt.findMany({
+        where: { userId: session.user.id, practiceId },
+        select: { nodeId: true, status: true, createdAt: true },
+        orderBy: { createdAt: "asc" },
+    });
+}
+
 // Get overall student stats
 export async function getStudentStats() {
     const session = await auth();

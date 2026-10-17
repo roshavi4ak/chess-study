@@ -7,7 +7,7 @@ import { saveLineProgress } from "@/app/actions/progress";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { useTranslations } from "next-intl";
 import { formatPracticeHint } from "@/lib/practiceHints";
-import { getAllLeafNodes, hasSeenLine, getLineCandidates, getAvailableChildren, chooseOpponentChild, type PracticeNode, type LineProgress } from "@/lib/practiceLines";
+import { getAllLeafNodes, hasSeenLine, pickNextLine, getAvailableChildren, chooseOpponentChild, type PracticeNode, type LineProgress, type LineAttemptRecord } from "@/lib/practiceLines";
 import LichessAnalysisLink from "@/components/LichessAnalysisLink";
 import { Link } from "@/i18n/navigation";
 import WhyQuestionCard from "@/components/WhyQuestionCard";
@@ -23,6 +23,8 @@ interface PracticeSessionProps {
         tree: PracticeNode;
     };
     initialProgress: LineProgress[];
+    // Every saved run of this practice's lines; decides which line comes next.
+    initialAttempts?: LineAttemptRecord[];
     // Lines due for review today; they are served first, before normal practice continues.
     dueLineIds?: string[];
     // "Why?" questions by the last node of a line, and whether this viewer (a coach) may edit them.
@@ -30,7 +32,7 @@ interface PracticeSessionProps {
     canEditQuestions?: boolean;
 }
 
-export default function PracticeSession({ practice, initialProgress, dueLineIds, questions = {}, canEditQuestions = false }: PracticeSessionProps) {
+export default function PracticeSession({ practice, initialProgress, initialAttempts = [], dueLineIds, questions = {}, canEditQuestions = false }: PracticeSessionProps) {
     const t = useTranslations("Practice");
     const commonT = useTranslations("Common");
     const [game, setGame] = useState(() => new Chess(practice.tree.fen));
@@ -40,7 +42,7 @@ export default function PracticeSession({ practice, initialProgress, dueLineIds,
     const [nodePath, setNodePath] = useState<string[]>([practice.tree.id]);
     const [reviewIndex, setReviewIndex] = useState<number | null>(null);
     const [seenOnly, setSeenOnly] = useState(false);
-    const [sessionCompletedIds, setSessionCompletedIds] = useState<Set<string>>(new Set());
+    const [attempts, setAttempts] = useState<LineAttemptRecord[]>(() => initialAttempts.map(attempt => ({ ...attempt, createdAt: new Date(attempt.createdAt) })));
     const [feedback, setFeedback] = useState<{ type: "incorrect" | "complete" | "note" | null; message: string }>({ type: null, message: "" });
     const [highlightSquares, setHighlightSquares] = useState<Record<string, React.CSSProperties>>({});
     const [showCoachHints, setShowCoachHints] = useState(false);
@@ -148,23 +150,19 @@ export default function PracticeSession({ practice, initialProgress, dueLineIds,
         });
     }
 
+    function pickLine(leaves: PracticeNode[], onlySeen: boolean) {
+        return pickNextLine(leaves, { seenIds, attempts, seenOnly: onlySeen, now: new Date() });
+    }
+
     function selectOpponentReply(node: PracticeNode, targetId: string | null, onlySeen: boolean) {
-        const candidates = getLineCandidates(getAllLeafNodes(node), progressMap, sessionCompletedIds, onlySeen);
-        const allowedIds = new Set(candidates.lines.map(line => line.id));
-        if (targetId && (!onlySeen || seenIds.has(targetId))) allowedIds.add(targetId);
-        return chooseOpponentChild(node, targetId, allowedIds);
+        const target = targetId && (!onlySeen || seenIds.has(targetId)) ? targetId : null;
+        return chooseOpponentChild(node, target, pickLine(getAllLeafNodes(node), onlySeen)?.id ?? null);
     }
 
     function startNewLine(onlySeen = seenOnly, repeatLine?: PracticeNode) {
-        const completedIds = onlySeen === seenOnly ? sessionCompletedIds : new Set<string>();
         const dueLeaves = allLeafNodes.filter(node => dueRemaining.has(node.id));
-        const candidates = dueLeaves.length
-            ? getLineCandidates(dueLeaves, progressMap, new Set(), false)
-            : getLineCandidates(allLeafNodes, progressMap, completedIds, onlySeen);
-        const candidate = repeatLine ?? (candidates.random
-            ? candidates.lines[Math.floor(Math.random() * candidates.lines.length)] : candidates.lines[0]);
+        const candidate = repeatLine ?? (dueLeaves.length ? pickLine(dueLeaves, false) : pickLine(allLeafNodes, onlySeen));
         if (!candidate) return;
-        if (candidates.resetCycle && !repeatLine) setSessionCompletedIds(new Set());
         const firstTime = !hasSeenLine(progressMap.get(candidate.id));
         setGame(new Chess(practice.tree.fen));
         setCurrentNode(practice.tree);
@@ -228,7 +226,7 @@ export default function PracticeSession({ practice, initialProgress, dueLineIds,
                 perfectCount: (existing?.perfectCount ?? 0) + (perfect ? 1 : 0),
             });
         });
-        setSessionCompletedIds(prev => new Set(prev).add(nodeId));
+        setAttempts(prev => [...prev, { nodeId, status: perfect ? "PERFECT" : "COMPLETED", createdAt: new Date() }]);
         setDueRemaining(prev => {
             if (!prev.has(nodeId)) return prev;
             const next = new Set(prev);
@@ -414,7 +412,6 @@ export default function PracticeSession({ practice, initialProgress, dueLineIds,
                         <label className="flex items-center gap-2">
                             <input type="checkbox" checked={seenOnly} disabled={totalSeen === 0} onChange={(e) => {
                                 setSeenOnly(e.target.checked);
-                                setSessionCompletedIds(new Set());
                                 startNewLine(e.target.checked);
                             }} />
                             <span className="text-sm font-medium">{t("practiceSeenLines")}</span>

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getPractice } from "@/app/actions/practice";
-import { getPracticeProgress } from "@/app/actions/progress";
+import { getPracticeAttempts, getPracticeProgress } from "@/app/actions/progress";
 import { getDueLineIds } from "@/app/actions/mission";
 import { getPracticeQuestions } from "@/app/actions/practiceQuestions";
 import { auth } from "@/auth";
@@ -18,9 +18,10 @@ export default async function PracticePage({ params, searchParams }: PracticePag
     const { id } = await params;
     const { review } = await searchParams;
     const t = await getTranslations("Practice");
-    const [practice, progressData, dueLineIds, questions, session] = await Promise.all([
+    const [practice, progressData, attempts, dueLineIds, questions, session] = await Promise.all([
         getPractice(id),
         getPracticeProgress(id),
+        getPracticeAttempts(id),
         review ? getDueLineIds(id) : Promise.resolve(undefined),
         getPracticeQuestions(id),
         auth(),
@@ -41,7 +42,7 @@ export default async function PracticePage({ params, searchParams }: PracticePag
                         ← {t("backToPractices")}
                     </Link>
                 </div>
-                <PracticeSession practice={practice} initialProgress={progressData} dueLineIds={dueLineIds} questions={questions} canEditQuestions={session?.user?.role === "COACH"} />
+                <PracticeSession practice={practice} initialProgress={progressData} initialAttempts={attempts} dueLineIds={dueLineIds} questions={questions} canEditQuestions={session?.user?.role === "COACH"} />
             </div>
         </main>
     );
