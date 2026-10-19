@@ -7,6 +7,7 @@ export type ExerciseTheme = typeof EXERCISE_THEMES[number];
 
 export interface LevelExercise {
     id: string;
+    puzzleId?: string;
     fen: string; // Starts with the student's turn; no hidden setup move.
     moves: string[]; // Student move, opponent reply, student move, ...
     theme: ExerciseTheme;
@@ -122,7 +123,7 @@ export function selectLevelExercises(pool: LevelPuzzleCandidate[], level: Curric
             if (level.only && !focus.has(level.only)) continue;
             const theme = level.only ?? (level.tags.length ? level.tags : EXERCISE_THEMES)
                 .find(tag => puzzle.tags.includes(tag) && EXERCISE_THEMES.includes(tag as ExerciseTheme)) as ExerciseTheme | undefined;
-            candidates.push({ exercise: { id: puzzle.id, fen, moves, theme: theme ?? "tactics", setupMove: { from: setup.from, to: setup.to } }, focus });
+            candidates.push({ exercise: { id: puzzle.id, puzzleId: puzzle.id, fen, moves, theme: theme ?? "tactics", setupMove: { from: setup.from, to: setup.to } }, focus });
             seen.add(puzzle.id);
             if (!level.mix && candidates.length === TEST_PUZZLES) break;
         } catch {

@@ -18,7 +18,12 @@ export async function POST(request: Request) {
         const body = await request.json();
         console.log("Request body:", body);
         
-        const { puzzleId, success } = body;
+        const { puzzleId, hintUsed = false, review = false } = body;
+        if (typeof puzzleId !== "string" || typeof hintUsed !== "boolean" || typeof review !== "boolean" || typeof body.success !== "boolean") {
+            return new NextResponse("Invalid submission", { status: 400 });
+        }
+        // Assistance is always an unsolved, unrated attempt, even if success was sent.
+        const success = !hintUsed && body.success === true;
 
         if (!puzzleId) {
             console.error("Missing puzzleId");
@@ -77,8 +82,8 @@ export async function POST(request: Request) {
             }
         });
 
-        if (existingAttempt) {
-            // Already tried this puzzle, don't change rating
+        if (existingAttempt || hintUsed || review) {
+            // Retries and assisted attempts never change either rating.
             await prisma.puzzleAttempt.create({
                 data: {
                     userId: session.user.id,

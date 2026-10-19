@@ -116,6 +116,10 @@ export default function DailyMission() {
             )}
 
             <ul className="space-y-5">
+                {mission.puzzleReview?.target > 0 && <Task icon={<Repeat className="h-6 w-6" />} title={t("puzzleReviewTask")} done={mission.puzzleReview.done} total={mission.puzzleReview.target}>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{t("puzzleReviewReason")}</p>
+                    {mission.puzzleReview.done < mission.puzzleReview.target && <Link href="/puzzles/review" className="inline-block px-3 py-1.5 rounded-lg bg-blue-600 text-white text-sm font-medium">{t("start")}</Link>}
+                </Task>}
                 {mission.reviewTotal > 0 && (
                     <Task icon={<Repeat className="h-6 w-6" />} title={t("reviewTask", { count: mission.reviewTotal })} done={mission.reviewDone} total={mission.reviewTotal}>
                         <div className="flex flex-wrap gap-2">

@@ -34,32 +34,50 @@ export async function recordPlaySession(input: { kind: PlayKind; key?: string; s
     });
 }
 
+export type ClubRecord = { name: string | null; score: number };
+type ClubRecords = { streak: ClubRecord[]; coordinates: ClubRecord[] };
+
 export interface PersonalBests {
     streak: number;
     coordinates: number;
     // Best score per key (bot id → 1 when beaten, mini-game level id → stars).
     byKey: Record<string, number>;
-    clubWeek: { streak: { name: string | null; score: number }[]; coordinates: { name: string | null; score: number }[] };
+    clubWeek: ClubRecords;
+    clubAllTime: ClubRecords;
 }
 
 const CLUB_TOP = 5;
 
 export async function getPersonalBests(): Promise<PersonalBests> {
     const user = await requireUser();
-    const empty: PersonalBests = { streak: 0, coordinates: 0, byKey: {}, clubWeek: { streak: [], coordinates: [] } };
+    const empty: PersonalBests = { streak: 0, coordinates: 0, byKey: {}, clubWeek: { streak: [], coordinates: [] }, clubAllTime: { streak: [], coordinates: [] } };
     try {
         const days = weekDays(sofiaDay(new Date()));
         // A day of margin on both sides; the exact Sofia week is filtered below.
         const since = new Date(`${days[0]}T00:00:00Z`);
         since.setUTCDate(since.getUTCDate() - 1);
-        const [mine, week, excluded] = await Promise.all([
+        const [mine, week, allTime, excluded] = await Promise.all([
             prisma.playSession.groupBy({ by: ["kind", "key"], where: { userId: user.id! }, _max: { score: true } }),
             prisma.playSession.findMany({
                 where: { kind: { in: ["STREAK", "COORDINATES"] }, createdAt: { gte: since } },
                 select: { kind: true, score: true, createdAt: true, user: { select: { id: true, name: true, lichessId: true } } },
             }),
+            prisma.playSession.groupBy({
+                by: ["kind", "userId"],
+                where: { kind: { in: ["STREAK", "COORDINATES"] } },
+                _max: { score: true },
+            }),
             getExcludedLichessIds(),
         ]);
+        const players = await prisma.user.findMany({
+            where: { id: { in: [...new Set(allTime.map(row => row.userId))] } },
+            select: { id: true, name: true, lichessId: true },
+        });
+        const playersById = new Map(players.map(player => [player.id, player]));
+        const records = allTime.flatMap(row => {
+            const player = playersById.get(row.userId);
+            return player ? [{ kind: row.kind, score: row._max.score ?? 0, user: player }] : [];
+        });
         const result = { ...empty, byKey: {} as Record<string, number> };
         for (const row of mine) {
             const best = row._max.score ?? 0;
@@ -69,16 +87,18 @@ export async function getPersonalBests(): Promise<PersonalBests> {
         }
         const weekSet = new Set(days);
         const hidden = new Set(excluded);
-        const top = (kind: PlayKind) => {
+        const top = (rows: typeof records, kind: PlayKind) => {
             const bestByUser = new Map<string, { name: string | null; score: number }>();
-            for (const row of week) {
-                if (row.kind !== kind || !weekSet.has(sofiaDay(row.createdAt)) || (row.user.lichessId && hidden.has(row.user.lichessId))) continue;
+            for (const row of rows) {
+                if (row.kind !== kind || (row.user.lichessId && hidden.has(row.user.lichessId))) continue;
                 const current = bestByUser.get(row.user.id);
                 if (!current || row.score > current.score) bestByUser.set(row.user.id, { name: row.user.name, score: row.score });
             }
             return [...bestByUser.values()].filter(entry => entry.score > 0).sort((a, b) => b.score - a.score).slice(0, CLUB_TOP);
         };
-        result.clubWeek = { streak: top("STREAK"), coordinates: top("COORDINATES") };
+        const thisWeek = week.filter(row => weekSet.has(sofiaDay(row.createdAt)));
+        result.clubWeek = { streak: top(thisWeek, "STREAK"), coordinates: top(thisWeek, "COORDINATES") };
+        result.clubAllTime = { streak: top(records, "STREAK"), coordinates: top(records, "COORDINATES") };
         return result;
     } catch (error) {
         console.error("[Play] Could not load personal bests:", error);

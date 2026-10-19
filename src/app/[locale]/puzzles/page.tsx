@@ -25,6 +25,7 @@ async function fetchPuzzleTags(): Promise<{ tag: string; count: number }[]> {
 export default function PuzzlesPage() {
     const { data: session } = useSession();
     const t = useTranslations("Puzzles");
+    const tReview = useTranslations("PuzzleReview");
     const tCategories = useTranslations("PuzzleCategories");
     const commonT = useTranslations("Common");
     
@@ -103,6 +104,7 @@ export default function PuzzlesPage() {
 
                 <div className="mb-8">
                     <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{t("categories")}</h2>
+                    {session?.user && <Link href="/puzzles/review" className="block mb-5 rounded-xl bg-indigo-50 text-indigo-950 p-4 font-semibold">↺ {tReview("title")} — {tReview("shortIntro")}</Link>}
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                         {tags.map((item) => {
                             const translatedTag = themeLabel(item.tag, tCategories);

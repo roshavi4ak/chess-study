@@ -6,8 +6,9 @@ import { buildDailyMission, type DailyMission } from "@/lib/dailyMission";
 import { getAssignmentProgress, isVisibleToStudent, type AssignmentProgress } from "@/lib/assignments";
 import { loadProgressHistory, puzzleHistoryStart, toAssignmentRecord } from "@/lib/progressHistory";
 import { sofiaDay } from "@/lib/reviewSchedule";
+import { loadPuzzleReviews } from "@/lib/puzzleReviewService";
 
-export type MissionView = DailyMission & { homework: AssignmentProgress[] };
+export type MissionView = DailyMission & { homework: AssignmentProgress[]; puzzleReview: { target: number; done: number } };
 
 async function loadMission(userId: string): Promise<MissionView> {
     const now = new Date();
@@ -27,8 +28,12 @@ async function loadMission(userId: string): Promise<MissionView> {
     const practiceAttempts = history.practiceAttempts.get(userId)!;
     const puzzleAttempts = history.puzzleAttempts.get(userId)!;
 
+    const puzzleReview = await loadPuzzleReviews(userId, now);
+    const mission = buildDailyMission({ now, practiceAttempts, puzzleAttempts, practices: history.practices, playSessions: history.playSessions.get(userId)! });
     return {
-        ...buildDailyMission({ now, practiceAttempts, puzzleAttempts, practices: history.practices, playSessions: history.playSessions.get(userId)! }),
+        ...mission,
+        complete: mission.complete && puzzleReview.done >= puzzleReview.target,
+        puzzleReview: { target: puzzleReview.target, done: puzzleReview.done },
         homework: assignments.map(assignment => getAssignmentProgress(assignment, practiceAttempts, puzzleAttempts, today, history.playSessions.get(userId)!)),
     };
 }

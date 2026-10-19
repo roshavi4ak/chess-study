@@ -8,6 +8,8 @@ import { getMyLevel, type MyLevel } from "@/app/actions/levels";
 import { CURRICULUM, KING_LEVEL, TEST_PASS, TEST_PUZZLES, type CurriculumLevel } from "@/lib/curriculum";
 import LevelTest from "@/components/LevelTest";
 import LevelPractice from "@/components/LevelPractice";
+import MicroLesson from "@/components/MicroLesson";
+import { lessonForLevel } from "@/lib/microLessons";
 
 const GROUP_ICON: Record<CurriculumLevel["group"], string> = { pawn: "♙", knight: "♘", bishop: "♗", rook: "♖", queen: "♕", king: "♔" };
 
@@ -71,6 +73,7 @@ export default function LevelsPage() {
                             <h2 className="text-2xl font-bold"><span aria-hidden>{GROUP_ICON[active.group]}</span> {name(active)}</h2>
                             <p className="font-semibold text-blue-700 dark:text-blue-300">{t("youWillLearn", { topic: t(`topic_${active.id}`) })}</p>
                             <p className="text-lg text-gray-700 dark:text-gray-200">{t(`lesson_${active.id}`)}</p>
+                            {lessonForLevel(active.id) && <MicroLesson key={active.id} lessonId={lessonForLevel(active.id)!} onPractice={() => { setSelected(active); setMode("practice"); setRound(round + 1); }} />}
                             {mine.best[active.id] !== undefined && <p className="text-sm text-gray-500">{t("bestScore", { score: mine.best[active.id], count: TEST_PUZZLES })}</p>}
                             <div className="flex flex-wrap gap-2">
                                 <button type="button" onClick={() => { setSelected(active); setMode("practice"); setRound(round + 1); }} className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 font-medium hover:bg-gray-200 dark:hover:bg-gray-600">{t("practiseFirst")}</button>

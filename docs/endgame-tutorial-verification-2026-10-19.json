@@ -1,0 +1,5281 @@
+{
+  "checkedAt": "2026-10-19T18:48:17.658Z",
+  "source": "https://tablebase.lichess.ovh/standard",
+  "scope": "Every displayed board and every legal alternative, including intermediate defender turns",
+  "examples": [
+    {
+      "challenge": "queenMate",
+      "step": "fence",
+      "moves": [
+        "d3e4",
+        "f6g7"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/5k2/8/8/2KQ4/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 13,
+          "moves": [
+            {
+              "uci": "d3d6",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "d3b1",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3d1",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3f1",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3c2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3d2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3e2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3e3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3f3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3g3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3h3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3c4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3d4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3e4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3b5",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3d5",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3a6",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3d7",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3h7",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3d8",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "d3f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "d3g6",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/5k2/8/4Q3/2K5/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -14,
+          "moves": [
+            {
+              "uci": "f6g5",
+              "category": "win",
+              "dtm": 13
+            },
+            {
+              "uci": "f6f7",
+              "category": "win",
+              "dtm": 13
+            },
+            {
+              "uci": "f6g7",
+              "category": "win",
+              "dtm": 11
+            }
+          ]
+        },
+        {
+          "fen": "8/6k1/8/8/4Q3/2K5/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 11,
+          "moves": [
+            {
+              "uci": "e4f5",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e4e6",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4f3",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4f4",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4g4",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4e5",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4c6",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4e7",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4e8",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "c3d3",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "e4d5",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4e1",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4h4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4b1",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4g2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4d3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4e3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4h1",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4b7",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4a4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4a8",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4b4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4c4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4d4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4c2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "e4e2",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "e4g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e4h7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "queenMate",
+      "step": "king",
+      "moves": [
+        "f4g5",
+        "h7h8"
+      ],
+      "positions": [
+        {
+          "fen": "8/7k/8/8/5K2/8/8/4Q3 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 7,
+          "moves": [
+            {
+              "uci": "e1g1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1g3",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e8",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f4f5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f4g5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1b1",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1e2",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1e3",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1b4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1e4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1h4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1e5",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1e6",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f4g4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f4e5",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "e1a1",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1c1",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1d1",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1f1",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1h1",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1d2",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1f2",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1c3",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "e1a5",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "f4f3",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "f4g3",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "f4e4",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "f4e3",
+              "category": "loss",
+              "dtm": -12
+            }
+          ]
+        },
+        {
+          "fen": "8/7k/8/6K1/8/8/8/4Q3 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -6,
+          "moves": [
+            {
+              "uci": "h7g7",
+              "category": "win",
+              "dtm": 5
+            },
+            {
+              "uci": "h7g8",
+              "category": "win",
+              "dtm": 5
+            },
+            {
+              "uci": "h7h8",
+              "category": "win",
+              "dtm": 3
+            }
+          ]
+        },
+        {
+          "fen": "7k/8/8/6K1/8/8/8/4Q3 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 3,
+          "moves": [
+            {
+              "uci": "g5g6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "g5h6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e1e7",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "g5f6",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "e1a1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1b1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1c1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1d1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1f1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1g1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1h1",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1d2",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e2",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1f2",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1c3",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e3",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1g3",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1b4",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e4",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1a5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e6",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1e8",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "g5f5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "g5h5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "e1h4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "g5f4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "g5g4",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "g5h4",
+              "category": "loss",
+              "dtm": -10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "queenMate",
+      "step": "stalemate",
+      "moves": [
+        "e7f7"
+      ],
+      "positions": [
+        {
+          "fen": "7k/4Q3/6K1/8/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 1,
+          "moves": [
+            {
+              "uci": "e7g7",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "e7h7",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "e7d8",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "e7e8",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "e7f8",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "e7e1",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7e2",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7a3",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7e3",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7b4",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7e4",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7h4",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7c5",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7e5",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7g5",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7d6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7f6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7a7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7b7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7c7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "e7d7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "g6f6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "g6h6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "g6f7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "g6f5",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "g6g5",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "g6h5",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "e7e6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e7f7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "7k/5Q2/6K1/8/8/8/8/8 b - - 1 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": []
+        }
+      ]
+    },
+    {
+      "challenge": "queenMate",
+      "step": "mate",
+      "moves": [
+        "f7g7"
+      ],
+      "positions": [
+        {
+          "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 1,
+          "moves": [
+            {
+              "uci": "f7g7",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "f7h7",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "f7e8",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "f7f8",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "f7f3",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7f4",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7f5",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7f6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7a7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7b7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7c7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7d7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7e7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7f1",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "f7f2",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "f7a2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7b3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7c4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7e6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g6f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g6g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g6h5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g6f6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g6h6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7g8",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "7k/6Q1/6K1/8/8/8/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": null,
+          "moves": []
+        }
+      ]
+    },
+    {
+      "challenge": "rookMate",
+      "step": "fence",
+      "moves": [
+        "a1e1",
+        "f6f7"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/5k2/8/8/2K5/8/R7 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 23,
+          "moves": [
+            {
+              "uci": "a1e1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "a1a5",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d3",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "a1b1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1c1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1d1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1f1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1g1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1h1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1a2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1a3",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1a4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1a6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1a7",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "a1a8",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -26
+            }
+          ]
+        },
+        {
+          "fen": "8/8/5k2/8/8/2K5/8/4R3 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -22,
+          "moves": [
+            {
+              "uci": "f6f5",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "f6g5",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "f6g6",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "f6f7",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "f6g7",
+              "category": "win",
+              "dtm": 21
+            }
+          ]
+        },
+        {
+          "fen": "8/5k2/8/8/8/2K5/8/4R3 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 21,
+          "moves": [
+            {
+              "uci": "e1e5",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e1e4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d3",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1a1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1b1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1c1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1d1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1g1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1h1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1e2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1e3",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1f1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1e6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e1e7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e1e8",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "rookMate",
+      "step": "king",
+      "moves": [
+        "c3d4",
+        "f6f7"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/5k2/8/8/2K5/8/4R3 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 23,
+          "moves": [
+            {
+              "uci": "e1e2",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1e3",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1e4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1e8",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d3",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1a1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1b1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1c1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1d1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1f1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1g1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1h1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e1e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e1e6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e1e7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/5k2/8/3K4/8/8/4R3 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -22,
+          "moves": [
+            {
+              "uci": "f6f5",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "f6f7",
+              "category": "win",
+              "dtm": 19
+            },
+            {
+              "uci": "f6g5",
+              "category": "win",
+              "dtm": 17
+            },
+            {
+              "uci": "f6g7",
+              "category": "win",
+              "dtm": 17
+            },
+            {
+              "uci": "f6g6",
+              "category": "win",
+              "dtm": 15
+            }
+          ]
+        },
+        {
+          "fen": "8/5k2/8/8/3K4/8/8/4R3 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 19,
+          "moves": [
+            {
+              "uci": "e1e5",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "d4d5",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "d4e5",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e1e2",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e1e3",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e1e4",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e1a1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1b1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1c1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1d1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1g1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1h1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4d3",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4c4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4e4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4c5",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e1f1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d4c3",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d4e3",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e1e6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e1e7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e1e8",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "rookMate",
+      "step": "wait",
+      "moves": [
+        "a7b7",
+        "h8g8"
+      ],
+      "positions": [
+        {
+          "fen": "7k/R7/5K2/8/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 3,
+          "moves": [
+            {
+              "uci": "f6g6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a7a1",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7a2",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7a3",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7a4",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7a5",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7f7",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7a8",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "f6f7",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a7a6",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "a7b7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "a7c7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "a7d7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "a7e7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6e5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6f5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6g5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6e6",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6e7",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "a7g7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "a7h7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "7k/1R6/5K2/8/8/8/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -6,
+          "moves": [
+            {
+              "uci": "h8g8",
+              "category": "win",
+              "dtm": 5
+            }
+          ]
+        },
+        {
+          "fen": "6k1/1R6/5K2/8/8/8/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 5,
+          "moves": [
+            {
+              "uci": "b7b1",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7b2",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7b3",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7b4",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7b5",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7b6",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7a7",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7c7",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7d7",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7b8",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "b7e7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "b7f7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "b7g7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6e5",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f6f5",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f6e6",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f6e7",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f6g5",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "f6g6",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "b7h7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "rookMate",
+      "step": "mate",
+      "moves": [
+        "a1a8"
+      ],
+      "positions": [
+        {
+          "fen": "7k/8/6K1/8/8/8/8/R7 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 1,
+          "moves": [
+            {
+              "uci": "a1a8",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "a1b1",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1c1",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1d1",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1e1",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1a2",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1a3",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1a4",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1a5",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1a6",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1a7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "g6f7",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "a1f1",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a1g1",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "a1h1",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "g6f6",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "g6h6",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "g6g5",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "g6f5",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "g6h5",
+              "category": "loss",
+              "dtm": -10
+            }
+          ]
+        },
+        {
+          "fen": "R6k/8/6K1/8/8/8/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": null,
+          "moves": []
+        }
+      ]
+    },
+    {
+      "challenge": "promotion",
+      "step": "lead",
+      "moves": [
+        "f4e5",
+        "a7b7"
+      ],
+      "positions": [
+        {
+          "fen": "8/k7/8/8/5K2/4P3/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 31,
+          "moves": [
+            {
+              "uci": "e3e4",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "f4e5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "f4f5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "f4g4",
+              "category": "loss",
+              "dtm": -32
+            },
+            {
+              "uci": "f4g5",
+              "category": "loss",
+              "dtm": -32
+            },
+            {
+              "uci": "f4e4",
+              "category": "loss",
+              "dtm": -32
+            },
+            {
+              "uci": "f4f3",
+              "category": "loss",
+              "dtm": -36
+            },
+            {
+              "uci": "f4g3",
+              "category": "loss",
+              "dtm": -36
+            }
+          ]
+        },
+        {
+          "fen": "8/k7/8/4K3/8/4P3/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -30,
+          "moves": [
+            {
+              "uci": "a7b7",
+              "category": "win",
+              "dtm": 29
+            },
+            {
+              "uci": "a7b8",
+              "category": "win",
+              "dtm": 29
+            },
+            {
+              "uci": "a7a6",
+              "category": "win",
+              "dtm": 27
+            },
+            {
+              "uci": "a7b6",
+              "category": "win",
+              "dtm": 27
+            },
+            {
+              "uci": "a7a8",
+              "category": "win",
+              "dtm": 27
+            }
+          ]
+        },
+        {
+          "fen": "8/1k6/8/4K3/8/4P3/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 29,
+          "moves": [
+            {
+              "uci": "e3e4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e5e6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e5f5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5d6",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5f6",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5d5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5f4",
+              "category": "loss",
+              "dtm": -34
+            },
+            {
+              "uci": "e5e4",
+              "category": "loss",
+              "dtm": -34
+            },
+            {
+              "uci": "e5d4",
+              "category": "loss",
+              "dtm": -34
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "promotion",
+      "step": "protect",
+      "moves": [
+        "e3e4",
+        "a7b7"
+      ],
+      "positions": [
+        {
+          "fen": "8/k7/8/4K3/8/4P3/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 27,
+          "moves": [
+            {
+              "uci": "e3e4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e5d6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e5f6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e5e6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e5d5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5f5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5d4",
+              "category": "loss",
+              "dtm": -32
+            },
+            {
+              "uci": "e5f4",
+              "category": "loss",
+              "dtm": -32
+            },
+            {
+              "uci": "e5e4",
+              "category": "loss",
+              "dtm": -32
+            }
+          ]
+        },
+        {
+          "fen": "8/k7/8/4K3/4P3/8/8/8 b - - 0 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -26,
+          "moves": [
+            {
+              "uci": "a7a6",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "a7b6",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "a7b7",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "a7a8",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "a7b8",
+              "category": "win",
+              "dtm": 25
+            }
+          ]
+        },
+        {
+          "fen": "8/1k6/8/4K3/4P3/8/8/8 w - - 1 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 25,
+          "moves": [
+            {
+              "uci": "e5d6",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e5f6",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e5e6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e5f5",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e5d5",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e5d4",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "e5f4",
+              "category": "loss",
+              "dtm": -30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "promotion",
+      "step": "rush",
+      "moves": [
+        "e4e5",
+        "e6e5"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/4k3/8/4P3/8/5K2/8 w - - 0 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "e4e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2e1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2f1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2e2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2e3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2f3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g3",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/4k3/4P3/8/8/5K2/8 b - - 0 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "e6e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6d7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6e7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6f7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/8/4k3/8/8/5K2/8 w - - 0 2",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "f2e1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2f1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2e2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2e3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2f3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g3",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "promotion",
+      "step": "promote",
+      "moves": [
+        "f7f8q"
+      ],
+      "positions": [
+        {
+          "fen": "7k/5P2/5K2/8/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 3,
+          "moves": [
+            {
+              "uci": "f7f8q",
+              "category": "loss",
+              "dtm": -2
+            },
+            {
+              "uci": "f7f8r",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "f6e7",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "f6e6",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "f6g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7f8b",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7f8n",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "5Q1k/8/5K2/8/8/8/8/8 b - - 0 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -2,
+          "moves": [
+            {
+              "uci": "h8h7",
+              "category": "win",
+              "dtm": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "opposition",
+      "step": "face",
+      "moves": [
+        "e8d8",
+        "e6f7"
+      ],
+      "positions": [
+        {
+          "fen": "4k3/8/4K3/4P3/8/8/8/8 b - - 0 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -24,
+          "moves": [
+            {
+              "uci": "e8d8",
+              "category": "win",
+              "dtm": 23
+            },
+            {
+              "uci": "e8f8",
+              "category": "win",
+              "dtm": 21
+            }
+          ]
+        },
+        {
+          "fen": "3k4/8/4K3/4P3/8/8/8/8 w - - 1 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 23,
+          "moves": [
+            {
+              "uci": "e6f7",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e6d6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e6f6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e6d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6f5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "3k4/5K2/8/4P3/8/8/8/8 b - - 2 2",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -22,
+          "moves": [
+            {
+              "uci": "d8c7",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "d8d7",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "d8c8",
+              "category": "win",
+              "dtm": 19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "opposition",
+      "step": "side",
+      "moves": [
+        "e6f6",
+        "e8f8",
+        "e5e6"
+      ],
+      "positions": [
+        {
+          "fen": "4k3/8/4K3/4P3/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 21,
+          "moves": [
+            {
+              "uci": "e6d6",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e6f6",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e6d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e6f5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "4k3/8/5K2/4P3/8/8/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -22,
+          "moves": [
+            {
+              "uci": "e8d7",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "e8d8",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "e8f8",
+              "category": "win",
+              "dtm": 21
+            }
+          ]
+        },
+        {
+          "fen": "5k2/8/5K2/4P3/8/8/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 21,
+          "moves": [
+            {
+              "uci": "e5e6",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "f6e6",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "f6f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g6",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "5k2/8/4PK2/8/8/8/8/8 b - - 0 2",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -20,
+          "moves": [
+            {
+              "uci": "f8e8",
+              "category": "win",
+              "dtm": 19
+            },
+            {
+              "uci": "f8g8",
+              "category": "win",
+              "dtm": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "opposition",
+      "step": "escort",
+      "moves": [
+        "e6e7",
+        "e8d7",
+        "f6f7"
+      ],
+      "positions": [
+        {
+          "fen": "4k3/8/4PK2/8/8/8/8/8 w - - 1 3",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 19,
+          "moves": [
+            {
+              "uci": "e6e7",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "f6e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "4k3/4P3/5K2/8/8/8/8/8 b - - 0 3",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -18,
+          "moves": [
+            {
+              "uci": "e8d7",
+              "category": "win",
+              "dtm": 17
+            }
+          ]
+        },
+        {
+          "fen": "8/3kP3/5K2/8/8/8/8/8 w - - 1 4",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 17,
+          "moves": [
+            {
+              "uci": "f6f7",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "e7e8b",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e7e8n",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e7e8q",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e7e8r",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6g7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/3kPK2/8/8/8/8/8/8 b - - 2 4",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -16,
+          "moves": [
+            {
+              "uci": "d7c6",
+              "category": "win",
+              "dtm": 15
+            },
+            {
+              "uci": "d7d6",
+              "category": "win",
+              "dtm": 15
+            },
+            {
+              "uci": "d7c7",
+              "category": "win",
+              "dtm": 13
+            },
+            {
+              "uci": "d7c8",
+              "category": "win",
+              "dtm": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "opposition",
+      "step": "promote",
+      "moves": [
+        "d7d6",
+        "e7e8q"
+      ],
+      "positions": [
+        {
+          "fen": "8/3kPK2/8/8/8/8/8/8 b - - 2 4",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -16,
+          "moves": [
+            {
+              "uci": "d7c6",
+              "category": "win",
+              "dtm": 15
+            },
+            {
+              "uci": "d7d6",
+              "category": "win",
+              "dtm": 15
+            },
+            {
+              "uci": "d7c7",
+              "category": "win",
+              "dtm": 13
+            },
+            {
+              "uci": "d7c8",
+              "category": "win",
+              "dtm": 11
+            }
+          ]
+        },
+        {
+          "fen": "8/4PK2/3k4/8/8/8/8/8 w - - 3 5",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 15,
+          "moves": [
+            {
+              "uci": "e7e8q",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "f7f8",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "f7f6",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "f7e8",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e7e8r",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e7e8b",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e7e8n",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7g7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7g8",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "4Q3/5K2/3k4/8/8/8/8/8 b - - 0 5",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -14,
+          "moves": [
+            {
+              "uci": "d6c5",
+              "category": "win",
+              "dtm": 13
+            },
+            {
+              "uci": "d6d5",
+              "category": "win",
+              "dtm": 11
+            },
+            {
+              "uci": "d6c7",
+              "category": "win",
+              "dtm": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "holdDraw",
+      "step": "corner",
+      "moves": [
+        "f2g1",
+        "h4g4",
+        "g1h1"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/8/8/7k/7p/5K2/8 w - - 0 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "f2f1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2g1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2f3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f2e3",
+              "category": "win",
+              "dtm": 21
+            },
+            {
+              "uci": "f2e1",
+              "category": "win",
+              "dtm": 19
+            },
+            {
+              "uci": "f2e2",
+              "category": "win",
+              "dtm": 19
+            }
+          ]
+        },
+        {
+          "fen": "8/8/8/8/7k/7p/8/6K1 b - - 1 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "h3h2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h4g3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h4g4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h4g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h4h5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/8/8/6k1/7p/8/6K1 w - - 2 2",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "g1f1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g1h1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g1f2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g1h2",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/8/8/6k1/7p/8/7K b - - 3 2",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "h3h2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4f3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4g3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4f4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4h4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4h5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "holdDraw",
+      "step": "stalemate",
+      "moves": [
+        "h3h2"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/8/8/8/6kp/8/7K b - - 0 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "h3h2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g3f2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g3f3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g3f4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g3g4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g3h4",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/8/8/8/6k1/7p/7K w - - 0 2",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": []
+        }
+      ]
+    },
+    {
+      "challenge": "holdDraw",
+      "step": "capture",
+      "moves": [
+        "h1h2"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/8/8/6k1/8/7p/7K w - - 0 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "h1h2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h1g2",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/8/8/6k1/8/7K/8 b - - 0 1",
+          "category": "draw",
+          "whiteResult": "draw",
+          "dtm": 0,
+          "moves": [
+            {
+              "uci": "g4f3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4f4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4h4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "g4h5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopPairMate",
+      "step": "diagonals",
+      "moves": [
+        "e3f4",
+        "f6e6"
+      ],
+      "positions": [
+        {
+          "fen": "8/8/5k2/8/8/2KBB3/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 25,
+          "moves": [
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e3d4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "e3f4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d3b1",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3f1",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3c2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3e2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3c4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3e4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3b5",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3a6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3h7",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3c1",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3g1",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3d2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3f2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3c5",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3b6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3h6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "e3a7",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "d3f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "d3g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e3g5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/8/5k2/8/5B2/2KB4/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -26,
+          "moves": [
+            {
+              "uci": "f6e7",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "f6f7",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "f6e6",
+              "category": "win",
+              "dtm": 23
+            },
+            {
+              "uci": "f6g7",
+              "category": "win",
+              "dtm": 23
+            }
+          ]
+        },
+        {
+          "fen": "8/8/4k3/8/5B2/2KB4/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 23,
+          "moves": [
+            {
+              "uci": "c3c4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "c3d4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d3b1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d3c2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d3e4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d3h7",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "f4h2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "f4g3",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "f4b8",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3b3",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c3b4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d3c4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3g6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "f4c1",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "f4d2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "f4e3",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "f4g5",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "f4h6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "f4c7",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c3b2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c3c2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c3d2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "d3f1",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "d3e2",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "d3b5",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "d3a6",
+              "category": "loss",
+              "dtm": -30
+            },
+            {
+              "uci": "d3f5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f4e5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f4d6",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopPairMate",
+      "step": "king",
+      "moves": [
+        "d4e5",
+        "g7g8"
+      ],
+      "positions": [
+        {
+          "fen": "8/6k1/8/8/3K4/3BB3/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 21,
+          "moves": [
+            {
+              "uci": "e3g5",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d4d5",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d4e5",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3c2",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d3e2",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d3f5",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e3c1",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e3d2",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e3f2",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e3f4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4c4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4e4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d4c5",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d3b1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d3f1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d3c4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d3e4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d3b5",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d3a6",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e3g1",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d4c3",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d3g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "d3h7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "e3h6",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "8/6k1/8/4K3/8/3BB3/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -20,
+          "moves": [
+            {
+              "uci": "g7f7",
+              "category": "win",
+              "dtm": 19
+            },
+            {
+              "uci": "g7f8",
+              "category": "win",
+              "dtm": 17
+            },
+            {
+              "uci": "g7g8",
+              "category": "win",
+              "dtm": 11
+            },
+            {
+              "uci": "g7h8",
+              "category": "win",
+              "dtm": 9
+            }
+          ]
+        },
+        {
+          "fen": "6k1/8/8/4K3/8/3BB3/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 11,
+          "moves": [
+            {
+              "uci": "e5f6",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "d3g6",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "d3f5",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "e5e6",
+              "category": "loss",
+              "dtm": -16
+            },
+            {
+              "uci": "d3c4",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e3f4",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e3c5",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e3g5",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e3b6",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e5f5",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "e5d6",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "d3b1",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3f1",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3c2",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3e2",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3e4",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3b5",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "d3a6",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3c1",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3g1",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3d2",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3f2",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3d4",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3h6",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e3a7",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e5d5",
+              "category": "loss",
+              "dtm": -20
+            },
+            {
+              "uci": "e5d4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e5e4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "e5f4",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "d3h7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopPairMate",
+      "step": "net",
+      "moves": [
+        "h6g7"
+      ],
+      "positions": [
+        {
+          "fen": "7k/5K2/7B/5B2/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 1,
+          "moves": [
+            {
+              "uci": "h6g7",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "f7g6",
+              "category": "loss",
+              "dtm": -4
+            },
+            {
+              "uci": "f5h3",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f5g4",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f5e6",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f5d7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f5c8",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f7f6",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f7e6",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f7e7",
+              "category": "loss",
+              "dtm": -8
+            },
+            {
+              "uci": "f7e8",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "f5b1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f5c2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f5d3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f5e4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f5g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6c1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6d2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6e3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6f4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6f8",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7f8",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f5h7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "7k/5KB1/8/5B2/8/8/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": null,
+          "moves": []
+        }
+      ]
+    },
+    {
+      "challenge": "bishopKnightMate",
+      "step": "corner",
+      "moves": [],
+      "positions": [
+        {
+          "fen": "5k2/5N2/2K5/8/8/1B6/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 45,
+          "moves": [
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "c6d7",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "f7e5",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "f7d6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "c6c5",
+              "category": "loss",
+              "dtm": -50
+            },
+            {
+              "uci": "f7g5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7h6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7d8",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7h8",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6c7",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b7",
+              "category": "loss",
+              "dtm": -54
+            },
+            {
+              "uci": "b3d1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3c2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3a4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopKnightMate",
+      "step": "wall",
+      "moves": [
+        "c6d6",
+        "e8f8"
+      ],
+      "positions": [
+        {
+          "fen": "4k3/5N2/2K5/8/8/1B6/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 45,
+          "moves": [
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "f7e5",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "f7g5",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "f7d6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "c6c5",
+              "category": "loss",
+              "dtm": -50
+            },
+            {
+              "uci": "f7h6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7h8",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6c7",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b7",
+              "category": "loss",
+              "dtm": -54
+            },
+            {
+              "uci": "f7d8",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3d1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3c2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3a4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "4k3/5N2/3K4/8/8/1B6/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -44,
+          "moves": [
+            {
+              "uci": "e8f8",
+              "category": "win",
+              "dtm": 43
+            }
+          ]
+        },
+        {
+          "fen": "5k2/5N2/3K4/8/8/1B6/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 43,
+          "moves": [
+            {
+              "uci": "d6e6",
+              "category": "loss",
+              "dtm": -42
+            },
+            {
+              "uci": "f7e5",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "d6e5",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "d6d7",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "f7g5",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "f7d8",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "f7h6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "f7h8",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "d6c5",
+              "category": "loss",
+              "dtm": -50
+            },
+            {
+              "uci": "d6c6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "d6c7",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3d1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3c2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3a4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "d6d5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopKnightMate",
+      "step": "routeA",
+      "moves": [
+        "f7e5",
+        "f8e8",
+        "e5d7",
+        "e8d8"
+      ],
+      "positions": [
+        {
+          "fen": "5k2/5N2/2K5/8/8/1B6/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 45,
+          "moves": [
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "c6d7",
+              "category": "loss",
+              "dtm": -44
+            },
+            {
+              "uci": "f7e5",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "f7d6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "c6c5",
+              "category": "loss",
+              "dtm": -50
+            },
+            {
+              "uci": "f7g5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7h6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7d8",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "f7h8",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6c7",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b7",
+              "category": "loss",
+              "dtm": -54
+            },
+            {
+              "uci": "b3d1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3c2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "b3a4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d5",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "5k2/8/2K5/4N3/8/1B6/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -48,
+          "moves": [
+            {
+              "uci": "f8g7",
+              "category": "win",
+              "dtm": 47
+            },
+            {
+              "uci": "f8e7",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "f8e8",
+              "category": "win",
+              "dtm": 25
+            }
+          ]
+        },
+        {
+          "fen": "4k3/8/2K5/4N3/8/1B6/8/8 w - - 2 2",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 25,
+          "moves": [
+            {
+              "uci": "e5g6",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "e5d7",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "c6c7",
+              "category": "loss",
+              "dtm": -46
+            },
+            {
+              "uci": "b3c2",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "c6d5",
+              "category": "loss",
+              "dtm": -48
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -50
+            },
+            {
+              "uci": "b3g8",
+              "category": "loss",
+              "dtm": -50
+            },
+            {
+              "uci": "e5d3",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "e5f3",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "e5c4",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "e5g4",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "e5f7",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3d1",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3a4",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "b3f7",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6c5",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b6",
+              "category": "loss",
+              "dtm": -52
+            },
+            {
+              "uci": "c6b7",
+              "category": "loss",
+              "dtm": -52
+            }
+          ]
+        },
+        {
+          "fen": "4k3/3N4/2K5/8/8/1B6/8/8 b - - 3 2",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -24,
+          "moves": [
+            {
+              "uci": "e8e7",
+              "category": "win",
+              "dtm": 23
+            },
+            {
+              "uci": "e8d8",
+              "category": "win",
+              "dtm": 23
+            }
+          ]
+        },
+        {
+          "fen": "3k4/3N4/2K5/8/8/1B6/8/8 w - - 4 3",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 23,
+          "moves": [
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3g8",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d7c5",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7e5",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7b6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7f6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7b8",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7f8",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3d1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3c2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3a4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3f7",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c6b5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6c5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6b6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6b7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopKnightMate",
+      "step": "routeB",
+      "moves": [
+        "d7c5",
+        "d8c8",
+        "c5b7",
+        "c8b8"
+      ],
+      "positions": [
+        {
+          "fen": "3k4/3N4/2K5/8/8/1B6/8/8 w - - 4 3",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 23,
+          "moves": [
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -22
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3g8",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "d7c5",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7e5",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7b6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7f6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7b8",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "d7f8",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3d1",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3c2",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3a4",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "b3f7",
+              "category": "loss",
+              "dtm": -26
+            },
+            {
+              "uci": "c6b5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6c5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6b6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6b7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "3k4/8/2K5/2N5/8/1B6/8/8 b - - 5 3",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -26,
+          "moves": [
+            {
+              "uci": "d8e7",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "d8e8",
+              "category": "win",
+              "dtm": 25
+            },
+            {
+              "uci": "d8c8",
+              "category": "win",
+              "dtm": 13
+            }
+          ]
+        },
+        {
+          "fen": "2k5/8/2K5/2N5/8/1B6/8/8 w - - 6 4",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 13,
+          "moves": [
+            {
+              "uci": "c5e6",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "c5b7",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3a4",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c6d6",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "b3f7",
+              "category": "loss",
+              "dtm": -18
+            },
+            {
+              "uci": "c5d7",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "b3g8",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c6d5",
+              "category": "loss",
+              "dtm": -24
+            },
+            {
+              "uci": "c5d3",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c5a4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c5e4",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c5a6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "b3d1",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "b3c2",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c6b6",
+              "category": "loss",
+              "dtm": -28
+            },
+            {
+              "uci": "c6b5",
+              "category": "loss",
+              "dtm": -42
+            }
+          ]
+        },
+        {
+          "fen": "2k5/1N6/2K5/8/8/1B6/8/8 b - - 7 4",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": -12,
+          "moves": [
+            {
+              "uci": "c8b8",
+              "category": "win",
+              "dtm": 11
+            }
+          ]
+        },
+        {
+          "fen": "1k6/1N6/2K5/8/8/1B6/8/8 w - - 8 5",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 11,
+          "moves": [
+            {
+              "uci": "b7d6",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "b3c4",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "b3e6",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "c6b6",
+              "category": "loss",
+              "dtm": -10
+            },
+            {
+              "uci": "b3d1",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3a2",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3c2",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3a4",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3d5",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3f7",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b3g8",
+              "category": "loss",
+              "dtm": -12
+            },
+            {
+              "uci": "b7a5",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "b7c5",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "b7d8",
+              "category": "loss",
+              "dtm": -14
+            },
+            {
+              "uci": "c6b5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6c5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "c6d7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "challenge": "bishopKnightMate",
+      "step": "mate",
+      "moves": [
+        "h6g7"
+      ],
+      "positions": [
+        {
+          "fen": "7k/5K2/5N1B/8/8/8/8/8 w - - 0 1",
+          "category": "win",
+          "whiteResult": "win",
+          "dtm": 1,
+          "moves": [
+            {
+              "uci": "h6g7",
+              "category": "loss",
+              "dtm": null
+            },
+            {
+              "uci": "f6e4",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6g4",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6d5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6h5",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6d7",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6e8",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "f6g8",
+              "category": "loss",
+              "dtm": -6
+            },
+            {
+              "uci": "h6c1",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6d2",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6e3",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6f4",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6g5",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "h6f8",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7e6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7g6",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7e7",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7e8",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f7f8",
+              "category": "draw",
+              "dtm": 0
+            },
+            {
+              "uci": "f6h7",
+              "category": "draw",
+              "dtm": 0
+            }
+          ]
+        },
+        {
+          "fen": "7k/5KB1/5N2/8/8/8/8/8 b - - 1 1",
+          "category": "loss",
+          "whiteResult": "win",
+          "dtm": null,
+          "moves": []
+        }
+      ]
+    }
+  ]
+}

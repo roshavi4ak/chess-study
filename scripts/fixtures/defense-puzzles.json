@@ -1,0 +1,1070 @@
+[
+  {
+    "level": 2,
+    "puzzles": [
+      {
+        "id": "csbyiprtvuvnjxkgdbbsrga",
+        "name": "1nIWn",
+        "fen": "3k4/3q1Q2/5p2/p7/1p4PK/8/P4P1P/8 w - - 0 49",
+        "solution": "f7f6 d7e7 f6e7 d8e7",
+        "rating": 570,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "queenEndgame",
+          "short"
+        ],
+        "setup": "f7f6",
+        "moves": [
+          "d7e7",
+          "f6e7",
+          "d8e7"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "czvqkjkp4bjgugzpccfa",
+        "name": "5xM2Z",
+        "fen": "8/8/6p1/K5k1/8/1P6/8/8 b - - 0 52",
+        "solution": "g5f4 b3b4 g6g5 b4b5",
+        "rating": 531,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "pawnEndgame",
+          "quietMove",
+          "short"
+        ],
+        "setup": "g5f4",
+        "moves": [
+          "b3b4",
+          "g6g5",
+          "b4b5"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cxml3ldcnqu49waycbyd6ig",
+        "name": "4LVCW",
+        "fen": "7r/p7/5k2/8/1PNR4/P2P1pp1/2P3b1/R5K1 w - - 2 44",
+        "solution": "d4f4 f6g5 f4g4 g5g4",
+        "rating": 591,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "short"
+        ],
+        "setup": "d4f4",
+        "moves": [
+          "f6g5",
+          "f4g4",
+          "g5g4"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cb0e2u5ay8mysf442tyninq",
+        "name": "4j3Io",
+        "fen": "8/3k4/5p1p/2K2P1P/5P2/8/8/8 w - - 6 52",
+        "solution": "c5b6 d7d6 b6b5 d6d5",
+        "rating": 551,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "pawnEndgame",
+          "short"
+        ],
+        "setup": "c5b6",
+        "moves": [
+          "d7d6",
+          "b6b5",
+          "d6d5"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cj6su7md9ty5b05x3piyjq",
+        "name": "5uXd3",
+        "fen": "8/p7/1p6/kP4R1/6PK/1r6/8/8 b - - 0 67",
+        "solution": "b3b5 g5b5 a5b5 g4g5",
+        "rating": 562,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "rookEndgame",
+          "short"
+        ],
+        "setup": "b3b5",
+        "moves": [
+          "g5b5",
+          "a5b5",
+          "g4g5"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "puzzles": [
+      {
+        "id": "c1bdxbnhpoev4bivghwclhg",
+        "name": "1NbzF",
+        "fen": "8/8/6Kp/1p1Q4/2q5/1k4P1/7P/8 w - - 6 55",
+        "solution": "d5d1 c4c2 d1c2 b3c2 g3g4 b5b4",
+        "rating": 990,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "queenEndgame"
+        ],
+        "setup": "d5d1",
+        "moves": [
+          "c4c2",
+          "d1c2",
+          "b3c2",
+          "g3g4",
+          "b5b4"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cgghdextqkgzm6joqjgygaw",
+        "name": "1dB9Q",
+        "fen": "8/7k/6pp/2p2p2/2P1p3/4Q1P1/5PKP/3q4 b - - 1 43",
+        "solution": "d1d4 e3d4 c5d4 c4c5",
+        "rating": 956,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "queenEndgame",
+          "short"
+        ],
+        "setup": "d1d4",
+        "moves": [
+          "e3d4",
+          "c5d4",
+          "c4c5"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "crw6y5lxvrxikuu85vjwkq",
+        "name": "21SLW",
+        "fen": "8/2K5/2P1k3/7p/R6P/8/p1r5/8 w - - 2 58",
+        "solution": "a4e4 e6d5 e4a4 c2c6",
+        "rating": 966,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "masterVsMaster",
+          "rookEndgame",
+          "short"
+        ],
+        "setup": "a4e4",
+        "moves": [
+          "e6d5",
+          "e4a4",
+          "c2c6"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "c0um24vvfx6dn6zilartpw",
+        "name": "0amZl",
+        "fen": "8/8/8/5ppp/7k/5K2/6PP/8 b - - 1 44",
+        "solution": "g5g4 f3f4 g4g3 h2g3",
+        "rating": 921,
+        "tags": [
+          "defensiveMove",
+          "endgame",
+          "mate",
+          "mateIn2",
+          "pawnEndgame",
+          "short",
+          "zugzwang"
+        ],
+        "setup": "g5g4",
+        "moves": [
+          "f3f4",
+          "g4g3",
+          "h2g3"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cui9rri1gfev7nmvh721ma",
+        "name": "0pfkm",
+        "fen": "8/2R2p2/4p3/4Pk2/3P1r2/4K3/8/8 b - - 1 42",
+        "solution": "f4e4 e3d3 e4e1 c7f7",
+        "rating": 941,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "rookEndgame",
+          "short"
+        ],
+        "setup": "f4e4",
+        "moves": [
+          "e3d3",
+          "e4e1",
+          "c7f7"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 4,
+    "puzzles": [
+      {
+        "id": "cmiheymk706sav8ws4t2ynjlp",
+        "name": "09IPx",
+        "fen": "rn2b1k1/pp4pp/3b1p2/3p1Q2/3P4/N1P2N2/Pq1B1PPP/R5K1 w - - 0 16",
+        "solution": "f5d5 e8f7 d5d6 b2a1",
+        "rating": 1123,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "middlegame",
+          "short"
+        ],
+        "setup": "f5d5",
+        "moves": [
+          "e8f7",
+          "d5d6",
+          "b2a1"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "c4v9v6c1fznbecqwmjuhha",
+        "name": "0gXgU",
+        "fen": "r1b2rk1/ppq2ppp/2nbp3/3pN3/3P1Bn1/2PB1N2/PP3PPP/R2QK2R w KQ - 1 11",
+        "solution": "d3h7 g8h7 f3g5 h7g8",
+        "rating": 1134,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "hangingPiece",
+          "opening",
+          "short"
+        ],
+        "setup": "d3h7",
+        "moves": [
+          "g8h7",
+          "f3g5",
+          "h7g8"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cpa6oqjmrpq3xptckcvaiw",
+        "name": "243SN",
+        "fen": "1k6/p1p5/Qp4p1/4P1q1/3P1r2/8/PPP1N1R1/2K5 b - - 0 31",
+        "solution": "g5g2 e2f4 g2g1 c1d2 g1d4 f4d3",
+        "rating": 1191,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "hangingPiece",
+          "long"
+        ],
+        "setup": "g5g2",
+        "moves": [
+          "e2f4",
+          "g2g1",
+          "c1d2",
+          "g1d4",
+          "f4d3"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "csawzrgx2k7n0va7lv8wfsq",
+        "name": "22FWd",
+        "fen": "8/P7/1K1k1pp1/2p4p/5P1P/4R1P1/8/r7 b - - 2 44",
+        "solution": "a1b1 b6a6 b1a1 a6b7",
+        "rating": 1125,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "endgame",
+          "rookEndgame",
+          "short"
+        ],
+        "setup": "a1b1",
+        "moves": [
+          "b6a6",
+          "b1a1",
+          "a6b7"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cyxbslkoinhibtzpreecfw",
+        "name": "0NLYd",
+        "fen": "8/7p/3k4/3np1p1/P3KpP1/1p1B1P1P/8/8 b - - 1 48",
+        "solution": "d6e6 d3c4 e6d6 c4d5 b3b2 d5a2",
+        "rating": 1126,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long"
+        ],
+        "setup": "d6e6",
+        "moves": [
+          "d3c4",
+          "e6d6",
+          "c4d5",
+          "b3b2",
+          "d5a2"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 5,
+    "puzzles": [
+      {
+        "id": "cykiyulx9qbussuqqsnzpq",
+        "name": "0FzWu",
+        "fen": "7k/5R2/2pB1bp1/4p2p/4P3/6PK/5r1P/8 w - - 4 38",
+        "solution": "f7f6 f2f6 d6e5 h8g7",
+        "rating": 1348,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "short"
+        ],
+        "setup": "f7f6",
+        "moves": [
+          "f2f6",
+          "d6e5",
+          "h8g7"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cf22fpb1f9xfrsssw1mjww",
+        "name": "0i56k",
+        "fen": "8/5K2/8/p3ppk1/Pp2P3/1P3P2/4N3/b7 w - - 0 51",
+        "solution": "f7e6 f5e4 f3e4 g5g4",
+        "rating": 1310,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "short"
+        ],
+        "setup": "f7e6",
+        "moves": [
+          "f5e4",
+          "f3e4",
+          "g5g4"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cfxlqcfqmhgbkrstrsvbwdq",
+        "name": "1PRRh",
+        "fen": "rn6/pp4kp/2p3p1/3p2q1/8/2P2B2/PP2NrPP/1K1Q3R b - - 1 21",
+        "solution": "b8d7 d1d4 d7e5 d4f2 g5f5 b1a1",
+        "rating": 1349,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "fork",
+          "long",
+          "middlegame"
+        ],
+        "setup": "b8d7",
+        "moves": [
+          "d1d4",
+          "d7e5",
+          "d4f2",
+          "g5f5",
+          "b1a1"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cmiheynyz07mgv8wsqs18w4eo",
+        "name": "0AVDi",
+        "fen": "8/8/4p3/8/8/5k2/2K2P2/8 w - - 3 52",
+        "solution": "c2d2 f3f2 d2d3 f2f3 d3d4 f3f4",
+        "rating": 1358,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "pawnEndgame"
+        ],
+        "setup": "c2d2",
+        "moves": [
+          "f3f2",
+          "d2d3",
+          "f2f3",
+          "d3d4",
+          "f3f4"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cmihc7yo9008bv88wqajhw1po",
+        "name": "00InW",
+        "fen": "8/2p5/pp1p4/3PnN2/PPP1Pp2/5P1p/5K1k/8 b - - 3 46",
+        "solution": "e5f3 f2f3 h2g1 f3f4 h3h2 f5g3",
+        "rating": 1317,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "hangingPiece",
+          "knightEndgame",
+          "long"
+        ],
+        "setup": "e5f3",
+        "moves": [
+          "f2f3",
+          "h2g1",
+          "f3f4",
+          "h3h2",
+          "f5g3"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 6,
+    "puzzles": [
+      {
+        "id": "cmiheyed001m9v8ws4d77e02j",
+        "name": "02GU0",
+        "fen": "8/1pr5/3k2p1/3P1p1p/1KR1p2P/P5P1/5P2/8 b - - 0 44",
+        "solution": "c7c4 b4c4 b7b6 a3a4",
+        "rating": 1534,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "short"
+        ],
+        "setup": "c7c4",
+        "moves": [
+          "b4c4",
+          "b7b6",
+          "a3a4"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cmiheyleb05ybv8wsjr2yk7g3",
+        "name": "089Vw",
+        "fen": "8/6K1/8/5P2/7R/8/p1r5/1k6 w - - 5 58",
+        "solution": "f5f6 a2a1q h4h1 c2c1 h1c1 b1c1",
+        "rating": 1574,
+        "tags": [
+          "advancedPawn",
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "promotion"
+        ],
+        "setup": "f5f6",
+        "moves": [
+          "a2a1q",
+          "h4h1",
+          "c2c1",
+          "h1c1",
+          "b1c1"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cmiheym3s06fyv8wshoqo1tjv",
+        "name": "08qtA",
+        "fen": "8/6p1/4k2p/4p3/p1P5/PrR1K2P/6P1/8 w - - 3 44",
+        "solution": "c3b3 a4b3 e3d2 e5e4",
+        "rating": 1537,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "short"
+        ],
+        "setup": "c3b3",
+        "moves": [
+          "a4b3",
+          "e3d2",
+          "e5e4"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cmiheyfnz02frv8ws70nqfrv1",
+        "name": "03Myn",
+        "fen": "4r1k1/5pp1/p2p3p/2bN4/2p1PP2/P6K/1P1Q2R1/5q2 b - - 7 45",
+        "solution": "e8e4 d5f6 g8f8 f6e4 f1f3 e4g3",
+        "rating": 1593,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "pin"
+        ],
+        "setup": "e8e4",
+        "moves": [
+          "d5f6",
+          "g8f8",
+          "f6e4",
+          "f1f3",
+          "e4g3"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cmiheyo2y07p7v8ws6pbki3v7",
+        "name": "0Ab4I",
+        "fen": "7k/5qp1/3P4/2pQ2P1/1p3p2/r4Pn1/P6N/2KR4 b - - 2 36",
+        "solution": "g3e2 c1b2 f7d5 d1d5",
+        "rating": 1556,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "short"
+        ],
+        "setup": "g3e2",
+        "moves": [
+          "c1b2",
+          "f7d5",
+          "d1d5"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 7,
+    "puzzles": [
+      {
+        "id": "cmiu8xfze0gjiv8b8c1skk1uu",
+        "name": "0s3UU",
+        "fen": "8/8/p7/2p3kp/1pP5/1P3K1P/P7/8 w - - 0 43",
+        "solution": "f3g3 h5h4 g3f3 g5f5 f3e3 f5e5",
+        "rating": 1761,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "master",
+          "pawnEndgame"
+        ],
+        "setup": "f3g3",
+        "moves": [
+          "h5h4",
+          "g3f3",
+          "g5f5",
+          "f3e3",
+          "f5e5"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cml0soctm1ex2v8ewd59b4jwq",
+        "name": "2sNTm",
+        "fen": "4n1k1/4p1bp/pN4p1/P1pP1r2/1rB2P2/8/6PP/R4RK1 b - - 3 25",
+        "solution": "g7a1 d5d6 b4c4 d6d7 f5f8 d7d8q a1d4 g1h1",
+        "rating": 1752,
+        "tags": [
+          "advancedPawn",
+          "advantage",
+          "defensiveMove",
+          "discoveredAttack",
+          "middlegame",
+          "promotion",
+          "sacrifice",
+          "veryLong"
+        ],
+        "setup": "g7a1",
+        "moves": [
+          "d5d6",
+          "b4c4",
+          "d6d7",
+          "f5f8",
+          "d7d8q",
+          "a1d4",
+          "g1h1"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cmiu8xhq30jg1v8b8ai7o9eq7",
+        "name": "19jfX",
+        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/4BN2/PPP2PPP/RN1QK2R b KQkq - 3 5",
+        "solution": "f8e7 d1d5 e7b4 c2c3",
+        "rating": 1783,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "opening",
+          "short"
+        ],
+        "setup": "f8e7",
+        "moves": [
+          "d1d5",
+          "e7b4",
+          "c2c3"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cml0soo3s20mev8ewx96mvtch",
+        "name": "42uVL",
+        "fen": "8/8/p1p5/1p2Bpk1/2P5/1P3KP1/1P1b4/8 w - - 5 45",
+        "solution": "e5f4 d2f4 g3f4 g5h4",
+        "rating": 1776,
+        "tags": [
+          "bishopEndgame",
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "short"
+        ],
+        "setup": "e5f4",
+        "moves": [
+          "d2f4",
+          "g3f4",
+          "g5h4"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cml0so30j0vtfv8ewyzpw91fv",
+        "name": "1nPXn",
+        "fen": "6k1/5p2/2p2Qp1/4P2p/2q4P/6P1/5PK1/8 b - - 0 53",
+        "solution": "c4e6 f6e6 f7e6 g2f3",
+        "rating": 1765,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "master",
+          "masterVsMaster",
+          "queenEndgame",
+          "short"
+        ],
+        "setup": "c4e6",
+        "moves": [
+          "f6e6",
+          "f7e6",
+          "g2f3"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 8,
+    "puzzles": [
+      {
+        "id": "cmiu8x8dn02iav8b8lnkncbjm",
+        "name": "08Cj9",
+        "fen": "6k1/8/1p2K2P/1P2P3/8/6b1/8/8 b - - 0 52",
+        "solution": "g8h7 e6f6 h7h6 e5e6 g3h4 f6f7",
+        "rating": 1962,
+        "tags": [
+          "bishopEndgame",
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long"
+        ],
+        "setup": "g8h7",
+        "moves": [
+          "e6f6",
+          "h7h6",
+          "e5e6",
+          "g3h4",
+          "f6f7"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cml0so5w4115qv8ewaoyw0x5i",
+        "name": "25Pdu",
+        "fen": "6k1/P2r1pp1/8/1N5p/8/8/1P3P2/1K6 b - - 0 33",
+        "solution": "d7a7 b5a7 h5h4 a7c6 h4h3 c6e7 g8h7 e7f5 h7g6 f5g3",
+        "rating": 1993,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "endgame",
+          "hangingPiece",
+          "quietMove",
+          "veryLong"
+        ],
+        "setup": "d7a7",
+        "moves": [
+          "b5a7",
+          "h5h4",
+          "a7c6",
+          "h4h3",
+          "c6e7",
+          "g8h7",
+          "e7f5",
+          "h7g6",
+          "f5g3"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cml0soyyh2lo5v8ew8zzusnau",
+        "name": "5FzDA",
+        "fen": "8/8/1p6/1K2N2p/P5kP/8/8/6b1 b - - 8 56",
+        "solution": "g4h4 e5f3 h4g3 f3g1 h5h4 b5b6 g3g2 g1e2",
+        "rating": 1958,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "fork",
+          "veryLong"
+        ],
+        "setup": "g4h4",
+        "moves": [
+          "e5f3",
+          "h4g3",
+          "f3g1",
+          "h5h4",
+          "b5b6",
+          "g3g2",
+          "g1e2"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cmiu8xitf0lfbv8b8vlxfbixc",
+        "name": "1LmMJ",
+        "fen": "8/p2Q4/1p3bpk/3B1p1p/8/P3q3/1P6/1K1R4 w - - 4 42",
+        "solution": "d7f7 e3e2 f7f8 f6g7 f8g7 h6g7",
+        "rating": 1994,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long"
+        ],
+        "setup": "d7f7",
+        "moves": [
+          "e3e2",
+          "f7f8",
+          "f6g7",
+          "f8g7",
+          "h6g7"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cmiu8xfyy0g96v8b8sdcd6i5c",
+        "name": "0qR7G",
+        "fen": "r5r1/p1pR2b1/1pP1qk2/4p2p/4Qp2/1P3P1P/P1P2P2/5KR1 b - - 1 28",
+        "solution": "e6h3 f1e2 g7h8 g1g8 a8g8 e4h7 h3e6 h7h6 f6f5 h6h5",
+        "rating": 1977,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "middlegame",
+          "veryLong"
+        ],
+        "setup": "e6h3",
+        "moves": [
+          "f1e2",
+          "g7h8",
+          "g1g8",
+          "a8g8",
+          "e4h7",
+          "h3e6",
+          "h7h6",
+          "f6f5",
+          "h6h5"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 9,
+    "puzzles": [
+      {
+        "id": "cml0sp3222totv8ewf20aaw4o",
+        "name": "69be9",
+        "fen": "8/8/8/8/3k1p1p/p3pP1P/2K5/2N5 w - - 1 49",
+        "solution": "c2b3 e3e2 c1e2 d4e3 e2c3 e3f3",
+        "rating": 2128,
+        "tags": [
+          "advancedPawn",
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "knightEndgame",
+          "long"
+        ],
+        "setup": "c2b3",
+        "moves": [
+          "e3e2",
+          "c1e2",
+          "d4e3",
+          "e2c3",
+          "e3f3"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cmiu8xb5s07dqv8b8761bg9f5",
+        "name": "0Mihi",
+        "fen": "8/8/p2k2pp/1p2p3/1P2K1PP/P4P2/8/8 w - - 0 35",
+        "solution": "g4g5 h6g5 h4g5 d6e6 e4d3 e6f5 d3e3 f5g5 e3e4 g5f6",
+        "rating": 2151,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "pawnEndgame",
+          "veryLong",
+          "zugzwang"
+        ],
+        "setup": "g4g5",
+        "moves": [
+          "h6g5",
+          "h4g5",
+          "d6e6",
+          "e4d3",
+          "e6f5",
+          "d3e3",
+          "f5g5",
+          "e3e4",
+          "g5f6"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cml0souem2cpov8ewgwx36vy1",
+        "name": "4j9ec",
+        "fen": "8/1r4kp/Q3pNp1/3pP3/P2P4/3n2KP/5PP1/1q6 b - - 1 37",
+        "solution": "b7b6 a6c8 d3e5 d4e5 b6b3 g3h2",
+        "rating": 2197,
+        "tags": [
+          "advantage",
+          "defensiveMove",
+          "endgame",
+          "long"
+        ],
+        "setup": "b7b6",
+        "moves": [
+          "a6c8",
+          "d3e5",
+          "d4e5",
+          "b6b3",
+          "g3h2"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cml0sorsq27onv8ew6w0agts2",
+        "name": "4R32j",
+        "fen": "8/8/8/8/3K1pkP/6P1/8/8 w - - 0 49",
+        "solution": "h4h5 f4g3 d4e3 g4h3 e3e2 g3g2 e2f2 h3h2",
+        "rating": 2165,
+        "tags": [
+          "advancedPawn",
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "pawnEndgame",
+          "veryLong"
+        ],
+        "setup": "h4h5",
+        "moves": [
+          "f4g3",
+          "d4e3",
+          "g4h3",
+          "e3e2",
+          "g3g2",
+          "e2f2",
+          "h3h2"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cml0snzpr0p7kv8ewgr9kj3rq",
+        "name": "1OoJd",
+        "fen": "r4rk1/5p1p/4pPp1/p7/1p1q2PQ/7P/P5K1/R4R2 b - - 0 26",
+        "solution": "a8c8 h4h6 c8c2 g2g3 d4e3 h6e3",
+        "rating": 2172,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "master"
+        ],
+        "setup": "a8c8",
+        "moves": [
+          "h4h6",
+          "c8c2",
+          "g2g3",
+          "d4e3",
+          "h6e3"
+        ],
+        "side": "w"
+      }
+    ]
+  },
+  {
+    "level": 10,
+    "puzzles": [
+      {
+        "id": "cml0sp9jj35s7v8ewppvu65te",
+        "name": "7hplV",
+        "fen": "R7/8/P7/5kp1/8/4pp1P/r5P1/6K1 w - - 0 47",
+        "solution": "g2f3 a2a1 g1g2 e3e2 a8f8 f5g6",
+        "rating": 2265,
+        "tags": [
+          "advancedPawn",
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long",
+          "rookEndgame"
+        ],
+        "setup": "g2f3",
+        "moves": [
+          "a2a1",
+          "g1g2",
+          "e3e2",
+          "a8f8",
+          "f5g6"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cml0sokre1u7yv8ewtt90t4go",
+        "name": "3ejtj",
+        "fen": "8/6pp/8/3kp3/7P/6P1/1B2K1n1/8 b - - 3 52",
+        "solution": "g2h4 g3h4 d5e4 b2c1 e4f5 e2f3",
+        "rating": 2273,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "hangingPiece",
+          "long",
+          "quietMove"
+        ],
+        "setup": "g2h4",
+        "moves": [
+          "g3h4",
+          "d5e4",
+          "b2c1",
+          "e4f5",
+          "e2f3"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cml0so94617azv8ewloghtq4p",
+        "name": "2KdWo",
+        "fen": "1q4rk/pp3Q2/4r2b/3pP1pP/1P5P/P2P4/1B6/2R3K1 b - - 0 30",
+        "solution": "e6e5 c1c7 g5h4 g1h1 b8c7 f7c7",
+        "rating": 2267,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "long",
+          "middlegame",
+          "pin"
+        ],
+        "setup": "e6e5",
+        "moves": [
+          "c1c7",
+          "g5h4",
+          "g1h1",
+          "b8c7",
+          "f7c7"
+        ],
+        "side": "w"
+      },
+      {
+        "id": "cml0sotla2b8gv8ewiu47c1sg",
+        "name": "4cY6a",
+        "fen": "8/8/1K6/p7/P1P1nk2/3B4/5p1P/8 w - - 1 47",
+        "solution": "d3f1 e4d2 f1h3 d2c4 b6a6 c4e3",
+        "rating": 2285,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long"
+        ],
+        "setup": "d3f1",
+        "moves": [
+          "e4d2",
+          "f1h3",
+          "d2c4",
+          "b6a6",
+          "c4e3"
+        ],
+        "side": "b"
+      },
+      {
+        "id": "cml0sp9ja35kbv8ewejpdap1n",
+        "name": "7bSFH",
+        "fen": "4r1k1/p5p1/4p1Np/2p1P2P/p2p1RP1/6K1/1qP2R2/8 b - - 1 40",
+        "solution": "b2c1 f4f8 g8h7 f8e8 c1e3 g3g2",
+        "rating": 2259,
+        "tags": [
+          "crushing",
+          "defensiveMove",
+          "endgame",
+          "long"
+        ],
+        "setup": "b2c1",
+        "moves": [
+          "f4f8",
+          "g8h7",
+          "f8e8",
+          "c1e3",
+          "g3g2"
+        ],
+        "side": "w"
+      }
+    ]
+  }
+]

@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "node .next/standalone/server.js",
     "lint": "eslint",
-    "test:puzzle-navigation": "node --test scripts/test-puzzle-navigation.cjs"
+    "test:puzzle-navigation": "node --test scripts/test-puzzle-navigation.cjs",
+    "test:puzzle-submission": "node --test scripts/test-puzzle-submission.cjs",
+    "test:learning": "node --test scripts/test-learning-upgrades.cjs",
+    "test:practical-training": "node --test scripts/test-practical-training.cjs scripts/test-practical-training-ui.cjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
@@ -16,13 +19,13 @@
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
     "lucide-react": "^0.554.0",
-    "next": "16.0.3",
+    "next": "16.3.8",
     "next-auth": "^5.0.0-beta.30",
     "next-intl": "^4.5.3",
     "prisma": "^6.19.0",
-    "react": "19.2.0",
+    "react": "19.2.7",
     "react-chessboard": "^5.8.4",
-    "react-dom": "19.2.0",
+    "react-dom": "19.2.7",
     "stockfish.js": "^10.0.2",
     "tailwind-merge": "^3.4.0"
   },
@@ -34,7 +37,7 @@
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.9.15",
     "eslint": "^9",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "16.3.8",
     "jsdom": "^29.1.1",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",

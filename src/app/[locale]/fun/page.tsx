@@ -8,6 +8,8 @@ import { BOTS } from "@/lib/bots";
 
 const TILES = [
     { href: "/play/bots", icon: "🐾", key: "bots", color: "from-orange-50 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30" },
+    { href: "/fun/endgames", icon: "♜", key: "endgames", color: "from-indigo-50 to-blue-100 dark:from-indigo-900/30 dark:to-blue-900/30" },
+    { href: "/fun/defense", icon: "🔎", key: "defense", color: "from-teal-50 to-emerald-100 dark:from-teal-900/30 dark:to-emerald-900/30" },
     { href: "/games", icon: "🌍", key: "games", color: "from-green-50 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30" },
     { href: "/fun/streak", icon: "🔥", key: "streak", color: "from-red-50 to-orange-100 dark:from-red-900/30 dark:to-orange-900/30" },
     { href: "/race", icon: "🏁", key: "race", color: "from-sky-50 to-blue-100 dark:from-sky-900/30 dark:to-blue-900/30" },

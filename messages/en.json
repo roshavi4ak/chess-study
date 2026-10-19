@@ -54,7 +54,9 @@
         "weekTitle": "This week",
         "weekProgress": "{done} of {goal} days",
         "weekGoalReached": "Weekly goal reached!",
-        "homeworkLevel": "Pass the {level} test"
+        "homeworkLevel": "Pass the {level} test",
+        "puzzleReviewTask": "Remember tricky puzzles",
+        "puzzleReviewReason": "A short, unrated review of positions you met before."
     },
     "CoachHomework": {
         "startLevel": "Start level",
@@ -179,6 +181,8 @@
         "yourBest": "Your best: {score}",
         "clubThisWeek": "Club top this week",
         "clubEmpty": "Nobody yet this week — be the first!",
+        "clubAllTime": "All-time records",
+        "clubAllTimeEmpty": "No records yet — be the first!",
         "newBest": "New personal best! ⭐",
         "coordinatesTitle": "Find the square",
         "coordinatesIntro": "Click the square that appears. How many can you find in 30 seconds?",
@@ -516,7 +520,11 @@
         "cardsTitle": "My cards",
         "cardsText": "Your collection of earned cards.",
         "certificatesTitle": "Certificates",
-        "certificatesText": "Print your achievements."
+        "certificatesText": "Print your achievements.",
+        "endgamesTitle": "Finish the endgame",
+        "endgamesText": "Give mate, promote a pawn, or save a draw against the computer.",
+        "defenseTitle": "Defense detective",
+        "defenseText": "Spot the opponent’s threat and choose a safe reply."
     },
     "Tournaments": {
         "title": "Club tournaments",
@@ -786,6 +794,9 @@
         "reset": "Reset",
         "showHint": "Show Hint",
         "hint": "Hint",
+        "nextMoveHint": "Play {move}.",
+        "hintNotice": "Using a hint gives no points and does not count as a solve.",
+        "puzzleCompletedWithHint": "Completed with a hint — not counted as solved.",
         "noMorePuzzles": "No more puzzles available!",
         "rating": "Rating"
     },
@@ -1020,5 +1031,514 @@
         "kind_LEVEL_TEST": "Level test",
         "kind_LEVEL_PRACTICE": "Level practice",
         "kind_TOURNAMENT": "Tournament"
+    },
+    "LearningHelp": {
+        "hint": "Give me a clue",
+        "moreHelp": "A little more help",
+        "hintStage": "Hint {stage} of 3",
+        "mate": "Look for a check that leaves the king no escape.",
+        "check": "Look for a forcing check. What must the king do?",
+        "promotion": "Can a pawn reach the last rank?",
+        "capture": "Look for a capture. Check what the opponent can do afterwards.",
+        "think": "Look for checks, captures and threats. Which piece could become more active?",
+        "pieceClue": "Look at the {piece} on {square}.",
+        "moveClue": "Play {move}.",
+        "assisted": "Help is welcome. This attempt is practice, not an independent solve.",
+        "piece_p": "pawn",
+        "piece_n": "knight",
+        "piece_b": "bishop",
+        "piece_r": "rook",
+        "piece_q": "queen",
+        "piece_k": "king",
+        "explore": "Explore my move",
+        "close": "Close",
+        "yourMove": "Your idea: {move}",
+        "analysing": "Finding a reply…",
+        "unavailable": "The board is ready, but the computer could not find a reply. You can explore it in analysis.",
+        "terminal": "This move ends the game. Look at whether it is checkmate or a draw.",
+        "showReply": "Show an opponent reply",
+        "backToMove": "Back to my move",
+        "mateReply": "The opponent can play {move}, giving checkmate.",
+        "captureReply": "The opponent can play {move}, capturing a {piece}.",
+        "checkReply": "The opponent can play {move}, giving check.",
+        "possibleReply": "One possible reply is {move}. What changes?",
+        "exploreNotice": "Watch the reply, compare the ideas, then try the exercise again.",
+        "saveError": "Your result could not be saved. Please try saving again before leaving.",
+        "retrySave": "Save again",
+        "saving": "Saving your practice…"
+    },
+    "PuzzleReview": {
+        "title": "Try these again",
+        "intro": "Revisit a few tricky positions, then try a fresh example of the same idea. Take your time and ask for help whenever you need it.",
+        "shortIntro": "Remember a tricky idea, without rating pressure.",
+        "retry": "A familiar position",
+        "fresh": "A new position with a similar idea",
+        "progress": "Position {current} of {total}",
+        "unrated": "Practice only — your rating will not change.",
+        "done": "Good work remembering!",
+        "summary": "You worked through {count} positions; {independent} without help or mistakes.",
+        "comeBack": "Tricky positions return on later days. Each independent review gives your memory a little longer before the next visit.",
+        "back": "Back to my dashboard",
+        "empty": "No puzzle reviews are due today. Missed or assisted puzzles first return tomorrow.",
+        "alreadyDone": "You have finished today’s puzzle reviews!",
+        "newPuzzles": "Try a new puzzle",
+        "signIn": "Sign in to see your personal puzzle reviews."
+    },
+    "MicroLessons": {
+        "step": "Step {current} of {total}",
+        "showExample": "Show me the idea",
+        "tryYourself": "Now I try",
+        "tryAgain": "Keep exploring. Try another square or move.",
+        "found": "Found {count} of {total}",
+        "complete": "You did it!",
+        "practice": "Practise this skill",
+        "help": "Show a helping arrow",
+        "replay": "Replay the lesson",
+        "listen": "Listen",
+        "stopAudio": "Stop audio",
+        "voiceUnavailable": "No voice for this language on this device",
+        "safeCapture": {
+            "title": "Take an undefended piece",
+            "intro": "The rook moves in straight lines. The black knight on a5 has no defender. Can the rook capture it safely?",
+            "example": "The rook took the knight. The black king is too far away to take the rook back.",
+            "find": "Tap a5, where the captured knight stood.",
+            "challenge": "A fresh position! Use the rook to capture the undefended bishop.",
+            "takeaway": "Before capturing, look for the opponent’s possible recapture."
+        },
+        "checkmate": {
+            "title": "Check or checkmate?",
+            "intro": "Checkmate is check with no escape. The queen and king can work together to trap the other king.",
+            "example": "The queen gives check on g7. Our king protects the queen and the black king has no safe escape.",
+            "find": "Tap the black king that is checkmated.",
+            "challenge": "The queen starts on a different square. Give checkmate in one move.",
+            "takeaway": "For checkmate, check the attack, every escape square, and whether the checking piece can be captured."
+        },
+        "fork": {
+            "title": "Two targets, one knight",
+            "intro": "A fork attacks two pieces at once. Watch the knight jump to f7.",
+            "example": "The knight attacks the king on h8 AND the queen on d8. The king must answer the check first.",
+            "find": "Tap both pieces attacked by the knight.",
+            "challenge": "A new fork! Jump the knight to e7 to attack the king and queen together.",
+            "takeaway": "Look for a square where your knight attacks two valuable targets."
+        },
+        "pin": {
+            "title": "A piece that cannot move",
+            "intro": "Watch the bishop move to b5 and line up with the knight and king.",
+            "example": "The knight on d7 is pinned to its king on e8. Moving the knight would expose the king to check, so it cannot legally move.",
+            "find": "Tap the pinned knight and the king behind it.",
+            "challenge": "Create the same pin from a new square. Move the bishop to b5.",
+            "takeaway": "A piece pinned to its king cannot move if that would expose the king."
+        },
+        "defend": {
+            "title": "Notice the opponent’s threat",
+            "intro": "The black rook on a8 attacks our rook down the open a-file. We can move our rook to safety.",
+            "example": "Our rook moves off the attacked file. First notice the danger, then choose a safe square.",
+            "find": "Tap the black rook that was making the threat.",
+            "challenge": "The black rook now attacks our rook on the c-file. Move our rook to a safe square.",
+            "takeaway": "After the opponent moves, ask: what is attacked, and how can I keep it safe?"
+        }
+    },
+    "Training": {
+        "unrated": "Learning practice — your chess and puzzle ratings do not change.",
+        "lineStep": "Move {current} of {total}",
+        "previous": "Previous move",
+        "next": "Next move",
+        "saving": "Saving your activity…",
+        "saved": "Activity saved.",
+        "saveError": "Your activity could not be saved.",
+        "retrySave": "Try saving again",
+        "signInSave": "Sign in to save your activity. You can still practise here."
+    },
+    "Endgames": {
+        "title": "Finish the endgame",
+        "back": "Back to Play & learn",
+        "intro": "First learn the strategy with an annotated board tutorial. Then try a random endgame on your own. You can return to the tutorial without losing your practice position.",
+        "thinking": "Thinking…",
+        "yourTurn": "Your turn — White to move",
+        "computerTurn": "Computer to move",
+        "engineError": "The endgame advisor could not reply. Try again shortly, or take back your move.",
+        "retryComputer": "Try the computer again",
+        "hint": "Give me a hint",
+        "takeback": "Take back my move",
+        "restart": "Start again from a new position",
+        "newPosition": "New random position",
+        "showDemo": "Show a demonstration",
+        "hideDemo": "Hide the demonstration",
+        "demonstration": "Watch the technique",
+        "lastMove": "Last move: {move}",
+        "outcome_won": "Goal achieved!",
+        "outcome_stalemate": "That is stalemate",
+        "outcome_draw": "The game is drawn",
+        "outcome_lost": "Let’s try again",
+        "stalemateHelp": "The king is not in check and has no legal move. That is a draw, not checkmate. Restart and leave an escape square until you are ready to give mate.",
+        "wonAlone": "You reached the goal without hints, takebacks or returning to the tutorial during this attempt.",
+        "wonWithHelp": "You reached the goal with help. Try a new position when you feel ready.",
+        "tryAgainHelp": "A tricky ending is a chance to learn. Replay the example and try again.",
+        "queenMate": {
+            "title": "King and queen mate",
+            "instruction": "You are White. Use your queen and king together to give checkmate. Keep an eye on stalemate.",
+            "demo": "The white king protects the queen on g7. The queen checks the black king and covers its escape squares."
+        },
+        "rookMate": {
+            "title": "King and rook mate",
+            "instruction": "You are White. Bring your king closer and use the rook to give checkmate at the edge.",
+            "demo": "The king on g6 guards g7 and h7. The rook moves to a8 to check along the last rank."
+        },
+        "promotion": {
+            "title": "Promote a pawn",
+            "instruction": "You are White. Help your pawn reach the last rank. Keep the king close enough to protect its journey.",
+            "demo": "A pawn on the seventh rank needs one more safe step. Here it can promote on f8."
+        },
+        "opposition": {
+            "title": "King and pawn teamwork",
+            "instruction": "You are White. Use your king to make space for the pawn and promote it. The defending king will try to block you.",
+            "demo": "One winning example: the king makes space, the pawn advances, and the king protects the promotion route. Your opponent may choose different replies in practice."
+        },
+        "holdDraw": {
+            "title": "Save a rook-pawn ending",
+            "instruction": "You are White with only a king. Stay near the pawn’s promotion corner and try to reach a draw. Sometimes taking the pawn is possible too.",
+            "demo": "If Black moves the king to g3 here, White has no legal move but is not in check. This is stalemate: a draw."
+        },
+        "verifiedStarts": "Random legal starts and endgame moves verified with tablebases",
+        "bishopPairMate": {
+            "title": "King and two bishops mate",
+            "instruction": "You are White. Your bishops cover opposite-colored squares. Bring your king up and squeeze the opposing king toward an edge, then a corner. Keep both bishops safe.",
+            "demo": "The king protects g7 and covers g8. One bishop covers h7; the other gives check on g7. The pieces cover every escape together."
+        },
+        "bishopKnightMate": {
+            "title": "King, bishop and knight mate",
+            "instruction": "You are White. Work with all three pieces. Drive the king toward a corner of the same color as your bishop. The knight covers squares your bishop cannot reach. This is an advanced challenge.",
+            "demo": "The knight on f6 covers g8 and h7. The king protects g7, and the bishop moves to g7 to deliver mate in the correct-colored corner."
+        }
+    },
+    "Defense": {
+        "title": "Defense detective",
+        "back": "Back to Play & learn",
+        "intro": "Ten detective levels. Start with simple attacks in Level 1, then tackle increasingly difficult defensive puzzles from our collection in Levels 2–10. Each round has five untimed positions.",
+        "progress": "Mystery {current} of {total}",
+        "watch": "Watch the opponent",
+        "watchHelp": "Black is about to move. Look for what changes.",
+        "showMove": "Play the opponent’s move",
+        "identify": "Which white piece is in danger?",
+        "identifyHelp": "Tap the white piece Black could win. The yellow squares show Black’s last move.",
+        "choose": "How will you protect it?",
+        "chooseHelp": "Move on the board or choose a move below. Other safe defenses count too.",
+        "correct": "You found a safe reply!",
+        "takeaway": "Notice the threat first, then move, capture, block or defend safely.",
+        "showThreat": "Highlight the piece in danger",
+        "wrongPiece": "Look again: which white piece can Black take?",
+        "wrongMove": "That move leaves trouble. Watch a possible reply, then choose another defense.",
+        "consequence": "What could happen after that move?",
+        "learned": "You learned this one with help. Good work trying again.",
+        "independent": "You spotted the danger and solved it independently.",
+        "next": "Next mystery",
+        "roundDone": "Detective round complete!",
+        "summary": "You solved {correct} of {total} positions without mistakes or help.",
+        "newRound": "Five new mysteries"
+    },
+    "BotTeaching": {
+        "enabled": "Learn while playing",
+        "selectionHelp": "The animal asks about threats, offers hints and lets you take moves back. You can turn help off during the game.",
+        "intro": "Find the danger, keep pieces safe, and practise two small goals. These games are unrated.",
+        "identifyThreat": "The opponent can win one of your pieces. Tap the piece in danger before you move.",
+        "wrongPiece": "Try another piece, or ask me to show the threat.",
+        "showThreat": "Show me the piece in danger",
+        "threatNamed": "Your {piece} on {square} needs attention.",
+        "escapeCheck": "Your king is in check. Move it, block the check, or capture the checking piece.",
+        "defendClue": "Find a safe response: move the piece, take the attacker, block the line or add a useful defender.",
+        "thinkClue": "Look for checks, captures and threats before choosing your move.",
+        "castleClue": "Castling is legal here. Think about bringing your king to safety.",
+        "developClue": "Try bringing a knight or bishop off its starting rank.",
+        "developGoal": "Develop two minor pieces",
+        "castleGoal": "Castle your king",
+        "hint": "A little help with my move",
+        "mateWarning": "After your idea, the opponent has a checkmate in one. Would you like to try another move?",
+        "materialWarning": "After your idea, the opponent can win material at {square} by capturing your {piece}. Explore the reply before deciding.",
+        "showConsequence": "Explore the opponent’s reply",
+        "tryAnother": "Try a different move",
+        "playAnyway": "Play my idea anyway",
+        "matePraise": "Checkmate! Your pieces worked together.",
+        "castlePraise": "You castled and brought your rook into play.",
+        "rescuePraise": "You dealt with the immediate material threats.",
+        "developPraise": "You brought a minor piece off its starting rank.",
+        "capturePraise": "You found a capture without leaving an immediate material loss.",
+        "pauseBeforeMove": "Pause before this move. Look at the opponent’s reply below the board."
+    },
+    "DefenseLevels": {
+        "chooseLevel": "Choose a detective level",
+        "level": "Level {level}",
+        "stars": "{count} stars",
+        "beginner": "Level 1: spot a simple attack and protect the piece.",
+        "rated": "Defensive puzzles from our collection · puzzle rating {min}–{max}.",
+        "moves": "The stored solutions contain at least {count, plural, one {# defensive move} other {# defensive moves}} to find.",
+        "loading": "Finding five fresh defensive positions…",
+        "loadError": "These positions could not be loaded. Please try again.",
+        "retry": "Try loading again",
+        "watchHelp": "Watch the opponent’s last move before choosing your defense.",
+        "findDefense": "What is the opponent threatening?",
+        "answerCheck": "Your king is in check. Find the best defense.",
+        "playHelp": "Find a defensive move on the board, then keep calculating after the opponent replies. There are no candidate buttons at these levels.",
+        "playWhite": "You play White",
+        "playBlack": "You play Black",
+        "rating": "Puzzle rating {rating}",
+        "checking": "Checking your alternative and the opponent’s best continuation…",
+        "engineError": "Your move could not be checked. The position has stayed the same; try the move again or use a hint.",
+        "hint": "Help me find the defense",
+        "checkThreat": "The king is under attack. Look at legal escapes, captures and blocks.",
+        "pieceThreat": "Immediate material danger on: {squares}. Check the opponent’s captures and your replies.",
+        "hiddenThreat": "The danger may take several moves. Check threats to the king, captures, pins and promotion plans before choosing a defense.",
+        "weaker": "The engine found a stronger continuation for the opponent after your move. Explore it, then try again.",
+        "alternative": "Your alternative preserves the position at the engine’s search depth. This defense counts too.",
+        "solved": "You worked through the defensive continuation. Notice how your move answered the opponent’s plan."
+    },
+    "EndgameLessons": {
+        "tutorial": "Strategy tutorial",
+        "chooseMode": "Learn or practise",
+        "learn": "Learn the plan",
+        "try": "Try on my own",
+        "practice": "I’m ready — let me play",
+        "review": "Review the tutorial",
+        "step": "Strategy step {current} of {total}",
+        "showMove": "Show the next example move",
+        "previousStep": "Previous strategy step",
+        "nextStep": "Next strategy step",
+        "avoid": "A mistake to avoid",
+        "checklist": "My plan to remember",
+        "legend": "Blue squares show the idea. Gold squares and the arrow show the last example move.",
+        "examples": "These are short teaching examples, not one sequence to memorize. The defending king can choose other moves in your random practice position.",
+        "queenMate": {
+            "check1": "Use the queen to make the king’s space smaller; do not chase with endless checks.",
+            "check2": "Bring your king up while keeping the queen safe.",
+            "check3": "At the edge, cover escapes and give check. No check plus no legal move is stalemate.",
+            "trap": "A queen can cover every escape too soon. Before a quiet queen move, check whether the opponent will still have a legal move.",
+            "fence": {
+                "title": "Build a fence with the queen",
+                "explain": "The black king is on f6. The queen can form a fence across a file and a rank. Watch Qe4: the king cannot cross the e-file or the fourth rank while the queen controls them.",
+                "after": "After Qe4 and …Kg7, the king stays above the fourth rank and to the right of the e-file. Aim to tighten this space gradually while your king approaches."
+            },
+            "king": {
+                "title": "The queen needs its king",
+                "explain": "Our king is on f4 and the defending king is on h7. Rather than giving another check, bring our king toward the area we have restricted.",
+                "after": "Kg5 gives our king a more active post. After …Kh8, we still need to coordinate both pieces; the queen should not have to do everything alone."
+            },
+            "stalemate": {
+                "title": "Spot the stalemate trap",
+                "explain": "This is a deliberately bad example. With our king on g6 and Black on h8, Qf7 would cover all three neighbouring squares without checking the king. Watch what happens.",
+                "after": "Qf7 is stalemate: h8 is not attacked, but g8, g7 and h7 are unavailable. That is a draw. Leave an escape until you can give a real mating check."
+            },
+            "mate": {
+                "title": "Finish with a protected check",
+                "explain": "Here the queen starts on f7 and our king on g6. The king protects g7. Put the queen where it gives check and closes the remaining exits.",
+                "after": "Qg7# checks h8. The queen covers g8 and h7, and our king protects the queen on g7. Every escape and capture has been answered."
+            }
+        },
+        "rookMate": {
+            "check1": "Use a rook file or rank as a wall, and keep the rook out of reach.",
+            "check2": "Bring your king up to take away escape squares.",
+            "check3": "Use a waiting move if needed; give the final rank/file check only when the king covers the exits.",
+            "trap": "Random checks let the king wander. A rook wall plus an active king is more useful than checking on every turn. Do not leave the rook next to the enemy king unprotected.",
+            "fence": {
+                "title": "Cut the board with a rook wall",
+                "explain": "The black king is on f6. Re1 puts a wall on the e-file. The rook controls the highlighted squares, so the king cannot cross that file.",
+                "after": "After Re1 and …Kf7, the wall remains. Keep the rook safe and use your king to help reduce the space on the other side."
+            },
+            "king": {
+                "title": "Advance the king behind the wall",
+                "explain": "Our rook already controls the e-file. The king can move from c3 to d4, taking a more active position without dismantling the rook wall.",
+                "after": "The king on d4 helps control central squares such as e5. Continue improving the king’s position while the rook keeps the defender confined."
+            },
+            "wait": {
+                "title": "A quiet move can make the king move",
+                "explain": "Black is on h8. Our king on f6 and rook on a7 cover g7 and h7, leaving g8. A rook move along the seventh rank can keep those restrictions without giving check.",
+                "after": "Rb7 is a waiting move. Black must play …Kg8 in this example. You changed whose turn it was without losing the wall."
+            },
+            "mate": {
+                "title": "King and rook close the last exits",
+                "explain": "The defending king is on h8 and our king is on g6. Our king covers g7 and h7. The rook can now give the final check along the back rank.",
+                "after": "Ra8# checks along the eighth rank. The rook controls g8, and our king covers g7 and h7. That cooperation makes it mate."
+            }
+        },
+        "promotion": {
+            "check1": "Bring the king ahead of the pawn toward useful key squares.",
+            "check2": "Before every push, check whether the enemy king can take the pawn.",
+            "check3": "Escort the pawn to the last rank; do not abandon its protection just to move faster.",
+            "trap": "Being closer to the pawn is only a starting advantage. An unprotected push can still lose it. Check the defending king’s next move before advancing.",
+            "lead": {
+                "title": "Let the king lead the way",
+                "explain": "The pawn is on e3. For this non-rook pawn, d5, e5 and f5 are key squares. Watch the king step onto e5, ahead of the pawn.",
+                "after": "Ke5 gives the pawn an escort in front. After …Kb7, the king holds an important square while the pawn prepares to follow."
+            },
+            "protect": {
+                "title": "Push when the king can protect the pawn",
+                "explain": "With the king on e5, the pawn can step from e3 to e4 and remain next to its king. Compare this with sending a pawn forward alone.",
+                "after": "After e4, our king on e5 protects the pawn on e4. Keep asking whether the next square will be safe before each new push."
+            },
+            "rush": {
+                "title": "A rushed pawn can be captured",
+                "explain": "This is a deliberately bad push. Our king on f2 is too far away to protect e5. If the pawn runs from e4 to e5, Black can take it.",
+                "after": "After e5? …Kxe5, the pawn is gone and only two kings remain. Advance the king when the pawn would otherwise be left unprotected."
+            },
+            "promote": {
+                "title": "Take the final safe step",
+                "explain": "The pawn is on f7, our king is on f6, and the defending king is far away on h8. The pawn can now reach the last rank.",
+                "after": "f8=Q+ promotes safely. In a real game you would continue toward checkmate; in this challenge, reaching promotion completes the goal."
+            }
+        },
+        "opposition": {
+            "check1": "Identify who must move when the kings face each other across one empty square.",
+            "check2": "Use a king move to go around the defender when it steps aside.",
+            "check3": "Push the pawn only when your king can protect its route and promotion square.",
+            "trap": "Opposition is a tool, not a rule to follow blindly. Do not make a pawn push automatically when a king move can win access to a useful square.",
+            "face": {
+                "title": "Understand whose turn matters",
+                "explain": "The kings on e6 and e8 face each other across the empty e7-square. Here it is Black’s turn. Black must move its king away from this face-to-face position.",
+                "after": "After …Kd8, Kf7 goes around the defender. The king on f7 controls e8 and helps clear a route for the pawn."
+            },
+            "side": {
+                "title": "Go around the defending king",
+                "explain": "In this example White moves first. Kf6 goes to the side. After the sample reply …Kf8, the pawn can advance under the king’s protection.",
+                "after": "Kf6 …Kf8 e6 is one useful continuation. Black can defend differently in your game, so look for the same ideas rather than copying the moves."
+            },
+            "escort": {
+                "title": "Keep the pawn protected as the king changes sides",
+                "explain": "The pawn on e6 can move to e7, protected by our king on f6. When Black steps to d7, our king can move to f7.",
+                "after": "After e7 …Kd7 Kf7, our king protects e8. Black cannot simply step onto that promotion square to block the pawn."
+            },
+            "promote": {
+                "title": "Use the route your king created",
+                "explain": "Our king on f7 guards e8 and the pawn is on e7. Watch one legal defending reply and the final promotion.",
+                "after": "After …Kd6, e8=Q completes the promotion. The king’s work created the safe route; the pawn did not need to race ahead alone."
+            }
+        },
+        "holdDraw": {
+            "check1": "Find the rook-pawn’s promotion corner: h1 for a black h-pawn, a1 for a black a-pawn.",
+            "check2": "Keep your king close to that corner and avoid being driven away.",
+            "check3": "Recognize stalemate, or capture the pawn if the square is genuinely safe.",
+            "trap": "Do not run far from the promotion corner, and do not assume every pawn can be captured. The opposing king may protect it.",
+            "corner": {
+                "title": "Head for the promotion corner",
+                "explain": "Black’s h-pawn wants to reach h1. Our king on f2 can approach through g1. The corner is a useful shelter when the attacking king cannot drive us away.",
+                "after": "Kg1 …Kg4 Kh1 reaches the corner in this example. Stay alert to checks and keep access to this shelter."
+            },
+            "stalemate": {
+                "title": "Understand why the corner can save a draw",
+                "explain": "Our king is on h1, Black’s king is on g3, and the pawn is on h3. If Black pushes to h2, all of our exits disappear — but h1 is not in check.",
+                "after": "…h2 is stalemate. The pawn controls g1 and the black king controls g2 and h2. White has no legal move and is not in check, so the game is drawn."
+            },
+            "capture": {
+                "title": "Take an unprotected pawn when it is safe",
+                "explain": "This time Black’s king is on g4, which does not control h2. Our king on h1 is allowed to capture the pawn on h2.",
+                "after": "Kxh2 leaves only two kings, so the game is drawn. The important check was whether the opposing king protected the capture square."
+            }
+        },
+        "bishopPairMate": {
+            "check1": "Use the bishops together: each covers one colour of squares.",
+            "check2": "Bring the king up while the bishops build diagonal barriers.",
+            "check3": "Drive the king to an edge and build a mating net, checking every escape before the final check.",
+            "trap": "Two bishops still need their king. Do not separate the pieces carelessly, lose a bishop to the defending king, or cover every escape without giving check.",
+            "diagonals": {
+                "title": "Build a net on both colours",
+                "explain": "The bishops work on different colours. After Bf4, one bishop controls e4, f5 and g6; the other controls g5 and h6. These diagonal barriers work together.",
+                "after": "After Bf4 …Ke6, look at the two sets of diagonal squares. Use the pair to restrict routes, rather than chasing the king with one bishop alone."
+            },
+            "king": {
+                "title": "The king completes the bishop barriers",
+                "explain": "Our king on d4 can move to e5 while the bishops stay coordinated. The king is needed to cover squares that the diagonals alone leave open.",
+                "after": "After Ke5 …Kg8, our king has an active role and controls squares such as d6, e6 and f6. Keep the pieces cooperating as the defender approaches an edge."
+            },
+            "net": {
+                "title": "See how the pieces share the last squares",
+                "explain": "In this finishing example, our king on f7 covers g8 and protects g7. The bishop on f5 covers h7. The bishop on h6 can give the mating check.",
+                "after": "Bg7# checks the king on h8. One bishop gives check, the other closes h7, and the king supports the net. Every piece has a job."
+            }
+        },
+        "bishopKnightMate": {
+            "check1": "Aim for a corner of the same colour as your bishop.",
+            "check2": "Use the king as a wall, and coordinate the knight with the bishop to cover both colours.",
+            "check3": "Recognize useful knight routes, but recalculate the king’s escapes after every reply.",
+            "trap": "The knight route is not an automatic recipe. Check every enemy capture and escape after each move. Keep the knight and bishop safe while aiming for a corner of the bishop’s colour.",
+            "corner": {
+                "title": "Choose the right-coloured corner",
+                "explain": "The bishop on b3 runs on light squares and protects our knight on f7 along b3–c4–d5–e6–f7. The matching mating corners are a8 and h1, highlighted in blue.",
+                "after": "The bishop’s colour determines the target corners. In a different starting position, a dark-squared bishop would point you toward a1 or h8."
+            },
+            "wall": {
+                "title": "Make a wall with the king",
+                "explain": "Our king can move from c6 to d6 to control c7, d7 and e7. The bishop on b3 protects the knight on f7: Black cannot play …Kxf7 because f7 is attacked by the bishop.",
+                "after": "After Kd6 …Kf8, c7, d7 and e7 remain controlled by our king, and the bishop still protects f7. Always check the defender’s captures before moving your king away from a piece."
+            },
+            "routeA": {
+                "title": "Recognize the first half of a knight route",
+                "explain": "A useful pattern is a W-shaped knight route. The bishop on b3 protects the starting square f7. Follow f7–e5–d7 with example king replies; e5 is out of the black king’s reach, and our king on c6 protects d7.",
+                "after": "After Ne5 …Ke8 Nd7 …Kd8, the knight is on d7, supported by the king. This illustrates a pattern, not a claim that Black must choose these exact replies."
+            },
+            "routeB": {
+                "title": "Continue the pattern toward the corner",
+                "explain": "Continue the example route d7–c5–b7. Notice how our king supports these knight posts while the defending king moves toward the a8 side.",
+                "after": "After Nc5 …Kc8 Nb7 …Kb8, the route f7–e5–d7–c5–b7 is complete. Further king and bishop coordination is still needed to finish; the W alone is not checkmate."
+            },
+            "mate": {
+                "title": "Finish by sharing the escape squares",
+                "explain": "This final example has a dark-squared bishop, so h8 is the right-coloured corner. The knight on f6 controls g8 and h7, and our king protects g7.",
+                "after": "Bg7# gives the final check on h8. The knight closes g8 and h7, the king protects g7, and the bishop supplies the check."
+            }
+        }
+    },
+    "EndgameHints": {
+        "light": "light squares",
+        "dark": "dark squares",
+        "focus": "Blue squares mark strategic targets; they are not all legal moves right now.",
+        "cannotWin": "With accurate defense, this position no longer forces the winning goal. You can practise the best resistance or take back a move to restore your chance.",
+        "cannotDraw": "The defender can now force a win with accurate play. Practise resisting, or take back a move to return to a drawable position.",
+        "plan_fence": "The defending king is on {enemyKing}. Use the piece on {heavy} to fence off space, then bring your king on {king} up behind the fence.",
+        "plan_edge": "The defending king is already at the edge on {enemyKing}. Coordinate your king on {king} with the mating piece; close the exits before the final check, and watch for stalemate.",
+        "plan_pawn": "Your pawn is on {pawn}, and your king is on {king}. The useful key squares are {keys}. Use the king to control the route before pushing the pawn past its protection.",
+        "plan_rookPawn": "Your pawn is on the edge at {pawn}. Rook pawns have different winning rules: focus on the promotion corner {corner}, not the usual three key squares.",
+        "plan_corner": "The black pawn on {pawn} wants to promote on {corner}. Your king on {king} should keep access to that corner and avoid being driven away from it.",
+        "plan_survive": "The pawn has already promoted. Your king is on {king}; survival is harder now. Consider taking back a move to practise the original drawing method.",
+        "plan_finish": "The king on {enemyKing} can be checkmated on this move. Look for a checking move that leaves no escape, capture or block.",
+        "plan_promoteNow": "Your pawn on {pawn} can reach the last rank on this move. Look at the promotion square and finish the challenge’s goal.",
+        "plan_takePawn": "The pawn on {pawn} is within reach of your king on {king}, and a legal capture is available. Taking the last pawn will leave a draw with two kings.",
+        "plan_inCheck": "Your king on {king} is in check. First find a legal escape or capture; a longer-term plan cannot ignore the current check.",
+        "plan_bishops": "The king on {enemyKing} currently has {before} legal king moves. Use both bishop colours as diagonal barriers and bring your king on {king} into the net.",
+        "plan_bishopKnight": "Your bishop on {bishop} controls {color}, so the target corners are {corners}. Coordinate the king on {king} and knight to guide the king from {enemyKing} toward a matching corner.",
+        "plan_bishopKnightCorner": "The defending king is already in the right-coloured corner on {enemyKing}. Keep it confined while your king on {king} and knight close the remaining exits; your bishop on {bishop} can then help finish the mating net. Do not let the king slip back into open space.",
+        "reason_mate": "Look for the final check. Confirm that the opponent cannot move its king, capture the checking piece or block the check.",
+        "reason_stalemate": "The suggested move reaches stalemate. That saves a draw, but would not complete a checkmate challenge.",
+        "reason_drawCapture": "The suggested king move captures the last pawn safely. Only two kings will remain.",
+        "reason_promotion": "The pawn can reach the last rank now. Check the promotion square rather than moving the king again automatically.",
+        "reason_reachCorner": "The suggested king move reaches the pawn’s promotion corner. Use that shelter to resist promotion.",
+        "reason_approachCorner": "This king move reduces the distance to the pawn’s promotion corner. Stay on the route to that shelter.",
+        "reason_holdCorner": "This king move is the tablebase’s best defense. Keep watching the promotion corner and whether the pawn can be captured safely.",
+        "reason_supportedPawn": "This push keeps the pawn on a square guarded by your king. The king and pawn can advance as a team.",
+        "reason_pawnStep": "The pawn moves in the suggested plan. Compare its next square with the defending king’s reach; not every useful push is beside your king.",
+        "reason_keySquare": "The suggested king move occupies one of this pawn’s key squares. Win control of space before asking the pawn to move again.",
+        "reason_opposition": "This king move places the kings across one empty square from each other. Black must move its king next; use that change of turn to make progress.",
+        "reason_kingApproach": "This king move really brings your king closer to the defending king. Active king support helps close the net or escort the pawn.",
+        "reason_kingWall": "This king move is about controlling space, not necessarily getting closer. Think of the squares the king will take away.",
+        "reason_knight": "The knight supplies a different set of controlled squares. Look for a post that works with the bishop and king, not just a checking jump.",
+        "reason_bishop": "Use the bishop’s diagonal as part of the net. Keep the other pieces involved so the king cannot simply escape on the other colour.",
+        "reason_restrict": "This move reduces the opponent’s legal king moves from {before} to {after}. That is a concrete way to make the net tighter.",
+        "reason_checkFence": "This is a checking move with the mating piece. Check how your king and piece cover the remaining routes; a check alone is not the whole plan.",
+        "reason_keepFence": "This move repositions the mating piece without requiring a smaller number of king moves immediately. Keep the wall and king support working together.",
+        "effect_mate": "After {move}, the king on {enemyKing} is in check and has no legal reply: checkmate.",
+        "effect_stalemate": "After {move}, Black is not in check and has no legal move. This is a draw, not mate.",
+        "effect_drawCapture": "After {move}, the pawn is gone and the two kings cannot checkmate each other: a draw.",
+        "effect_promotion": "After {move}, the pawn has promoted on {to}. You have reached this challenge’s goal.",
+        "effect_reachCorner": "After {move}, your king reaches {to}, the pawn’s promotion corner.",
+        "effect_approachCorner": "After {move}, your king is on {to}, nearer to {corner}. Recheck the attacking king’s reply before your next step.",
+        "effect_holdCorner": "After {move}, your king stands on {to}. Keep checking the route to {corner} and the safety of any pawn capture.",
+        "effect_supportedPawn": "After {move}, your pawn on {to} is protected by your king on {king}.",
+        "effect_pawnStep": "After {move}, your pawn reaches {to}. The defender is still on {enemyKing}; check its next move before pushing again.",
+        "effect_keySquare": "After {move}, your king occupies {to}, one of the highlighted key squares for the pawn on {pawn}.",
+        "effect_opposition": "After {move}, your king on {to} faces the king on {enemyKing} across an empty square, with Black to move.",
+        "effect_kingApproach": "After {move}, your king stands on {to}, closer to the defender on {enemyKing}.",
+        "effect_kingWall": "After {move}, your king takes its post on {to}. Count the squares that your king and the rest of the team control near the defender.",
+        "effect_knight": "After {move}, the knight stands on {to}. Recheck how the whole team covers squares around {enemyKing}.",
+        "effect_bishop": "After {move}, the bishop uses the diagonal through {to}. Recheck how its colour coverage joins the other pieces.",
+        "effect_restrict": "After {move}, the defending king has {after} legal king moves instead of {before}. Keep building from that restriction.",
+        "effect_checkFence": "After {move}, the defender is in check and has {after} legal king moves. Your next plan depends on the reply.",
+        "effect_keepFence": "After {move}, the defending king has {after} legal king moves. This is a repositioning step; continue coordinating rather than expecting every move to be a check.",
+        "covered": "Your pieces now control these neighbouring squares around the defending king: {covered}."
     }
 }

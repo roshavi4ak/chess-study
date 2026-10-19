@@ -112,7 +112,7 @@ export default function CoordinatesPage() {
                             {finalScore === null ? t("start") : t("playAgain")}
                         </button>
                     </div>
-                    {bests && <PersonalBestPanel best={bests.coordinates} club={bests.clubWeek.coordinates} />}
+                    {bests && <PersonalBestPanel best={bests.coordinates} club={bests.clubWeek.coordinates} allTime={bests.clubAllTime.coordinates} />}
                 </div>
             </div>
         </main>

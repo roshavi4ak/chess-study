@@ -12,11 +12,13 @@ import BotGame, { type BotGameResult } from "@/components/BotGame";
 
 export default function BotsPage() {
     const t = useTranslations("Bots");
+    const tCoach = useTranslations("BotTeaching");
     const [wins, setWins] = useState<Record<string, number>>({});
     const [bot, setBot] = useState<BotProfile | null>(null);
     const [childColor, setChildColor] = useState<"w" | "b">("w");
     const [round, setRound] = useState(0);
     const [finished, setFinished] = useState<BotGameResult | null>(null);
+    const [teaching, setTeaching] = useState(true);
 
     useEffect(() => {
         getBotWins().then(setWins).catch(() => undefined);
@@ -31,12 +33,12 @@ export default function BotsPage() {
         setRound(round + 1);
     }
 
-    function onFinish(result: BotGameResult, moves: number) {
+    function onFinish(result: BotGameResult, moves: number, usedTeaching: boolean) {
         if (!bot) return;
         setFinished(result);
         // Games where nobody moved yet (an instant resign) are not saved.
         if (moves === 0) return;
-        recordPlaySession({ kind: "BOT_GAME", key: botKey(bot.id), score: result === "win" ? 1 : 0, won: result === "draw" ? undefined : result === "win", details: { color: childColor, moves } })
+        recordPlaySession({ kind: "BOT_GAME", key: botKey(bot.id), score: result === "win" ? 1 : 0, won: result === "draw" ? undefined : result === "win", details: { color: childColor, moves, teaching: usedTeaching } })
             .then(() => getBotWins().then(setWins))
             .catch(error => console.error("Failed to save bot game:", error));
     }
@@ -57,7 +59,7 @@ export default function BotsPage() {
 
             {bot ? (
                 <div className="space-y-4">
-                    <BotGame key={round} bot={bot} childColor={childColor} onFinish={onFinish} />
+                    <BotGame key={round} bot={bot} childColor={childColor} onFinish={onFinish} initialTeaching={teaching} />
                     {finished && (
                         <div className="flex flex-wrap gap-2">
                             <button type="button" onClick={() => play(bot)} className="px-4 py-2 rounded-lg bg-green-600 text-white font-bold hover:bg-green-700">{t("playAgain")}</button>
@@ -72,6 +74,7 @@ export default function BotsPage() {
             ) : (
                 <>
                     <p className="text-gray-600 dark:text-gray-300">{t("intro")}</p>
+                    <label className="flex items-center gap-2 rounded-xl bg-indigo-50 text-indigo-950 p-4"><input type="checkbox" checked={teaching} onChange={event => setTeaching(event.target.checked)} /><span><strong>{tCoach("enabled")}</strong> — {tCoach("selectionHelp")}</span></label>
                     <div className="flex items-center gap-2 text-sm">
                         <span className="font-medium">{t("playAs")}</span>
                         {(["w", "b"] as const).map(color => (

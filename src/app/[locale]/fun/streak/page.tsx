@@ -122,7 +122,7 @@ export default function StreakPage() {
                             </button>
                         )}
                     </div>
-                    {bests && <PersonalBestPanel best={bests.streak} club={bests.clubWeek.streak} />}
+                    {bests && <PersonalBestPanel best={bests.streak} club={bests.clubWeek.streak} allTime={bests.clubAllTime.streak} />}
                 </div>
             </div>
         </main>

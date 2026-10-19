@@ -5,6 +5,10 @@ import { Chess, type Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { useTranslations } from "next-intl";
 import { applyExerciseMove, attemptExerciseMove, exerciseCredit, nextExerciseMove, retryExercise, showExerciseSolution, startExercise, type LevelExercise } from "@/lib/levelExercises";
+import ProgressiveHint from "./ProgressiveHint";
+import MoveConsequence from "./MoveConsequence";
+import { attemptedUci } from "@/lib/puzzleLearning";
+import { useLearningAttempt } from "@/hooks/useLearningAttempt";
 
 // After a correct move the opponent replies on its own, as in the puzzle boards.
 const REPLY_DELAY_MS = 350;
@@ -12,8 +16,12 @@ const REPLY_DELAY_MS = 350;
 // Learning feedback is deliberately separate from the timed, one-try boards.
 export default function LevelExerciseBoard({ exercise, onContinue, last }: { exercise: LevelExercise; onContinue: (unassisted: boolean) => void; last: boolean }) {
     const t = useTranslations("LevelExercises");
+    const tHelp = useTranslations("LearningHelp");
+    const submission = useLearningAttempt(exercise.puzzleId);
     const [attempt, setAttempt] = useState(() => startExercise(exercise));
     const [selected, setSelected] = useState<Square | null>(null);
+    const [hintStage, setHintStage] = useState(0);
+    const [wrongPosition, setWrongPosition] = useState<{ fen: string; move: string } | null>(null);
     const advanced = useRef(false);
     const game = useMemo(() => new Chess(attempt.fen), [attempt.fen]);
     const side = useMemo(() => new Chess(exercise.fen).turn(), [exercise.fen]);
@@ -31,7 +39,16 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
 
     function move(from: string, to: string) {
         if (!ready || from === to) return;
-        setAttempt(previous => attemptExerciseMove(exercise, previous, { from, to }));
+        const next = attemptExerciseMove(exercise, attempt, { from, to });
+        if (next.status === "wrong") {
+            submission.record(false);
+            const uci = attemptedUci(attempt.fen, from, to);
+            if (uci) setWrongPosition({ fen: attempt.fen, move: uci });
+        } else {
+            setHintStage(0); setWrongPosition(null);
+            if (next.status === "complete") submission.record(exerciseCredit(next), next.assisted);
+        }
+        setAttempt(next);
         setSelected(null);
     }
 
@@ -53,6 +70,7 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
             squareStyles[option.to] = { backgroundImage: "radial-gradient(circle, rgba(0,0,0,.25) 22%, transparent 24%)" };
         }
     }
+    if (hintStage >= 2 && nextUci && !complete) squareStyles[nextUci.slice(0, 2)] = { backgroundColor: "rgba(250,204,21,.65)" };
     const feedback = attempt.status === "wrong" ? "wrong" : attempt.status === "complete" ? (exerciseCredit(attempt) ? "correct" : "learned") : reviewing ? "walkthrough" : null;
     const buttonClass = "rounded-lg px-4 py-2 font-semibold bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600";
     const original = new Chess(exercise.fen);
@@ -80,7 +98,7 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
                     canDragPiece: ({ piece }) => ready && piece.pieceType[0] === side,
                     allowDragging: ready,
                     squareStyles,
-                    arrows: attempt.status === "solution" && nextUci ? [{ startSquare: nextUci.slice(0, 2), endSquare: nextUci.slice(2, 4), color: "#2563eb" }] : [],
+                    arrows: (attempt.status === "solution" || hintStage >= 3) && nextUci ? [{ startSquare: nextUci.slice(0, 2), endSquare: nextUci.slice(2, 4), color: "#2563eb" }] : [],
                     allowDrawingArrows: false,
                     animationDurationInMs: 150,
                 }} />
@@ -97,12 +115,17 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
                 </div>
             )}
             {attempt.played.length > 0 && <p className="text-sm text-gray-600 dark:text-gray-300">{t("playedMoves", { moves: attempt.played.join(" · ") })}</p>}
+            {!complete && !reviewing && nextUci && <ProgressiveHint fen={attempt.fen} move={nextUci} stage={hintStage} />}
+            {wrongPosition && <MoveConsequence key={`${wrongPosition.fen}-${wrongPosition.move}`} {...wrongPosition} />}
             <div className="flex flex-wrap gap-2">
-                {(attempt.status === "wrong" || complete || reviewing) && <button type="button" className={buttonClass} onClick={() => { setAttempt(previous => retryExercise(exercise, previous)); setSelected(null); }}>{t("retry")}</button>}
-                {!reviewing && !complete && <button type="button" className={buttonClass} onClick={() => { setAttempt(previous => showExerciseSolution(exercise, previous)); setSelected(null); }}>{t("showSolution")}</button>}
+                {(attempt.status === "wrong" || complete || reviewing) && <button type="button" className={buttonClass} onClick={() => { setAttempt(previous => retryExercise(exercise, previous)); setSelected(null); setHintStage(0); setWrongPosition(null); }}>{t("retry")}</button>}
+                {!reviewing && !complete && hintStage < 3 && attempt.status !== "step" && <button type="button" className={buttonClass} onClick={() => { submission.record(false, true); setHintStage(value => value + 1); setAttempt(previous => ({ ...previous, assisted: true, status: "playing" })); }}>{tHelp(hintStage ? "moreHelp" : "hint")}</button>}
+                {!reviewing && !complete && hintStage >= 3 && <button type="button" className={buttonClass} onClick={() => { submission.record(false, true); setAttempt(previous => showExerciseSolution(exercise, previous)); setSelected(null); setHintStage(0); }}>{t("showSolution")}</button>}
                 {attempt.status === "solution" && <button type="button" className={buttonClass} onClick={() => setAttempt(previous => nextExerciseMove(exercise, previous))}>{t("nextSolutionMove")}</button>}
-                {complete && <button type="button" className="rounded-lg px-4 py-2 font-bold bg-green-600 text-white hover:bg-green-700" onClick={() => { if (!advanced.current) { advanced.current = true; onContinue(exerciseCredit(attempt)); } }}>{t(last ? "finishTest" : "nextExercise")}</button>}
+                {complete && <button type="button" disabled={submission.saving || submission.error} className="rounded-lg px-4 py-2 font-bold bg-green-600 text-white hover:bg-green-700 disabled:opacity-50" onClick={() => { if (!advanced.current) { advanced.current = true; onContinue(exerciseCredit(attempt)); } }}>{t(last ? "finishTest" : "nextExercise")}</button>}
             </div>
+            {submission.saving && <p role="status">{tHelp("saving")}</p>}
+            {submission.error && <div role="alert" className="space-y-2"><p>{tHelp("saveError")}</p><button type="button" disabled={submission.saving} onClick={() => void submission.retry()} className="underline">{tHelp("retrySave")}</button></div>}
         </div>
     );
 }
