@@ -12,7 +12,9 @@ moduleUnderTest.paths = Module._nodeModulePaths(path.dirname(source));
 moduleUnderTest._compile(compiled, source);
 const { getPracticeHint, formatPracticeHint } = moduleUnderTest.exports;
 const instruction = moves => `Изиграйте ${moves}.`;
-const snapshot = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../backups/opening-notes-before-2026-10-08.json'), 'utf8'));
+// Keep the full position-tree regression reproducible without an ignored local backup.
+// The fixture contains chess content only, with remapped node references.
+const snapshot = require('./fixtures/opening-hints.json');
 let tested = 0, terminalParents = 0;
 for (const practice of snapshot.practices) {
   const children = new Map();
