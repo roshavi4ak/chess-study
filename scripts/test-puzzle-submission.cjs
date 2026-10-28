@@ -33,6 +33,7 @@ const { POST } = loadSource('../src/app/api/puzzles/submit/route.ts', {
     } },
     '@/lib/glicko2': loadSource('../src/lib/glicko2.ts'),
     '@/lib/puzzleChallenge': loadSource('../src/lib/puzzleChallenge.ts'),
+    '@/lib/attemptMoves': loadSource('../src/lib/attemptMoves.ts', { './puzzleLearning': loadSource('../src/lib/puzzleLearning.ts') }),
     'next/server': { NextResponse: Response },
 });
 

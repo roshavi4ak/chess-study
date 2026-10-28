@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { getPersonalBests, recordPlaySession } from "@/app/actions/play";
 import { NOTATION_DIRECTIONS, NOTATION_LEVELS, NOTATION_ROUND, notationKey, notationStars, type NotationDirection, type NotationLevel } from "@/lib/notationTrainer";
 import NotationRound from "@/components/NotationRound";
+import type { ExerciseReview } from "@/lib/attemptMoves";
 
 const starRow = (count: number) => "★".repeat(count) + "☆".repeat(3 - count);
 
@@ -27,12 +28,12 @@ export default function NotationPage() {
         setRound(round + 1);
     }
 
-    function onFinish(correct: number) {
+    function onFinish(correct: number, reviews?: ExerciseReview[]) {
         if (!playing) return;
         setResult(correct);
         const key = notationKey(playing.direction, playing.level);
         setBests(previous => ({ ...previous, [key]: Math.max(previous[key] ?? 0, correct) }));
-        recordPlaySession({ kind: "NOTATION", key, score: correct })
+        recordPlaySession({ kind: "NOTATION", key, score: correct, ...(reviews ? { details: { exercises: reviews } } : {}) })
             .catch(error => console.error("Failed to save notation round:", error));
     }
 

@@ -126,6 +126,7 @@ model PuzzleAttempt {
   puzzleId  String
   puzzle    Puzzle   @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
   success   Boolean
+  moveErrors             Json? // Exact wrong moves and positions; null for legacy attempts.
   points    Int      @default(0)
   // Competition points are independent of the rating change in points.
   // Null identifies attempts made before challenge scoring was introduced.
@@ -250,6 +251,8 @@ model PracticeAttempt {
   node       PracticeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
   status     LineStatus
   mistakes   Int        @default(0)     // Wrong moves in this attempt (recorded since the student profile was added)
+  moveErrors Json? // Exact wrong moves and positions; null for legacy attempts.
+  finalMove  String? // Actual terminal move, including an alternative checkmate.
   usedHints  Boolean    @default(false) // Coach notes or arrows were shown during this attempt
   createdAt  DateTime   @default(now())
 

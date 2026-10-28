@@ -189,8 +189,7 @@ export function attemptExerciseMove(exercise: LevelExercise, attempt: ExerciseAt
     try {
         const move = game.move({ ...input, promotion: input.promotion ?? "q" });
         const uci = move.from + move.to + (move.promotion ?? "");
-        const mateGoal = ["mateIn1", "mateIn2", "backRankMate", "knightMate", "tactics"].includes(exercise.theme);
-        const alternateMate = mateGoal && attempt.index === exercise.moves.length - 1 && game.isCheckmate();
+        const alternateMate = attempt.index === exercise.moves.length - 1 && game.isCheckmate();
         if (uci !== exercise.moves[attempt.index] && !alternateMate) throw new Error("Try again");
         const index = attempt.index + 1;
         return { ...attempt, fen: game.fen(), index, status: index === exercise.moves.length ? "complete" : "step", lastMove: { from: move.from, to: move.to }, played: [...attempt.played, move.san] };

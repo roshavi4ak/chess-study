@@ -13,6 +13,7 @@ import StartLevelSelect from "@/components/StartLevelSelect";
 import StudentHomeworkPanel from "@/components/StudentHomeworkPanel";
 import DeleteAssignmentButton from "@/components/DeleteAssignmentButton";
 import PuzzleDifficultySettings from "@/components/PuzzleDifficultySettings";
+import { activityReviewHref } from "@/lib/attemptReview";
 
 const card = "bg-white dark:bg-gray-800 shadow rounded-2xl border border-gray-100 dark:border-gray-700";
 const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400";
@@ -94,7 +95,7 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
     if (!profile) notFound();
 
     const { student, summary, level, totals } = profile;
-    const coachId = session.user.id;
+    const coachId = session.user.id!;
     const dayFormat = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
     const formatDay = (day: string) => dayFormat.format(new Date(`${day}T00:00:00Z`));
     const dateTime = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Sofia" });
@@ -331,7 +332,7 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
                                         {practice.lines.map(line => (
                                             <tr key={line.nodeId} className={line.withMistakes + line.mistakes > 0 && !line.mastered ? "bg-red-50/60 dark:bg-red-900/10" : ""}>
                                                 <td className={td}>{line.lineNumber ?? "—"}</td>
-                                                <td className="px-3 py-2 font-mono text-xs min-w-[16rem]">{line.moves}</td>
+                                                <td className="px-3 py-2 font-mono text-xs min-w-[16rem]">{line.attemptId ? <Link href={activityReviewHref(id, "practice", line.attemptId)} prefetch={false} className="text-blue-600 dark:text-blue-400 hover:underline">{line.moves}</Link> : line.moves}</td>
                                                 <td className={`${td} text-center`}>{line.attempts}</td>
                                                 <td className={`${td} text-center`}>{line.perfect}</td>
                                                 <td className={`${td} text-center`}>{line.withMistakes}</td>
@@ -404,7 +405,7 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
                                         <tr key={`${puzzle.id}-${index}`}>
                                             <td className={`${td} text-xs text-gray-500`}>{formatAt(puzzle.createdAt)}</td>
                                             <td className={td}>
-                                                <Link href={`/puzzles/${puzzle.name}`} prefetch={false} className="text-blue-600 dark:text-blue-400 hover:underline">{puzzle.name}</Link>
+                                                <Link href={activityReviewHref(id, "puzzle", puzzle.attemptId)} prefetch={false} className="text-blue-600 dark:text-blue-400 hover:underline">{puzzle.name}</Link>
                                                 <span className="text-xs text-gray-500"> ({puzzle.rating})</span>
                                             </td>
                                             <td className={td}>{puzzle.success ? <CheckCircle className="h-4 w-4 text-green-600" aria-label={tCoach("solved")} /> : <XCircle className="h-4 w-4 text-red-600" aria-label={tCoach("failed")} />}</td>
@@ -470,7 +471,7 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
                                 <li key={index} className="flex gap-3">
                                     <span className="w-32 shrink-0 text-xs text-gray-500 dark:text-gray-400 pt-0.5">{formatAt(event.at)}</span>
                                     <span aria-hidden className="w-10 shrink-0">{timelineIcon(event)}</span>
-                                    <span>{timelineText(event)}</span>
+                                    <Link href={event.type === "opening" ? `/openings/${event.openingId}` : activityReviewHref(id, event.type, event.id)} prefetch={false} className="text-blue-600 dark:text-blue-400 hover:underline">{timelineText(event)}</Link>
                                 </li>
                             ))}
                         </ol>

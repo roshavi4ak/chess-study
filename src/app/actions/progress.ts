@@ -4,12 +4,17 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { LineStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { Chess } from "chess.js";
+import { readMoveErrors, type MoveError } from "@/lib/attemptMoves";
+import { learningMove } from "@/lib/puzzleLearning";
 
 interface SaveLineProgressParams {
     practiceId: string;
     nodeId: string;  // ID of the leaf node
     hadWrongMoves: boolean;
     mistakes?: number; // Number of wrong moves in this attempt
+    moveErrors?: MoveError[];
+    finalMove?: string;
     completed: boolean;
     coachNotesVisible: boolean;
 }
@@ -21,8 +26,35 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
         throw new Error("Unauthorized");
     }
 
-    const { practiceId, nodeId, hadWrongMoves, completed, coachNotesVisible } = params;
-    const mistakes = Math.max(hadWrongMoves ? 1 : 0, Math.min(1000, Math.round(params.mistakes ?? 0)));
+    const { practiceId, nodeId, completed, coachNotesVisible } = params;
+    if (params.finalMove !== undefined) {
+        const leaf = await prisma.practiceNode.findFirst({ where: { id: nodeId, practiceId }, include: { parent: true, children: { select: { id: true } } } });
+        if (!leaf?.parent || leaf.children.length) throw new Error("Unknown practice line");
+        const after = new Chess(leaf.parent.fen);
+        learningMove(after, params.finalMove);
+        if (params.finalMove !== leaf.move && !after.isCheckmate()) throw new Error("Invalid final move");
+    }
+    let moveErrors: MoveError[] | undefined;
+    if (params.moveErrors !== undefined) {
+        moveErrors = readMoveErrors(params.moveErrors);
+        if (moveErrors.length !== params.moveErrors.length || moveErrors.length > 1000) throw new Error("Invalid move errors");
+        const nodes = await prisma.practiceNode.findMany({ where: { practiceId }, select: { id: true, parentId: true, fen: true, move: true } });
+        const byId = new Map(nodes.map(node => [node.id, node]));
+        if (!byId.has(nodeId)) throw new Error("Unknown practice line");
+        // Validate against the practice tree; a run can branch or replay an earlier position.
+        moveErrors = moveErrors.map(error => {
+            const parent = nodes.find(node => node.fen === error.fen);
+            const expected = nodes.filter(node => node.parentId === parent?.id && node.move && error.expected.includes(node.move)).map(node => node.move!);
+            if (!parent || !expected.length) throw new Error("Invalid mistake position");
+            const after = new Chess(parent.fen);
+            const played = learningMove(after, error.played);
+            const uci = played.from + played.to + (played.promotion ?? "");
+            if (expected.includes(uci)) throw new Error("Correct move recorded as a mistake");
+            return { ply: error.ply, fen: parent.fen, played: uci, expected };
+        });
+    }
+    const hadWrongMoves = params.hadWrongMoves || !!moveErrors?.length;
+    const mistakes = Math.max(hadWrongMoves ? 1 : 0, moveErrors?.length ?? 0, Math.min(1000, Math.round(params.mistakes ?? 0)));
 
     // Determine status
     let status: LineStatus;
@@ -76,6 +108,8 @@ export async function saveLineProgress(params: SaveLineProgressParams) {
                 nodeId,
                 status,
                 mistakes,
+                ...(moveErrors !== undefined ? { moveErrors } : {}),
+                ...(params.finalMove ? { finalMove: params.finalMove } : {}),
                 usedHints: coachNotesVisible,
             }
         })

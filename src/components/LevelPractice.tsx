@@ -6,6 +6,7 @@ import { getLevelPractice, recordLevelPractice } from "@/app/actions/levels";
 import { TEST_PUZZLES } from "@/lib/curriculum";
 import type { LevelExercise } from "@/lib/levelExercises";
 import LevelExerciseBoard from "@/components/LevelExerciseBoard";
+import type { ExerciseReview } from "@/lib/attemptMoves";
 
 // Fetch the next batch while this many exercises are still waiting.
 const PREFETCH_AT = 3;
@@ -18,6 +19,7 @@ export default function LevelPractice({ levelId, canTest, onTakeTest }: { levelI
     const t = useTranslations("Levels");
     const [queue, setQueue] = useState<LevelExercise[]>([]);
     const [results, setResults] = useState<boolean[]>([]);
+    const reviews = useRef<ExerciseReview[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [empty, setEmpty] = useState(false);
     const [stopped, setStopped] = useState(false);
@@ -54,11 +56,13 @@ export default function LevelPractice({ levelId, canTest, onTakeTest }: { levelI
     function save(upTo: number, list: boolean[]) {
         const block = list.slice(saved.current, upTo);
         if (!block.length) return;
+        const blockReviews = reviews.current.slice(saved.current, upTo);
         saved.current = upTo;
-        void recordLevelPractice(levelId, block.filter(Boolean).length, block.length).catch(() => undefined);
+        void recordLevelPractice(levelId, block.filter(Boolean).length, block.length, blockReviews).catch(() => undefined);
     }
 
-    function onContinue(unassisted: boolean) {
+    function onContinue(unassisted: boolean, review?: ExerciseReview) {
+        if (review) reviews.current.push(review);
         const next = [...results, unassisted];
         setResults(next);
         if (next.length - saved.current >= TEST_PUZZLES) save(next.length, next);

@@ -42,7 +42,10 @@ function loadSource(relativePath, overrides = {}) {
     const loaded = new Module(filename, module);
     loaded.paths = Module._nodeModulePaths(path.dirname(filename));
     const originalRequire = loaded.require.bind(loaded);
-    loaded.require = name => Object.hasOwn(overrides, name) ? overrides[name] : originalRequire(name);
+    loaded.require = name => Object.hasOwn(overrides, name) ? overrides[name]
+        : name === '@/hooks/useActivityChessnut' ? { useActivityChessnut: () => ({ enabled: false, ready: true, reset() {} }) }
+        : name === './ActivityBoardPanel' || name === '@/components/ActivityBoardPanel' ? () => null
+        : originalRequire(name);
     loaded._compile(output, filename);
     return loaded.exports;
 }
@@ -82,6 +85,7 @@ const learningComponents = {
     }).default,
 };
 const PuzzleSolver = loadSource('../src/components/PuzzleSolver.tsx', {
+    '@/lib/attemptMoves': loadSource('../src/lib/attemptMoves.ts', { './puzzleLearning': puzzleLearning }),
     ...common,
     ...learningComponents,
     '@/components/LichessAnalysisLink': loadSource('../src/components/LichessAnalysisLink.tsx', {
@@ -244,7 +248,7 @@ for (const locale of ['en', 'bg']) {
         await waitFor(() => assert.equal(requests.length, 1));
         assert.equal(requests[0].url.pathname, '/api/puzzles/submit');
         assert.equal(requests[0].init.method, 'POST');
-        assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: true });
+        assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: true, moveErrors: [] });
         assert.deepEqual(readHistory().at(-1), { id: puzzleProps.id, name: puzzleProps.currentPuzzleName, result: 'success' });
         await waitFor(() => assert(screen.getByText(messages[locale].PuzzleSolver.challengePoints.replace('{points}', '10'))));
         assert(screen.getByText(messages[locale].PuzzleSolver.ratingChange.replace('{change}', '+5')));
@@ -307,7 +311,8 @@ for (const result of ['hint', 'mistake']) {
         await play('e7e5');
         assert.deepEqual(readHistory(), [{ id: puzzleProps.id, name: puzzleProps.currentPuzzleName, result }]);
         assert.equal(requests.length, 1);
-        assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: false, ...(result === 'hint' ? { hintUsed: true } : {}) });
+        const setup = new Chess(puzzleProps.fen); setup.move('e4');
+        assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: false, moveErrors: result === 'hint' ? [] : [{ ply: 1, fen: setup.fen(), played: 'd7d5', expected: ['e7e5'] }], ...(result === 'hint' ? { hintUsed: true } : {}) });
         assert(screen.getByRole('link', { name: '1' }).classList.contains(result === 'hint' ? 'bg-yellow-500' : 'bg-red-500'));
         view.unmount();
         render(localized(React.createElement(PuzzleSession, puzzleProps), 'en'));
@@ -344,7 +349,7 @@ for (const locale of ['en', 'bg']) {
         await act(async () => fireEvent.click(screen.getByRole('button', { name: messages[locale].LearningHelp.moreHelp })));
         assert.deepEqual(boardArrows(), expectedArrow('e7', 'e5'));
         assert.equal(requests.length, 1, 'Record assistance before completion or navigation');
-        assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: false, hintUsed: true });
+        assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: false, hintUsed: true, moveErrors: [] });
         await play('e7e5');
         assert.equal(requests.length, 1, 'No second result when finishing');
         assert.equal(readHistory()[0].result, 'hint');
@@ -368,7 +373,8 @@ test('the third mistake offers a concept clue; earlier mistakes keep their singl
         if (count === 3) assert(screen.getByText(messages.en.LearningHelp.assisted));
     }
     assert.equal(requests.length, 1);
-    assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: false });
+    const setup = new Chess(puzzleProps.fen); setup.move('e4');
+    assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: false, moveErrors: [{ ply: 1, fen: setup.fen(), played: 'd7d5', expected: ['e7e5'] }] });
     await play('e7e5');
     assert.equal(readHistory()[0].result, 'hint');
     assert(screen.getByText(messages.en.PuzzleSolver.puzzleCompletedWithHint));
@@ -518,7 +524,7 @@ test('review waits for persistence, offers retry after failure, and never naviga
     await act(async () => finishRequest({ok:true,json:async()=>({oldRating:1500,newRating:1500,change:0})}));
     await act(async () => fireEvent.click(screen.getByRole('button',{name:messages.en.PuzzleSolver.nextPuzzle})));
     assert(screen.getByText(messages.en.PuzzleReview.done));
-    assert.deepEqual(JSON.parse(requests[0].init.body),{puzzleId:'current-id',success:true,review:true});
+    assert.deepEqual(JSON.parse(requests[0].init.body),{puzzleId:'current-id',success:true,review:true,moveErrors:[]});
     assert.deepEqual(JSON.parse(requests[1].init.body),JSON.parse(requests[0].init.body));
     assert.equal(pushes.length,0);
 });
@@ -604,7 +610,7 @@ for (const locale of ['en','bg']) for (const hinted of [true,false]) {
         }
         await act(async()=>fireEvent.click(screen.getByRole('button',{name:lesson.answer})));
         assert.equal(requests.length,1);
-        assert.deepEqual(JSON.parse(requests[0].init.body),{puzzleId:'database-puzzle',success:!hinted,hintUsed:hinted,review:true});
+        assert.deepEqual(JSON.parse(requests[0].init.body),{puzzleId:'database-puzzle',success:!hinted,hintUsed:hinted,review:true,moveErrors:[]});
         fireEvent.click(screen.getByRole('button',{name:messages[locale].LevelExercises.nextExercise}));
         assert.equal(credit,!hinted);
     });

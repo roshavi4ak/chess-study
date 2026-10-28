@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { Glicko2, RatingData, MatchResult } from "@/lib/glicko2";
 import { puzzleChallengePoints } from "@/lib/puzzleChallenge";
+import { puzzleMoveErrors } from "@/lib/attemptMoves";
 
 export async function POST(request: Request) {
     const session = await auth();
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
         const body = await request.json();
         console.log("Request body:", body);
         
+        if (!body || typeof body !== "object") return new NextResponse("Invalid submission", { status: 400 });
         const { puzzleId, hintUsed = false, review = false } = body;
         if (typeof puzzleId !== "string" || typeof hintUsed !== "boolean" || typeof review !== "boolean" || typeof body.success !== "boolean") {
             return new NextResponse("Invalid submission", { status: 400 });
@@ -47,7 +49,7 @@ export async function POST(request: Request) {
                 rating: true,
                 ratingDeviation: true,
                 volatility: true,
-                tags: true
+                tags: true, fen: true, solution: true,
             }
         });
 
@@ -60,6 +62,12 @@ export async function POST(request: Request) {
         if (!user || !puzzle) {
             return new NextResponse("Not Found", { status: 404 });
         }
+
+        let moveErrors: ReturnType<typeof puzzleMoveErrors> | undefined = undefined;
+        try {
+            moveErrors = body.moveErrors === undefined ? undefined : puzzleMoveErrors(puzzle.fen, puzzle.solution, body.moveErrors);
+        } catch { return new NextResponse("Invalid move errors", { status: 400 }); }
+        if (success && moveErrors?.length) return new NextResponse("A successful attempt cannot contain mistakes", { status: 400 });
 
         const userRating: RatingData = {
             rating: user.ratingPuzzle || 1500,
@@ -85,11 +93,12 @@ export async function POST(request: Request) {
 
         if (existingAttempt || hintUsed || review) {
             // Retries and assisted attempts never change either rating.
-            await prisma.puzzleAttempt.create({
+            const attempt = await prisma.puzzleAttempt.create({
                 data: {
                     userId: session.user.id,
                     puzzleId: puzzleId,
                     success: success,
+                    ...(moveErrors !== undefined ? { moveErrors } : {}),
                     points: 0,
                     challengePoints: 0, // No competition points for retries, hints, or reviews.
                     challengeStudentRating: userRating.rating,
@@ -120,7 +129,8 @@ export async function POST(request: Request) {
                 oldRating: Math.round(userRating.rating),
                 newRating: Math.round(userRating.rating),
                 change: 0,
-                challengePoints: 0
+                challengePoints: 0,
+                ...(moveErrors !== undefined ? { attemptId: attempt.id } : {}),
             });
         }
 
@@ -170,11 +180,12 @@ export async function POST(request: Request) {
             }
         });
 
-        await prisma.puzzleAttempt.create({
+        const attempt = await prisma.puzzleAttempt.create({
             data: {
                 userId: session.user.id,
                 puzzleId: puzzleId,
                 success: success,
+                ...(moveErrors !== undefined ? { moveErrors } : {}),
                 points: points,
                 challengePoints,
                 challengeStudentRating: userRating.rating,
@@ -205,10 +216,30 @@ export async function POST(request: Request) {
             oldRating: Math.round(userRating.rating),
             newRating: finalUserRating,
             change: points,
-            challengePoints
+            challengePoints,
+            ...(moveErrors !== undefined ? { attemptId: attempt.id } : {}),
         });
     } catch (error) {
         console.error("Error submitting puzzle result:", error);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
+}
+
+// Further mistakes belong to the original attempt, without another rating change or activity count.
+export async function PATCH(request: Request) {
+    const session = await auth();
+    if (!session?.user?.id) return new NextResponse("Unauthorized", { status: 401 });
+    let body;
+    try { body = await request.json(); } catch { return new NextResponse("Invalid submission", { status: 400 }); }
+    if (!body || typeof body.attemptId !== "string") return new NextResponse("Invalid submission", { status: 400 });
+    const attempt = await prisma.puzzleAttempt.findFirst({
+        where: { id: body.attemptId, userId: session.user.id, success: false },
+        select: { id: true, puzzle: { select: { fen: true, solution: true } } },
+    });
+    if (!attempt) return new NextResponse("Not Found", { status: 404 });
+    let moveErrors;
+    try { moveErrors = puzzleMoveErrors(attempt.puzzle.fen, attempt.puzzle.solution, body.moveErrors); }
+    catch { return new NextResponse("Invalid move errors", { status: 400 }); }
+    await prisma.puzzleAttempt.update({ where: { id: attempt.id }, data: { moveErrors } });
+    return NextResponse.json({ attemptId: attempt.id });
 }

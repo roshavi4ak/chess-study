@@ -14,6 +14,7 @@ import WhyQuestionCard from "@/components/WhyQuestionCard";
 import type { WhyQuestion } from "@/app/actions/practiceQuestions";
 import { useChessnutBoard } from "@/hooks/useChessnutBoard";
 import ChessnutBoardPanel from "@/components/ChessnutBoardPanel";
+import type { MoveError } from "@/lib/attemptMoves";
 
 interface PendingReply {
     parent: PracticeNode;
@@ -67,6 +68,7 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
     const [boardEpoch, setBoardEpoch] = useState(0);
     // Wrong moves in the current attempt of a line.
     const wrongMoves = useRef(0);
+    const moveErrors = useRef<MoveError[]>([]);
     const usedCoachHints = useRef(false);
     // Browsing or replaying an attempt must never save its completion twice.
     const attemptCompleted = useRef(false);
@@ -86,7 +88,7 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
     });
     const seenIds = new Set([...progressMap.values()].filter(hasSeenLine).map(p => p.nodeId));
     const displayedIndex = reviewIndex ?? nodePath.length - 1;
-    const displayedNode = nodesById.get(nodePath[displayedIndex]) ?? currentNode;
+    const displayedNode = displayedIndex === nodePath.length - 1 ? currentNode : nodesById.get(nodePath[displayedIndex]) ?? currentNode;
     const displayedGame = useMemo(() => new Chess(displayedNode.fen), [displayedNode.fen]);
     const reviewing = reviewIndex !== null;
     const hintNode = { ...displayedNode, children: getAvailableChildren(displayedNode, seenOnly ? seenIds : null) };
@@ -125,28 +127,38 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
         const { from, to, promotion = "q" } = move;
         setOptionSquares({});
         if ((board.enabled && !physical) || pendingReply || reviewing || isOpponentTurn(game.fen()) || feedback.type === "complete" || from === to) return false;
-        const matchingChild = getAvailableChildren(currentNode, seenOnly ? seenIds : null)
-            .find(child => physical ? child.move === `${from}${to}${move.promotion ?? ""}` : child.move?.startsWith(`${from}${to}`));
+        const gameResult = new Chess(game.fen());
+        let played;
+        try { played = gameResult.move({ from, to, promotion }); } catch { return false; }
+        const playedUci = played.from + played.to + (played.promotion ?? "");
+        const available = getAvailableChildren(currentNode, seenOnly ? seenIds : null);
+        let matchingChild = available.find(child => child.move === playedUci);
+        if (!matchingChild && gameResult.isCheckmate()) {
+            // A mating move is interchangeable only with a terminal move of an available line.
+            const endings = available.filter(child => child.children.length === 0);
+            matchingChild = endings.find(child => child.id === targetLine?.id) ?? endings[0];
+        }
         if (!matchingChild) {
+            moveErrors.current.push({ ply: nodePath.length - 1, fen: game.fen(), played: playedUci,
+                expected: getAvailableChildren(currentNode, seenOnly ? seenIds : null).flatMap(child => child.move ? [child.move] : []) });
             wrongMoves.current += 1;
             setWrongAt(previous => ({ nodeId: currentNode.id, count: previous?.nodeId === currentNode.id ? previous.count + 1 : 1 }));
             const hint = formatPracticeHint({ ...currentNode, children: getAvailableChildren(currentNode, seenOnly ? seenIds : null) }, moves => t("expectedMoveHint", { moves }));
             setFeedback({ type: "incorrect", message: hint ? t("wrongMoveHint", { hint }) : t("wrongMoveTryAgain") });
             return false;
         }
-        const gameResult = new Chess(game.fen());
         try {
-            const moveResult = gameResult.move({ from, to, promotion: matchingChild.move?.[4] || promotion });
+            const moveResult = played;
             if (!moveResult) return false;
             const newHistory = [...moveHistory, moveResult.san];
             const newPath = [...nodePath, matchingChild.id];
             setGame(gameResult);
             setMoveHistory(newHistory);
-            setCurrentNode(matchingChild);
+            setCurrentNode(matchingChild.move === playedUci ? matchingChild : { ...matchingChild, fen: gameResult.fen(), move: playedUci });
             setNodePath(newPath);
             highlightMove(from, to);
             if (!matchingChild.children.length) {
-                void handleLineComplete(newPath);
+                void handleLineComplete(newPath, playedUci);
             } else {
                 setFeedback({ type: matchingChild.notes && currentLineFirstTime ? "note" : null, message: matchingChild.notes && currentLineFirstTime ? `💡 ${matchingChild.notes}` : "" });
                 const selected = selectOpponentReply(matchingChild, targetLine?.id ?? null, seenOnly);
@@ -204,6 +216,7 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
         setHighlightSquares({});
         setWrongAt(null);
         wrongMoves.current = 0;
+        moveErrors.current = [];
         usedCoachHints.current = firstTime;
         attemptCompleted.current = false;
         setShowCoachHints(false);
@@ -242,7 +255,7 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
         } catch (error) { console.error(error); }
     }
 
-    async function handleLineComplete(finalPath: string[]) {
+    async function handleLineComplete(finalPath: string[], finalMove?: string) {
         const nodeId = finalPath[finalPath.length - 1];
         const leafNode = nodesById.get(nodeId);
         const coachNotesVisible = usedCoachHints.current;
@@ -272,7 +285,7 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
             return next;
         });
         try {
-            await saveLineProgress({ practiceId: practice.id, nodeId, hadWrongMoves: wrong, mistakes, completed: true, coachNotesVisible });
+            await saveLineProgress({ practiceId: practice.id, nodeId, hadWrongMoves: wrong, mistakes, moveErrors: [...moveErrors.current], ...(finalMove ? { finalMove } : {}), completed: true, coachNotesVisible });
         } catch (error) { console.error("Failed to save progress:", error); }
     }
 

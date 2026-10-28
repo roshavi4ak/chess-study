@@ -19,6 +19,7 @@ const WEAK_THEME_MIN_TRIES = 5;
 const WEAK_THEME_MAX_SUCCESS = 0.6;
 
 export interface ProfileLine {
+    attemptId: string | null;
     nodeId: string;
     lineNumber: number | null;
     moves: string; // "1. e4 e5 2. Nf3 …"
@@ -56,6 +57,7 @@ export interface ProfileTheme {
 }
 
 export interface ProfilePuzzle {
+    attemptId: string;
     id: string;
     name: string;
     rating: number;
@@ -83,9 +85,9 @@ export interface ProfilePlay {
 }
 
 export type TimelineEvent =
-    | { type: "puzzle"; at: Date; name: string; rating: number; success: boolean; points: number }
-    | { type: "practice"; at: Date; practiceId: string; practice: string; lineNumber: number | null; status: string; mistakes: number }
-    | { type: "play"; at: Date; kind: string; key: string; score: number; won: boolean | null }
+    | { type: "puzzle"; id: string; at: Date; name: string; rating: number; success: boolean; points: number }
+    | { type: "practice"; id: string; at: Date; practiceId: string; practice: string; lineNumber: number | null; status: string; mistakes: number }
+    | { type: "play"; id: string; at: Date; kind: string; key: string; score: number; won: boolean | null }
     | { type: "opening"; at: Date; openingId: string; opening: string; completed: boolean };
 
 export interface Suggestion {
@@ -162,9 +164,10 @@ function lineMoves(path: { fen: string; move: string | null }[]): string {
     return parts.join(" ");
 }
 
+// Only student accounts can be opened through the coach review.
 export async function loadStudentProfile(studentId: string): Promise<StudentProfile | null> {
     const user = await prisma.user.findFirst({
-        where: { id: studentId },
+        where: { id: studentId, role: "STUDENT" },
         select: {
             id: true, name: true, image: true, lichessId: true, startLevel: true,
             ratingPuzzle: true, ratingBullet: true, ratingBlitz: true, ratingRapid: true, ratingClassical: true,
@@ -177,17 +180,17 @@ export async function loadStudentProfile(studentId: string): Promise<StudentProf
     const [practiceRows, puzzleRows, playRows, openingRows, gameRows, assignmentRows, league, level] = await Promise.all([
         prisma.practiceAttempt.findMany({
             where: { userId: studentId },
-            select: { practiceId: true, nodeId: true, status: true, mistakes: true, createdAt: true },
+            select: { id: true, practiceId: true, nodeId: true, status: true, mistakes: true, createdAt: true },
             orderBy: { createdAt: "asc" },
         }),
         prisma.puzzleAttempt.findMany({
             where: { userId: studentId },
-            select: { success: true, points: true, createdAt: true, puzzle: { select: { id: true, name: true, rating: true, tags: true } } },
+            select: { id: true, success: true, points: true, createdAt: true, puzzle: { select: { id: true, name: true, rating: true, tags: true } } },
             orderBy: { createdAt: "asc" },
         }),
         prisma.playSession.findMany({
             where: { userId: studentId },
-            select: { kind: true, key: true, score: true, won: true, details: true, createdAt: true },
+            select: { id: true, kind: true, key: true, score: true, won: true, details: true, createdAt: true },
             orderBy: { createdAt: "asc" },
         }).catch(() => []),
         prisma.openingProgress.findMany({
@@ -232,6 +235,7 @@ export async function loadStudentProfile(studentId: string): Promise<StudentProf
             const review = getLineReviewState(attempts);
             const last = attempts[attempts.length - 1];
             return {
+                attemptId: last?.id ?? null,
                 nodeId: leaf.id,
                 lineNumber: leaf.lineNumber,
                 moves: lineMoves(path),
@@ -360,14 +364,14 @@ export async function loadStudentProfile(studentId: string): Promise<StudentProf
 
     const lineNumbers = new Map(practiceTrees.flatMap(practice => practice.nodes.map(node => [node.id, node.lineNumber] as const)));
     const timeline: TimelineEvent[] = [
-        ...puzzleRows.slice(-TIMELINE_LENGTH).map(row => ({ type: "puzzle" as const, at: row.createdAt, name: row.puzzle.name, rating: row.puzzle.rating, success: row.success, points: row.points })),
+        ...puzzleRows.slice(-TIMELINE_LENGTH).map(row => ({ type: "puzzle" as const, id: row.id, at: row.createdAt, name: row.puzzle.name, rating: row.puzzle.rating, success: row.success, points: row.points })),
         ...practiceRows.slice(-TIMELINE_LENGTH).map(row => ({
-            type: "practice" as const, at: row.createdAt, practiceId: row.practiceId,
+            type: "practice" as const, id: row.id, at: row.createdAt, practiceId: row.practiceId,
             practice: practiceInfo.get(row.practiceId)?.name ?? "?",
             lineNumber: lineNumbers.get(row.nodeId) ?? null,
             status: row.status, mistakes: row.mistakes,
         })),
-        ...playRows.slice(-TIMELINE_LENGTH).map(row => ({ type: "play" as const, at: row.createdAt, kind: row.kind, key: row.key, score: row.score, won: row.won })),
+        ...playRows.slice(-TIMELINE_LENGTH).map(row => ({ type: "play" as const, id: row.id, at: row.createdAt, kind: row.kind, key: row.key, score: row.score, won: row.won })),
         ...openingRows.filter(row => row.lastViewedAt).map(row => ({ type: "opening" as const, at: row.lastViewedAt!, openingId: row.opening.id, opening: row.opening.name, completed: row.completed })),
     ].sort((a, b) => b.at.getTime() - a.at.getTime()).slice(0, TIMELINE_LENGTH);
 
@@ -406,7 +410,7 @@ export async function loadStudentProfile(studentId: string): Promise<StudentProf
         practices,
         openings: openingRows.map(row => ({ id: row.opening.id, name: row.opening.name, viewCount: row.viewCount, completed: row.completed, lastViewedAt: row.lastViewedAt })),
         themes,
-        recentPuzzles: puzzleRows.slice(-RECENT_PUZZLES).reverse().map(row => ({ ...row.puzzle, success: row.success, points: row.points, createdAt: row.createdAt })),
+        recentPuzzles: puzzleRows.slice(-RECENT_PUZZLES).reverse().map(row => ({ ...row.puzzle, attemptId: row.id, success: row.success, points: row.points, createdAt: row.createdAt })),
         playKinds: [...kindMap.values()].sort((a, b) => b.count - a.count),
         recentPlay: playRows.slice(-RECENT_PLAY).reverse(),
         levelTests: playRows.filter(row => row.kind === "LEVEL_TEST").reverse().map(row => ({ levelId: row.key.replace(/^level:/, ""), score: row.score, passed: !!row.won, createdAt: row.createdAt })),

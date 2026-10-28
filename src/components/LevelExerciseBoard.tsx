@@ -11,12 +11,13 @@ import { attemptedUci } from "@/lib/puzzleLearning";
 import { useLearningAttempt } from "@/hooks/useLearningAttempt";
 import { useActivityChessnut } from "@/hooks/useActivityChessnut";
 import ActivityBoardPanel from "./ActivityBoardPanel";
+import type { ExerciseReview, MoveError } from "@/lib/attemptMoves";
 
 // After a correct move the opponent replies on its own, as in the puzzle boards.
 const REPLY_DELAY_MS = 350;
 
 // Learning feedback is deliberately separate from the timed, one-try boards.
-export default function LevelExerciseBoard({ exercise, onContinue, last }: { exercise: LevelExercise; onContinue: (unassisted: boolean) => void; last: boolean }) {
+export default function LevelExerciseBoard({ exercise, onContinue, last }: { exercise: LevelExercise; onContinue: (unassisted: boolean, review?: ExerciseReview) => void; last: boolean }) {
     const t = useTranslations("LevelExercises");
     const tHelp = useTranslations("LearningHelp");
     const submission = useLearningAttempt(exercise.puzzleId);
@@ -25,6 +26,7 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
     const [hintStage, setHintStage] = useState(0);
     const [wrongPosition, setWrongPosition] = useState<{ fen: string; move: string } | null>(null);
     const advanced = useRef(false);
+    const moveErrors = useRef<MoveError[]>([]);
     const game = useMemo(() => new Chess(attempt.fen), [attempt.fen]);
     const side = useMemo(() => new Chess(exercise.fen).turn(), [exercise.fen]);
     const ready = attempt.status === "playing";
@@ -43,9 +45,12 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
         if ((board.enabled && !physical) || !ready || from === to) return false;
         const next = attemptExerciseMove(exercise, attempt, { from, to, promotion });
         if (next.status === "wrong") {
-            submission.record(false);
-            const uci = attemptedUci(attempt.fen, from, to);
-            if (uci) setWrongPosition({ fen: attempt.fen, move: uci });
+            const uci = attemptedUci(attempt.fen, from, to, promotion);
+            if (uci) {
+                moveErrors.current.push({ ply: attempt.index, fen: attempt.fen, played: uci, expected: [exercise.moves[attempt.index]] });
+                setWrongPosition({ fen: attempt.fen, move: uci });
+            }
+            submission.record(false, false, moveErrors.current.map(error => ({ ...error, ply: error.ply + 1 })));
         } else {
             setHintStage(0); setWrongPosition(null);
         }
@@ -139,7 +144,7 @@ export default function LevelExerciseBoard({ exercise, onContinue, last }: { exe
                 {!reviewing && !complete && hintStage < 3 && attempt.status !== "step" && <button type="button" className={buttonClass} onClick={() => { submission.record(false, true); setHintStage(value => value + 1); setAttempt(previous => ({ ...previous, assisted: true, status: "playing" })); }}>{tHelp(hintStage ? "moreHelp" : "hint")}</button>}
                 {!reviewing && !complete && hintStage >= 3 && <button type="button" className={buttonClass} onClick={() => { submission.record(false, true); setAttempt(previous => showExerciseSolution(exercise, previous)); setSelected(null); setHintStage(0); }}>{t("showSolution")}</button>}
                 {attempt.status === "solution" && <button type="button" disabled={!board.ready} className={buttonClass} onClick={() => setAttempt(previous => nextExerciseMove(exercise, previous))}>{t("nextSolutionMove")}</button>}
-                {complete && <button type="button" disabled={submission.saving || submission.error || !board.ready} className="rounded-lg px-4 py-2 font-bold bg-green-600 text-white hover:bg-green-700 disabled:opacity-50" onClick={() => { if (!advanced.current) { advanced.current = true; onContinue(exerciseCredit(attempt)); } }}>{t(last ? "finishTest" : "nextExercise")}</button>}
+                {complete && <button type="button" disabled={submission.saving || submission.error || !board.ready} className="rounded-lg px-4 py-2 font-bold bg-green-600 text-white hover:bg-green-700 disabled:opacity-50" onClick={() => { if (!advanced.current) { advanced.current = true; onContinue(exerciseCredit(attempt), { fen: exercise.fen, moves: exercise.moves, errors: [...moveErrors.current], success: exerciseCredit(attempt) }); } }}>{t(last ? "finishTest" : "nextExercise")}</button>}
             </div>
             {submission.saving && <p role="status">{tHelp("saving")}</p>}
             {submission.error && <div role="alert" className="space-y-2"><p>{tHelp("saveError")}</p><button type="button" disabled={submission.saving} onClick={() => void submission.retry()} className="underline">{tHelp("retrySave")}</button></div>}

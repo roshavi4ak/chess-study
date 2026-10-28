@@ -10,6 +10,7 @@
     "test:coach-dashboard": "node --test scripts/test-coach-dashboard.cjs",
     "test:puzzle-navigation": "node --test scripts/test-puzzle-navigation.cjs",
     "test:puzzle-submission": "node --test scripts/test-puzzle-submission.cjs",
+    "test:attempt-review": "node --test scripts/test-attempt-review.cjs",
     "test:puzzle-leaderboard": "node --test scripts/test-puzzle-leaderboard.cjs",
     "test:puzzle-difficulty": "node --test scripts/test-puzzle-difficulty.cjs scripts/test-puzzle-difficulty-ui.cjs",
     "test:learning": "node --test scripts/test-learning-upgrades.cjs",

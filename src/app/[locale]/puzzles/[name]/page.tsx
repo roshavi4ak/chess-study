@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { isSkillTag } from "@/lib/dailyMission";
 import { orderThemes, themeLabel } from "@/lib/puzzleThemes";
+import { loadPuzzleMistakes } from "@/lib/attemptReview";
+import AttemptReview from "@/components/AttemptReview";
+import { Chess } from "chess.js";
 
 interface PageProps {
     params: Promise<{
@@ -33,6 +36,9 @@ export default async function PuzzlePage(props: PageProps) {
     const [t, tCommon, tCategories] = await Promise.all([getTranslations("Puzzles"), getTranslations("Common"), getTranslations("PuzzleCategories")]);
     // Imported puzzles all carry the description "Lichess Puzzle <id>".
     const lichessId = puzzle.description?.match(/^Lichess Puzzle (\S+)$/)?.[1];
+    const coach = session?.user?.role === "COACH";
+    const mistakes = coach ? await loadPuzzleMistakes(puzzle.id) : [];
+    const tReview = await getTranslations("AttemptReview");
 
     return (
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -80,6 +86,9 @@ export default async function PuzzlePage(props: PageProps) {
                         tag={tag}
                     />
                 </div>
+                {coach && <div className="mt-8"><AttemptReview fen={puzzle.fen} moves={puzzle.solution.split(/\s+/).filter(Boolean)}
+                    orientation={new Chess(puzzle.fen).turn() === "w" ? "black" : "white"}
+                    attempts={mistakes} title={tReview("clubMistakes")} /></div>}
             </div>
         </main>
     );

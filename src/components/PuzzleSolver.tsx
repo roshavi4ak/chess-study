@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import LichessAnalysisLink from "@/components/LichessAnalysisLink";
 import ProgressiveHint from "@/components/ProgressiveHint";
 import MoveConsequence from "@/components/MoveConsequence";
+import { isPuzzleMoveCorrect, type MoveError } from "@/lib/attemptMoves";
 
 function playSolutionMove(game: Chess, move: string) {
     return /^[a-h][1-8][a-h][1-8][qrbn]?$/.test(move)
@@ -54,6 +55,10 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
     const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
     const [ratingChange, setRatingChange] = useState<{ oldRating: number, newRating: number, change: number, challengePoints: number } | null>(null);
     const submitted = useRef(false);
+    const moveErrors = useRef<MoveError[]>([]);
+    const savedErrorCount = useRef(0);
+    const attemptId = useRef<string | null>(null);
+    const saveQueue = useRef<Promise<void>>(Promise.resolve());
     const inputLocked = useRef(true);
     const moveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -139,18 +144,14 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
             const expectedMove = solutionMoves[currentMoveIndex];
             const moveUci = move.from + move.to + (move.promotion || "");
 
-            let isCorrect = false;
-            if (expectedMove === moveUci) {
-                isCorrect = true;
-            } else if (expectedMove === move.san) {
-                isCorrect = true;
-            }
+            const isCorrect = isPuzzleMoveCorrect(move, tempGame, expectedMove, currentMoveIndex === solutionMoves.length - 1);
 
             if (!isCorrect) {
                 // Wrong move!
                 setStatus("wrong");
                 setMessage(t("incorrectMove"));
                 setMistakeMade(true);
+                moveErrors.current.push({ ply: currentMoveIndex, fen: game.fen(), played: moveUci, expected: [expectedMove] });
                 setWrongPosition({ fen: game.fen(), move: moveUci });
                 inputLocked.current = true;
                 setMistakeCount(mistakeCount + 1);
@@ -242,12 +243,35 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
         void submitResult(false, true);
     }
 
-    async function submitResult(success: boolean, assisted = hintUsed) {
+    function submitResult(success: boolean, assisted = hintUsed): Promise<void> {
+        // Serialize saves so a second mistake made during the first request is retained.
+        saveQueue.current = saveQueue.current.then(() => saveResult(success, assisted));
+        return saveQueue.current;
+    }
+
+    async function saveResult(success: boolean, assisted: boolean) {
+        if (attemptId.current) {
+            if (savedErrorCount.current === moveErrors.current.length) return;
+            setSaving(true);
+            const errors = [...moveErrors.current];
+            try {
+                const response = await fetch('/api/puzzles/submit', {
+                    method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ attemptId: attemptId.current, moveErrors: errors }), keepalive: true,
+                });
+                if (!response.ok) throw new Error("Could not save puzzle mistakes");
+                savedErrorCount.current = errors.length;
+                setSaveError(false);
+            } catch { setSaveError(true); }
+            finally { setSaving(false); }
+            return;
+        }
         if (submitted.current) return;
         submitted.current = true;
         pendingResult.current = { success, assisted };
         setSaving(true);
         setSaveError(false);
+        const errors = [...moveErrors.current];
         try {
             console.log("Submitting puzzle result:", { puzzleId: id, success });
             
@@ -256,7 +280,8 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ puzzleId: id, success, ...(assisted ? { hintUsed: true } : {}), ...(reviewMode ? { review: true } : {}) })
+                body: JSON.stringify({ puzzleId: id, success, moveErrors: errors, ...(assisted ? { hintUsed: true } : {}), ...(reviewMode ? { review: true } : {}) }),
+                keepalive: true,
             });
             
             console.log("Response status:", res.status);
@@ -265,6 +290,9 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
                 const data = await res.json();
                 console.log("Response data:", data);
                 setRatingChange(data);
+                attemptId.current = data.attemptId ?? null;
+                // If errors arrived during the request, the next queued save sends them too.
+                savedErrorCount.current = errors.length;
             } else {
                 const errorText = await res.text();
                 console.error("Error response:", errorText);

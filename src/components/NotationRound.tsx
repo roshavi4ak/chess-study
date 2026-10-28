@@ -6,6 +6,7 @@ import { Chessboard } from "react-chessboard";
 import { useTranslations } from "next-intl";
 import { Delete } from "lucide-react";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
+import type { ExerciseReview } from "@/lib/attemptMoves";
 import {
     NOTATION_ROUND, PIECE_LETTERS, checkWrittenAnswer, makeNotationQuestion, playedRight,
     type AnswerCheck, type NotationDirection, type NotationLevel, type NotationQuestion,
@@ -19,7 +20,7 @@ const PROMOTIONS = ["q", "r", "b", "n"] as const;
 export default function NotationRound({ direction, level, onFinish }: {
     direction: NotationDirection;
     level: NotationLevel;
-    onFinish: (correct: number) => void;
+    onFinish: (correct: number, reviews?: ExerciseReview[]) => void;
 }) {
     const t = useTranslations("Notation");
     const [index, setIndex] = useState(0);
@@ -29,6 +30,7 @@ export default function NotationRound({ direction, level, onFinish }: {
     const [feedback, setFeedback] = useState<AnswerCheck | null>(null);
     const [pendingPromotion, setPendingPromotion] = useState<{ from: string; to: string } | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const reviews = useRef<ExerciseReview[]>([]);
 
     useEffect(() => {
         // Level 3 and 4 positions take a moment to find; let the page paint first.
@@ -48,7 +50,9 @@ export default function NotationRound({ direction, level, onFinish }: {
         return after.fen();
     }, [question]);
 
-    function finishQuestion(result: AnswerCheck) {
+    function finishQuestion(result: AnswerCheck, played?: string) {
+        if (question) reviews.current.push({ fen: question.fen, moves: [question.from + question.to + (question.promotion ?? "")], success: result !== "wrong", errors: [],
+            answer: { played: played ?? answer, expected: question.san } });
         setFeedback(result);
         setResults(previous => [...previous, result !== "wrong"]);
     }
@@ -61,7 +65,8 @@ export default function NotationRound({ direction, level, onFinish }: {
 
     function judgeMove(move: { from: string; to: string; promotion?: string }) {
         if (!question || answered) return false;
-        finishQuestion(playedRight(question, move) ? "exact" : "wrong");
+        const played = new Chess(question.fen).move({ ...move, promotion: move.promotion ?? "q" });
+        finishQuestion(playedRight(question, move) ? "exact" : "wrong", played.san);
         return true;
     }
 
@@ -80,7 +85,7 @@ export default function NotationRound({ direction, level, onFinish }: {
 
     function next() {
         if (index + 1 >= NOTATION_ROUND) {
-            onFinish(results.filter(Boolean).length);
+            onFinish(results.filter(Boolean).length, reviews.current);
             return;
         }
         setQuestion(null);

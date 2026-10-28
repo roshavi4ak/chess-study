@@ -6,6 +6,7 @@ import { getLevelTest, submitLevelTest } from "@/app/actions/levels";
 import { TEST_PASS, TEST_PUZZLES } from "@/lib/curriculum";
 import type { LevelExercise } from "@/lib/levelExercises";
 import LevelExerciseBoard from "@/components/LevelExerciseBoard";
+import type { ExerciseReview } from "@/lib/attemptMoves";
 
 export default function LevelTest({ levelId, onDone }: { levelId: string; onDone: (passed: boolean) => void }) {
     const [round, setRound] = useState(0);
@@ -20,6 +21,7 @@ function LevelTestRound({ levelId, onDone, onRetry }: { levelId: string; onDone:
     const [submitting, setSubmitting] = useState(false);
     const [outcome, setOutcome] = useState<{ passed: boolean; correct: number } | null>(null);
     const submitted = useRef(false);
+    const reviews = useRef<ExerciseReview[]>([]);
 
     useEffect(() => {
         let cancelled = false;
@@ -36,7 +38,7 @@ function LevelTestRound({ levelId, onDone, onRetry }: { levelId: string; onDone:
         setError(null);
         const correct = next.filter(Boolean).length;
         try {
-            const { passed } = await submitLevelTest(levelId, correct);
+            const { passed } = await submitLevelTest(levelId, correct, reviews.current);
             setOutcome({ passed, correct });
             onDone(passed);
         } catch {
@@ -47,7 +49,8 @@ function LevelTestRound({ levelId, onDone, onRetry }: { levelId: string; onDone:
         }
     }
 
-    function onContinue(unassisted: boolean) {
+    function onContinue(unassisted: boolean, review?: ExerciseReview) {
+        if (review) reviews.current.push(review);
         const next = [...results, unassisted];
         setResults(next);
         if (next.length === TEST_PUZZLES) void finish(next);

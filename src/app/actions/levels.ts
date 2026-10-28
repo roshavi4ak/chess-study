@@ -7,6 +7,7 @@ import { CURRICULUM, KING_LEVEL, TEST_PUZZLES, findCurriculumLevel, levelKey, te
 import { loadLevel, type MyLevel } from "@/lib/levelProgress";
 import { loadLevelExercises } from "@/lib/puzzleQueries";
 import { beginnerExercises, randomHangingExercises, type LevelExercise } from "@/lib/levelExercises";
+import { validateExerciseReviews, type ExerciseReview } from "@/lib/attemptMoves";
 
 export type { MyLevel };
 
@@ -46,23 +47,25 @@ export async function getLevelPractice(levelId: string): Promise<LevelExercise[]
 }
 
 // A finished practice round. Kept for the coach's view of the child's activity; it never affects passing.
-export async function recordLevelPractice(levelId: string, correct: number, total: number) {
+export async function recordLevelPractice(levelId: string, correct: number, total: number, reviews?: ExerciseReview[]) {
     const user = await requireUser();
     const level = findCurriculumLevel(levelId);
     if (!level) throw new Error("Unknown level");
     const safeTotal = Math.max(1, Math.min(TEST_PUZZLES, Math.round(total)));
     const score = Math.max(0, Math.min(safeTotal, Math.round(correct)));
-    await prisma.playSession.create({ data: { userId: user.id!, kind: "LEVEL_PRACTICE", key: levelKey(level.id), score, details: { total: safeTotal } } })
+    const exercises = reviews ? validateExerciseReviews(reviews) : undefined;
+    await prisma.playSession.create({ data: { userId: user.id!, kind: "LEVEL_PRACTICE", key: levelKey(level.id), score, details: { total: safeTotal, ...(exercises ? { exercises } : {}) } } })
         .catch(error => console.error("[Levels] Could not save practice round:", error));
 }
 
-export async function submitLevelTest(levelId: string, correct: number): Promise<{ passed: boolean }> {
+export async function submitLevelTest(levelId: string, correct: number, reviews?: ExerciseReview[]): Promise<{ passed: boolean }> {
     const user = await requireUser();
     const level = findCurriculumLevel(levelId);
     if (!level) throw new Error("Unknown level");
     const score = Math.max(0, Math.min(TEST_PUZZLES, Math.round(correct)));
     const passed = testPassed(score);
-    await prisma.playSession.create({ data: { userId: user.id!, kind: "LEVEL_TEST", key: levelKey(level.id), score, won: passed } });
+    const exercises = reviews ? validateExerciseReviews(reviews) : undefined;
+    await prisma.playSession.create({ data: { userId: user.id!, kind: "LEVEL_TEST", key: levelKey(level.id), score, won: passed, ...(exercises ? { details: { exercises } } : {}) } });
     return { passed };
 }
 

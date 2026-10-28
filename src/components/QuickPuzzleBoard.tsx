@@ -6,12 +6,13 @@ import { Chessboard } from "react-chessboard";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { useActivityChessnut } from "@/hooks/useActivityChessnut";
 import ActivityBoardPanel from "./ActivityBoardPanel";
+import type { ExerciseReview, MoveError } from "@/lib/attemptMoves";
 
 interface QuickPuzzleBoardProps {
     fen: string;
     solution: string; // Space-separated UCI moves; the first one is the opponent's set-up move
     // Called once: true when every move was right, false at the first wrong move.
-    onResult: (solved: boolean) => void;
+    onResult: (solved: boolean, review?: ExerciseReview) => void;
     disabled?: boolean;
     boardSupport?: boolean;
 }
@@ -32,6 +33,7 @@ export default function QuickPuzzleBoard({ fen, solution, onResult, disabled, bo
     const [done, setDone] = useState(false);
     const [result, setResult] = useState<boolean | null>(null);
     const reported = useRef(false);
+    const moveErrors = useRef<MoveError[]>([]);
     const orientation = new Chess(fen).turn() === "w" ? "black" : "white";
 
     function finish(solved: boolean) {
@@ -72,6 +74,7 @@ export default function QuickPuzzleBoard({ fen, solution, onResult, disabled, bo
         // Any mate in one counts, like on Lichess.
         const correct = `${move.from}${move.to}${move.promotion ?? ""}` === expected || (index === moves.length - 1 && attempt.isCheckmate());
         if (!correct) {
+            moveErrors.current.push({ ply: index, fen: game.fen(), played: move.from + move.to + (move.promotion ?? ""), expected: [expected] });
             finish(false);
             return false;
         }
@@ -97,8 +100,10 @@ export default function QuickPuzzleBoard({ fen, solution, onResult, disabled, bo
     });
     useEffect(() => {
         if (result === null || reported.current || (boardSupport && !board.ready)) return;
-        const timer = setTimeout(() => { reported.current = true; onResult(result); }, boardSupport && board.enabled && result ? 4700 : result ? 350 : 700);
+        const timer = setTimeout(() => { reported.current = true; onResult(result, { fen, moves, errors: [...moveErrors.current], success: result }); }, boardSupport && board.enabled && result ? 4700 : result ? 350 : 700);
         return () => clearTimeout(timer);
+        // The board is remounted for each puzzle; fen and moves belong to this attempt.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result, boardSupport, board.ready, board.enabled, onResult]);
     const squareStyles: Record<string, React.CSSProperties> = lastMove ? {
         [lastMove.from]: { backgroundColor: "rgba(255, 255, 0, 0.35)" },

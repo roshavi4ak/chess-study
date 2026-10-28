@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { SkipForward } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -8,6 +8,7 @@ import { getPersonalBests, getPuzzleLadder, recordPlaySession, type PersonalBest
 import { STREAK_STEP, type LadderPuzzle } from "@/lib/puzzleLadder";
 import QuickPuzzleBoard from "@/components/QuickPuzzleBoard";
 import PersonalBestPanel from "@/components/PersonalBestPanel";
+import type { ExerciseReview } from "@/lib/attemptMoves";
 
 const BATCH = 30;
 
@@ -22,6 +23,7 @@ export default function StreakPage() {
     const [score, setScore] = useState(0);
     const [skipUsed, setSkipUsed] = useState(false);
     const [error, setError] = useState(false);
+    const reviews = useRef<ExerciseReview[]>([]);
 
     useEffect(() => {
         getPersonalBests().then(setBests).catch(() => undefined);
@@ -37,6 +39,7 @@ export default function StreakPage() {
             setIndex(0);
             setScore(0);
             setSkipUsed(false);
+            reviews.current = [];
             setPhase("playing");
         } catch (err) {
             console.error("Failed to load streak puzzles:", err);
@@ -61,12 +64,13 @@ export default function StreakPage() {
 
     function finish(finalScore: number) {
         setPhase("over");
-        recordPlaySession({ kind: "STREAK", score: finalScore })
+        recordPlaySession({ kind: "STREAK", score: finalScore, details: { exercises: reviews.current } })
             .then(() => getPersonalBests().then(setBests))
             .catch(error => console.error("Failed to save streak:", error));
     }
 
-    function onResult(solved: boolean) {
+    function onResult(solved: boolean, review?: ExerciseReview) {
+        if (review) reviews.current = [...reviews.current, review].slice(-100);
         if (!solved) return finish(score);
         const newScore = score + 1;
         setScore(newScore);
