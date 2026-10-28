@@ -29,3 +29,27 @@ This release is based on the deployed source. It excludes the separate unfinishe
 - The isolated release contains no backup source copies; production compilation runs its full TypeScript check.
 - The additional practical-training and Chessnut UI/activity suites pass: 137 tests.
 - The navigation fixture supplies the board reset boundary required by the current micro-lessons, so the full navigation suite passes.
+
+## VPS deployment
+
+Activated on 28 October 2026 at **21:00:38 UTC / 23:00:38 Europe/Kiev**.
+
+- Application commit: `38b153b02ab86583e7b65facfb963b88a6fe8721` (preceded by `089a36094bbee398508b7a19327895bae4cda423`, recording the existing deployed source).
+- Build: `txrbHKqhRoSl0ewN73cvb`, replacing `eev4TvHrg7itVurP22ByO`.
+- All **260 VPS tests** passed: 114 review/puzzle/learning/notation checks, 39 Chessnut checks and 107 practical-training checks. The 1,439 translation-key checks, targeted ESLint, full TypeScript check and production build passed.
+- The three nullable columns were added in a transaction. Schema comparison verified that existing columns were unchanged and none were removed. A database-enforced read-only transaction verified reads through the generated Prisma client.
+- Staging and live HTTPS checks passed for 26 English/Bulgarian pages, four protected-route redirects, both unauthenticated submission methods, 29 linked JavaScript/CSS assets and both engine assets.
+- Signed-in browser verification confirmed 150 clickable timeline entries, puzzle review, opening-line review and the combined puzzle mistake panel. Both review boards rendered 64 squares; solution navigation worked and the opening review had no browser console errors. No student activity was submitted during verification.
+- All 924 deployed source files matched the committed archive. The app is healthy with zero restarts; PostgreSQL's container identity and start time remained unchanged.
+
+The first activation automatically restored the previous application when a smoke fixture could not be copied into the read-only production container. The verification was changed to pass that fixture entirely through stdin, then activation and all live checks passed.
+
+Deployment artifacts and logs: `/srv/sites/shah.belovezem.com/attempt-review-20261028`.
+
+## Backup retention and rollback
+
+Exactly one website backup remains: `/srv/sites/shah.belovezem.com/backups/20261028-attempt-review`.
+
+It contains the previous release, previous source archive, a PostgreSQL custom-format dump, checksums and a manifest. Dump contents were checked with `pg_restore --list`, and archive checksums were verified before old backups were deleted. Six older backups, the two older deployment trees and duplicate retired source/release copies were removed. The active source, active release and current build artifacts remain in place.
+
+For an application rollback, preserve the active release, restore a copy of `release-before` from the retained backup to `/srv/sites/shah.belovezem.com/release`, and recreate only the app service with `/opt/websites/compose.shah.yml`. Restore source from `source-before.tgz` separately if needed. Leave the additive database columns and all subsequent student activity in place; do not restore the database dump for an application-only rollback.
