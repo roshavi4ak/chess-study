@@ -47,14 +47,14 @@ export default function RaceHomePage() {
             </div>
             <p className="text-gray-600 dark:text-gray-300">{t("intro")}</p>
 
-            <form onSubmit={join} className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-3">
+            <form id="join" onSubmit={join} className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-3">
                 <label className="block text-lg font-bold" htmlFor="race-code">{t("enterCode")}</label>
                 <input id="race-code" value={code} onChange={e => setCode(e.target.value.replace(/\D/g, "").slice(0, 4))} inputMode="numeric" placeholder="1234"
                     className="w-full text-center text-4xl font-black tracking-[0.5em] rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 py-3" />
                 <button type="submit" disabled={busy || code.length !== 4} className="w-full py-3 rounded-lg bg-blue-600 text-white text-lg font-bold hover:bg-blue-700 disabled:opacity-50">{t("join")}</button>
             </form>
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-3">
+            <div id="duel" className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-3">
                 <h2 className="text-lg font-bold">⚔️ {t("duelTitle")}</h2>
                 <p className="text-sm text-gray-600 dark:text-gray-300">{t("duelIntro")}</p>
                 <button type="button" onClick={duel} disabled={busy} className="px-5 py-2.5 rounded-lg bg-orange-500 text-white font-bold hover:bg-orange-600 disabled:opacity-50">{t("startDuelButton")}</button>

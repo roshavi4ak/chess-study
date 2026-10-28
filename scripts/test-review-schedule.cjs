@@ -242,7 +242,10 @@ const themes = byId(themeCards([
     puzzle(true, ['fork'], '2026-10-05', 18),                          // same day again: no extra credit
     ...['01', '02'].map(d => puzzle(true, ['pin'], `2026-10-${d}`)),
 ]));
-assert.deepEqual(themes, { 'theme:fork': ['silver', 5, 10], 'theme:pin': [null, 2, 3] });
+assert.deepEqual(themes['theme:fork'], ['silver', 5, 10]);
+assert.deepEqual(themes['theme:pin'], [null, 2, 3]);
+assert.deepEqual(themes['theme:skewer'], [null, 0, 3]);
+assert.equal(themes['theme:middlegame'], undefined);
 
 const sorted = sortCards([
     { id: 'a', name: 'A', tier: null, current: 2, nextTarget: 3 },

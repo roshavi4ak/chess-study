@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { Glicko2, RatingData, MatchResult } from "@/lib/glicko2";
+import { puzzleChallengePoints } from "@/lib/puzzleChallenge";
 
 export async function POST(request: Request) {
     const session = await auth();
@@ -89,7 +90,10 @@ export async function POST(request: Request) {
                     userId: session.user.id,
                     puzzleId: puzzleId,
                     success: success,
-                    points: 0 // No points for retries
+                    points: 0,
+                    challengePoints: 0, // No competition points for retries, hints, or reviews.
+                    challengeStudentRating: userRating.rating,
+                    challengePuzzleRating: puzzleRating.rating
                 }
             });
 
@@ -115,7 +119,8 @@ export async function POST(request: Request) {
             return NextResponse.json({
                 oldRating: Math.round(userRating.rating),
                 newRating: Math.round(userRating.rating),
-                change: 0
+                change: 0,
+                challengePoints: 0
             });
         }
 
@@ -140,6 +145,7 @@ export async function POST(request: Request) {
         const puzzleDiff = newPuzzleRating.rating - puzzleRating.rating;
 
         const points = Math.round(userDiff * 0.7);
+        const challengePoints = success ? puzzleChallengePoints(userRating.rating, puzzleRating.rating) : 0;
         const puzzleChange = Math.round(puzzleDiff * 0.1);
 
         const finalUserRating = Math.round(userRating.rating) + points;
@@ -169,7 +175,10 @@ export async function POST(request: Request) {
                 userId: session.user.id,
                 puzzleId: puzzleId,
                 success: success,
-                points: points
+                points: points,
+                challengePoints,
+                challengeStudentRating: userRating.rating,
+                challengePuzzleRating: puzzleRating.rating
             }
         });
 
@@ -195,7 +204,8 @@ export async function POST(request: Request) {
         return NextResponse.json({
             oldRating: Math.round(userRating.rating),
             newRating: finalUserRating,
-            change: points
+            change: points,
+            challengePoints
         });
     } catch (error) {
         console.error("Error submitting puzzle result:", error);

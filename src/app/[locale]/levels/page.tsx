@@ -1,5 +1,7 @@
 "use client";
 
+import { ChessnutSession } from "@/components/ChessnutSession";
+
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check, Lock } from "lucide-react";
@@ -14,6 +16,10 @@ import { lessonForLevel } from "@/lib/microLessons";
 const GROUP_ICON: Record<CurriculumLevel["group"], string> = { pawn: "♙", knight: "♘", bishop: "♗", rook: "♖", queen: "♕", king: "♔" };
 
 export default function LevelsPage() {
+    return <ChessnutSession><LevelsPageContent /></ChessnutSession>;
+}
+
+function LevelsPageContent() {
     const t = useTranslations("Levels");
     const [mine, setMine] = useState<MyLevel | null>(null);
     const [selected, setSelected] = useState<CurriculumLevel | null>(null);

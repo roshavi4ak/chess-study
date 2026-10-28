@@ -5,6 +5,9 @@ import { Chessboard } from "react-chessboard";
 import { useTranslations } from "next-intl";
 import { Lightbulb, RotateCcw } from "lucide-react";
 import { boardStars, guardedSquares, legalTargets, playMove, solve, startState, type BlackPiece, type BoardLevel, type BoardState } from "@/lib/miniGames";
+import { useActivityChessnut } from "@/hooks/useActivityChessnut";
+import { movedPieces, piecesPlacement } from "@/lib/chessnut";
+import ActivityBoardPanel from "./ActivityBoardPanel";
 
 const OVERLAY: React.CSSProperties = { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none", fontSize: "min(7vw, 2.6rem)" };
 
@@ -22,16 +25,17 @@ export default function MiniBoardGame({ level, onComplete }: { level: BoardLevel
     const targets = won || caught ? [] : legalTargets(level, state);
 
     function reset() {
+        board.reset();
         setState(startState(level));
         setCapturedBy(null);
         setHint(null);
         setTries(value => value + 1);
     }
 
-    function handleMove(square: string, from = state.at) {
-        if (won || caught) return;
+    function handleMove(square: string, from = state.at, physical = false) {
+        if ((board.enabled && !physical) || won || caught) return false;
         const outcome = playMove(level, state, square, from);
-        if (!outcome) return;
+        if (!outcome) return false;
         setHint(null);
         setState(outcome.state);
         if (outcome.result === "caught") setCapturedBy(outcome.capturedBy);
@@ -39,6 +43,7 @@ export default function MiniBoardGame({ level, onComplete }: { level: BoardLevel
             setWon(true);
             onComplete(boardStars(outcome.state.moves, best), outcome.state.moves);
         }
+        return true;
     }
 
     function showHint() {
@@ -62,9 +67,18 @@ export default function MiniBoardGame({ level, onComplete }: { level: BoardLevel
 
     const apples = new Set((level.apples ?? []).filter(apple => !state.collected.includes(apple)));
     const needsHelp = tries >= 2 || state.moves > best + 2 || caught;
+    const board = useActivityChessnut({
+        fen: piecesPlacement(position), canMove: !won && !caught,
+        candidates: targets.map(to => ({ move: { from: state.at, to }, fen: movedPieces(position, state.at, to) })),
+        onMove: move => handleMove(move.to, move.from, true),
+        hintMove: hint ? state.at + hint : undefined,
+        guideSquares: won || caught ? [] : [...apples, ...(level.star ? [level.star] : [])],
+        completion: won ? `${level.id}:${tries}` : undefined,
+    });
 
     return (
         <div className="space-y-3">
+            <ActivityBoardPanel board={board} />
             <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-lg font-bold text-gray-900 dark:text-white">
                     {level.goal === "apples" ? t("goalApples") : level.goal === "star" ? (level.guards?.length ? t("goalStarSafe") : t("goalStar")) : t("goalCapture")}
@@ -77,8 +91,8 @@ export default function MiniBoardGame({ level, onComplete }: { level: BoardLevel
                     options={{
                         id: `mini-${level.id}`,
                         position,
-                        allowDragging: !won && !caught,
-                        canDragPiece: ({ square }) => !won && !caught && square === state.at,
+                        allowDragging: !board.enabled && !won && !caught,
+                        canDragPiece: ({ square }) => !board.enabled && !won && !caught && square === state.at,
                         onSquareClick: ({ square }) => handleMove(square),
                         onPieceDrop: ({ sourceSquare, targetSquare }) => { if (targetSquare) handleMove(targetSquare, sourceSquare); return false; },
                         squareStyles,

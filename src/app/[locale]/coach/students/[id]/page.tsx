@@ -12,6 +12,7 @@ import { loadStudentProfile, type StudentProfile, type TimelineEvent } from "@/l
 import StartLevelSelect from "@/components/StartLevelSelect";
 import StudentHomeworkPanel from "@/components/StudentHomeworkPanel";
 import DeleteAssignmentButton from "@/components/DeleteAssignmentButton";
+import PuzzleDifficultySettings from "@/components/PuzzleDifficultySettings";
 
 const card = "bg-white dark:bg-gray-800 shadow rounded-2xl border border-gray-100 dark:border-gray-700";
 const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400";
@@ -370,6 +371,7 @@ export default async function StudentProfilePage({ params }: { params: Promise<{
 
             {/* Puzzles */}
             <Section id="puzzles" title={t("section_puzzles")}>
+                <PuzzleDifficultySettings studentId={id} defaultOpen />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className={`${card} overflow-x-auto`}>
                         <h3 className="font-bold px-4 pt-4">{t("themesTitle")}</h3>

@@ -28,7 +28,10 @@ export default async function CoachStudentHelp() {
         <div className="bg-white dark:bg-gray-800 shadow-xl overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-700">
             <div className="px-6 py-5 bg-gradient-to-r from-amber-500 to-orange-600 flex flex-wrap justify-between items-center gap-2">
                 <h3 className="text-xl font-bold text-white">{t("needsHelpTitle")}</h3>
-                <Link href="/coach/assignments" className="px-3 py-1.5 rounded-lg bg-white/20 text-white font-medium hover:bg-white/30">{t("manageHomework")} →</Link>
+                <div className="flex flex-wrap gap-2">
+                    <Link href="/coach/teams" className="px-3 py-1.5 rounded-lg bg-white/20 text-white font-medium hover:bg-white/30">{t("manageTeams")} →</Link>
+                    <Link href="/coach/assignments" className="px-3 py-1.5 rounded-lg bg-white/20 text-white font-medium hover:bg-white/30">{t("manageHomework")} →</Link>
+                </div>
             </div>
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">

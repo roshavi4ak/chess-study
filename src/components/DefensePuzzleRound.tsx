@@ -10,6 +10,7 @@ import { learningMove } from "@/lib/puzzleLearning";
 import { trainingAnalysis } from "@/lib/trainingEngine";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { orderThemes, themeLabel } from "@/lib/puzzleThemes";
+import LichessAnalysisLink from "./LichessAnalysisLink";
 import ProgressiveHint from "./ProgressiveHint";
 import TrainingLine from "./TrainingLine";
 import TrainingResult from "./TrainingResult";
@@ -56,7 +57,6 @@ function DefensePuzzleExercise({ puzzle, onDone }: { puzzle: DefensePuzzle; onDo
     const [alternative, setAlternative] = useState(false);
     const [mistake, setMistake] = useState<{ fen: string; moves: string[] } | null>(null);
     const request = useRef<AbortController | null>(null);
-    const locked = useRef(false);
     useEffect(() => () => request.current?.abort(), []);
     const expected = puzzle.moves[cursor];
     const fen = game.fen();
@@ -68,16 +68,21 @@ function DefensePuzzleExercise({ puzzle, onDone }: { puzzle: DefensePuzzle; onDo
         else { learningMove(next, puzzle.moves[cursor + 1]); setCursor(value => value + 2); }
         setGame(next);
     }
+    // Stopping, or trying another move, discards the pending check so the student is never stuck waiting.
+    function stopCheck() {
+        request.current?.abort(); request.current = null; setBusy(false);
+    }
     async function answer(uci: string) {
-        if (!started || done || locked.current) return false;
+        if (!started || done) return false;
         const next = copyGame(game);
         let played;
         try { played = learningMove(next, uci); } catch { return false; }
         const move = moveUci(played);
         const reference = copyGame(game);
         const expectedMove = learningMove(reference, expected);
-        if (move === moveUci(expectedMove)) { accept(next); return true; }
-        locked.current = true; setBusy(true); setError(false); setMistake(null);
+        if (move === moveUci(expectedMove)) { stopCheck(); accept(next); return true; }
+        request.current?.abort();
+        setBusy(true); setError(false); setMistake(null);
         const controller = new AbortController(); request.current = controller;
         try {
             const best = await trainingAnalysis(reference.fen(), controller.signal);
@@ -89,7 +94,7 @@ function DefensePuzzleExercise({ puzzle, onDone }: { puzzle: DefensePuzzle; onDo
             setMistake({ fen, moves: [move, ...candidate.pv.slice(0, 5)] });
             return false;
         } catch { if (!controller.signal.aborted) setError(true); return false; }
-        finally { if (!controller.signal.aborted) { locked.current = false; setBusy(false); } }
+        finally { if (request.current === controller) { request.current = null; setBusy(false); } }
     }
     const { onSquareClick, onPieceClick, onPieceDrop, optionSquares } = useLegalMoves({ game, onMove: ({ from, to, promotion }) => answer(from + to + (promotion ?? "")) });
     const last = game.history({ verbose: true }).at(-1);
@@ -98,13 +103,13 @@ function DefensePuzzleExercise({ puzzle, onDone }: { puzzle: DefensePuzzle; onDo
     return <div className="space-y-4">
         <div className="rounded-xl bg-indigo-50 text-indigo-950 p-4 space-y-2"><h2 className="font-bold text-xl">{done ? tDefense("correct") : !started ? tDefense("watch") : tPuzzle(game.inCheck() ? "answerCheck" : "findDefense")}</h2><p>{done ? tPuzzle(alternative ? "alternative" : "solved") : tPuzzle(!started ? "watchHelp" : "playHelp")}</p><p className="text-sm font-semibold">{tPuzzle(puzzle.side === "w" ? "playWhite" : "playBlack")}</p></div>
         <div className="space-y-2"><h3 className="font-bold break-words">{puzzle.name} · {tPuzzle("rating", { rating: puzzle.rating })}</h3>{done && <div className="flex flex-wrap gap-2">{orderThemes(puzzle.tags).map(tag => <span key={tag} className="rounded bg-gray-100 text-gray-800 px-2 py-1 text-xs">{themeLabel(tag, tThemes)}</span>)}</div>}</div>
-        <div className="max-w-[560px] aspect-square mx-auto"><Chessboard options={{ id: "defense-puzzle-board", position: fen, boardOrientation: orientation, allowDragging: started && !done && !busy, onSquareClick: args => { if (started && !done && !busy) void onSquareClick(args); }, onPieceClick: args => { if (started && !done && !busy) onPieceClick(args); }, onPieceDrop: args => { if (started && !done && !busy) void onPieceDrop(args); return false; }, squareStyles: { ...optionSquares, ...styles }, arrows: hint >= 3 && expected ? [{ startSquare: expected.slice(0, 2), endSquare: expected.slice(2, 4), color: "#4f46e5" }] : [], allowDrawingArrows: false, animationDurationInMs: 300 }} /></div>
+        <div className="max-w-[560px] aspect-square mx-auto"><Chessboard options={{ id: "defense-puzzle-board", position: fen, boardOrientation: orientation, allowDragging: started && !done, onSquareClick: args => { if (started && !done) void onSquareClick(args); }, onPieceClick: args => { if (started && !done) onPieceClick(args); }, onPieceDrop: args => { if (started && !done) void onPieceDrop(args); return false; }, squareStyles: { ...optionSquares, ...styles }, arrows: hint >= 3 && expected ? [{ startSquare: expected.slice(0, 2), endSquare: expected.slice(2, 4), color: "#4f46e5" }] : [], allowDrawingArrows: false, animationDurationInMs: 300 }} /></div>
         {!started && <button type="button" onClick={() => { const next = copyGame(game); learningMove(next, puzzle.setup); setGame(next); setStarted(true); }} className="rounded-lg bg-indigo-600 text-white px-4 py-3 font-bold">{tDefense("showMove")}</button>}
-        {busy && <p role="status">{tPuzzle("checking")}</p>}
+        {busy && <div className="flex flex-wrap items-center gap-3"><p role="status">{tPuzzle("checking")}</p><button type="button" onClick={stopCheck} className="rounded-lg bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 px-4 py-2 font-medium">{tPuzzle("stopChecking")}</button></div>}
         {error && <p role="alert" className="text-amber-800 dark:text-amber-200">{tPuzzle("engineError")}</p>}
-        {started && !done && <button type="button" disabled={busy || hint === 3} onClick={() => { setHelped(true); setHint(value => value + 1); }} className="rounded-lg bg-amber-100 text-amber-950 px-4 py-2 disabled:opacity-40">{tPuzzle("hint")}</button>}
+        {started && !done && <button type="button" disabled={hint === 3} onClick={() => { setHelped(true); setHint(value => value + 1); }} className="rounded-lg bg-amber-100 text-amber-950 px-4 py-2 disabled:opacity-40">{tPuzzle("hint")}</button>}
         {hint > 0 && !done && <><p>{game.inCheck() ? tPuzzle("checkThreat") : threats.length ? tPuzzle("pieceThreat", { squares: threats.map(threat => threat.square).join(", ") }) : tPuzzle("hiddenThreat")}</p><ProgressiveHint fen={fen} move={expected} stage={hint} /></>}
         {mistake && <><p role="status" className="text-amber-800 dark:text-amber-200">{tPuzzle("weaker")}</p><TrainingLine key={mistake.fen + mistake.moves[0]} fen={mistake.fen} moves={mistake.moves} orientation={orientation} label={tDefense("consequence")} /></>}
-        {done && <><p role="status" className="text-green-700 dark:text-green-300">{tDefense(helped ? "learned" : "independent")}</p><button type="button" onClick={() => onDone(!helped)} className="rounded-lg bg-green-600 text-white px-4 py-3 font-bold">{tDefense("next")}</button></>}
+        {done && <><p role="status" className="text-green-700 dark:text-green-300">{tDefense(helped ? "learned" : "independent")}</p><div className="flex flex-wrap items-center gap-3"><button type="button" onClick={() => onDone(!helped)} className="rounded-lg bg-green-600 text-white px-4 py-3 font-bold">{tDefense("next")}</button><LichessAnalysisLink fen={fen} orientation={orientation} /></div></>}
     </div>;
 }

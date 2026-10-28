@@ -59,13 +59,17 @@ async function checkStatistics() {
     try { result = await getWeeklyStatistics(); } finally { global.Date = RealDate; }
 
     assert.deepEqual(result.dateRange, { start: '05.10.2026', end: '11.10.2026' });
-    assert.equal(queries.length, 2);
+    assert.equal(queries.length, 3);
     for (const query of queries) {
         const range = query.where.createdAt || query.where.lastAttemptAt;
         assert.equal(range.gte.toISOString(), '2026-10-04T21:00:00.000Z');
         assert.equal(range.lt.toISOString(), '2026-10-11T21:00:00.000Z');
         assert.equal(query.where.user.role, 'STUDENT');
-        assert.equal(query.take, 3);
+        if (query.where.lastAttemptAt || query.by.length === 1) assert.equal(query.take, 3);
+        else {
+            assert.deepEqual(query.by, ['userId', 'success']);
+            assert.equal(query._sum.challengePoints, true);
+        }
     }
     console.log('Leaderboard week boundaries and statistics query regression checks passed.');
 }

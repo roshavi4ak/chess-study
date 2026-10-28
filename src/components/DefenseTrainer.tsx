@@ -7,6 +7,7 @@ import { defenseAnswer, defenseRound, defenseStart } from "@/lib/defenseTraining
 import { Chess } from "chess.js";
 import { learningMove } from "@/lib/puzzleLearning";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
+import LichessAnalysisLink from "./LichessAnalysisLink";
 import TrainingLine from "./TrainingLine";
 import TrainingResult from "./TrainingResult";
 import DefensePuzzleRound from "./DefensePuzzleRound";
@@ -84,7 +85,7 @@ function DefenseExercise({ position, onDone }: { position: ReturnType<typeof def
         {stage === "move" && <div className="flex flex-wrap gap-3">{(roundOrder(position.id) ? [position.safe, position.tempting] : [position.tempting, position.safe]).map(move => <button key={move} type="button" onClick={() => answer(move)} className="rounded-lg bg-gray-100 dark:bg-gray-700 px-5 py-3 font-bold">{candidateLabel(move)}</button>)}</div>}
         {wrong && <p role="status" className="text-amber-800 dark:text-amber-200">{t(stage === "identify" ? "wrongPiece" : "wrongMove")}</p>}
         {attempt && <TrainingLine key={attempt.move} fen={setup.fen} moves={[attempt.move, attempt.reply]} label={t("consequence")} />}
-        {stage === "done" && <><p role="status" className="text-green-700 dark:text-green-300">{t(helped ? "learned" : "independent")}</p><button type="button" onClick={() => onDone(!helped)} className="rounded-lg bg-green-600 text-white px-4 py-2 font-bold">{t("next")}</button></>}
+        {stage === "done" && <><p role="status" className="text-green-700 dark:text-green-300">{t(helped ? "learned" : "independent")}</p><div className="flex flex-wrap items-center gap-3"><button type="button" onClick={() => onDone(!helped)} className="rounded-lg bg-green-600 text-white px-4 py-2 font-bold">{t("next")}</button><LichessAnalysisLink fen={fen} /></div></>}
         {helped && <p className="text-sm text-gray-500 dark:text-gray-400">{tHelp("assisted")}</p>}
     </div>;
 }

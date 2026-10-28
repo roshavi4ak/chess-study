@@ -12,6 +12,16 @@ import LichessAnalysisLink from "@/components/LichessAnalysisLink";
 import { Link } from "@/i18n/navigation";
 import WhyQuestionCard from "@/components/WhyQuestionCard";
 import type { WhyQuestion } from "@/app/actions/practiceQuestions";
+import { useChessnutBoard } from "@/hooks/useChessnutBoard";
+import ChessnutBoardPanel from "@/components/ChessnutBoardPanel";
+
+interface PendingReply {
+    parent: PracticeNode;
+    child: PracticeNode;
+    history: string[];
+    path: string[];
+    firstTime: boolean;
+}
 
 interface PracticeSessionProps {
     practice: {
@@ -53,6 +63,8 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
     const [currentLineFirstTime, setCurrentLineFirstTime] = useState(true);
     const [dueRemaining, setDueRemaining] = useState<Set<string>>(() => new Set(dueLineIds));
     const [questionMap, setQuestionMap] = useState<Record<string, WhyQuestion>>(questions);
+    const [pendingReply, setPendingReply] = useState<PendingReply | null>(null);
+    const [boardEpoch, setBoardEpoch] = useState(0);
     // Wrong moves in the current attempt of a line.
     const wrongMoves = useRef(0);
     const usedCoachHints = useRef(false);
@@ -87,18 +99,34 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
         [displayedNode.move.slice(0, 2)]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
         [displayedNode.move.slice(2, 4)]: { backgroundColor: "rgba(255, 255, 0, 0.6)" },
     } : reviewing ? {} : highlightSquares;
-    const hintArrows = !reviewing && feedback.type !== "complete" && wrongAt?.nodeId === currentNode.id && wrongAt.count >= 2
+    const hintedMoves = !reviewing && feedback.type !== "complete" && wrongAt?.nodeId === currentNode.id && wrongAt.count >= 2
         ? getAvailableChildren(currentNode, seenOnly ? seenIds : null)
             .filter(child => child.move)
-            .map(child => ({ startSquare: child.move!.slice(0, 2), endSquare: child.move!.slice(2, 4), color: "rgba(34, 197, 94, 0.85)" }))
         : [];
+    const hintArrows = hintedMoves.map(child => ({ startSquare: child.move!.slice(0, 2), endSquare: child.move!.slice(2, 4), color: "rgba(34, 197, 94, 0.85)" }));
 
-    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
+    const board = useChessnutBoard({
+        fen: displayedNode.fen,
+        reply: !reviewing && pendingReply?.child.move ? { fen: pendingReply.child.fen, move: pendingReply.child.move } : undefined,
+        epoch: boardEpoch,
+        canMove: !reviewing && !pendingReply && !isOpponentTurn(game.fen()) && feedback.type !== "complete",
+        expectedMoves: getAvailableChildren(currentNode, seenOnly ? seenIds : null).flatMap(child => child.move ? [child.move] : []),
+        hintMove: hintedMoves[0]?.move ?? undefined,
+        completion: !reviewing && feedback.type === "complete" ? sessionLinesCompleted : undefined,
+        onMove: move => handleMove(move, true),
+        onReply: () => {
+            if (!pendingReply) return;
+            setPendingReply(null);
+            commitOpponentMove(pendingReply.parent, pendingReply.child, pendingReply.history, pendingReply.path, pendingReply.firstTime);
+        },
+    });
+
+    const handleMove = (move: { from: string; to: string; promotion?: string }, physical = false) => {
         const { from, to, promotion = "q" } = move;
         setOptionSquares({});
-        if (reviewing || isOpponentTurn(game.fen()) || feedback.type === "complete" || from === to) return false;
+        if ((board.enabled && !physical) || pendingReply || reviewing || isOpponentTurn(game.fen()) || feedback.type === "complete" || from === to) return false;
         const matchingChild = getAvailableChildren(currentNode, seenOnly ? seenIds : null)
-            .find(child => child.move?.startsWith(`${from}${to}`));
+            .find(child => physical ? child.move === `${from}${to}${move.promotion ?? ""}` : child.move?.startsWith(`${from}${to}`));
         if (!matchingChild) {
             wrongMoves.current += 1;
             setWrongAt(previous => ({ nodeId: currentNode.id, count: previous?.nodeId === currentNode.id ? previous.count + 1 : 1 }));
@@ -159,11 +187,13 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
         return chooseOpponentChild(node, target, pickLine(getAllLeafNodes(node), onlySeen)?.id ?? null);
     }
 
-    function startNewLine(onlySeen = seenOnly, repeatLine?: PracticeNode) {
+    function startNewLine(onlySeen = seenOnly, repeatLine?: PracticeNode, physical = board.enabled) {
         const dueLeaves = allLeafNodes.filter(node => dueRemaining.has(node.id));
         const candidate = repeatLine ?? (dueLeaves.length ? pickLine(dueLeaves, false) : pickLine(allLeafNodes, onlySeen));
         if (!candidate) return;
         const firstTime = !hasSeenLine(progressMap.get(candidate.id));
+        setPendingReply(null);
+        setBoardEpoch(value => value + 1);
         setGame(new Chess(practice.tree.fen));
         setCurrentNode(practice.tree);
         setMoveHistory([]);
@@ -183,11 +213,19 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
             void handleLineComplete([practice.tree.id]);
         } else if (isOpponentTurn(practice.tree.fen)) {
             const child = selectOpponentReply(practice.tree, candidate.id, onlySeen);
-            if (child) executeOpponentMove(practice.tree, child, [], [practice.tree.id], firstTime);
+            if (child) executeOpponentMove(practice.tree, child, [], [practice.tree.id], firstTime, physical);
         }
     }
 
-    function executeOpponentMove(parent: PracticeNode, child: PracticeNode, history: string[], path: string[], firstTime: boolean) {
+    function executeOpponentMove(parent: PracticeNode, child: PracticeNode, history: string[], path: string[], firstTime: boolean, physical = board.enabled) {
+        if (!child.move) return;
+        if (physical) {
+            setPendingReply({ parent, child, history, path, firstTime });
+            highlightMove(child.move.slice(0, 2), child.move.slice(2, 4));
+        } else commitOpponentMove(parent, child, history, path, firstTime);
+    }
+
+    function commitOpponentMove(parent: PracticeNode, child: PracticeNode, history: string[], path: string[], firstTime: boolean) {
         if (!child.move) return;
         const gameCopy = new Chess(parent.fen);
         try {
@@ -239,12 +277,15 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
     }
 
     function navigateTo(index: number) {
+        setBoardEpoch(value => value + 1);
         setReviewIndex(index === nodePath.length - 1 ? null : index);
         setOptionSquares({});
     }
 
     function replayFromHere() {
         if (!reviewing || isOpponentTurn(displayedNode.fen)) return;
+        setPendingReply(null);
+        setBoardEpoch(value => value + 1);
         setGame(new Chess(displayedNode.fen));
         setCurrentNode(displayedNode);
         setNodePath(nodePath.slice(0, displayedIndex + 1));
@@ -272,6 +313,22 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
         <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-4">
+                    <ChessnutBoardPanel
+                        board={board}
+                        reply={pendingReply?.child.move ? `${pendingReply.child.move.slice(0, 2)} → ${pendingReply.child.move.slice(2, 4)}${pendingReply.child.move[4] ? ` = ${pendingReply.child.move[4].toUpperCase()}` : ""}` : undefined}
+                        onConnect={() => {
+                            if (!board.enabled) startNewLine(seenOnly, targetLine ?? undefined, true);
+                            else setBoardEpoch(value => value + 1);
+                            void board.connect();
+                        }}
+                        onScreen={() => {
+                            board.disconnect(true);
+                            if (pendingReply) {
+                                setPendingReply(null);
+                                commitOpponentMove(pendingReply.parent, pendingReply.child, pendingReply.history, pendingReply.path, pendingReply.firstTime);
+                            }
+                        }}
+                    />
                     <div className="aspect-square w-full max-w-[600px] mx-auto border-4 border-gray-800 rounded-lg overflow-hidden shadow-xl">
                         <Chessboard
                             key={`session-${displayedNode.fen}`}
@@ -282,9 +339,9 @@ export default function PracticeSession({ practice, initialProgress, initialAtte
                                 boardOrientation: practice.playerColor.toLowerCase() as "white" | "black",
                                 squareStyles: { ...displayedHighlights, ...optionSquares },
                                 arrows: hintArrows,
-                                onSquareClick: reviewing || feedback.type === "complete" ? undefined : onSquareClick,
-                                onPieceClick: reviewing || feedback.type === "complete" ? undefined : onPieceClick,
-                                allowDragging: !reviewing && !isOpponentTurn(game.fen()) && feedback.type !== "complete",
+                                onSquareClick: board.enabled || reviewing || feedback.type === "complete" ? undefined : onSquareClick,
+                                onPieceClick: board.enabled || reviewing || feedback.type === "complete" ? undefined : onPieceClick,
+                                allowDragging: !board.enabled && !reviewing && !isOpponentTurn(game.fen()) && feedback.type !== "complete",
                             }}
                         />
                     </div>

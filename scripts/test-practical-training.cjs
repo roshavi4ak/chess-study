@@ -184,16 +184,17 @@ test('endgame advisor validates positions and shares/caches outcome metadata wit
 });
 
 const lessons=loadSource('../src/lib/endgameLessons.ts').ENDGAME_LESSONS;
+const lessonLines=steps=>steps.flatMap(step=>[step,...(step.branches||[]).map(branch=>({...step,id:step.id+'.'+branch.id,moves:branch.moves}))]);
 const hintRules=loadSource('../src/lib/endgameHints.ts');
 const lessonProof=require('../docs/endgame-tutorial-verification-2026-10-19.json');
 for(const challenge of endgames.ENDGAMES) test(`${challenge.id}: strategy tutorial examples are legal and teach accurate terminal results`,()=>{
-    const steps=lessons[challenge.id];assert(steps.length>=3);
+    const steps=lessonLines(lessons[challenge.id]);assert(steps.length>=3);
     for(const step of steps) {
         const game=new Chess(step.fen);assert(!game.isGameOver(),step.id);
         const pieces=game.board().flat().filter(Boolean),other=game.turn()==='w'?'b':'w';
         assert(!game.isAttacked(pieces.find(p=>p.type==='k'&&p.color===other).square,game.turn()),step.id+': last mover did not leave its king in check');
         for(const move of step.moves) learningMove(game,move);
-        if(['mate','net'].includes(step.id)) assert(game.isCheckmate(),step.id);
+        if(step.id==='mate'||(challenge.id==='bishopPairMate'&&step.id==='net')) assert(game.isCheckmate(),step.id);
         if(step.id==='stalemate') assert(game.isStalemate(),step.id);
         if(step.id==='promote') assert(game.history({verbose:true}).at(-1).promotion,step.id);
         if(step.id==='capture'||step.id==='rush') assert(game.isInsufficientMaterial(),step.id);
@@ -201,7 +202,7 @@ for(const challenge of endgames.ENDGAMES) test(`${challenge.id}: strategy tutori
 });
 for(const [id,steps]of Object.entries(lessons)) {
     test(`${id}: no displayed board leaves material capturable by the defending king`,()=>{
-        for(const step of steps) {
+        for(const step of lessonLines(steps)) {
             const game=new Chess(step.fen);
             for(let ply=0;ply<=step.moves.length;ply++) {
                 // Inspect White-to-move snapshots too, so an unexplained hanging
@@ -215,7 +216,7 @@ for(const [id,steps]of Object.entries(lessons)) {
         }
     });
     test(`${id}: every intermediate board preserves the stated result against every legal defense`,()=>{
-        for(const step of steps) {
+        for(const step of lessonLines(steps)) {
             const proof=lessonProof.examples.find(row=>row.challenge===id&&row.step===step.id);
             assert(proof,`Missing proof: ${step.id}; run scripts/verify-endgame-lessons.cjs`);
             assert.deepEqual(proof.moves,step.moves);
@@ -238,7 +239,7 @@ for(const [id,steps]of Object.entries(lessons)) {
     });
 }
 test('tablebase evidence covers exactly the current tutorial collection',()=>{
-    assert.equal(lessonProof.examples.length,Object.values(lessons).reduce((sum,steps)=>sum+steps.length,0));
+    assert.equal(lessonProof.examples.length,Object.values(lessons).reduce((sum,steps)=>sum+lessonLines(steps).length,0));
     const keys=lessonProof.examples.map(row=>row.challenge+'/'+row.step);
     assert.equal(new Set(keys).size,keys.length);
 });
@@ -269,6 +270,40 @@ test('all tutorial steps and hint explanations have complete English and Bulgari
     assert.deepEqual(leaves(english.EndgameHints),leaves(bulgarian.EndgameHints));
     for(const messages of [english,bulgarian])for(const [id,steps]of Object.entries(lessons)) {
         for(const step of steps)for(const field of ['title','explain','after'])assert(messages.EndgameLessons[id][step.id][field].trim().length>10);
+        for(const step of steps)for(const branch of step.branches||[])for(const field of ['title','explain','after'])assert(messages.EndgameLessons[id][step.id][branch.id][field].trim().length>10);
+        if(['queenMate','rookMate','bishopPairMate','bishopKnightMate'].includes(id))for(const step of steps){
+            for(let ply=1;ply<step.moves.length;ply++)assert(messages.EndgameLessons[id][step.id]['move'+ply]?.length>10,`${id}/${step.id}/${ply}: explain the intermediate board`);
+            for(const branch of step.branches||[])for(let ply=1;ply<branch.moves.length;ply++)assert(messages.EndgameLessons[id][step.id][branch.id]['move'+ply]?.length>10);
+        }
         for(const field of ['check1','check2','check3','trap'])assert(messages.EndgameLessons[id][field].trim().length>10);
+    }
+});
+
+const netRules=loadSource('../src/lib/endgameNet.ts');
+test('the net map identifies real escape routes and explains who closes every other neighbouring square',()=>{
+    const net=fen=>netRules.endgameNet(new Chess(fen));
+    const built=new Chess(lessons.bishopKnightMate.find(step=>step.id==='net').fen);
+    assert.deepEqual(netRules.endgameNet(built).escapes,['f8']);
+    built.move('Kf8');built.move('Bh7');assert.deepEqual(netRules.endgameNet(built).escapes,['e8']);
+    built.move('Ke8');built.move('Ne5');assert.deepEqual(netRules.endgameNet(built).escapes,['d8','f8']);
+    assert(netRules.endgameNet(built).blocked.find(row=>row.square==='f7').by.some(piece=>piece.square==='f6'&&piece.piece==='k'));
+    const loose=new Chess(lessons.bishopKnightMate.find(step=>step.id==='escapeSide').fen);
+    assert(netRules.endgameNet(loose).escapes.includes('g7'),'do not pretend the loose setup is a completed net');
+    const retreat=new Chess(lessons.bishopKnightMate.find(step=>step.id==='escapeBack').fen);
+    for(const san of ['Ke8','Nd7','Ke7','Kc7'])retreat.move(san);
+    assert.deepEqual(netRules.endgameNet(retreat).escapes,['e8']);
+    const diagonal=new Chess(lessons.bishopPairMate.find(step=>step.id==='squeeze').fen);diagonal.move('Bg5+');
+    assert(netRules.endgameNet(diagonal).blocked.find(row=>row.square==='d8').by.some(piece=>piece.square==='g5'),'retreating through e7 uncovers the bishop ray to d8');
+    assert.equal(net('7k/5Q2/6K1/8/8/8/8/8 w - - 0 1').inCheck,false);
+    assert.deepEqual(net('7k/5Q2/6K1/8/8/8/8/8 w - - 0 1').escapes,[]);
+    assert.equal(net('7k/6Q1/6K1/8/8/8/8/8 b - - 0 1').inCheck,true);
+    for(const id of netRules.MATE_LESSONS)for(const step of lessonLines(lessons[id])){
+        const game=new Chess(step.fen);
+        for(let ply=0;ply<=step.moves.length;ply++){
+            const map=netRules.endgameNet(game);assert(map);
+            assert(map.blocked.every(row=>row.by.length>0),`${id}/${step.id}/${ply}: explain every closed square`);
+            assert(!map.blocked.some(row=>map.escapes.includes(row.square)));
+            if(ply<step.moves.length)learningMove(game,step.moves[ply]);
+        }
     }
 });

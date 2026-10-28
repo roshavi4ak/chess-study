@@ -14,6 +14,8 @@ const SCORE_LIMITS: Partial<Record<PlayKind, number>> = {
     COORDINATES: 300,
     MINIGAME: 3,
     BOT_GAME: 1,
+    SOLO_CHESS: 1, // 1 = solved without help, 0 = finished with a hint
+    NOTATION: 10, // correct answers in a round of ten
 };
 
 async function requireUser() {
@@ -29,6 +31,10 @@ export async function recordPlaySession(input: { kind: PlayKind; key?: string; s
     if (limit === undefined) throw new Error("This activity cannot be recorded directly");
     if (!Number.isFinite(score) || score < 0 || score > limit) throw new Error("Invalid score");
     const key = (input.key ?? "").slice(0, 64);
+    if (input.kind === "MINIGAME" && key.startsWith("freeplay:")) {
+        // Reconnecting to the same completed game must not create another activity day.
+        if (await prisma.playSession.findFirst({ where: { userId: user.id!, kind: "MINIGAME", key }, select: { id: true } })) return;
+    }
     await prisma.playSession.create({
         data: { userId: user.id!, kind: input.kind, key, score, won: input.won ?? null, details: input.details },
     });
@@ -126,5 +132,26 @@ export async function getBotWins(): Promise<Record<string, number>> {
     } catch (error) {
         console.error("[Play] Could not load bot wins:", error);
         return {};
+    }
+}
+
+// Solo chess puzzles finished by this child: solved without help (never shown again) and finished with a hint.
+export async function getSoloChessProgress(): Promise<{ solved: string[]; helped: string[] }> {
+    const user = await requireUser();
+    try {
+        const rows = await prisma.playSession.groupBy({
+            by: ["key"],
+            where: { userId: user.id!, kind: "SOLO_CHESS" },
+            _max: { score: true },
+        });
+        const id = (key: string) => key.replace(/^solo:/, "");
+        return {
+            solved: rows.filter(row => (row._max.score ?? 0) >= 1).map(row => id(row.key)),
+            helped: rows.filter(row => (row._max.score ?? 0) < 1).map(row => id(row.key)),
+        };
+    } catch (error) {
+        // Usually the database does not know the SOLO_CHESS kind yet.
+        console.error("[Play] Could not load solo chess progress:", error);
+        return { solved: [], helped: [] };
     }
 }

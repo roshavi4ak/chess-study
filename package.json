@@ -7,10 +7,17 @@
     "build": "next build",
     "start": "node .next/standalone/server.js",
     "lint": "eslint",
+    "test:coach-dashboard": "node --test scripts/test-coach-dashboard.cjs",
     "test:puzzle-navigation": "node --test scripts/test-puzzle-navigation.cjs",
     "test:puzzle-submission": "node --test scripts/test-puzzle-submission.cjs",
+    "test:puzzle-leaderboard": "node --test scripts/test-puzzle-leaderboard.cjs",
+    "test:puzzle-difficulty": "node --test scripts/test-puzzle-difficulty.cjs scripts/test-puzzle-difficulty-ui.cjs",
     "test:learning": "node --test scripts/test-learning-upgrades.cjs",
-    "test:practical-training": "node --test scripts/test-practical-training.cjs scripts/test-practical-training-ui.cjs"
+    "test:practical-training": "node --test scripts/test-practical-training.cjs scripts/test-practical-training-ui.cjs",
+    "test:club-games": "node --test scripts/test-solo-chess.cjs scripts/test-notation-trainer.cjs scripts/test-team-goals.cjs",
+    "test:challenges": "node --test scripts/test-team-goals.cjs scripts/test-challenge-ui.cjs",
+    "test:challenges:db": "node --test scripts/test-challenge-persistence.cjs",
+    "test:chessnut": "node --test scripts/test-chessnut.cjs scripts/test-chessnut-ui.cjs scripts/test-chessnut-activities.cjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",

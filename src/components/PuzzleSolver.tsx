@@ -5,7 +5,7 @@ import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { CheckCircle, XCircle, RotateCcw, Lightbulb, ArrowRight } from "lucide-react";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import LichessAnalysisLink from "@/components/LichessAnalysisLink";
 import ProgressiveHint from "@/components/ProgressiveHint";
@@ -36,6 +36,8 @@ export default function PuzzleSolver(props: PuzzleSolverProps) {
 function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag, reviewMode = false, onContinue }: PuzzleSolverProps) {
     const t = useTranslations("PuzzleSolver");
     const tHelp = useTranslations("LearningHelp");
+    const tDifficulty = useTranslations("PuzzleDifficulty");
+    const [nextMessage, setNextMessage] = useState("");
     const [game, setGame] = useState(new Chess(fen));
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
     const [status, setStatus] = useState<"playing" | "correct" | "wrong">("playing");
@@ -50,7 +52,7 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
     const [mistakeCount, setMistakeCount] = useState(0);
     const [restartCount, setRestartCount] = useState(0);
     const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
-    const [ratingChange, setRatingChange] = useState<{ oldRating: number, newRating: number, change: number } | null>(null);
+    const [ratingChange, setRatingChange] = useState<{ oldRating: number, newRating: number, change: number, challengePoints: number } | null>(null);
     const submitted = useRef(false);
     const inputLocked = useRef(true);
     const moveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -280,17 +282,20 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
 
     async function handleNextPuzzle() {
         try {
+            setNextMessage("");
             const query = new URLSearchParams({ exclude: name });
             if (tag) query.set("tag", tag);
             const res = await fetch(`/api/puzzles/next?${query}`);
+            if (!res.ok) throw new Error("Could not load next puzzle");
             const data = await res.json();
             if (data.puzzleName) {
                 router.push({ pathname: `/puzzles/${data.puzzleName}`, query: tag ? { tag } : undefined });
             } else {
-                alert(t("noMorePuzzles"));
+                setNextMessage(data.range ? tDifficulty("noneInRange", data.range) : t("noMorePuzzles"));
             }
         } catch (error) {
             console.error("Failed to fetch next puzzle", error);
+            setNextMessage(tDifficulty("loadPuzzleFailed"));
         }
     }
 
@@ -351,8 +356,11 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
                         </div>
                         {ratingChange && !reviewMode && (
                             <div className="flex flex-col items-center">
+                                <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                                    {t("challengePoints", { points: ratingChange.challengePoints ?? 0 })}
+                                </span>
                                 <span className={`text-xl font-bold ${ratingChange.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                    {ratingChange.change >= 0 ? '+' : ''}{ratingChange.change}
+                                    {t("ratingChange", { change: `${ratingChange.change >= 0 ? '+' : ''}${ratingChange.change}` })}
                                 </span>
                                 <span className="text-sm text-gray-500">
                                     {t("rating")}: {ratingChange.newRating}
@@ -381,7 +389,7 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
                         {status === "wrong" && ratingChange && !reviewMode && (
                             <div className="flex flex-col items-center mt-2">
                                 <span className={`text-lg font-bold ${ratingChange.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                    {ratingChange.change >= 0 ? '+' : ''}{ratingChange.change}
+                                    {t("ratingChange", { change: `${ratingChange.change >= 0 ? '+' : ''}${ratingChange.change}` })}
                                 </span>
                                 <span className="text-xs text-gray-500">
                                     {t("rating")}: {ratingChange.newRating}
@@ -425,6 +433,7 @@ function PuzzleSolverContent({ id, fen, solution, hints = [], name, onSolve, tag
                     </>
                 )}
             </div>
+            {nextMessage && <div role="status" className="text-center max-w-xl space-y-2"><p>{nextMessage}</p><Link href="/puzzles" className="text-blue-600 underline">{tDifficulty("chooseTopic")}</Link></div>}
             {saveError && <div role="alert" className="text-center space-y-2"><p>{tHelp("saveError")}</p><button type="button" disabled={saving} className="underline" onClick={() => { const pending = pendingResult.current; if (pending) void submitResult(pending.success, pending.assisted); }}>{tHelp("retrySave")}</button></div>}
             {reviewMode && saving && <p role="status">{tHelp("saving")}</p>}
         </div>

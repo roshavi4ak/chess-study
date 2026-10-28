@@ -11,7 +11,7 @@ const realFetch=globalThis.fetch;
 const cache=new Map();
 function Board({options}) {
     const game=new Chess(options.position);
-    return React.createElement('div',{'data-testid':options.id,'data-position':options.position,'data-orientation':options.boardOrientation,'data-arrows':JSON.stringify(options.arrows??[])},
+    return React.createElement('div',{'data-testid':options.id,'data-position':options.position,'data-orientation':options.boardOrientation,'data-arrows':JSON.stringify(options.arrows??[]),'data-styles':JSON.stringify(options.squareStyles??{})},
         ...'abcdefgh'.split('').flatMap(file=>'12345678'.split('').map(rank=>React.createElement('button',{key:file+rank,onClick:()=>options.onSquareClick?.({square:file+rank})},`square ${file}${rank}`))),
         ...game.moves({verbose:true}).map(move=>{const uci=move.from+move.to+(move.promotion??'');return React.createElement('button',{key:uci,disabled:options.allowDragging===false,onClick:()=>options.onPieceDrop?.({sourceSquare:move.from,targetSquare:move.to})},uci);}));
 }
@@ -175,6 +175,28 @@ test('an engine-checked alternative can fail with a legal continuation or pass w
     await act(async()=>requests[3].resolve({score:{type:'cp',value:-100},pv:[]}));
     assert(screen.getByText(messages.en.DefenseLevels.alternative));assert.equal(saves.length,0);
 });
+test('an engine check keeps the board playable, can be stopped, and a solved puzzle links to Lichess analysis',async()=>{
+    const puzzles=puzzleGroups[0].puzzles;globalThis.fetch=async()=>({ok:true,json:async()=>({puzzles})});
+    render(localized(React.createElement(DefenseTrainer),'en'));
+    fireEvent.click(screen.getByRole('button',{name:'Level 2'}));await waitFor(()=>assert(screen.queryByTestId('defense-puzzle-board')));
+    fireEvent.click(screen.getByRole('button',{name:messages.en.Defense.showMove}));
+    const fen=screen.getByTestId('defense-puzzle-board').getAttribute('data-position');
+    const [first,second]=new Chess(fen).moves({verbose:true}).map(m=>m.from+m.to+(m.promotion??'')).filter(m=>m!==puzzles[0].moves[0]);
+    await move('defense-puzzle-board',first);
+    assert(screen.getByText(messages.en.DefenseLevels.checking));
+    assert.equal(within(screen.getByTestId('defense-puzzle-board')).getByRole('button',{name:second}).disabled,false);
+    await move('defense-puzzle-board',second);assert(requests[0].signal.aborted);assert.equal(requests.length,2);
+    await act(async()=>requests[0].resolve({score:{type:'cp',value:0},pv:[]}));assert.equal(requests.length,2);
+    fireEvent.click(screen.getByRole('button',{name:messages.en.DefenseLevels.stopChecking}));
+    assert(requests[1].signal.aborted);assert.equal(screen.queryByText(messages.en.DefenseLevels.checking),null);
+    await act(async()=>requests[1].resolve({score:{type:'cp',value:0},pv:[]}));
+    assert.equal(requests.length,2);assert.equal(screen.queryByRole('heading',{name:messages.en.Defense.consequence}),null);
+    await move('defense-puzzle-board',first);assert.equal(requests.length,3);
+    for(let index=0;index<puzzles[0].moves.length;index+=2) await move('defense-puzzle-board',puzzles[0].moves[index]);
+    assert(requests[2].signal.aborted);assert.equal(screen.queryByText(messages.en.DefenseLevels.checking),null);
+    const link=screen.getByRole('link',{name:messages.en.Common.openLichessAnalysis});
+    assert(link.getAttribute('href').startsWith('https://lichess.org/analysis/standard/'+screen.getByTestId('defense-puzzle-board').getAttribute('data-position').replaceAll(' ','_')));
+});
 test('restarting an endgame replaces the complete arrangement and cancels a pending advisor move',async()=>{
     const pool=require('../src/lib/endgameStarts.json').positions.queenMate;let index=0;
     randomStart=()=>pool[index++].fen;
@@ -189,6 +211,76 @@ test('restarting an endgame replaces the complete arrangement and cancels a pend
 });
 
 const lessons=loadSource('../src/lib/endgameLessons.ts').ENDGAME_LESSONS;
+for(const locale of ['en','bg']) test(`${locale}: bishop and knight tutorial shows protection, turns and continuous moves without a hidden king jump`,()=>{
+    render(localized(React.createElement(EndgameTrainer),locale));
+    const t=messages[locale].EndgameLessons;
+    fireEvent.click(screen.getByRole('button',{name:messages[locale].Endgames.bishopKnightMate.title}));
+    const board=()=>screen.getByTestId('endgame-tutorial');
+    const fen=()=>board().getAttribute('data-position');
+    const initial=fen();
+    assert(screen.getByRole('status').textContent.includes(t.whiteToMove));
+    assert(JSON.parse(board().getAttribute('data-arrows')).some(a=>a.startSquare==='b3'&&a.endSquare==='f7'&&a.color==='#15803d'));
+    assert(screen.getByRole('complementary',{name:t.knightSafety}).textContent.includes('b3'));
+    const pretendBlack=initial.split(' ');pretendBlack[1]='b';
+    assert(!new Chess(pretendBlack.join(' ')).moves({verbose:true}).some(m=>m.to==='f7'));
+    fireEvent.click(screen.getByRole('button',{name:t.nextStep}));assert.equal(fen(),initial);assert(screen.getByText(t.samePosition));
+    for(let index=2;index<=lessons.bishopKnightMate.findIndex(step=>step.id==='routeA');index++)fireEvent.click(screen.getByRole('button',{name:t.nextStep}));assert.equal(fen(),initial);
+    for(const [index,expected]of ['e5','e5','d7','d7'].entries()){
+        fireEvent.click(screen.getByRole('button',{name:t.showMove}));
+        const game=new Chess(fen());assert.equal(game.get(expected).type,'n');
+        assert(screen.getByRole('status').textContent.includes(index%2===0?t.blackToMove:t.whiteToMove));
+        assert(screen.getByText(t.bishopKnightMate.routeA[`move${index+1}`]));
+        const arrows=JSON.parse(board().getAttribute('data-arrows')).filter(a=>a.color==='#15803d');
+        assert(arrows.every(a=>a.endSquare===expected&&game.attackers(expected,'w').includes(a.startSquare)));
+    }
+    const routeEnd=fen();fireEvent.click(screen.getByRole('button',{name:t.nextStep}));assert.equal(fen(),routeEnd);
+    for(let i=0;i<4;i++)fireEvent.click(screen.getByRole('button',{name:t.showMove}));
+    for(let index=lessons.bishopKnightMate.findIndex(step=>step.id==='routeB')+1;index<lessons.bishopKnightMate.length;index++)fireEvent.click(screen.getByRole('button',{name:t.nextStep}));assert(screen.getByText(t.newExample));
+    assert.equal(new Chess(fen()).get('a6').type,'b');
+    fireEvent.click(screen.getByRole('button',{name:t.showMove}));assert(new Chess(fen()).isCheckmate());assert(screen.getByRole('status').textContent.includes(t.checkmate));
+    assert.equal(requests.length,0);assert.equal(saves.length,0);
+});
+for(const locale of ['en','bg']) test(`${locale}: mating nets show real exits and all defensive branches replay independently without saving student results`,()=>{
+    render(localized(React.createElement(EndgameTrainer),locale));
+    const t=messages[locale].EndgameLessons;
+    const board=()=>screen.getByTestId('endgame-tutorial');
+    const next=()=>fireEvent.click(screen.getByRole('button',{name:t.showMove}));
+    for(const id of ['queenMate','rookMate','bishopPairMate','bishopKnightMate']){
+        fireEvent.click(screen.getByRole('button',{name:messages[locale].Endgames[id].title}));
+        assert(screen.getByRole('complementary',{name:t.netTitle}));
+        for(const [index,step]of lessons[id].entries()){
+            if(id==='bishopKnightMate'&&step.id==='net'){
+                const styles=()=>JSON.parse(board().getAttribute('data-styles'));
+                assert.equal(styles().f8.backgroundColor,'rgba(56,189,248,.5)');
+                assert(screen.getByText(t.oneExit));
+                fireEvent.click(screen.getByRole('checkbox',{name:t.showNet}));
+                assert.notEqual(styles().f8?.backgroundColor,'rgba(56,189,248,.5)');
+                fireEvent.click(screen.getByRole('checkbox',{name:t.showNet}));
+                assert.equal(styles().f8.backgroundColor,'rgba(56,189,248,.5)');
+            }
+            for(const branch of step.branches||[]){
+                fireEvent.click(screen.getByRole('button',{name:t[id][step.id][branch.id].title}));
+                assert.equal(board().getAttribute('data-position'),step.fen);
+                assert(screen.getByText(t[id][step.id][branch.id].explain));
+                const game=new Chess(step.fen);
+                for(const [ply,uci]of branch.moves.entries()){
+                    next();game.move({from:uci.slice(0,2),to:uci.slice(2,4),promotion:uci[4]});
+                    assert.equal(board().getAttribute('data-position'),game.fen());
+                    assert(screen.getByText(t[id][step.id][branch.id]['move'+(ply+1)]));
+                    assert(screen.getByRole('complementary',{name:t.netTitle}).textContent.includes(game.board().flat().find(p=>p?.color==='b'&&p.type==='k').square));
+                }
+                fireEvent.click(screen.getByRole('button',{name:messages[locale].Training.previous}));
+                assert.notEqual(board().getAttribute('data-position'),game.fen());
+                fireEvent.click(screen.getByRole('button',{name:t[id][step.id].main}));
+                assert.equal(board().getAttribute('data-position'),step.fen);
+                assert(screen.getByText(t[id][step.id].explain));
+            }
+            for(const move of step.moves){void move;next();}
+            if(index+1<lessons[id].length)fireEvent.click(screen.getByRole('button',{name:t.nextStep}));
+        }
+    }
+    assert.equal(requests.length,0);assert.equal(saves.length,0);
+});
 for(const locale of ['en','bg']) test(`${locale}: every endgame opens its own complete strategy tutorial before practice`,()=>{
     render(localized(React.createElement(EndgameTrainer),locale));
     assert(screen.getByTestId('endgame-tutorial'));assert.equal(screen.queryByTestId('endgame-board'),null);
@@ -227,7 +319,7 @@ for(const locale of ['en','bg']) test(`${locale}: hints describe the current end
     await act(async()=>requests[0].resolve({move:'f5g6',category:'win',dtm:3}));
     const hint=screen.getAllByRole('status').find(el=>el.tagName==='ASIDE');assert(hint);
     assert(hint.textContent.includes('h8'));assert(hint.textContent.includes('f5'));
-    assert(!hint.textContent.includes(messages[locale].LearningHelp.think));
+    assert(!hint.textContent.includes(messages[locale].LearningHelp.quiet));
     fireEvent.click(screen.getByRole('button',{name:messages[locale].Endgames.hint}));
     assert(within(hint).getByText(messages[locale].EndgameHints.reason_kingApproach));
     fireEvent.click(screen.getByRole('button',{name:messages[locale].Endgames.hint}));

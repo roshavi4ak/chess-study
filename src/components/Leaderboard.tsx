@@ -534,6 +534,20 @@ export default function Leaderboard({ data, weeklyStats, effort, leagues, curren
             ) : (
                 // Original table view for puzzles and openings
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
+                    {section === "puzzles" && (
+                        <><p className="px-6 pt-4 text-sm text-gray-600 dark:text-gray-300">{t("challengeCountHelp")}</p><details className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300">
+                            <summary className="cursor-pointer font-semibold text-blue-600 dark:text-blue-400">{t("challengeScoringTitle")}</summary>
+                            <p className="mt-2">{t("challengeScoringIntro")}</p>
+                            <ul className="mt-2 list-disc pl-5 space-y-1">
+                                <li>{t("challengeScoringTooEasy")}</li>
+                                <li>{t("challengeScoringEasier")}</li>
+                                <li>{t("challengeScoringMatched")}</li>
+                                <li>{t("challengeScoringHarder")}</li>
+                            </ul>
+                            <p className="mt-2">{t("challengeScoringEligibility")}</p>
+                            <p className="mt-2">{t("challengeScoringHistory")}</p>
+                        </details></>
+                    )}
                     <div className="overflow-x-auto">
                         <table className="min-w-full text-left">
                             <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-700">
@@ -546,13 +560,13 @@ export default function Leaderboard({ data, weeklyStats, effort, leagues, curren
                                                 className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
                                                 onClick={() => handleSort("count")}
                                             >
-                                                <div className="flex items-center">{t("number")} {sortIcon("count")}</div>
+                                                <div className="flex items-center">{t("successfulAttempts")} {sortIcon("count")}</div>
                                             </th>
                                             <th
                                                 className="px-6 py-4 text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-colors"
                                                 onClick={() => handleSort("points")}
                                             >
-                                                <div className="flex items-center">{t("points")} {sortIcon("points")}</div>
+                                                <div className="flex items-center">{t("challengePoints")} {sortIcon("points")}</div>
                                             </th>
                                         </>
                                     ) : (

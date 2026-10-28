@@ -4,6 +4,7 @@ import { useMemo, useSyncExternalStore } from "react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import PuzzleSolver from "./PuzzleSolver";
+import PuzzleDifficultySettings from "@/components/PuzzleDifficultySettings";
 
 interface SolvedPuzzle {
     id: string;
@@ -80,6 +81,7 @@ export default function PuzzleSession({ id, currentPuzzleName, fen, solution, hi
 
     return (
         <div className="space-y-8">
+            <PuzzleDifficultySettings />
             {/* Timeline */}
             <div className="w-full max-w-[250px] md:max-w-2xl mx-auto">
                 <div className="flex items-center gap-2 overflow-x-auto p-2 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">

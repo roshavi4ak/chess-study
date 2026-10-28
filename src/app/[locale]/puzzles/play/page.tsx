@@ -4,12 +4,15 @@ import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import PuzzleDifficultySettings from "@/components/PuzzleDifficultySettings";
 
 export default function PuzzlePlayPage() {
     const t = useTranslations("Puzzles");
+    const tDifficulty = useTranslations("PuzzleDifficulty");
     const [error, setError] = useState<string | null>(null);
-    const { data: session, status } = useSession();
+    const [emptyRange, setEmptyRange] = useState<{ min: number; max: number } | null>(null);
+    const { status } = useSession();
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -17,12 +20,10 @@ export default function PuzzlePlayPage() {
 
     const fetchNextPuzzle = useCallback(async () => {
         try {
-            let url = `/api/puzzles/next?rating=${session?.user?.ratingPuzzle || 1500}`;
+            setError(null); setEmptyRange(null);
+            let url = "/api/puzzles/next";
             if (tag) {
-                url += `&tag=${encodeURIComponent(tag)}`;
-            }
-            if (session?.user?.id) {
-                url += `&userId=${session.user.id}`;
+                url += `?tag=${encodeURIComponent(tag)}`;
             }
 
             const response = await fetch(url);
@@ -34,12 +35,13 @@ export default function PuzzlePlayPage() {
             if (data.puzzleName) {
                 router.push({ pathname: `/puzzles/${data.puzzleName}`, query: tag ? { tag } : undefined });
             } else {
-                setError(t("noneFound"));
+                if (data.range) setEmptyRange(data.range);
+                else setError(t("noneFound"));
             }
         } catch {
             setError(t("loadFailed"));
         }
-    }, [session, tag, router, t]);
+    }, [tag, router, t]);
 
     useEffect(() => {
         if (status === 'loading') return;
@@ -52,11 +54,13 @@ export default function PuzzlePlayPage() {
         fetchNextPuzzle();
     }, [status, fetchNextPuzzle, router]);
 
-    if (error) {
+    if (error || emptyRange) {
         return (
-            <div className="p-8 text-center">
-                <h1 className="text-2xl font-bold text-red-600">{t("errorTitle")}</h1>
-                <p className="mt-2 text-gray-600">{error}</p>
+            <div className="p-8 max-w-2xl mx-auto text-center space-y-4">
+                <p role="status" className="text-gray-700 dark:text-gray-200">{emptyRange ? tDifficulty("noneInRange", emptyRange) : error}</p>
+                <button type="button" onClick={fetchNextPuzzle} className="rounded-lg bg-blue-600 text-white px-4 py-2">{tDifficulty("tryAgain")}</button>
+                <Link href="/puzzles" className="block text-blue-600 underline">{tDifficulty("chooseTopic")}</Link>
+                <PuzzleDifficultySettings defaultOpen onSaved={fetchNextPuzzle} />
             </div>
         );
     }

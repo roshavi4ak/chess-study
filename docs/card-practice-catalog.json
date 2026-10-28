@@ -1,0 +1,118 @@
+[
+  {
+    "id": "cmuqh3skg05vvlcrjj1w2rsdf",
+    "name": "Гамбит Енглунд (Englund Gambit)"
+  },
+  {
+    "id": "cmuqh3sau05k3lcrjbjtvjqtr",
+    "name": "Гамбит Русо (Rousseau Gambit)"
+  },
+  {
+    "id": "cmuqh3s07058blcrj3tnngly0",
+    "name": "Контраатака Тракслер (Traxler Counterattack)"
+  },
+  {
+    "id": "cmuqh3rsb04zjlcrjjgd2lid7",
+    "name": "Контрагамбит Албин (Albin Countergambit)"
+  },
+  {
+    "id": "cmuqh3rn004tdlcrj9nl3qoi0",
+    "name": "Датски гамбит (Danish Gambit)"
+  },
+  {
+    "id": "cmuqh3rfg04kvlcrjltyt78ko",
+    "name": "Царски гамбит (King's Gambit)"
+  },
+  {
+    "id": "cmuqh3r9504dllcrjt5fkboq3",
+    "name": "Дебют Понциани (Ponziani)"
+  },
+  {
+    "id": "cmuqh3r24045tlcrj85p48ax2",
+    "name": "Защита срещу Виенския гамбит (Vienna Gambit Counter)"
+  },
+  {
+    "id": "cmuqh3qi403lnlcrj4mtj0d77",
+    "name": "Виенски гамбит – разширен курс (Vienna Gambit Mastery)"
+  },
+  {
+    "id": "cmuqh3qau03d1lcrjsr5wobos",
+    "name": "Виенска партия (Vienna Game)"
+  },
+  {
+    "id": "cmuqh3q00031vlcrjhld8xkj8",
+    "name": "Дебют на офицера (Bishop's Opening)"
+  },
+  {
+    "id": "cmuqh3pph02qllcrjqnnoo3os",
+    "name": "Сицилианска защита: вариант Алапин (Alapin Sicilian)"
+  },
+  {
+    "id": "cmuqh3phi02hvlcrjpr348bex",
+    "name": "Английско начало (English Opening)"
+  },
+  {
+    "id": "cmuqh3p6y026rlcrjwiplh88z",
+    "name": "Защита Петров (Petrov Defense)"
+  },
+  {
+    "id": "cmuqh3ozu01z7lcrjtc9jpp2w",
+    "name": "Скандинавска защита (Scandinavian Defense)"
+  },
+  {
+    "id": "cmuqh3ome01hzlcrjd0nhjs7n",
+    "name": "Староиндийска защита (King's Indian Defense)"
+  },
+  {
+    "id": "cmuqh3oh001bllcrj463nxuaf",
+    "name": "Приет дамски гамбит (Queen's Gambit Accepted)"
+  },
+  {
+    "id": "cmuqh3o88011nlcrjxl6lm9ln",
+    "name": "Отказан дамски гамбит (Queen's Gambit Declined)"
+  },
+  {
+    "id": "cmuqh3nhr00adlcrjd9b041nq",
+    "name": "Испанска партия (Ruy Lopez)"
+  },
+  {
+    "id": "cmuqh3n5p0001lcrjvfjnlxfj",
+    "name": "Френска защита (French Defense)"
+  },
+  {
+    "id": "cmuq7dnb200jllcb2b1n3veco",
+    "name": "Сицилианска защита (Sicilian Defense)"
+  },
+  {
+    "id": "cmuq7dn4w00dflcb24ho2uec8",
+    "name": "Пържен дроп атака (Fried Liver Attack)"
+  },
+  {
+    "id": "cmuq7dmq50001lcb28jk0peem",
+    "name": "Лондонска система (London)"
+  },
+  {
+    "id": "cmupzpfss00rnlcympo4ksxq4",
+    "name": "Система Джобава–Лондон (Jobava-London)"
+  },
+  {
+    "id": "cmupzpfgl00ellcymqbkoz7xm",
+    "name": "Шотландска партия (Scotch Game)"
+  },
+  {
+    "id": "cmupzpezg0001lcymszsy9bjn",
+    "name": "Защита Каро-Кан (Caro-Kann)"
+  },
+  {
+    "id": "cmkyaf9tt0001v8h4v8ddb4u2",
+    "name": "Италианска Игра (Italian Game)"
+  },
+  {
+    "id": "cmkd2uwkv00039aado1ihyc98",
+    "name": "Stafford Gambit (Стафордски Гамбит)"
+  },
+  {
+    "id": "cmixqeggi0001v8fgg83pi4on",
+    "name": "Vienna Gambit (Виенски Гамбит) "
+  }
+]

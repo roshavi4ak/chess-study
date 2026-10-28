@@ -2,15 +2,10 @@
 
 import { prisma } from "@/lib/db";
 import { getExcludedLichessIds } from "@/lib/leaderboardExclusions";
+import { getLeaderboardWeek } from "@/lib/leaderboardWeeks";
 
 export async function getLeaderboardData() {
-    const now = new Date();
-    // Manual start of week (Monday 00:00:00)
-    const weekStart = new Date(now);
-    const day = weekStart.getDay();
-    const diff = weekStart.getDate() - day + (day === 0 ? -6 : 1);
-    weekStart.setDate(diff);
-    weekStart.setHours(0, 0, 0, 0);
+    const { startDate: weekStart, endDate: weekEnd } = getLeaderboardWeek();
 
     // Get all students
     const allStudents = await prisma.user.findMany({
@@ -33,11 +28,11 @@ export async function getLeaderboardData() {
             userId: { in: allUserIds }
         },
         _sum: {
-            points: true
+            challengePoints: true
         }
     });
 
-    const pointsMap = new Map(userAggregates.map(a => [a.userId, a._sum.points || 0]));
+    const pointsMap = new Map(userAggregates.map(a => [a.userId, a._sum.challengePoints || 0]));
 
     // Fetch the user details for all students
     const topStudents = await prisma.user.findMany({
@@ -54,10 +49,10 @@ export async function getLeaderboardData() {
                 }
             },
             puzzleAttempts: {
-                where: { createdAt: { gte: weekStart } },
+                where: { createdAt: { gte: weekStart, lt: weekEnd } },
                 select: {
                     success: true,
-                    points: true
+                    challengePoints: true
                 }
             },
             practiceAttempts: {
@@ -84,7 +79,7 @@ export async function getLeaderboardData() {
     const allLeaderboardData = topStudents.map(student => {
         // Weekly Puzzles (Aggregated in memory from filtered rows)
         const weeklySuccessful = student.puzzleAttempts.filter(a => a.success);
-        const weeklyPuzzlePoints = weeklySuccessful.reduce((sum, a) => sum + (a.points ?? 0), 0);
+        const weeklyPuzzlePoints = weeklySuccessful.reduce((sum, a) => sum + (a.challengePoints ?? 0), 0);
 
         // Weekly Openings (Calculate unique completed/perfected nodes this week, considering only the last attempt)
         const nodeLastAttemptMap = new Map();
@@ -138,6 +133,7 @@ export async function getLeaderboardData() {
         };
     });
 
-    // Sort by all-time points descending and limit to 20
-    return allLeaderboardData.sort((a, b) => b.puzzleStats.allTime.points - a.puzzleStats.allTime.points).slice(0, 20);
+    // Keep every student available for weekly and opening sorts. Limiting by
+    // lifetime points here can hide the actual weekly winner.
+    return allLeaderboardData.sort((a, b) => b.puzzleStats.allTime.points - a.puzzleStats.allTime.points);
 }

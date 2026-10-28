@@ -1,5 +1,7 @@
 "use client";
 
+import { ChessnutSession } from "@/components/ChessnutSession";
+
 import { use, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Lock } from "lucide-react";
@@ -13,6 +15,10 @@ import MiniPuzzleGame from "@/components/MiniPuzzleGame";
 const starRow = (count: number) => "★".repeat(count) + "☆".repeat(3 - count);
 
 export default function WorldPage({ params }: { params: Promise<{ world: string }> }) {
+    return <ChessnutSession><WorldPageContent params={params} /></ChessnutSession>;
+}
+
+function WorldPageContent({ params }: { params: Promise<{ world: string }> }) {
     const { world: worldId } = use(params);
     const t = useTranslations("MiniGames");
     const world = WORLDS.find(entry => entry.id === worldId);

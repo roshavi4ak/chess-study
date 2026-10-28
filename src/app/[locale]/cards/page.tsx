@@ -13,6 +13,7 @@ import MasteryCardView from "@/components/MasteryCardView";
 const SECTIONS: { key: keyof CardCollection; icon: string; empty?: { href: string } }[] = [
     { key: "practices", icon: "♞", empty: { href: "/practices" } },
     { key: "themes", icon: "🧩", empty: { href: "/puzzles" } },
+    { key: "activities", icon: "✨" },
     { key: "bots", icon: "🐾" },
     { key: "worlds", icon: "🌍" },
     { key: "tournaments", icon: "🏆" },

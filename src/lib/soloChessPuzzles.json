@@ -1,0 +1,1510 @@
+[
+ {
+  "id": "solo-001",
+  "band": "easy",
+  "pieces": [
+   "Pa4",
+   "Qa6",
+   "Ra7"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-002",
+  "band": "easy",
+  "pieces": [
+   "Ba3",
+   "Pc5",
+   "Qb6"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-003",
+  "band": "easy",
+  "pieces": [
+   "Pe7",
+   "Qe2",
+   "Rd7"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-004",
+  "band": "easy",
+  "pieces": [
+   "Bh8",
+   "Pf6",
+   "Pg7"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-005",
+  "band": "easy",
+  "pieces": [
+   "Ba2",
+   "Bh7",
+   "Nb1"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-006",
+  "band": "easy",
+  "pieces": [
+   "Pg6",
+   "Qh8",
+   "Rh7"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-007",
+  "band": "easy",
+  "pieces": [
+   "Bg3",
+   "Nh2",
+   "Rf2"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-008",
+  "band": "easy",
+  "pieces": [
+   "Bb8",
+   "Ka7",
+   "Qc8"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-009",
+  "band": "easy",
+  "pieces": [
+   "Ne1",
+   "Pe5",
+   "Re4"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-010",
+  "band": "easy",
+  "pieces": [
+   "Bd4",
+   "Ke3",
+   "Ne2"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-011",
+  "band": "easy",
+  "pieces": [
+   "Ka3",
+   "Pa2",
+   "Rd2"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-012",
+  "band": "easy",
+  "pieces": [
+   "Bf8",
+   "Ng6",
+   "Rh7"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-013",
+  "band": "easy",
+  "pieces": [
+   "Ne2",
+   "Qc3",
+   "Rd3",
+   "Rf3"
+  ],
+  "solutions": 12
+ },
+ {
+  "id": "solo-014",
+  "band": "easy",
+  "pieces": [
+   "Ne5",
+   "Ng6",
+   "Nh8",
+   "Rg5"
+  ],
+  "solutions": 11
+ },
+ {
+  "id": "solo-015",
+  "band": "easy",
+  "pieces": [
+   "Kb7",
+   "Nb6",
+   "Ra7",
+   "Ra8"
+  ],
+  "solutions": 8
+ },
+ {
+  "id": "solo-016",
+  "band": "easy",
+  "pieces": [
+   "Be3",
+   "Ng4",
+   "Pd2",
+   "Pf2"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-017",
+  "band": "easy",
+  "pieces": [
+   "Bh8",
+   "Nd4",
+   "Qc2",
+   "Rb2"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-018",
+  "band": "easy",
+  "pieces": [
+   "Nd4",
+   "Ne2",
+   "Pe6",
+   "Re1"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-019",
+  "band": "easy",
+  "pieces": [
+   "Bd1",
+   "Qc1",
+   "Qd4",
+   "Rc7"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-020",
+  "band": "easy",
+  "pieces": [
+   "Nh8",
+   "Qd8",
+   "Rc8",
+   "Rd4"
+  ],
+  "solutions": 5
+ },
+ {
+  "id": "solo-021",
+  "band": "easy",
+  "pieces": [
+   "Ba5",
+   "Bd7",
+   "Qc8",
+   "Rd8"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-022",
+  "band": "easy",
+  "pieces": [
+   "Bd7",
+   "Nb3",
+   "Qe6",
+   "Rb6"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-023",
+  "band": "easy",
+  "pieces": [
+   "Bd3",
+   "Nh4",
+   "Qe1",
+   "Re4"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-024",
+  "band": "easy",
+  "pieces": [
+   "Bb2",
+   "Nh2",
+   "Nh8",
+   "Rh5"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-025",
+  "band": "easy",
+  "pieces": [
+   "Bb4",
+   "Na8",
+   "Ra3",
+   "Ra4"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-026",
+  "band": "easy",
+  "pieces": [
+   "Ng4",
+   "Ph2",
+   "Qe2",
+   "Rf3"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-027",
+  "band": "easy",
+  "pieces": [
+   "Ba1",
+   "Nc2",
+   "Pa2",
+   "Qb1"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-028",
+  "band": "easy",
+  "pieces": [
+   "Ng6",
+   "Pb5",
+   "Pc6",
+   "Rg4"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-029",
+  "band": "easy",
+  "pieces": [
+   "Pe3",
+   "Qc3",
+   "Rb3",
+   "Rc2"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-030",
+  "band": "easy",
+  "pieces": [
+   "Ba3",
+   "Bd1",
+   "Qc1",
+   "Rg1"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-031",
+  "band": "easy",
+  "pieces": [
+   "Kf6",
+   "Nh6",
+   "Pg6",
+   "Qh2"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-032",
+  "band": "easy",
+  "pieces": [
+   "Pf2",
+   "Pf5",
+   "Rb2",
+   "Rf1"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-033",
+  "band": "easy",
+  "pieces": [
+   "Ba3",
+   "Bh6",
+   "Nc1",
+   "Nf7"
+  ],
+  "solutions": 3
+ },
+ {
+  "id": "solo-034",
+  "band": "easy",
+  "pieces": [
+   "Bg6",
+   "Bg8",
+   "Qh5",
+   "Rc6"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-035",
+  "band": "easy",
+  "pieces": [
+   "Nb6",
+   "Pa5",
+   "Pc5",
+   "Ra7"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-036",
+  "band": "easy",
+  "pieces": [
+   "Nd4",
+   "Nf4",
+   "Re2",
+   "Rg1"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-037",
+  "band": "easy",
+  "pieces": [
+   "Ba1",
+   "Nf6",
+   "Pe5",
+   "Ph4"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-038",
+  "band": "easy",
+  "pieces": [
+   "Ba6",
+   "Bb5",
+   "Bc3",
+   "Nc7"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-039",
+  "band": "easy",
+  "pieces": [
+   "Bb3",
+   "Qc2",
+   "Rb1",
+   "Rg2"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-040",
+  "band": "easy",
+  "pieces": [
+   "Bf5",
+   "Ke6",
+   "Nf7",
+   "Rb5"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-041",
+  "band": "medium",
+  "pieces": [
+   "Ba6",
+   "Nc8",
+   "Ne8",
+   "Qc6",
+   "Rc3"
+  ],
+  "solutions": 13
+ },
+ {
+  "id": "solo-042",
+  "band": "medium",
+  "pieces": [
+   "Be8",
+   "Ne2",
+   "Qh8",
+   "Rh2",
+   "Rh4"
+  ],
+  "solutions": 12
+ },
+ {
+  "id": "solo-043",
+  "band": "medium",
+  "pieces": [
+   "Be7",
+   "Na6",
+   "Pb6",
+   "Rc7",
+   "Rf7"
+  ],
+  "solutions": 12
+ },
+ {
+  "id": "solo-044",
+  "band": "medium",
+  "pieces": [
+   "Bb1",
+   "Ng1",
+   "Qf3",
+   "Qg3",
+   "Rf1"
+  ],
+  "solutions": 12
+ },
+ {
+  "id": "solo-045",
+  "band": "medium",
+  "pieces": [
+   "Nf6",
+   "Ng6",
+   "Nh7",
+   "Pf5",
+   "Rc7"
+  ],
+  "solutions": 12
+ },
+ {
+  "id": "solo-046",
+  "band": "medium",
+  "pieces": [
+   "Ba8",
+   "Kd3",
+   "Nf3",
+   "Pe2",
+   "Pe3"
+  ],
+  "solutions": 10
+ },
+ {
+  "id": "solo-047",
+  "band": "medium",
+  "pieces": [
+   "Pd7",
+   "Qb3",
+   "Qc5",
+   "Qd3",
+   "Rf5"
+  ],
+  "solutions": 8
+ },
+ {
+  "id": "solo-048",
+  "band": "medium",
+  "pieces": [
+   "Bg1",
+   "Kc6",
+   "Nd5",
+   "Nd7",
+   "Qc5"
+  ],
+  "solutions": 8
+ },
+ {
+  "id": "solo-049",
+  "band": "medium",
+  "pieces": [
+   "Bc4",
+   "Bh5",
+   "Nf4",
+   "Ng2",
+   "Qf7"
+  ],
+  "solutions": 7
+ },
+ {
+  "id": "solo-050",
+  "band": "medium",
+  "pieces": [
+   "Bh5",
+   "Kf6",
+   "Ne4",
+   "Pg5",
+   "Rh2"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-051",
+  "band": "medium",
+  "pieces": [
+   "Bb1",
+   "Bc4",
+   "Nb7",
+   "Ne4",
+   "Qd5"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-052",
+  "band": "medium",
+  "pieces": [
+   "Bh8",
+   "Nf7",
+   "Ph7",
+   "Rf8",
+   "Rg5"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-053",
+  "band": "medium",
+  "pieces": [
+   "Bb4",
+   "Pc3",
+   "Pd2",
+   "Ra4",
+   "Ra8"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-054",
+  "band": "medium",
+  "pieces": [
+   "Bf1",
+   "Ng2",
+   "Ng4",
+   "Ph3",
+   "Rd2"
+  ],
+  "solutions": 5
+ },
+ {
+  "id": "solo-055",
+  "band": "medium",
+  "pieces": [
+   "Pf2",
+   "Pf7",
+   "Pg6",
+   "Qh7",
+   "Rb7"
+  ],
+  "solutions": 5
+ },
+ {
+  "id": "solo-056",
+  "band": "medium",
+  "pieces": [
+   "Bd3",
+   "Bh4",
+   "Nc4",
+   "Pg3",
+   "Rc7"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-057",
+  "band": "medium",
+  "pieces": [
+   "Bg8",
+   "Pa3",
+   "Qc4",
+   "Qc6",
+   "Rb4"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-058",
+  "band": "medium",
+  "pieces": [
+   "Bb4",
+   "Bc3",
+   "Na2",
+   "Pa3",
+   "Pc6"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-059",
+  "band": "medium",
+  "pieces": [
+   "Bf7",
+   "Pf3",
+   "Pg6",
+   "Ra7",
+   "Rb7"
+  ],
+  "solutions": 2
+ },
+ {
+  "id": "solo-060",
+  "band": "medium",
+  "pieces": [
+   "Ba3",
+   "Bh6",
+   "Nd6",
+   "Nf4",
+   "Pe7"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-061",
+  "band": "medium",
+  "pieces": [
+   "Kc6",
+   "Ne2",
+   "Pd5",
+   "Qd4",
+   "Ra4",
+   "Rd2"
+  ],
+  "solutions": 29
+ },
+ {
+  "id": "solo-062",
+  "band": "medium",
+  "pieces": [
+   "Nb2",
+   "Nd3",
+   "Nf2",
+   "Pa2",
+   "Rb5",
+   "Rd2"
+  ],
+  "solutions": 28
+ },
+ {
+  "id": "solo-063",
+  "band": "medium",
+  "pieces": [
+   "Nc3",
+   "Pd2",
+   "Pd4",
+   "Rb4",
+   "Rd1",
+   "Re3"
+  ],
+  "solutions": 27
+ },
+ {
+  "id": "solo-064",
+  "band": "medium",
+  "pieces": [
+   "Bd8",
+   "Kf6",
+   "Ne7",
+   "Qb6",
+   "Ra8",
+   "Rh8"
+  ],
+  "solutions": 26
+ },
+ {
+  "id": "solo-065",
+  "band": "medium",
+  "pieces": [
+   "Bb3",
+   "Pa2",
+   "Pa4",
+   "Pc2",
+   "Qb5",
+   "Rh5"
+  ],
+  "solutions": 26
+ },
+ {
+  "id": "solo-066",
+  "band": "medium",
+  "pieces": [
+   "Bb6",
+   "Bf8",
+   "Nf2",
+   "Qe8",
+   "Rf3",
+   "Rh3"
+  ],
+  "solutions": 25
+ },
+ {
+  "id": "solo-067",
+  "band": "medium",
+  "pieces": [
+   "Bd2",
+   "Nh3",
+   "Pf4",
+   "Pg4",
+   "Ph5",
+   "Re5"
+  ],
+  "solutions": 20
+ },
+ {
+  "id": "solo-068",
+  "band": "medium",
+  "pieces": [
+   "Nc6",
+   "Pc2",
+   "Pd3",
+   "Pd5",
+   "Qb5",
+   "Rd7"
+  ],
+  "solutions": 19
+ },
+ {
+  "id": "solo-069",
+  "band": "medium",
+  "pieces": [
+   "Be8",
+   "Na8",
+   "Nb8",
+   "Nd7",
+   "Pb6",
+   "Ra4"
+  ],
+  "solutions": 17
+ },
+ {
+  "id": "solo-070",
+  "band": "medium",
+  "pieces": [
+   "Bc6",
+   "Kb4",
+   "Nb5",
+   "Ne7",
+   "Pc4",
+   "Rg6"
+  ],
+  "solutions": 17
+ },
+ {
+  "id": "solo-071",
+  "band": "medium",
+  "pieces": [
+   "Bb7",
+   "Nf5",
+   "Pg2",
+   "Ra7",
+   "Ra8",
+   "Rh4"
+  ],
+  "solutions": 15
+ },
+ {
+  "id": "solo-072",
+  "band": "medium",
+  "pieces": [
+   "Bd3",
+   "Nf1",
+   "Nf8",
+   "Pe7",
+   "Qe5",
+   "Rf5"
+  ],
+  "solutions": 15
+ },
+ {
+  "id": "solo-073",
+  "band": "medium",
+  "pieces": [
+   "Ba3",
+   "Kb2",
+   "Na5",
+   "Qa4",
+   "Qe4",
+   "Rc4"
+  ],
+  "solutions": 14
+ },
+ {
+  "id": "solo-074",
+  "band": "medium",
+  "pieces": [
+   "Ba4",
+   "Bd6",
+   "Bd7",
+   "Nb5",
+   "Pc6",
+   "Rc8"
+  ],
+  "solutions": 13
+ },
+ {
+  "id": "solo-075",
+  "band": "medium",
+  "pieces": [
+   "Bc3",
+   "Be3",
+   "Nd1",
+   "Nf1",
+   "Pd2",
+   "Rf5"
+  ],
+  "solutions": 12
+ },
+ {
+  "id": "solo-076",
+  "band": "medium",
+  "pieces": [
+   "Nb7",
+   "Nd6",
+   "Nf2",
+   "Pc2",
+   "Rc4",
+   "Rd3"
+  ],
+  "solutions": 10
+ },
+ {
+  "id": "solo-077",
+  "band": "medium",
+  "pieces": [
+   "Bf4",
+   "Bg4",
+   "Bh6",
+   "Qe6",
+   "Re3",
+   "Rf5"
+  ],
+  "solutions": 10
+ },
+ {
+  "id": "solo-078",
+  "band": "medium",
+  "pieces": [
+   "Pb6",
+   "Pc5",
+   "Pd4",
+   "Ph5",
+   "Rb1",
+   "Rg5"
+  ],
+  "solutions": 5
+ },
+ {
+  "id": "solo-079",
+  "band": "medium",
+  "pieces": [
+   "Bd8",
+   "Nd7",
+   "Pb2",
+   "Pf2",
+   "Rb6",
+   "Rf7"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-080",
+  "band": "medium",
+  "pieces": [
+   "Be1",
+   "Nf3",
+   "Pd3",
+   "Pd6",
+   "Re3",
+   "Rh1"
+  ],
+  "solutions": 1
+ },
+ {
+  "id": "solo-081",
+  "band": "hard",
+  "pieces": [
+   "Bg3",
+   "Bg6",
+   "Nd6",
+   "Nh4",
+   "Ph5",
+   "Rf1",
+   "Rf8"
+  ],
+  "solutions": 60
+ },
+ {
+  "id": "solo-082",
+  "band": "hard",
+  "pieces": [
+   "Be6",
+   "Na5",
+   "Nb3",
+   "Ng7",
+   "Pc3",
+   "Pd5",
+   "Rd4"
+  ],
+  "solutions": 60
+ },
+ {
+  "id": "solo-083",
+  "band": "hard",
+  "pieces": [
+   "Bb2",
+   "Bc1",
+   "Bh4",
+   "Pd2",
+   "Pe3",
+   "Pg5",
+   "Rf4"
+  ],
+  "solutions": 60
+ },
+ {
+  "id": "solo-084",
+  "band": "hard",
+  "pieces": [
+   "Bf4",
+   "Bf8",
+   "Nd7",
+   "Nf7",
+   "Ph6",
+   "Qa8",
+   "Ra2"
+  ],
+  "solutions": 60
+ },
+ {
+  "id": "solo-085",
+  "band": "hard",
+  "pieces": [
+   "Na1",
+   "Nc6",
+   "Pa6",
+   "Pa7",
+   "Qb1",
+   "Rb6",
+   "Rd1"
+  ],
+  "solutions": 60
+ },
+ {
+  "id": "solo-086",
+  "band": "hard",
+  "pieces": [
+   "Nb6",
+   "Nh3",
+   "Pe3",
+   "Qb7",
+   "Rc8",
+   "Re6",
+   "Rh1"
+  ],
+  "solutions": 57
+ },
+ {
+  "id": "solo-087",
+  "band": "hard",
+  "pieces": [
+   "Kh1",
+   "Nd3",
+   "Nf3",
+   "Nf4",
+   "Ph3",
+   "Qh2",
+   "Rd2"
+  ],
+  "solutions": 54
+ },
+ {
+  "id": "solo-088",
+  "band": "hard",
+  "pieces": [
+   "Nb6",
+   "Nf8",
+   "Rb7",
+   "Rc7",
+   "Rd7",
+   "Re7",
+   "Rh8"
+  ],
+  "solutions": 54
+ },
+ {
+  "id": "solo-089",
+  "band": "hard",
+  "pieces": [
+   "Bc7",
+   "Ne6",
+   "Nh5",
+   "Pc3",
+   "Rc1",
+   "Rc6",
+   "Rg7"
+  ],
+  "solutions": 50
+ },
+ {
+  "id": "solo-090",
+  "band": "hard",
+  "pieces": [
+   "Kb2",
+   "Na7",
+   "Nb3",
+   "Nc4",
+   "Pa2",
+   "Ra3",
+   "Rb5"
+  ],
+  "solutions": 45
+ },
+ {
+  "id": "solo-091",
+  "band": "hard",
+  "pieces": [
+   "Ba5",
+   "Bf8",
+   "Nd1",
+   "Pb4",
+   "Pc3",
+   "Qe8",
+   "Re7"
+  ],
+  "solutions": 42
+ },
+ {
+  "id": "solo-092",
+  "band": "hard",
+  "pieces": [
+   "Bb6",
+   "Bd7",
+   "Na4",
+   "Nd2",
+   "Ne5",
+   "Ng4",
+   "Rc4"
+  ],
+  "solutions": 32
+ },
+ {
+  "id": "solo-093",
+  "band": "hard",
+  "pieces": [
+   "Ba4",
+   "Bc7",
+   "Bg4",
+   "Na5",
+   "Ne1",
+   "Rd1",
+   "Re8"
+  ],
+  "solutions": 32
+ },
+ {
+  "id": "solo-094",
+  "band": "hard",
+  "pieces": [
+   "Be8",
+   "Bh5",
+   "Kb8",
+   "Nc6",
+   "Pc4",
+   "Rb7",
+   "Rd5"
+  ],
+  "solutions": 30
+ },
+ {
+  "id": "solo-095",
+  "band": "hard",
+  "pieces": [
+   "Bb3",
+   "Bd1",
+   "Bf3",
+   "Bf6",
+   "Ne4",
+   "Pf2",
+   "Rb6"
+  ],
+  "solutions": 27
+ },
+ {
+  "id": "solo-096",
+  "band": "hard",
+  "pieces": [
+   "Bc8",
+   "Bg5",
+   "Ne6",
+   "Pf4",
+   "Pg2",
+   "Ph3",
+   "Ph4"
+  ],
+  "solutions": 26
+ },
+ {
+  "id": "solo-097",
+  "band": "hard",
+  "pieces": [
+   "Ba4",
+   "Nb6",
+   "Ne7",
+   "Pa5",
+   "Pa7",
+   "Pc6",
+   "Rb1"
+  ],
+  "solutions": 24
+ },
+ {
+  "id": "solo-098",
+  "band": "hard",
+  "pieces": [
+   "Bd2",
+   "Bf8",
+   "Ke8",
+   "Nd7",
+   "Ng6",
+   "Pg5",
+   "Qd8"
+  ],
+  "solutions": 20
+ },
+ {
+  "id": "solo-099",
+  "band": "hard",
+  "pieces": [
+   "Bb5",
+   "Bb7",
+   "Bh1",
+   "Na8",
+   "Nc5",
+   "Ra2",
+   "Re8"
+  ],
+  "solutions": 6
+ },
+ {
+  "id": "solo-100",
+  "band": "hard",
+  "pieces": [
+   "Ke2",
+   "Nb6",
+   "Nf1",
+   "Pb2",
+   "Pg2",
+   "Ra4",
+   "Rb5"
+  ],
+  "solutions": 4
+ },
+ {
+  "id": "solo-101",
+  "band": "hard",
+  "pieces": [
+   "Bf1",
+   "Bg4",
+   "Bh5",
+   "Kg5",
+   "Na6",
+   "Qd1",
+   "Qg6",
+   "Ra4"
+  ],
+  "solutions": 214
+ },
+ {
+  "id": "solo-102",
+  "band": "hard",
+  "pieces": [
+   "Bh1",
+   "Ng2",
+   "Nh4",
+   "Nh5",
+   "Pf5",
+   "Pg4",
+   "Rd6",
+   "Rg6"
+  ],
+  "solutions": 210
+ },
+ {
+  "id": "solo-103",
+  "band": "hard",
+  "pieces": [
+   "Ba1",
+   "Ba4",
+   "Bh5",
+   "Nf1",
+   "Ng4",
+   "Qh2",
+   "Ra2",
+   "Rd1"
+  ],
+  "solutions": 210
+ },
+ {
+  "id": "solo-104",
+  "band": "hard",
+  "pieces": [
+   "Bd1",
+   "Bh5",
+   "Na4",
+   "Nc4",
+   "Pb2",
+   "Pd2",
+   "Pe3",
+   "Pf2"
+  ],
+  "solutions": 210
+ },
+ {
+  "id": "solo-105",
+  "band": "hard",
+  "pieces": [
+   "Bc5",
+   "Nd7",
+   "Ne7",
+   "Nf5",
+   "Pa5",
+   "Pd5",
+   "Qa7",
+   "Rf6"
+  ],
+  "solutions": 207
+ },
+ {
+  "id": "solo-106",
+  "band": "hard",
+  "pieces": [
+   "Bg3",
+   "Nc8",
+   "Ne3",
+   "Pc7",
+   "Qf1",
+   "Rd8",
+   "Rh2",
+   "Rh5"
+  ],
+  "solutions": 168
+ },
+ {
+  "id": "solo-107",
+  "band": "hard",
+  "pieces": [
+   "Bd6",
+   "Pd2",
+   "Re1",
+   "Rf1",
+   "Rf2",
+   "Rf5",
+   "Rf6",
+   "Rg2"
+  ],
+  "solutions": 157
+ },
+ {
+  "id": "solo-108",
+  "band": "hard",
+  "pieces": [
+   "Bc8",
+   "Nc6",
+   "Nf5",
+   "Ng8",
+   "Pb6",
+   "Ra7",
+   "Re5",
+   "Re7"
+  ],
+  "solutions": 150
+ },
+ {
+  "id": "solo-109",
+  "band": "hard",
+  "pieces": [
+   "Bd4",
+   "Be7",
+   "Ke6",
+   "Pc4",
+   "Pd5",
+   "Pf6",
+   "Pg5",
+   "Qd8"
+  ],
+  "solutions": 141
+ },
+ {
+  "id": "solo-110",
+  "band": "hard",
+  "pieces": [
+   "Bd6",
+   "Na6",
+   "Ne6",
+   "Pa3",
+   "Qf8",
+   "Ra8",
+   "Rb7",
+   "Re7"
+  ],
+  "solutions": 131
+ },
+ {
+  "id": "solo-111",
+  "band": "hard",
+  "pieces": [
+   "Bd2",
+   "Bf1",
+   "Nb1",
+   "Nc3",
+   "Nc4",
+   "Nf3",
+   "Rh1",
+   "Rh6"
+  ],
+  "solutions": 128
+ },
+ {
+  "id": "solo-112",
+  "band": "hard",
+  "pieces": [
+   "Bd3",
+   "Bf7",
+   "Ng3",
+   "Nh5",
+   "Ph2",
+   "Qe6",
+   "Qf1",
+   "Ra3"
+  ],
+  "solutions": 126
+ },
+ {
+  "id": "solo-113",
+  "band": "hard",
+  "pieces": [
+   "Bb6",
+   "Bd1",
+   "Nc3",
+   "Nd8",
+   "Pd6",
+   "Ra6",
+   "Rf1",
+   "Rh6"
+  ],
+  "solutions": 120
+ },
+ {
+  "id": "solo-114",
+  "band": "hard",
+  "pieces": [
+   "Bh8",
+   "Ne8",
+   "Nf5",
+   "Ng1",
+   "Ng3",
+   "Ng7",
+   "Re2",
+   "Re6"
+  ],
+  "solutions": 114
+ },
+ {
+  "id": "solo-115",
+  "band": "hard",
+  "pieces": [
+   "Ng3",
+   "Pb2",
+   "Ph3",
+   "Qe2",
+   "Rc3",
+   "Re7",
+   "Rh5",
+   "Rh6"
+  ],
+  "solutions": 112
+ },
+ {
+  "id": "solo-116",
+  "band": "hard",
+  "pieces": [
+   "Bc6",
+   "Bg3",
+   "Bh5",
+   "Kg5",
+   "Ne8",
+   "Nh4",
+   "Pf2",
+   "Ph2"
+  ],
+  "solutions": 70
+ },
+ {
+  "id": "solo-117",
+  "band": "hard",
+  "pieces": [
+   "Ba5",
+   "Bd8",
+   "Kg4",
+   "Pd3",
+   "Ph5",
+   "Qc4",
+   "Rb4",
+   "Rh4"
+  ],
+  "solutions": 59
+ },
+ {
+  "id": "solo-118",
+  "band": "hard",
+  "pieces": [
+   "Bb3",
+   "Nb8",
+   "Pa3",
+   "Pb2",
+   "Pc6",
+   "Pe4",
+   "Qb4",
+   "Rd5"
+  ],
+  "solutions": 42
+ },
+ {
+  "id": "solo-119",
+  "band": "hard",
+  "pieces": [
+   "Bc7",
+   "Be3",
+   "Kd6",
+   "Nh4",
+   "Pf4",
+   "Pg3",
+   "Pg5",
+   "Rd8"
+  ],
+  "solutions": 18
+ },
+ {
+  "id": "solo-120",
+  "band": "hard",
+  "pieces": [
+   "Bc6",
+   "Bh8",
+   "Nf4",
+   "Pb2",
+   "Pe6",
+   "Pf6",
+   "Rc3",
+   "Rg7"
+  ],
+  "solutions": 5
+ }
+]

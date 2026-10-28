@@ -50,8 +50,23 @@ test('clues verify captures, checks, mate and promotions and handle SAN', () => 
     assert.equal(moveClue(MICRO_LESSONS.fork.fen, 'e5f7').clue, 'check');
     assert.equal(moveClue(MICRO_LESSONS.checkmate.fen, 'f7g7').clue, 'mate');
     assert.equal(moveClue('6k1/P7/8/8/8/8/8/7K w - - 0 1', 'a7a8n').clue, 'promotion');
-    assert.equal(moveClue(MICRO_LESSONS.pin.fen, 'c4b5').clue, 'think');
+    assert.equal(moveClue(MICRO_LESSONS.pin.fen, 'c4b5').clue, 'pin');
     assert.equal(moveClue(new Chess().fen(), 'e2e8'), null);
+});
+test('quiet moves get a clue that matches what the move does on the board', () => {
+    assert.equal(moveClue('k7/8/2K5/8/8/8/8/7R w - - 0 1', 'c6b6').clue, 'mateThreat');
+    assert.equal(moveClue('7k/2r1r3/8/8/8/2N5/8/K7 w - - 0 1', 'c3d5').clue, 'fork');
+    assert.equal(moveClue('7k/8/8/3r4/8/8/8/K5R1 w - - 0 1', 'g1d1').clue, 'threat');
+    assert.equal(moveClue('7k/8/8/8/8/8/1q6/R5K1 w - - 0 1', 'a1e1').clue, 'defend');
+    assert.equal(moveClue('7k/8/1P6/8/8/8/8/K7 w - - 0 1', 'b6b7').clue, 'advance');
+    assert.equal(moveClue('8/8/8/4k3/8/8/3p4/7K b - - 0 1', 'e5e4').clue, 'king');
+    assert.equal(moveClue(new Chess().fen(), 'e2e4').clue, 'quiet');
+});
+test('every clue a move can get has a message in both languages', () => {
+    for (const locale of ['en', 'bg']) {
+        const help = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../messages/${locale}.json`), 'utf8')).LearningHelp;
+        for (const clue of ['mate', 'check', 'promotion', 'capture', 'mateThreat', 'fork', 'pin', 'threat', 'defend', 'advance', 'king', 'quiet']) assert(help[clue], `${locale}: ${clue}`);
+    }
 });
 test('consequences apply the actual alternative and legal reply, without treating every reply as a loss', () => {
     const board = new Chess();

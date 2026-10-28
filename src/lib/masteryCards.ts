@@ -2,6 +2,7 @@ import { groupLineHistories, isSkillTag, type PracticeAttemptRecord, type Practi
 import { isLineMastered, sofiaDay } from "./reviewSchedule";
 import { BOTS, BOT_CARD_WINS } from "./bots";
 import { WORLDS, miniKey, worldTier } from "./miniGames";
+import { CARD_THEMES } from "./cardThemes";
 
 export type CardTier = "bronze" | "silver" | "gold";
 const TIERS: CardTier[] = ["bronze", "silver", "gold"];
@@ -12,8 +13,8 @@ export const PRACTICE_TIER_SHARES = [0.5, 0.8, 1];
 export const THEME_TIER_DAYS = [3, 5, 10];
 
 export interface MasteryCard {
-    id: string; // "practice:<id>", "theme:<tag>", "bot:<id>", "world:<id>", "tournament"
-    kind: "practice" | "theme" | "bot" | "world" | "tournament";
+    id: string; // "practice:<id>", "theme:<tag>", "bot:<id>", "world:<id>", "activity:<id>", "tournament"
+    kind: "practice" | "theme" | "bot" | "world" | "tournament" | "activity";
     practiceId: string | null;
     tag: string | null;
     name: string;
@@ -23,22 +24,20 @@ export interface MasteryCard {
     nextTarget: number | null;
 }
 
-function cardTier(current: number, targets: number[]) {
+export function cardTier(current: number, targets: number[]) {
     const reached = targets.filter(target => current >= target).length;
     return { tier: reached ? TIERS[reached - 1] : null, nextTarget: targets[reached] ?? null };
 }
 
 export function practiceCards(practiceAttempts: PracticeAttemptRecord[], practices: Map<string, PracticeInfo>): MasteryCard[] {
     const mastered = new Map<string, number>();
-    const started = new Set<string>();
     for (const [key, attempts] of groupLineHistories(practiceAttempts, practices)) {
         const practiceId = key.slice(0, key.indexOf(":"));
-        started.add(practiceId);
         if (isLineMastered(attempts)) {
             mastered.set(practiceId, (mastered.get(practiceId) ?? 0) + 1);
         }
     }
-    return [...started].map(practiceId => {
+    return [...practices.keys()].map(practiceId => {
         const info = practices.get(practiceId)!;
         const current = mastered.get(practiceId) ?? 0;
         const targets = PRACTICE_TIER_SHARES.map(share => Math.max(1, Math.ceil(share * info.leafIds.length)));
@@ -47,7 +46,7 @@ export function practiceCards(practiceAttempts: PracticeAttemptRecord[], practic
 }
 
 export function themeCards(solvedPuzzles: { createdAt: Date; tags: string[] }[]): MasteryCard[] {
-    const days = new Map<string, Set<string>>();
+    const days = new Map<string, Set<string>>(CARD_THEMES.map(tag => [tag, new Set<string>()]));
     for (const puzzle of solvedPuzzles) {
         const day = sofiaDay(puzzle.createdAt);
         for (const tag of puzzle.tags) {

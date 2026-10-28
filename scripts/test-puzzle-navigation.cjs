@@ -58,6 +58,7 @@ const trackedNavigation = {
 };
 const dailyMission = loadSource('../src/lib/dailyMission.ts', { './reviewSchedule': loadSource('../src/lib/reviewSchedule.ts') });
 const common = {
+    '@/components/PuzzleDifficultySettings': () => null,
     '@/i18n/navigation': trackedNavigation,
     '@/lib/utils': loadSource('../src/lib/utils.ts'),
     '@/lib/puzzleThemes': loadSource('../src/lib/puzzleThemes.ts', { './dailyMission': dailyMission }),
@@ -110,7 +111,7 @@ beforeEach(() => {
     globalThis.fetch = async (input, init) => {
         requests.push({ url: new URL(input, window.location.origin), init });
         return { ok: true, status: 200, json: async () => init?.method === 'POST'
-            ? { oldRating: 1500, newRating: 1505, change: 5 }
+            ? { oldRating: 1500, newRating: 1505, change: 5, challengePoints: 10 }
             : { puzzleName: 'next-puzzle' } };
     };
 });
@@ -159,35 +160,57 @@ for (const locale of ['en', 'bg']) {
         });
     }
 
-    test(`${locale}: the 100-row coach puzzle table disables prefetch and keeps the locale`, async () => {
-        const attempts = Array.from({ length: 100 }, (_, i) => ({
-            id: `attempt-${i}`, userId: `student-${i}`, user: { name: 'Student', image: null }, puzzle: { name: `puzzle-${i}`, rating: 1500 },
-            success: i % 2 === 0, createdAt: new Date('2026-10-16T09:00:00Z'),
+    test(`${locale}: paginated coach activity links disable prefetch and keep the locale`, async () => {
+        const dashboard = loadSource('../src/lib/coachDashboard.ts');
+        const students = Array.from({ length: 100 }, (_, i) => ({
+            id: `student-${i}`, name: 'Student', summary: { flags: [], backlog: 0, activeDaysThisWeek: 0 }, homework: [],
+        }));
+        const rows = students.slice(0, dashboard.DASHBOARD_PAGE_SIZE).map((student, i) => ({
+            id: `attempt-${i}`, userId: student.id, studentName: student.name, kind: 'puzzle',
+            activityId: `puzzle-${i}`, activityName: `Puzzle ${i}`, rating: 1500,
+            status: i % 2 === 0 ? 'solved' : 'failed', createdAt: new Date('2026-10-16T09:00:00Z'),
         }));
         const CoachDashboard = loadSource('../src/app/[locale]/coach/dashboard/page.tsx', {
             ...common,
             '@/auth': { auth: async () => session },
-            '@/lib/db': { prisma: {
-                puzzleAttempt: { findMany: async () => attempts },
-                practiceAttempt: { findMany: async () => [] },
-                user: { findMany: async () => [] },
-            } },
-            'next-intl/server': { getTranslations: async () => key => key },
-            '@/components/CoachStudentHelp': () => null,
+            '@/lib/db': { prisma: { user: { findMany: async () => [] } } },
+            '@/app/actions/assignments': { getCoachOverview: async () => ({ students }) },
+            '@/lib/coachDashboard': dashboard,
+            '@/lib/coachDashboardData': {
+                loadDashboardTeams: async () => [],
+                loadDashboardActivity: async filters => {
+                    assert.equal(filters.view, 'activity');
+                    return { rows, total: 100, pagination: dashboard.dashboardPagination(100, filters.page) };
+                },
+            },
+            'next-intl/server': { getTranslations: async () => key => key, getLocale: async () => locale },
+            '@/components/CoachDashboardFilters': () => null,
+            '@/components/CoachDashboardStudents': () => null,
         }).default;
-        render(localized(await CoachDashboard(), locale));
-        // Each row links the puzzle and the student's profile; none of the 200 links may prefetch.
-        const links = screen.getAllByRole('link');
-        assert.equal(links.length, 200);
-        assert.equal(linkProps.length, 200);
-        assert(linkProps.every(props => props.prefetch === false));
+        // Resolve nested async server components while leaving client components to React.
+        async function resolveServer(element) {
+            if (Array.isArray(element)) return Promise.all(element.map(resolveServer));
+            if (!React.isValidElement(element)) return element;
+            if (element.type?.constructor?.name === 'AsyncFunction') return resolveServer(await element.type(element.props));
+            const children = await resolveServer(element.props.children);
+            return Array.isArray(children) ? React.cloneElement(element, {}, ...children) : React.cloneElement(element, {}, children);
+        }
+        render(localized(await resolveServer(await CoachDashboard({ searchParams: Promise.resolve({ view: 'activity' }) })), locale));
+        // Both responsive layouts contain only the current page. Header/tab links keep normal prefetching.
+        const links = screen.getAllByRole('link').filter(link => /\/(puzzles|coach\/students)\//.test(link.getAttribute('href')));
+        assert.equal(links.length, dashboard.DASHBOARD_PAGE_SIZE * 4);
+        const activityProps = linkProps.filter(props => /\/(puzzles|coach\/students)\//.test(props.href));
+        assert.equal(activityProps.length, links.length);
+        assert(activityProps.every(props => props.prefetch === false));
         assert(links.every(link => link.dataset.prefetch === 'false'));
         const puzzleLinks = links.filter(link => link.getAttribute('href').includes('/puzzles/'));
         const profileLinks = links.filter(link => link.getAttribute('href').includes('/coach/students/'));
-        puzzleLinks.forEach((link, i) => assert.equal(link.getAttribute('href'), `/${locale}/puzzles/puzzle-${i}`));
-        profileLinks.forEach((link, i) => assert.equal(link.getAttribute('href'), `/${locale}/coach/students/student-${i}`));
-        assert.equal(puzzleLinks.length, 100);
-        assert.equal(profileLinks.length, 100);
+        puzzleLinks.forEach((link, i) => assert.equal(link.getAttribute('href'), `/${locale}/puzzles/puzzle-${i % rows.length}`));
+        profileLinks.forEach((link, i) => assert.equal(link.getAttribute('href'), `/${locale}/coach/students/student-${i % rows.length}`));
+        assert.equal(puzzleLinks.length, rows.length * 2);
+        assert.equal(profileLinks.length, rows.length * 2);
+        fireEvent.mouseEnter(puzzleLinks[0]);
+        fireEvent.focus(profileLinks.at(-1));
         assert.equal(requests.length, 0);
     });
 
@@ -223,6 +246,8 @@ for (const locale of ['en', 'bg']) {
         assert.equal(requests[0].init.method, 'POST');
         assert.deepEqual(JSON.parse(requests[0].init.body), { puzzleId: puzzleProps.id, success: true });
         assert.deepEqual(readHistory().at(-1), { id: puzzleProps.id, name: puzzleProps.currentPuzzleName, result: 'success' });
+        await waitFor(() => assert(screen.getByText(messages[locale].PuzzleSolver.challengePoints.replace('{points}', '10'))));
+        assert(screen.getByText(messages[locale].PuzzleSolver.ratingChange.replace('{change}', '+5')));
         await act(async () => fireEvent.click(screen.getByRole('button', { name: messages[locale].PuzzleSolver.nextPuzzle })));
         assert.equal(requests.length, 2);
         assert.equal(requests[1].url.pathname, '/api/puzzles/next');
@@ -256,8 +281,8 @@ for (const locale of ['en', 'bg']) {
         await waitFor(() => assert.equal(pushes.length, 1));
         assert.equal(requests.length, 1);
         assert.equal(requests[0].url.searchParams.get('tag'), tag);
-        assert.equal(requests[0].url.searchParams.get('rating'), '1500');
-        assert.equal(requests[0].url.searchParams.get('userId'), 'student');
+        assert.equal(requests[0].url.searchParams.get('rating'), null, 'the server reads the current rating');
+        assert.equal(requests[0].url.searchParams.get('userId'), null, 'the server uses the authenticated user');
         const url = new URL(pushes[0], window.location.origin);
         assert.equal(url.pathname, `/${locale}/puzzles/next-puzzle`);
         assert.deepEqual([...url.searchParams], [['tag', tag]]);
@@ -584,3 +609,20 @@ for (const locale of ['en','bg']) for (const hinted of [true,false]) {
         assert.equal(credit,!hinted);
     });
 }
+
+for (const locale of ['en', 'bg']) test(`${locale}: an empty rating band shows limits and a localized topic link without selecting an easier puzzle`, async () => {
+    globalThis.fetch = async (input, init) => {
+        requests.push({ url: new URL(input, window.location.origin), init });
+        return { ok: true, json: async () => ({ puzzleName: null, range: { min: 1363, max: 1663 } }) };
+    };
+    render(localized(React.createElement(PuzzlePlayPage), locale, new URLSearchParams({ tag })));
+    await screen.findByRole('status');
+    assert(screen.getByRole('status').textContent.includes('1363–1663'));
+    assert.equal(pushes.length, 0);
+    const link = screen.getByRole('link', { name: messages[locale].PuzzleDifficulty.chooseTopic });
+    assert.equal(link.getAttribute('href'), `/${locale}/puzzles`);
+    fireEvent.click(screen.getByRole('button', { name: messages[locale].PuzzleDifficulty.tryAgain }));
+    await waitFor(() => assert.equal(requests.length, 2));
+    assert(requests.every(request => request.url.searchParams.get('tag') === tag));
+    assert(requests.every(request => request.url.searchParams.get('rating') === null));
+});

@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { themeLabel } from "@/lib/puzzleThemes";
+import PuzzleDifficultySettings from "@/components/PuzzleDifficultySettings";
 
 // API function to fetch puzzle tags
 async function fetchPuzzleTags(): Promise<{ tag: string; count: number }[]> {
@@ -103,6 +104,7 @@ export default function PuzzlesPage() {
                 </div>
 
                 <div className="mb-8">
+                    {session?.user && <div className="mb-5"><PuzzleDifficultySettings /></div>}
                     <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{t("categories")}</h2>
                     {session?.user && <Link href="/puzzles/review" className="block mb-5 rounded-xl bg-indigo-50 text-indigo-950 p-4 font-semibold">↺ {tReview("title")} — {tReview("shortIntro")}</Link>}
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">

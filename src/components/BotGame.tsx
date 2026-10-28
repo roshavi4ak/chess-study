@@ -14,6 +14,9 @@ import { captureThreats, coachingGoals, coachingHint, coachingPraise, copyGame, 
 import ProgressiveHint from "./ProgressiveHint";
 import TrainingLine from "./TrainingLine";
 import type { BotProfile } from "@/lib/bots";
+import { useActivityChessnut } from "@/hooks/useActivityChessnut";
+import ActivityBoardPanel from "./ActivityBoardPanel";
+import { ChessnutSession } from "./ChessnutSession";
 
 export type BotGameResult = "win" | "loss" | "draw";
 type Line = "Greeting" | "Capture" | "Check" | "BotWins" | "ChildWins" | "Draw";
@@ -29,6 +32,10 @@ async function pickMove(bot: BotProfile, fen: string, signal: AbortSignal) {
 }
 
 export default function BotGame({ bot, childColor, onFinish, initialTeaching = true }: { bot: BotProfile; childColor: "w" | "b"; onFinish: (result: BotGameResult, moves: number, teaching: boolean) => void; initialTeaching?: boolean }) {
+    return <ChessnutSession><BotGameContent bot={bot} childColor={childColor} onFinish={onFinish} initialTeaching={initialTeaching} /></ChessnutSession>;
+}
+
+function BotGameContent({ bot, childColor, onFinish, initialTeaching = true }: { bot: BotProfile; childColor: "w" | "b"; onFinish: (result: BotGameResult, moves: number, teaching: boolean) => void; initialTeaching?: boolean }) {
     const t = useTranslations("Bots");
     const tCoach = useTranslations("BotTeaching");
     const tPieces = useTranslations("LearningHelp");
@@ -53,25 +60,41 @@ export default function BotGame({ bot, childColor, onFinish, initialTeaching = t
     const needsIdentify = !!(threat && !game.inCheck() && identifiedFen !== game.fen());
     const hint = useMemo(() => teaching && hintStage > 0 && yourTurn && !pending ? coachingHint(game.fen()) : null, [teaching, hintStage, yourTurn, pending, game]);
     const goals = coachingGoals(game.history({ verbose: true }), childColor);
+    const boardReply = lastMove && game.turn() === childColor ? lastMove.from + lastMove.to : undefined;
+    const board = useActivityChessnut({
+        fen: game.fen(), canMove: yourTurn && !needsIdentify && !pending,
+        onMove: move => handleMove(move, true), syncMove: boardReply,
+        hintMove: hint && hintStage >= 3 ? hint.move : undefined,
+        completion: result ? `${result}:${game.fen()}` : undefined,
+        onLift: needsIdentify ? square => {
+            if (square === threat?.square) { setIdentifiedFen(game.fen()); setWrongPiece(false); return true; }
+            setWrongPiece(true); return false;
+        } : undefined,
+    });
+    const reported = useRef(false);
+    useEffect(() => {
+        if (!result || reported.current || !board.ready) return;
+        reported.current = true;
+        onFinish(result, game.history().length, teachingUsed.current);
+    }, [result, board.ready, game, onFinish]);
 
-    function end(outcome: BotGameResult, finalGame: Chess) {
+    function end(outcome: BotGameResult) {
         if (finished.current) return;
         finished.current = true;
         setResult(outcome);
         setLine(outcome === "win" ? "ChildWins" : outcome === "loss" ? "BotWins" : "Draw");
-        onFinish(outcome, finalGame.history().length, teachingUsed.current);
     }
 
     function checkEnd(next: Chess) {
         if (!next.isGameOver()) return false;
-        if (next.isCheckmate()) end(next.turn() === childColor ? "loss" : "win", next);
-        else end("draw", next);
+        if (next.isCheckmate()) end(next.turn() === childColor ? "loss" : "win");
+        else end("draw");
         return true;
     }
 
     // The bot moves whenever it is its turn.
     useEffect(() => {
-        if (finished.current || game.turn() !== botColor) return;
+        if (finished.current || game.turn() !== botColor || !board.ready) return;
         let cancelled = false;
         const controller = new AbortController();
         let timer: ReturnType<typeof setTimeout> | undefined;
@@ -97,9 +120,10 @@ export default function BotGame({ bot, childColor, onFinish, initialTeaching = t
         return () => { cancelled = true; controller.abort(); if (timer) clearTimeout(timer); };
         // checkEnd only reads refs and stable values.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [game, bot, botColor, result]);
+    }, [game, bot, botColor, result, board.ready]);
 
-    function handleMove({ from, to, promotion }: { from: string; to: string; promotion?: string }) {
+    function handleMove({ from, to, promotion }: { from: string; to: string; promotion?: string }, physical = false) {
+        if (board.enabled && !physical) return false;
         if (finished.current || thinking || locked.current || pending || needsIdentify || game.turn() !== childColor) return false;
         const next = copyGame(game);
         try {
@@ -123,6 +147,7 @@ export default function BotGame({ bot, childColor, onFinish, initialTeaching = t
 
     function takeback() {
         if (finished.current || thinking) return;
+        board.reset();
         const next = new Chess();
         const history = game.history({ verbose: true });
         // Undo the bot's reply and the child's move, so it is the child's turn again.
@@ -144,6 +169,7 @@ export default function BotGame({ bot, childColor, onFinish, initialTeaching = t
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-3">
+                <ActivityBoardPanel board={board} reply={boardReply} />
                 <div className="flex items-start gap-3">
                     <Image src={getAvatarPath(bot.avatar)} alt="" width={64} height={64} className="h-16 w-16 rounded-full bg-white ring-2 ring-orange-300 object-contain p-1 shrink-0" />
                     <div className="relative bg-white dark:bg-gray-800 rounded-2xl rounded-tl-none shadow px-4 py-3 text-gray-900 dark:text-white">
@@ -159,15 +185,15 @@ export default function BotGame({ bot, childColor, onFinish, initialTeaching = t
                             id: "bot-game",
                             position: game.fen(),
                             boardOrientation: childColor === "w" ? "white" : "black",
-                            onPieceDrop: (args) => { void onPieceDrop(args); return false; },
+                            onPieceDrop: (args) => { if (!board.enabled) void onPieceDrop(args); return false; },
                             onSquareClick: args => {
                                 if (!yourTurn || pending) return;
                                 if (needsIdentify) { if (args.square === threat?.square) { setIdentifiedFen(game.fen()); setWrongPiece(false); } else setWrongPiece(true); }
-                                else void onSquareClick(args);
+                                else if (!board.enabled) void onSquareClick(args);
                             },
-                            onPieceClick: args => { if (yourTurn && !needsIdentify && !pending) onPieceClick(args); },
+                            onPieceClick: args => { if (!board.enabled && yourTurn && !needsIdentify && !pending) onPieceClick(args); },
                             squareStyles: { ...highlights, ...optionSquares },
-                            allowDragging: yourTurn && !needsIdentify && !pending,
+                            allowDragging: !board.enabled && yourTurn && !needsIdentify && !pending,
                             arrows: hint && hintStage >= 3 ? [{ startSquare: hint.move.slice(0, 2), endSquare: hint.move.slice(2, 4), color: "#4f46e5" }] : [],
                             animationDurationInMs: 200,
                         }}
@@ -205,7 +231,7 @@ export default function BotGame({ bot, childColor, onFinish, initialTeaching = t
                                     <Undo2 className="h-4 w-4" /> {t("takeback")}
                                 </button>
                             )}
-                            <button type="button" onClick={() => end("loss", game)}
+                            <button type="button" onClick={() => end("loss")}
                                 className="inline-flex items-center gap-1 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-sm font-medium">
                                 <Flag className="h-4 w-4" /> {t("resign")}
                             </button>

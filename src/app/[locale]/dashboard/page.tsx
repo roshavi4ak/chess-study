@@ -10,6 +10,7 @@ import DailyMission from "@/components/DailyMission";
 import CardsSummary from "@/components/CardsSummary";
 import LevelSummary from "@/components/LevelSummary";
 import LeagueSummary from "@/components/LeagueSummary";
+import ClubChallengeSummary from "@/components/ClubChallengeSummary";
 import { Link } from "@/i18n/navigation";
 
 export default function Dashboard() {
@@ -62,6 +63,7 @@ export default function Dashboard() {
                 <div className="mt-8 max-w-2xl space-y-4">
                     <DailyMission />
                     <LevelSummary />
+                    <ClubChallengeSummary />
                     {session.user.id && <LeagueSummary userId={session.user.id} />}
                     {session.user.id && <CardsSummary userId={session.user.id} />}
                 </div>

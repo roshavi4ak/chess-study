@@ -63,7 +63,7 @@ export default function MiniPuzzleGame({ level, onComplete }: { level: PuzzleLev
                 )
             ) : (
                 <div className="max-w-[560px]">
-                    <QuickPuzzleBoard key={`${puzzle.id}-${index}`} fen={puzzle.fen} solution={puzzle.solution} onResult={onResult} />
+                    <QuickPuzzleBoard boardSupport key={`${puzzle.id}-${index}`} fen={puzzle.fen} solution={puzzle.solution} onResult={onResult} />
                 </div>
             )}
         </div>

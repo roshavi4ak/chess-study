@@ -19,32 +19,44 @@ export interface AllTimeWinner {
   image: string | null;
 }
 
+async function puzzleWinnersForWeek(start: Date, end: Date, take: number) {
+  const rows = await prisma.puzzleAttempt.groupBy({
+    by: ['userId', 'success'],
+    where: {
+      createdAt: { gte: start, lt: end },
+      user: { role: 'STUDENT' }
+    },
+    _sum: { points: true, challengePoints: true },
+    _count: { challengePoints: true }
+  });
+  // Preserve completed legacy weeks. Once a week contains a new-scoring
+  // attempt (even a failure or zero-point solve), use only challenge points.
+  const usesChallengePoints = rows.some(row => row._count.challengePoints > 0);
+  if (!usesChallengePoints) {
+    // Keep the original legacy query, including its zero-score awards and tie
+    // behavior, so introducing challenge points does not rewrite past winners.
+    const legacy = await prisma.puzzleAttempt.groupBy({
+      by: ['userId'],
+      where: { createdAt: { gte: start, lt: end }, success: true, user: { role: 'STUDENT' } },
+      _sum: { points: true },
+      orderBy: { _sum: { points: 'desc' } },
+      take
+    });
+    return legacy.map(row => ({ userId: row.userId, points: row._sum.points ?? 0 }));
+  }
+  return rows.filter(row => row.success).map(row => ({
+    userId: row.userId,
+    points: row._sum.challengePoints ?? 0
+  })).filter(row => row.points > 0)
+    .sort((a, b) => b.points - a.points || a.userId.localeCompare(b.userId))
+    .slice(0, take);
+}
+
 export async function getWeeklyStatistics() {
   const { startDate, endDate, dateRange } = getLeaderboardWeek(new Date(), 1);
 
   // Get top 3 weekly puzzle winners
-  const puzzlePointsResult = await prisma.puzzleAttempt.groupBy({
-    by: ['userId'],
-    where: {
-      createdAt: {
-        gte: startDate,
-        lt: endDate
-      },
-      success: true,
-      user: {
-        role: 'STUDENT'
-      }
-    },
-    _sum: {
-      points: true
-    },
-    orderBy: {
-      _sum: {
-        points: 'desc'
-      }
-    },
-    take: 3
-  });
+  const puzzlePointsResult = await puzzleWinnersForWeek(startDate, endDate, 3);
 
   const puzzleWinners: WeeklyWinner[] = [];
   for (const result of puzzlePointsResult) {
@@ -59,7 +71,7 @@ export async function getWeeklyStatistics() {
     puzzleWinners.push({
       id: result.userId,
       name: user?.name || 'Anonymous',
-      points: result._sum.points || 0,
+      points: result.points,
       lichessId: user?.lichessId || null,
       image: user?.image || null
     });
@@ -148,17 +160,7 @@ export async function getAllTimeWinners() {
   // For each week, find the top 1 puzzle winner and top 1 practice winner
   for (const week of weeks) {
     // Get top 1 puzzle winner for this week
-    const puzzleWinners = await prisma.puzzleAttempt.groupBy({
-      by: ['userId'],
-      where: {
-        createdAt: { gte: week.start, lt: week.end },
-        success: true,
-        user: { role: 'STUDENT' }
-      },
-      _sum: { points: true },
-      orderBy: { _sum: { points: 'desc' } },
-      take: 1
-    });
+    const puzzleWinners = await puzzleWinnersForWeek(week.start, week.end, 1);
     
     // Get top 1 practice winner for this week
     const practiceWinners = await prisma.practiceLineProgress.groupBy({

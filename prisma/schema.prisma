@@ -34,6 +34,8 @@ model User {
   ratingCorrespondence Int?
   puzzleRd             Float     @default(350)
   puzzleVolatility     Float     @default(0.06)
+  // Coach-set relative limits and the student's preferred target inside them.
+  puzzleDifficulty     Json?
   
   accounts      Account[]
   sessions      Session[]
@@ -59,6 +61,10 @@ model User {
   racesHosted         PuzzleRace[]
   raceEntries         PuzzleRaceEntry[]
   league              LeagueMembership?
+
+  // Team challenges set by coaches
+  teamMemberships     ChallengeTeamMember[]
+  clubTeamMemberships ClubTeamMember[]
 }
 
 model Account {
@@ -121,6 +127,13 @@ model PuzzleAttempt {
   puzzle    Puzzle   @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
   success   Boolean
   points    Int      @default(0)
+  // Competition points are independent of the rating change in points.
+  // Null identifies attempts made before challenge scoring was introduced.
+  challengePoints Int?
+  // Rating inputs used for the award; legacy backfills use the puzzle's current rating.
+  challengeStudentRating Int?
+  challengePuzzleRating Int?
+  challengeBackfilled Boolean @default(false)
   createdAt DateTime @default(now())
 
   @@index([userId])
@@ -324,6 +337,8 @@ enum PlayKind {
   LEVEL_TEST
   LEVEL_PRACTICE
   TOURNAMENT
+  SOLO_CHESS
+  NOTATION
 }
 
 // One finished fun activity. Fun modes never touch the puzzle rating; personal bests, bot wins,
@@ -442,4 +457,90 @@ model ClubTournament {
 
   @@unique([kind, lichessId])
   @@index([startsAt])
+}
+
+// ============================================
+// TEAM CHALLENGES AND CLUB GOALS
+// ============================================
+
+// Reusable rosters. Challenges copy these so later roster changes do not rewrite their results.
+model ClubTeam {
+  id        String           @id @default(cuid())
+  name      String
+  color     String
+  createdBy String
+  createdAt DateTime         @default(now())
+  members   ClubTeamMember[]
+}
+
+model ClubTeamMember {
+  teamId String
+  team   ClubTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId String
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([teamId, userId])
+  @@index([userId])
+}
+
+// Teams of children competing on one measure (see GOAL_METRICS in src/lib/clubGoals.ts) between two Sofia days.
+model TeamChallenge {
+  id         String                @id @default(cuid())
+  name       String
+  metric     String // e.g. PUZZLES_SOLVED, LINES_PLAYED, MANUAL
+  tag        String? // optional puzzle theme for puzzle measures
+  practiceId String? // optional opening practice for line measures
+  scoring    String                @default("TOTAL") // TOTAL, or AVERAGE per team member
+  startsOn   DateTime              @db.Date // first day, inclusive
+  endsOn     DateTime              @db.Date // last day, inclusive
+  createdBy  String
+  createdAt  DateTime              @default(now())
+  teams      ChallengeTeam[]
+  members    ChallengeTeamMember[]
+
+  @@index([endsOn])
+}
+
+model ChallengeTeam {
+  id          String                @id @default(cuid())
+  challengeId String
+  challenge   TeamChallenge         @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  name        String
+  color       String // red, blue, green, yellow, purple or orange
+  bonus       Int                   @default(0) // points the coach added by hand (e.g. for club lessons)
+  order       Int                   @default(0)
+  members     ChallengeTeamMember[]
+
+  @@index([challengeId])
+}
+
+// A child is in at most one team per challenge.
+model ChallengeTeamMember {
+  challengeId String
+  challenge   TeamChallenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  teamId      String
+  team        ChallengeTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([challengeId, userId])
+  @@index([teamId])
+  @@index([userId])
+}
+
+// A target the whole club works towards together, e.g. 1,000 puzzles in November.
+model ClubGoal {
+  id         String   @id @default(cuid())
+  title      String
+  metric     String
+  tag        String?
+  practiceId String?
+  target     Int
+  bonus      Int      @default(0) // progress the coach added by hand
+  startsOn   DateTime @db.Date
+  endsOn     DateTime @db.Date
+  createdBy  String
+  createdAt  DateTime @default(now())
+
+  @@index([endsOn])
 }

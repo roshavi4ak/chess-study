@@ -21,7 +21,14 @@ export default function BotsPage() {
     const [teaching, setTeaching] = useState(true);
 
     useEffect(() => {
-        getBotWins().then(setWins).catch(() => undefined);
+        getBotWins().then(loaded => {
+            setWins(loaded);
+            const requested = new URLSearchParams(window.location.search).get("bot");
+            const chosen = BOTS.find(entry => entry.id === requested);
+            const available = unlockedBots(new Set(Object.keys(loaded).filter(id => loaded[id] > 0)));
+            // A collectible being locked must never bypass the opponent ladder.
+            if (chosen && available.has(chosen.id)) { setBot(chosen); setRound(1); }
+        }).catch(() => undefined);
     }, []);
 
     const beaten = new Set(Object.keys(wins).filter(id => wins[id] > 0));

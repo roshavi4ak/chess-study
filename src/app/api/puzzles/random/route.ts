@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
-import { getNextPuzzleName } from "@/lib/puzzles";
+import { getNextPuzzleSelection } from "@/lib/puzzles";
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
@@ -8,15 +8,11 @@ export async function GET(request: Request) {
     const tag = searchParams.get("tag") || undefined;
 
     const session = await auth();
-    const rating = session?.user?.ratingPuzzle ?? 1500;
-
-
-    const puzzleName = await getNextPuzzleName({
+    const selection = await getNextPuzzleSelection({
         userId: session?.user?.id,
-        rating,
         tag,
         excludeName
     });
 
-    return NextResponse.json({ name: puzzleName });
+    return NextResponse.json({ name: selection.name, range: selection.range }, { headers: { "Cache-Control": "no-store" } });
 }

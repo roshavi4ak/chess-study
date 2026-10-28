@@ -23,6 +23,11 @@ import {
 import { useLegalMoves } from "@/hooks/useLegalMoves";
 import { getLichessAccessToken, getCurrentUserLichessId } from "@/app/actions/lichess";
 import { useTranslations } from "next-intl";
+import { recordPlaySession } from "@/app/actions/play";
+import { ChessnutSession } from "@/components/ChessnutSession";
+import ActivityBoardPanel from "@/components/ActivityBoardPanel";
+import { useActivityChessnut } from "@/hooks/useActivityChessnut";
+import { copyGame } from "@/lib/chessTeaching";
 
 type GameMode = 'lichess' | 'friend';
 
@@ -45,6 +50,10 @@ function formatTime(ms: number | undefined): string {
 }
 
 export default function PlayPage() {
+    return <ChessnutSession><PlayContent /></ChessnutSession>;
+}
+
+function PlayContent() {
     const t = useTranslations("Play");
     const commonT = useTranslations("Common");
     // Game state
@@ -99,6 +108,13 @@ export default function PlayPage() {
     const [incomingChallenge, setIncomingChallenge] = useState<IncomingChallenge | null>(null);
     const [isWaitingForChallenge, setIsWaitingForChallenge] = useState(false);
     const myLichessIdRef = useRef<string | null>(null);
+    const savedGamesRef = useRef(new Set<string>());
+    const [gameFinished, setGameFinished] = useState(false);
+    const [gameRound, setGameRound] = useState(0);
+    const [finishedActivity, setFinishedActivity] = useState<{ id: string; moves: number } | null>(null);
+    const submittingMove = useRef(false);
+    const moveRequest = useRef(0);
+    const [sendingMove, setSendingMove] = useState(false);
 
     const handleLichessGameState = useCallback(function handleLichessGameState(gameState: LichessGameState) {
         console.log('Lichess game state update:', gameState);
@@ -138,8 +154,12 @@ export default function PlayPage() {
                 setChessPosition(newGame.fen());
 
                 if (gameState.status === 'finished') {
+                    setGameFinished(true);
                     setStatus(`${t("gameFinished")} ${t("winner")}: ${gameState.winner || t("draw")}`);
+                    // Count played games, including losses/draws; instant aborts earn no card progress.
+                    if (movesArray.length >= 2) setFinishedActivity({ id: gameState.gameId, moves: movesArray.length });
                 } else {
+                    setGameFinished(false);
                     const currentTurn = newGame.turn();
                     const myTurn = playerColorRef.current === 'white' ? 'w' : 'b';
                     if (currentTurn === myTurn) setStatus(t("yourTurn"));
@@ -165,11 +185,10 @@ export default function PlayPage() {
             gameId,
             myLichessIdRef.current,
             (gameState) => {
-                // ... existing game state handling ...
-                // Reuse the logic from startLichessGame but extracted
-                handleLichessGameState(gameState);
+                if (lichessGameIdRef.current === gameId) handleLichessGameState(gameState);
             },
             (errorMsg) => {
+                if (lichessGameIdRef.current !== gameId) return;
                 setError(errorMsg);
                 setStatus('');
             }
@@ -376,24 +395,25 @@ export default function PlayPage() {
         return success;
     }
 
-    function getGameOverMessage(): string {
-        if (chessGame.isCheckmate()) {
-            return chessGame.turn() === 'w' ? t("checkmateBlackWins") : t("checkmateWhiteWins");
-        } else if (chessGame.isDraw()) {
+    function getGameOverMessage(game: Chess): string {
+        if (game.isCheckmate()) {
+            return game.turn() === 'w' ? t("checkmateBlackWins") : t("checkmateWhiteWins");
+        } else if (game.isDraw()) {
             return t("draw");
-        } else if (chessGame.isStalemate()) {
+        } else if (game.isStalemate()) {
             return t("stalemate");
-        } else if (chessGame.isThreefoldRepetition()) {
+        } else if (game.isThreefoldRepetition()) {
             return t("threefoldRepetition");
-        } else if (chessGame.isInsufficientMaterial()) {
+        } else if (game.isInsufficientMaterial()) {
             return t("insufficientMaterial");
         }
         return t("gameOver");
     }
 
-    const handleMove = (move: { from: string; to: string; promotion?: string }) => {
+    const handleMove = async (move: { from: string; to: string; promotion?: string }, physical = false) => {
         const { from, to, promotion } = move;
         setOptionSquares({});
+        if ((board.enabled && !physical) || submittingMove.current || gameFinished) return false;
         if (!to) return false;
         if (from === to) return false;
 
@@ -406,30 +426,64 @@ export default function PlayPage() {
             }
         }
         try {
-            chessGame.move({ from, to, promotion });
-            setChessPosition(chessGame.fen());
+            const before = chessGameRef.current;
+            const attempt = copyGame(before);
+            const played = attempt.move({ from, to, promotion: promotion ?? "q" });
+            const gameId = lichessGameIdRef.current;
+            if (lichessGameStarted) {
+                const request = ++moveRequest.current;
+                submittingMove.current = true; setSendingMove(true);
+                const success = await sendLichessMove(from, to, played.promotion);
+                if (request !== moveRequest.current || gameId !== lichessGameIdRef.current) return false;
+                submittingMove.current = false; setSendingMove(false);
+                const echoed = chessGameRef.current.history({ verbose: true })[before.history().length];
+                const confirmedByStream = echoed?.from === from && echoed?.to === to && (echoed?.promotion ?? "") === (played.promotion ?? "");
+                if (!success && !confirmedByStream) return false;
+                // The stream may already contain both our move and the AI reply.
+                if (chessGameRef.current.fen() !== before.fen()) { setError(''); return true; }
+            }
+            chessGameRef.current = attempt;
+            setChessGame(attempt); setChessPosition(attempt.fen());
             setError('');
-            if (gameMode === 'lichess' || gameMode === 'friend') sendLichessMove(from, to, promotion);
-            if (chessGame.isGameOver()) {
-                setStatus(getGameOverMessage());
+            if (attempt.isGameOver()) {
+                setGameFinished(true);
+                setStatus(getGameOverMessage(attempt));
                 return true;
             }
             if (gameMode === 'lichess' || gameMode === 'friend') setStatus(t("waitingForOpponent"));
             return true;
-        } catch { return false; }
+        } catch { submittingMove.current = false; setSendingMove(false); return false; }
     };
 
     const { onSquareClick, onPieceClick, optionSquares, setOptionSquares, onPieceDrop } = useLegalMoves({
         game: chessGame,
         onMove: handleMove
     });
+    const lastBoardMove = chessGame.history({ verbose: true }).at(-1);
+    const mySide = playerColor === "white" ? "w" : "b";
+    const boardReply = lastBoardMove && lastBoardMove.color !== mySide ? lastBoardMove.from + lastBoardMove.to + (lastBoardMove.promotion ?? "") : undefined;
+    const board = useActivityChessnut({
+        fen: chessPosition, active: gameMode === "lichess",
+        canMove: !gameFinished && !sendingMove && (!lichessGameStarted || chessGame.turn() === mySide),
+        onMove: move => handleMove(move, true), syncMove: boardReply,
+        completion: gameFinished ? `${gameRound}:${chessPosition}` : undefined,
+    });
+    useEffect(() => {
+        if (!finishedActivity || !board.ready || savedGamesRef.current.has(finishedActivity.id)) return;
+        savedGamesRef.current.add(finishedActivity.id);
+        void recordPlaySession({ kind: "MINIGAME", key: `freeplay:${finishedActivity.id}`, score: 1, details: { feature: "freeplay", moves: finishedActivity.moves } })
+            .catch(error => { savedGamesRef.current.delete(finishedActivity.id); console.error("Failed to save game activity:", error); });
+    }, [finishedActivity, board.ready]);
 
     const handlePieceDrop = ({ sourceSquare, targetSquare }: PieceDropHandlerArgs) => {
-        void onPieceDrop({ sourceSquare, targetSquare });
+        if (!board.enabled) void onPieceDrop({ sourceSquare, targetSquare });
         return false;
     };
 
     function startNewGame(mode?: GameMode) {
+        moveRequest.current++; submittingMove.current = false; setSendingMove(false);
+        setGameFinished(false); setFinishedActivity(null); setGameRound(value => value + 1); board.reset();
+        if (mode === "friend") board.disconnect(true);
         chessGameRef.current = new Chess();
         setChessGame(chessGameRef.current);
         setChessPosition(chessGameRef.current.fen());
@@ -474,10 +528,10 @@ export default function PlayPage() {
         position: chessPosition,
         onPieceDrop: handlePieceDrop,
         boardOrientation: boardOrientation,
-        canDragPiece: isDraggablePiece,
+        canDragPiece: args => !board.enabled && !sendingMove && isDraggablePiece(args),
         id: `play-vs-${gameMode}`,
-        onSquareClick,
-        onPieceClick,
+        onSquareClick: !board.enabled && !sendingMove ? onSquareClick : undefined,
+        onPieceClick: !board.enabled && !sendingMove ? onPieceClick : undefined,
         squareStyles: optionSquares
     };
 
@@ -691,6 +745,7 @@ export default function PlayPage() {
 
                 <div className="flex justify-center">
                     <div className="w-full max-w-[600px]">
+                        {gameMode === "lichess" && <div className="mb-4"><ActivityBoardPanel board={board} reply={boardReply} /></div>}
                         {lichessGameStarted && (
                             <div className="flex justify-between items-center mb-2 p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
                                 <div className="flex items-center gap-2">

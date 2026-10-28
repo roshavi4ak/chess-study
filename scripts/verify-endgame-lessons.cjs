@@ -42,7 +42,7 @@ async function probe(fen) {
 const whiteResult = (category, turn) => category === 'draw' ? 'draw' : (category === 'win') === (turn === 'w') ? 'win' : 'loss';
 (async () => {
     const examples = [];
-    for (const [challenge, steps] of Object.entries(ENDGAME_LESSONS)) for (const step of steps) {
+    for (const [challenge, steps] of Object.entries(ENDGAME_LESSONS)) for (const parent of steps) for (const step of [parent, ...(parent.branches || []).map(branch => ({ ...parent, id: parent.id + '.' + branch.id, moves: branch.moves }))]) {
         const game = new Chess(step.fen), positions = [];
         for (let ply = 0; ply <= step.moves.length; ply++) {
             const table = await probe(game.fen());
